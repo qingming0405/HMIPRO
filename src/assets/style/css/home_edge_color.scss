@@ -1,0 +1,753 @@
+/* 全局图形颜色 */
+/*
+报警的颜色
+#f80000 红
+#ffa101 黄
+#0092fe 蓝
+*/
+$default-themes: (
+  color1: #001e3dff,
+  //左边栏
+    color2: #204973ff,
+  //上边
+    color3: #092e55,
+  //center 颜色
+    color4: #07325e,
+  // logo 下边横线
+    color5: #022142,
+  //标签颜色
+    color6: #103760,
+  //标签激活颜色
+    color7: #0a53a0,
+  //input 框
+    color8: #007eff,
+  //list title
+    color9: #0e3e70,
+  // list 颜色1
+    color10: #0b4c90,
+  //list 颜色2
+    font_color1: #ffffff,
+  btn_color1: #a47c42,
+  btn_color2: red,
+  border_color1: #0092fe
+);
+
+$default1-themes: ();
+
+$themes: (
+  default-theme: $default-themes,
+  default1-themes: $default1-themes
+);
+
+@mixin color1() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: color1);
+    }
+  }
+}
+@mixin color2() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: color2);
+    }
+  }
+}
+@mixin color3() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: color3);
+    }
+  }
+}
+@mixin color4() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: color4);
+    }
+  }
+}
+@mixin color5() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: color5);
+    }
+  }
+}
+@mixin color6() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: color6);
+    }
+  }
+}
+@mixin color7() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: color7);
+    }
+  }
+}
+@mixin color8() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: color8);
+    }
+  }
+}
+@mixin color9() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: color9);
+    }
+  }
+}
+@mixin color10() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: color10);
+    }
+  }
+}
+@mixin font_color1() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      color: map-get($map: $theme, $key: font_color1);
+    }
+  }
+}
+@mixin btn1_content() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: btn_color1);
+    }
+  }
+}
+@mixin btn2_content() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      background: map-get($map: $theme, $key: btn_color2);
+    }
+  }
+}
+@mixin border_color1() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      border: 1px solid map-get($map: $theme, $key: border_color1);
+    }
+  }
+}
+@mixin border_color2() {
+  @each $themename, $theme in $themes {
+    [data-theme="#{$themename}"] & {
+      border: 1px solid map-get($map: $theme, $key: color7);
+    }
+  }
+}
+// @mixin color(){
+//   @each $themename , $theme in $themes {
+//       [data-theme = '#{$themename}'] & {
+//           background: map-get($map: $theme, $key: color )
+//       }
+//   }
+// }
+/* 定义全局三块的颜色 */
+
+.left {
+  @include color1();
+  @include font_color1();
+}
+.head {
+  @include color2();
+  @include font_color1();
+}
+.center {
+  @include color3();
+  @include font_color1();
+}
+/* 左边导航栏的颜色 */
+.my-left-content {
+  @include font_color1();
+  .line {
+    @include color4();
+  }
+}
+/* 上边导航栏 */
+.my-head-content {
+  @include color1();
+  .title {
+    @include color3();
+    .head_list_ul {
+      .head_tab_li {
+        @include color5();
+      }
+      .activity {
+        @include color6();
+      }
+    }
+  }
+}
+/* 搜索栏 背景色*/
+
+.retrieval-bg-color-edge {
+  @include color6();
+  @include font_color1();
+}
+
+.title-search {
+  /* 搜索栏 */
+  .search-box {
+    @include color6();
+  }
+
+  // 外部边框的样式
+  .outsize-border {
+    @include color7();
+    @include border_color2();
+    &:hover {
+      @include border_color1();
+    }
+  }
+  .outsize-border-color {
+    @include border_color1();
+  }
+  /* 普通按钮 */
+  .data-retrieval-btn-color {
+    @include btn1_content();
+    &:hover {
+      @include btn2_content();
+    }
+  }
+  .box-shadow {
+    box-shadow: 0px 0px 7px 0px #1bb1ffcc;
+  }
+  .box-shadow2 {
+    box-shadow: 0px 3px 14px -3px #1bb1ffcc;
+  }
+}
+
+/* 重写下拉选框 */
+.my-list-view {
+  user-select: none;
+  @include font_color1();
+  @include border_color1();
+  border-radius: 5px;
+  .my-list-msg {
+    background-color: #103760;
+    color: #fff !important;
+    &:hover {
+      @include color2();
+    }
+    i {
+      color: #fff;
+    }
+  }
+}
+/* 滚动条样式 */
+.scroll-style-edge {
+  ::-webkit-scrollbar {
+    // display: none;
+    width: 8px;
+    height: 8px;
+  }
+  ::-webkit-scrollbar-track {
+    border-radius: 3px;
+    background: rgb(239, 239, 239);
+  }
+  //滚动条的轨道（里面装有Thumb）
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: #0a53a0;
+    // @include color7();
+  }
+  //滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
+  ::-webkit-scrollbar-thumb:hover {
+    @include color6();
+  }
+  // 火狐
+  -ms-overflow-style: none;
+  overflow: -moz-scrollbars-none;
+}
+/*  数据搜索框 */
+.edge-content {
+  .data-retrieval-bg {
+    .data-retrieval-box {
+      color: #ffffff;
+      background-color: #103760;
+      .flatpickr-input {
+        background-color: #103760 !important;
+        color: #fff;
+      }
+      .data-retrieval-title span {
+        color: #ffffff;
+      }
+    }
+  }
+}
+/* 覆盖pro */
+.White-content {
+  // 弹窗
+  #pop-box,
+  .pop-box {
+    background-color: #103760 !important;
+    .pop-box-title,
+    .pop-box-text {
+      color: #fff !important;
+    }
+  }
+  /* 无数据 */
+  .none-data-box {
+    background-color: #092e55;
+    // height: calc(100% - 40px) !important;
+  }
+  input,
+  textarea {
+    background-color: #103760 !important;
+    color: #fff !important ;
+    &:focus,
+    &:hover {
+      color: #fff !important;
+    }
+  }
+  /* 系统日志 */
+  .system-log {
+    .my-system-head {
+      background-color: #007eff;
+    }
+    .my-system-body {
+      li:nth-child(2n-1) {
+        background: #0e3e70;
+      }
+      li:nth-child(2n) {
+        background: #103760;
+      }
+      li:hover {
+        background: #0b4c90;
+      }
+    }
+  }
+  /* 实时数据 历史数据 总貌图的设备模型*/
+  .my-realAlarm-table,
+  .my-real-table,
+  .my-history-table,
+  .my-rail-table,
+  .my-alarm-table,
+  .time-table,.my-lifePredict-table{
+    .my-table-thead {
+      background: #007eff;
+    }
+    .my-table-tbody {
+      tr:hover {
+        background: #0456aa;
+      }
+      & > :nth-child(2n-1) {
+        background: #0e3e70;
+      }
+      & > :nth-child(2n) {
+        background: #0b4c90;
+      }
+    }
+  }
+  .my-summary-table {
+    .my-summary-head-item {
+      background: #007eff;
+    }
+  }
+  /* 监测报表 */
+  .my-monitor-table {
+    .monitor-table .monitor-body .monitor-body-title-list:hover {
+      background: #0b4c90;
+    }
+    .monitor-table .monitor-body .monitor-val-list-ul {
+      &:nth-child(odd) {
+        background: #103760;
+      }
+    }
+    .monitor-table .monitor-body .monitor-val-list1 {
+      background: #103760;
+    }
+    .monitor-title {
+      background: #007eff;
+    }
+
+    // .monitor-val-list0 {
+    //   background: #0e3e70 !important;
+    //   &:hover {
+    //     background: #0b4c90 !important;
+    //   }
+    // }
+    // .monitor-val-list1 {
+    //   background: #103760 !important;
+    //   &:hover {
+    //     background: #0b4c90 !important;
+    //   }
+    // }
+  }
+  /* 趋势图 */
+  .my-trend-chart {
+    .trend-pos-list,
+    .trend-chart-view {
+      .trend-left-list {
+        color: #fff;
+        &:hover {
+          background-color: #0a53a0;
+        }
+        span {
+          .iconfont {
+            font-size: 10px;
+            color: #fff;
+            transform: scale(0.9);
+            display: block;
+          }
+        }
+      }
+    }
+  }
+  /* 下拉框 */
+  .multiList-pro {
+    .multiList {
+      background-color: #103760 !important;
+      color: #fff !important;
+    }
+    .multi-span:hover {
+      background: #103760 !important;
+    }
+  }
+  .my-census-chart-list .census-list-box .my-census-lists {
+    background-color: #103760 !important;
+    li {
+      color: #fff !important;
+    }
+    .my-census-li {
+      .my-child-list {
+        background-color: #103760 !important;
+        li:hover {
+          background: #103760 !important;
+        }
+      }
+      &:hover {
+        background: #103760;
+      }
+    }
+  }
+  /* 按钮 */
+  button {
+    background-color: #a47c42;
+    &:hover,
+    &:focus {
+      background-color: darken(#a47c42, 10%);
+    }
+    &.disable-btn {
+      background: #0072e6;
+      &:hover,
+      &:focus {
+        background-color: darken(#0072e6, 10%);
+      }
+    }
+  }
+  .data-retrieval-bg
+    .data-retrieval-box
+    .data-retrieval-title
+    .close-retrieval
+    .iconfont {
+    color: #fff;
+  }
+  .White-content .iconfont {
+    color: #fff;
+    &:hover,
+    &:focus {
+      color: #38dcff;
+    }
+  }
+  /* 波形频谱图图谱 */
+  .my-wave-chart,
+  .my-chart {
+    .iconfont {
+      color: #fff;
+      &:hover {
+        color: #38dcff;
+      }
+    }
+    .chart-btn-active {
+      color: #38dcff;
+    }
+  }
+  .tool-icon .icon-list .iconfont {
+    color: #fff !important;
+  }
+  .tool-icon .icon-list:hover {
+    border-color: #38dcff !important;
+  }
+  .tool-icon .check-icon {
+    border-color: #38dcff !important;
+  }
+  .my-table-tbody {
+    border-bottom: 1px solid #0b4c90;
+  }
+  .monitor-table .monitor-body {
+    border-bottom: 1px solid #0b4c90;
+  }
+  .normal-text {
+    color: #fff;
+  }
+  .pop-box-background .pop-box .pop-box-title .close-pop .iconfont {
+    color: #fff;
+  }
+  .icon-zhongzi_xuanzekuang1 {
+    color: #82c6fb;
+  }
+  .icon-zhongzi_xuanzekuang {
+    color: #3d75a0;
+  }
+  .icon-mianxing_fuzhi_huaban1 {
+    color: #00fdff;
+  }
+  .my-census-chart-list
+    .census-chart-list
+    .census-screen
+    .screen-list
+    .list-val,
+  .White-content
+    .my-census-chart-list
+    .census-chart-list
+    .census-screen
+    .screen-list
+    .set-speed {
+    border: 1px solid #fff;
+    &:hover {
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+        0 0 8px rgba(0, 126, 255, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+        0 0 8px rgba(0, 126, 255, 0.6);
+      input {
+        background-color: transparent !important;
+        outline: none;
+        -webkit-box-shadow: none;
+        box-shadow: none;
+      }
+    }
+    input {
+      background-color: transparent !important;
+    }
+    input::-webkit-input-placeholder {
+      color: #fff;
+    }
+
+    input::-moz-input-placeholder {
+      color: #fff;
+    }
+
+    input::-ms-input-placeholder {
+      color: #fff;
+    }
+  }
+  .my-census-chart-list
+    .census-chart-list
+    .census-screen
+    .screen-list
+    .list-val
+    > .iconfont {
+    color: #fff;
+  }
+  .edge-outside-border:hover {
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      0 0 8px rgba(0, 126, 255, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      0 0 8px rgba(0, 126, 255, 0.6);
+  }
+  .my-wave-spectrum-chart .develop-chart {
+    color: #ccc;
+  }
+  .my-wave-spectrum .set-failure-bg .set-failure {
+    position: absolute;
+    color: #ffffff;
+    background-color: #103760;
+  }
+  .compare-chart .set-failure-bg .set-failure .set-failure-title,
+  .my-wave-spectrum .set-failure-bg .set-failure .set-failure-title {
+    color: #fff;
+  }
+  .compare-chart
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-speed
+    .iconfont,
+  .my-wave-spectrum
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-speed
+    .iconfont {
+    color: #fff;
+  }
+  .compare-chart
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-speed
+    input:hover,
+  .my-wave-spectrum
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-speed
+    input:hover {
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      0 0 8px rgba(0, 126, 255, 0.6);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+      0 0 8px rgba(0, 126, 255, 0.6);
+  }
+  .compare-chart
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-speed
+    input[disabled="disabled"],
+  .my-wave-spectrum
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-speed
+    input[disabled="disabled"] {
+    outline: none;
+    background-color: #0c4e99 !important;
+    border-color: #0c4e99 !important;
+    box-shadow: none;
+  }
+  .compare-chart
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-msg
+    .failure-list
+    .my-failure-list
+    .icon-zhongzi_xuanzekuang1,
+  .my-wave-spectrum
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-msg
+    .failure-list
+    .my-failure-list
+    .icon-zhongzi_xuanzekuang1 {
+    color: #82c6fb;
+  }
+  .compare-chart
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-msg
+    .failure-list
+    .icon-zhongzi_xuanzekuang,
+  .my-wave-spectrum
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-msg
+    .failure-list
+    .icon-zhongzi_xuanzekuang {
+    color: #3d75a0;
+  }
+  .compare-chart
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-msg
+    .failure-list
+    .icon-shouqi_huaban,
+  .compare-chart
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-msg
+    .failure-list
+    .icon-zhankai_huaban,
+  .my-wave-spectrum
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-msg
+    .failure-list
+    .icon-shouqi_huaban,
+  .my-wave-spectrum
+    .set-failure-bg
+    .set-failure
+    .none-impeller-failure
+    .set-failure-msg
+    .failure-list
+    .icon-zhankai_huaban {
+    color: #fff;
+  }
+  .compare-chart
+    .set-failure-bg
+    .set-failure
+    .set-failure-title
+    .close-failure
+    .iconfont,
+  .my-wave-spectrum
+    .set-failure-bg
+    .set-failure
+    .set-failure-title
+    .close-failure
+    .iconfont {
+    color: #fff;
+  }
+  .wave-alert-bg .wave-alert-box,
+  .wave-alert-bg .pop-box,
+  .pop-box-background .wave-alert-box,
+  .pop-box-background .pop-box,
+  .pos-floating-window {
+    background-color: #103760;
+    color: #fff;
+  }
+  .wave-alert-bg .wave-alert-box .pop-box-title,
+  .wave-alert-bg .wave-alert-box .wave-alert-title,
+  .wave-alert-bg .pop-box .pop-box-title,
+  .wave-alert-bg .pop-box .wave-alert-title,
+  .pop-box-background .wave-alert-box .pop-box-title,
+  .pop-box-background .wave-alert-box .wave-alert-title,
+  .pop-box-background .pop-box .pop-box-title,
+  .pop-box-background .pop-box .wave-alert-title {
+    color: #fff;
+  }
+  .wave-alert-bg .wave-alert-box .wave-alert-title .close-wave-alert .iconfont {
+    color: #fff;
+  }
+  .wave-alert-box .wave-alert-low input,
+  .wave-alert-bg .wave-alert-box .set-effective input {
+    border-color: #fff;
+    &:hover {
+      outline: 0;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+        0 0 8px rgba(0, 126, 255, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+        0 0 8px rgba(0, 126, 255, 0.6);
+    }
+  }
+  .wave-alert-bg .wave-alert-box .wave-alert-unit .wave-alert-unit-value,
+  .wave-alert-bg .pop-box .wave-alert-unit .wave-alert-unit-value,
+  .pop-box-background .wave-alert-box .wave-alert-unit .wave-alert-unit-value,
+  .pop-box-background .pop-box .wave-alert-unit .wave-alert-unit-value {
+    border: 1px solid #fff;
+    &:hover {
+      border: 1px solid #6c91dd;
+      -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+        0 0 8px rgba(0, 126, 255, 0.6);
+      box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075),
+        0 0 8px rgba(0, 126, 255, 0.6);
+    }
+  }
+  .wave-alert-bg .wave-alert-box .wave-alert-unit .iconfont,
+  .wave-alert-bg .pop-box .wave-alert-unit .iconfont,
+  .pop-box-background .wave-alert-box .wave-alert-unit .iconfont,
+  .pop-box-background .pop-box .wave-alert-unit .iconfont {
+    color: #fff;
+  }
+  .edge-border {
+    border-color: #fff;
+  }
+}

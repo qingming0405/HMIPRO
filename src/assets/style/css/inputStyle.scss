@@ -1,0 +1,123 @@
+/deep/ .el-input__inner {
+  height: 35px;
+  // width: 220px;
+  line-height: 35px;
+  background-color: #0c4e99 !important;
+  border: 1px solid #344b80 !important;
+  border-color: #344b80 !important;
+  color: #fff;
+  &:focus {
+    border-color: #344b80 !important;
+  }
+}
+/deep/ .el-checkbox {
+  color: #fff;
+}
+/deep/ .el-select {
+  margin-right: 15px;
+}
+/deep/ .el-input-number__increase {
+  color: #061436 !important;
+}
+/deep/ .el-input-number__decrease {
+  color: #061436 !important;
+}
+
+/deep/ .el-textarea__inner {
+  background-color: #0c4e99 !important;
+  border: 1px solid #344b80;
+  color: #d8dce2;
+}
+
+/deep/ .el-input__icon {
+  line-height: 35px;
+}
+
+/deep/ .el-drawer {
+  background-color: #1f2c4a;
+  outline: none;
+}
+
+/deep/ .el-drawer__close-btn {
+  outline: none;
+  &:hover {
+    color: #409eff;
+  }
+}
+
+/deep/ .el-drawer__header {
+  margin-bottom: 20px;
+}
+
+/deep/ .el-drawer__body {
+  height: 100%;
+}
+
+/deep/ .el-collapse-item__header {
+  height: 35px; 
+  padding: 0 10px 0 20px;
+  background-color: #182857;
+  color: #fff;
+  border-bottom: none;
+  outline: none;
+  font-size: 14px;
+}
+/deep/.el-collapse-item__content {
+  color: #fff;
+  background-color: #111442;
+  padding: 10px;
+}
+
+/deep/ .el-collapse-item__wrap {
+  border-bottom: none;
+}
+/deep/ .el-collapse {
+  border-top: none;
+  border-bottom: none;
+}
+
+@media screen and (max-height: 850px) {
+  /deep/ .el-input__inner {
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+  }
+
+  /deep/ .el-input__icon {
+    line-height: 30px;
+  }
+}
+
+@media screen and (max-height: 600px) {
+  /deep/ .el-input__inner {
+    height: 26px !important;
+    line-height: 26px;
+    font-size: 12px;
+  }
+
+  /deep/ .el-input__icon {
+    line-height: 26px;
+  }
+
+  /deep/ .el-button--mini {
+    padding: 5px 8px !important;
+  }
+  /deep/ .is-circle {
+    padding: 5px !important;
+  }
+  .tabs-control-thr {
+    padding: 60px 20px 65px  !important;
+  }
+}
+
+@media screen and (max-height: 1366px) {
+  /deep/ .el-input__inner {
+    height: 30px;
+    line-height: 30px;
+    font-size: 13px;
+  }
+
+  /deep/ .el-input__icon {
+    line-height: 30px;
+  }
+}

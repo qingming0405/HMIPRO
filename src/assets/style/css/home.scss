@@ -1,0 +1,1539 @@
+html,
+body,
+ul,
+li,
+table,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+ol,
+dl,
+input,
+button,
+td,
+p {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+  -webkit-user-select: none;
+
+  -moz-user-select: none;
+
+  -ms-user-select: none;
+
+  user-select: none;
+}
+* {
+  font-family: "Source Han Sans CN";
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+body {
+  overflow: hidden;
+}
+ul,
+li,
+ol,
+dl {
+  list-style: none;
+}
+#app > .index-content,
+#app > .login_content {
+  height: 100vh;
+  overflow: hidden;
+}
+button,
+.radius {
+  border-radius: 4px;
+  &:disabled {
+    cursor: no-allowed;
+    opacity: 0.7;
+  }
+}
+.text-overflow {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.select-none {
+  user-select: none;
+}
+.hide {
+  display: none;
+}
+.hide-scroll {
+  overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+// 颜色选择插件
+.m-colorPicker {
+  .box {
+    width: 213px !important;
+    z-index: 10;
+  }
+}
+.White-content {
+  $btnDefaultColor: #6c91dd; // 按钮、图标默认, 输入框、下拉框鼠标选中边框, 当前tab选项卡背景
+  $btnHoverColor: #7ca1eb; // 按钮、图标鼠标移入
+  $btnClickColor: #5d87da; // 按钮、图标点击、下拉框默认边框, 菜单列表字体鼠标移入
+  $btnDisableColor: #ccc; // 取消按钮、图标禁用, 当前tab选项卡字体、关闭按钮
+  $btnFontColor: #fff; // 按钮字体, 列表偶数行背景
+  $iptDefaultColor: #9b9b9b; // 输入框默认边框
+  $selectHoverColor: #c6d9ff; // 下拉框选项鼠标移入
+  $boxFontDefaultColor: #666; // 输入框、下拉框默认字体, 弹窗内容字体
+  $boxFontHoverColor: #323232; // 输入框、下拉框选中字体
+  $popTitleColor: #333; // 弹窗标题字体
+  $popCloseIconColor: #999; // 弹窗右上角关闭按钮
+  $menuFontDefaultColor: #000; // 菜单栏默认字体
+  $menuFontHoverColor: #5d87da; // 菜单栏选中字体
+  $boxShadowColor: rgba(93, 135, 218, 0.33); // 投影颜色
+  $listFontDefaultColor: #000; // 菜单列表字体默认
+  $listClickBgColor: #99b7f4; // 测点列表选中背景
+  $theadBgColor: #f0f0f0; // 表头背景
+  $tbodyOddBgColor: #f4f4f4; // 列表奇数行背景
+  $tabBgColor: #e7eaed; // tab选项卡背景
+  $tabBdColor: #c4c4c4; // tab选项卡边框
+  $monitorBdColor: #dcdcdc; // 监测报表边框
+  // $warningColor: #C4C200; // 报警日志预警字体
+  $warningColor: #ffa101; // 报警日志预警字体
+  // $alarmColor: #ff0000; // 报警日志报警字体
+  $alarmColor: #f80000; // 报警日志报警字体
+  $redColor: #de0000; // 报警字体
+  $onealarmColor: #ffa101; //一级报警
+  $tmswarningColor: #c0b000; //TMS报警
+  $errTipColor: #f80000; // 错误提示字体
+  $buleColor: #0000ff; // 系统日志蓝色字体
+  body {
+    color: $menuFontDefaultColor;
+  }
+  table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    thead {
+      display: block;
+      overflow: hidden;
+    }
+    tbody {
+      display: block;
+      overflow: auto;
+    }
+    tr {
+      display: table;
+      width: 100%;
+      table-layout: fixed;
+    }
+  }
+  // 踏面数据使用elementUI，防止上面的table样式使element样式失效
+  /* .tread-table {
+    border-collapse: collapse;
+    table-layout: fixed;
+    thead {
+      display: table-header-group !important;
+      overflow: hidden;
+    }
+    tbody {
+      display: table-row-group !important;
+      overflow: auto;
+    }
+    tr {
+      display: table-row !important;
+      width: 100%;
+      table-layout: fixed;
+      td {
+        min-width: 97px;
+      }
+    }
+  } */
+  /* .pro-scrollbar {
+    &::-webkit-scrollbar {
+      width: 8px;
+      height: 8px;
+      background-color: $btnDisableColor;
+    }
+    &::-webkit-scrollbar-thumb {
+      width: 8px;
+      height: 8px;
+      border-radius: 10px;
+      background-color: $btnDefaultColor;
+    }
+    &::-webkit-scrollbar-corner {
+      background-color: $btnDisableColor;
+    }
+  } */
+  textarea {
+    border-color: $iptDefaultColor;
+    &:hover {
+      border-color: $btnDefaultColor;
+    }
+    &:focus {
+      border-color: $btnDefaultColor;
+      outline: $btnDefaultColor;
+    }
+  }
+  @mixin iconColor {
+    color: $btnDefaultColor;
+    &:hover {
+      color: $btnHoverColor;
+    }
+    &::active {
+      color: $btnClickColor;
+    }
+  }
+  .pop-bg,
+  .data-retrieval-bg,
+  .box-bg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    .icon-cuohao {
+      font-size: 12px;
+      color: $popCloseIconColor;
+    }
+  }
+  .default-border {
+    border: 1px solid $btnDisableColor;
+  }
+  button {
+    color: $btnFontColor;
+    background-color: $btnDefaultColor;
+    cursor: pointer;
+    &:hover {
+      background-color: $btnHoverColor;
+    }
+    &:active {
+      background-color: $btnClickColor;
+    }
+  }
+  .version {
+    color: $btnFontColor;
+    .versionText {
+      padding: 0 5px;
+      background: #024997;
+      box-shadow: 5px 5px 5px rgba(2, 73, 151, 0.6),
+        -5px -5px 5px rgba(2, 73, 151, 0.6), -5px 5px 5px rgba(2, 73, 151, 0.6),
+        5px -5px 5px rgba(2, 73, 151, 0.6);
+    }
+  }
+  .my-icon {
+    color: $btnDefaultColor;
+  }
+  button.disable-btn {
+    background: $btnDisableColor;
+  }
+  .login-icon {
+    color: $btnFontColor;
+  }
+  input,
+  .input-selection {
+    border: 1px solid $iptDefaultColor;
+    color: $boxFontDefaultColor;
+    &:focus,
+    &:hover {
+      border-color: $btnDefaultColor !important;
+      color: $boxFontHoverColor !important;
+    }
+    .iconfont {
+      color: $iptDefaultColor !important;
+    }
+  }
+  .outside-border {
+    border: 1px solid $btnDisableColor;
+    &:hover {
+      border-color: $btnDefaultColor;
+    }
+  }
+  .list-input {
+    border: 1px solid $btnDefaultColor;
+    input {
+      color: $btnDefaultColor;
+    }
+  }
+  .failure-text {
+    color: $btnDefaultColor;
+  }
+  .blue-text {
+    color: $buleColor;
+  }
+  .alarm-text {
+    color: $redColor;
+  }
+  // TMS一级报警
+  .alarm1-TMS-text {
+    color: $onealarmColor;
+  }
+  .warn-TMS-text {
+    color: $tmswarningColor;
+  }
+  .warning-text {
+    color: $warningColor;
+  }
+  .normal-text {
+    color: $boxFontHoverColor;
+  }
+  .offline-text {
+    color: $popCloseIconColor;
+  }
+  .my-checkbox {
+    display: none;
+  }
+  .my-header {
+    .header-list {
+      color: $listFontDefaultColor;
+      .checkList {
+        color: $btnClickColor;
+      }
+      li {
+        &:hover {
+          color: $btnClickColor;
+        }
+      }
+    }
+    .iconfont {
+      @include iconColor();
+    }
+  }
+  .icon-zhongzi_xuanzekuang {
+    color: $boxFontDefaultColor;
+  }
+  .icon-zhongzi_xuanzekuang1 {
+    color: $btnDefaultColor;
+  }
+  /* 无数据背景 */
+  .none-data-box {
+    background-color: $btnFontColor;
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: calc(100% - 49px);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    z-index: 2;
+  }
+  /* 波形频谱图 */
+  .my-wave-spectrum-chart {
+    .develop-chart {
+      color: $boxFontDefaultColor;
+    }
+    .none-data-box {
+      width: 100%;
+      height: 100%;
+    }
+  }
+  /* 专家频谱图 */
+  .my-spectrum-chart {
+    .none-data-box {
+      height: 100%;
+      width: 100%;
+    }
+    .my-spectrum {
+      .spectrum-chart-box {
+        .set-chart-type {
+          color: $boxFontDefaultColor;
+          .iconfont {
+            color: $iptDefaultColor;
+          }
+        }
+      }
+    }
+  }
+  /* 头部 */
+  .my-header-content {
+    // tab选项卡
+    .my-tab {
+      li {
+        background-color: $tabBgColor;
+        min-width: 70px;
+        position: relative;
+        .vertical-line {
+          border: 1px solid $tabBdColor;
+          display: block;
+          height: 16px;
+          position: absolute;
+        }
+      }
+      .check-tab {
+        color: $btnFontColor;
+        background-color: $btnDefaultColor;
+        .vertical-line {
+          display: none;
+        }
+        .iconfont {
+          color: $btnFontColor;
+        }
+      }
+      .check-tab + li {
+        .vertical-line {
+          display: none;
+        }
+      }
+      .close-tab {
+        @include iconColor();
+      }
+    }
+    // 头部上下边框
+    .custom-shortcut {
+      border-top: 1px solid $btnDisableColor;
+      border-bottom: 1px solid $btnDisableColor;
+      .abled-icon {
+        @include iconColor();
+      }
+      .disabled-icon {
+        color: $btnDisableColor;
+      }
+      .set-icon {
+        color: #343434;
+        font-size: 14px;
+        &:hover {
+          color: $btnClickColor;
+        }
+      }
+    }
+    .set-user-icon {
+      .user-icon {
+        background-color: $btnFontColor;
+        .user-icon-title {
+          color: $popTitleColor;
+          .close-custom-icon {
+            height: 40px;
+            line-height: 40px;
+            width: 20px;
+            text-align: center;
+            .iconfont {
+              font-size: 10px;
+              transform: scale(0.8);
+              display: block;
+            }
+          }
+        }
+        .select-user-icon {
+          .no-choice-title,
+          .choice-icon-title {
+            color: $boxFontDefaultColor;
+          }
+          ul {
+            border: 1px solid $btnDisableColor;
+            color: $boxFontHoverColor;
+            .iconfont {
+              color: $btnDefaultColor;
+            }
+            li {
+              &:hover {
+                &:hover {
+                  background-color: $selectHoverColor;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .close-box {
+    color: $popCloseIconColor;
+    font-size: 10px;
+  }
+  // 阴影
+  .box-shadow {
+    box-shadow: 0px 2px 7px 0px $boxShadowColor, 0px 3px 7px 0px $boxShadowColor;
+  }
+  // 下拉列表
+  .my-list-view {
+    background: $btnFontColor;
+    .my-list-msg {
+      color: $boxFontHoverColor;
+      &:hover {
+        background-color: $selectHoverColor;
+      }
+      &:active {
+        background-color: $btnDefaultColor;
+      }
+    }
+    .rember {
+      background-color: $btnDefaultColor;
+    }
+    .disabled-icon {
+      color: $btnDisableColor;
+      .iconfont {
+        color: $btnDisableColor;
+      }
+      &:hover {
+        background-color: transparent;
+      }
+      &:active {
+        background-color: transparent;
+      }
+    }
+  }
+  /* 测点列表 */
+  .set-position {
+    border: 1px solid $iptDefaultColor;
+    height: calc(100% - 80px);
+    width: 210px;
+    overflow: auto;
+    .pos-list {
+      &:hover {
+        background-color: $selectHoverColor;
+      }
+      width: 100%;
+      height: 30px;
+      line-height: 30px;
+      padding: 0 10px;
+      user-select: none;
+    }
+    .check-pos {
+      background-color: $listClickBgColor;
+    }
+  }
+  .retract-btn {
+    border: 1px solid $btnDisableColor;
+    background: $btnFontColor;
+    .iconfont {
+      color: $iptDefaultColor;
+    }
+  }
+  .pos-floating-window {
+    background-color: $btnFontColor;
+  }
+
+  // 数据列表
+  // 表头
+  .my-table-thead {
+    background-color: $theadBgColor;
+  }
+  // 内容
+  .my-table-tbody {
+    border-bottom: 1px solid $btnDisableColor;
+    .my-table-tr {
+      background-color: $btnFontColor;
+      &:nth-child(even) {
+        background-color: $tbodyOddBgColor;
+      }
+      &:hover {
+        background-color: $selectHoverColor;
+      }
+    }
+    .alarm-warning {
+      color: $warningColor;
+    }
+    .alarm-alarm {
+      color: $alarmColor;
+    }
+  }
+  /* 监测报表 */
+  .monitor-table {
+    color: $boxFontHoverColor;
+    .monitor-title {
+      font-weight: bold;
+      background-color: $theadBgColor;
+    }
+    .monitor-body {
+      border-bottom: 1px solid $btnDisableColor;
+      .monitor-body-list:nth-child(even) {
+        .monitor-body-title {
+          background-color: $tbodyOddBgColor;
+        }
+      }
+      .monitor-body-list {
+        &:last-child {
+          border-bottom: 1px solid $monitorBdColor;
+        }
+        .monitor-body-title {
+          border-right: 1px solid $monitorBdColor;
+          &:hover {
+            background-color: $selectHoverColor;
+          }
+        }
+      }
+      .monitor-val-list1 {
+        background-color: $tbodyOddBgColor;
+      }
+      .monitor-body-title-list {
+        &:hover {
+          background-color: $selectHoverColor;
+        }
+      }
+    }
+  }
+  /* 趋势图 */
+  .my-trend-chart {
+    .trend-pos-list,
+    .trend-chart-view {
+      border: 1px solid $iptDefaultColor;
+      .trend-left-list {
+        color: $boxFontHoverColor;
+        display: grid;
+        grid-template-columns: 1fr 26px;
+        height: 26px;
+        line-height: 26px;
+        font-size: 12px;
+        &:hover {
+          background-color: $selectHoverColor;
+        }
+        &:first-child {
+          font-size: 16px;
+        }
+        span {
+          height: 26px;
+          line-height: 26px;
+          &:first-child {
+            padding-left: 5px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+          .iconfont {
+            font-size: 10px;
+            color: $popCloseIconColor;
+            transform: scale(0.9);
+            display: block;
+          }
+        }
+        .trend-close-chart {
+          text-align: center;
+        }
+        .set-color {
+          height: 12px;
+          width: 12px;
+          margin: 7px auto;
+          cursor: pointer;
+        }
+      }
+    }
+    .trend-chart-view {
+      border-left: none;
+    }
+  }
+  /* 数据检索 */
+  .data-retrieval-bg {
+    color: $boxFontDefaultColor;
+    .data-retrieval-box {
+      background-color: $btnFontColor;
+      position: absolute;
+      padding: 0 15px 10px;
+      font-size: 12px;
+      width: 312px;
+      & > div + div {
+        margin-bottom: 10px;
+        width: 100%;
+        height: 20px;
+        line-height: 20px;
+        display: grid;
+        grid-template-columns: 20% 75%;
+        grid-column-gap: 2%;
+        div {
+          height: 20px;
+          line-height: 20px;
+        }
+        .select-title {
+          text-align: right;
+        }
+        .select-value {
+          position: relative;
+          padding: 0 25px 0 10px;
+        }
+        .input-value {
+          padding: 0 10px;
+        }
+        .time-value {
+          cursor: pointer;
+        }
+        .viewMsg-name,
+        .date-type-name {
+          .iconfont {
+            position: absolute;
+            right: 5px;
+            font-size: 12px;
+          }
+        }
+      }
+      .data-retrieval-title {
+        color: $popTitleColor;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        user-select: none;
+        span {
+          font-weight: bold;
+          font-size: 14px;
+        }
+        .close-retrieval {
+          height: 20px;
+          width: 20px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          .iconfont {
+            display: block;
+            font-size: 10px;
+            transform: scale(0.75);
+            color: $popCloseIconColor;
+          }
+        }
+      }
+      .data-retrieval-btn {
+        display: block;
+        text-align: center;
+        margin-left: -5%;
+        width: 110%;
+        button {
+          width: 60px;
+          line-height: 26px;
+          height: 26px;
+          font-size: 14px;
+          margin-left: 8px;
+          &:first-child {
+            margin: 0;
+          }
+        }
+      }
+      .set-speed {
+        grid-template-columns: 20% 33.5% 4% 33.5%;
+        grid-column-gap: 2%;
+        .speed-bar {
+          display: flex;
+          align-items: center;
+          div {
+            margin: 0 auto;
+            width: 100%;
+            height: 1px;
+            border: 1px solid $btnDisableColor;
+            background-color: $btnDisableColor;
+          }
+        }
+      }
+      .set-realtimeValue {
+        grid-template-columns: 20% 15% 15% 15% 18%;
+        grid-column-gap: 2%;
+        .set-realtimeInput {
+          display: flex;
+          align-items: center;
+          input {
+            margin-right: 5px;
+          }
+        }
+      }
+      .set-limit {
+        grid-template-columns: 20% 34%;
+      }
+      // 选择工况报警门限
+      .check-alarm-threshold {
+        height: auto;
+        .alarm-value {
+          padding: 0;
+          display: grid;
+          grid-template-columns: repeat(3, 33%);
+          grid-template-rows: repeat(2, 26px);
+          height: auto;
+        }
+      }
+      .check-eigenvalue-box {
+        height: auto;
+        .check-eigenvalue {
+          border: 1px solid $btnDisableColor;
+          padding: 0 10px;
+          display: flex;
+          flex-wrap: wrap;
+          max-height: 450px;
+          overflow: auto;
+          li {
+            width: 50%;
+            height: 28px;
+            line-height: 28px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+          }
+        }
+      }
+    }
+    .big-box {
+      width: 360px;
+    }
+    .date-type-title {
+      text-align: right;
+    }
+  }
+  /* 颜色选择 */
+  .my-color-picker-box {
+    background-color: $theadBgColor;
+  }
+  /* 报警日志 */
+  .alarm-table {
+    .alarm-thead,
+    .my-table-tr {
+      .iconfont {
+        font-size: 14px;
+      }
+    }
+  }
+  .compare-chart {
+    // 故障频率
+    .set-failure-bg {
+      .set-failure {
+        position: absolute;
+        background-color: $btnFontColor;
+        color: $boxFontDefaultColor;
+        padding-bottom: 20px;
+        font-size: 12px;
+        .set-failure-title {
+          padding: 0 10px;
+          height: 30px;
+          line-height: 30px;
+          font-size: 14px;
+          color: $popTitleColor;
+          position: relative;
+          .close-failure {
+            height: 30px;
+            line-height: 30px;
+            width: 30px;
+            text-align: center;
+            position: absolute;
+            right: 0;
+            .iconfont {
+              display: block;
+              transform: scale(0.75);
+              color: $popCloseIconColor;
+            }
+          }
+        }
+        .none-impeller-failure {
+          padding: 0 10px;
+          .set-failure-speed {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 500px;
+            height: 40px;
+            line-height: 40px;
+            .iconfont {
+              font-size: 14px;
+              color: $boxFontDefaultColor;
+            }
+            .icon-danxuankuang-yixuanzhong_huaban {
+              color: $btnDefaultColor;
+            }
+            input {
+              padding: 0 10px;
+            }
+            input[disabled="disabled"] {
+              background-color: $btnDisableColor !important;
+            }
+          }
+          .set-failure-msg {
+            display: grid;
+            grid-template-columns: repeat(3, 230px);
+            grid-column-gap: 10px;
+            .failure-list {
+              border: 1px solid $iptDefaultColor;
+              height: 400px;
+              padding: 10px;
+              overflow-y: auto;
+              overflow-x: hidden;
+              .icon-shouqi_huaban,
+              .icon-zhankai_huaban {
+                color: $popTitleColor;
+                font-weight: bold;
+                font-size: 10px;
+              }
+              .icon-zhongzi_xuanzekuang,
+              .icon-zhongzi_xuanzekuang1 {
+                color: $boxFontDefaultColor;
+                font-size: 16px;
+              }
+              .my-failure-list {
+                display: grid;
+                grid-template-columns: repeat(2, 20px) 150px;
+                height: 24px;
+                line-height: 24px;
+                .icon-zhongzi_xuanzekuang1 {
+                  color: $btnDefaultColor;
+                }
+              }
+              .second-failure-list {
+                margin-left: 20px;
+                grid-template-columns: repeat(2, 20px) 130px;
+              }
+              .failure-second-list {
+                margin-left: 30px;
+                grid-template-columns: 20px 140px;
+              }
+              .third-failure-list {
+                grid-template-columns: 20px 120px;
+                margin-left: 50px;
+              }
+              .children-list {
+                transition: height 0.5s;
+              }
+            }
+          }
+        }
+        .impeller-failure {
+          margin: 0px 20px;
+          width: 300px;
+          .set-failure-freq {
+            li {
+              height: 40px;
+              line-height: 40px;
+              display: grid;
+              grid-template-columns: 20% 71% 5%;
+              grid-column-gap: 4%;
+              align-items: center;
+              input {
+                height: 20px;
+                line-height: 20px;
+                padding: 0 5px;
+              }
+              .iconfont:hover {
+                color: #38dcff;
+              }
+            }
+          }
+          .impeller-operate-btn {
+            display: grid;
+            grid-template-columns: repeat(4, 22%);
+            grid-column-gap: 3%;
+            text-align: center;
+            button {
+              width: 70px;
+              height: 30px;
+              line-height: 30px;
+            }
+          }
+        }
+      }
+    }
+    // 故障频率明细
+    .failure-list-bg {
+      .failure-list-box {
+        position: absolute;
+        width: 500px;
+        height: 400px;
+        background-color: $btnFontColor;
+        .failure-list-title {
+          color: $popTitleColor;
+          height: 30px;
+          line-height: 30px;
+          font-size: 14px;
+          position: relative;
+          padding-left: 10px;
+          .close-failure-list {
+            height: 30px;
+            line-height: 30px;
+            width: 30px;
+            text-align: center;
+            position: absolute;
+            right: 0;
+            .iconfont {
+              display: block;
+              transform: scale(0.7);
+              color: $popCloseIconColor;
+            }
+          }
+        }
+        .failure-list-table {
+          color: $boxFontDefaultColor;
+        }
+        .failure-list-head {
+          height: 30px;
+          display: grid;
+          grid-template-columns: 60px 230px 80px 110px;
+          margin: 0 10px;
+          text-align: center;
+          align-items: center;
+          font-size: 14px;
+        }
+        .failure-list-body {
+          height: 330px;
+          overflow: auto;
+          width: 480px;
+          margin: 0 auto;
+          font-size: 12px;
+          li {
+            height: 30px;
+            display: grid;
+            grid-template-columns: 60px 230px 80px 110px;
+            text-align: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+  /* 波形频谱图 */
+  .my-wave-spectrum {
+    // 右侧按钮
+    .tool-icon {
+      .icon-list {
+        border: 1px solid $btnFontColor;
+        &:hover {
+          border-color: $btnDefaultColor;
+        }
+        .iconfont {
+          color: $popCloseIconColor;
+        }
+      }
+      .check-icon {
+        border-color: $btnDefaultColor;
+      }
+    }
+    // 故障频率
+    .set-failure-bg {
+      .set-failure {
+        position: absolute;
+        background-color: $btnFontColor;
+        color: $boxFontDefaultColor;
+        padding-bottom: 20px;
+        font-size: 12px;
+        .set-failure-title {
+          padding: 0 10px;
+          height: 30px;
+          line-height: 30px;
+          font-size: 14px;
+          color: $popTitleColor;
+          position: relative;
+          .close-failure {
+            height: 30px;
+            line-height: 30px;
+            width: 30px;
+            text-align: center;
+            position: absolute;
+            right: 0;
+            .iconfont {
+              display: block;
+              transform: scale(0.75);
+              color: $popCloseIconColor;
+            }
+          }
+        }
+        .none-impeller-failure {
+          padding: 0 10px;
+          .set-failure-speed {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 500px;
+            height: 40px;
+            line-height: 40px;
+            .iconfont {
+              font-size: 14px;
+              color: $boxFontDefaultColor;
+            }
+            .icon-danxuankuang-yixuanzhong_huaban {
+              color: $btnDefaultColor;
+            }
+            input {
+              padding: 0 10px;
+            }
+            input[disabled="disabled"] {
+              background-color: $btnDisableColor !important;
+            }
+          }
+          .set-failure-msg {
+            display: grid;
+            grid-template-columns: repeat(3, 230px);
+            grid-column-gap: 10px;
+            .failure-list {
+              border: 1px solid $iptDefaultColor;
+              height: 400px;
+              padding: 10px;
+              overflow-y: auto;
+              overflow-x: hidden;
+              .icon-shouqi_huaban,
+              .icon-zhankai_huaban {
+                color: $popTitleColor;
+                font-weight: bold;
+                font-size: 10px;
+              }
+              .icon-zhongzi_xuanzekuang,
+              .icon-zhongzi_xuanzekuang1 {
+                color: $boxFontDefaultColor;
+                font-size: 16px;
+              }
+              .my-failure-list {
+                display: grid;
+                grid-template-columns: repeat(2, 20px) 150px;
+                height: 24px;
+                line-height: 24px;
+                .icon-zhongzi_xuanzekuang1 {
+                  color: $btnDefaultColor;
+                }
+              }
+              .second-failure-list {
+                margin-left: 20px;
+                grid-template-columns: repeat(2, 20px) 130px;
+              }
+              .failure-second-list {
+                margin-left: 30px;
+                grid-template-columns: 20px 140px;
+              }
+              .third-failure-list {
+                grid-template-columns: 20px 120px;
+                margin-left: 50px;
+              }
+              .children-list {
+                transition: height 0.5s;
+              }
+            }
+          }
+        }
+        .impeller-failure {
+          margin: 0px 20px;
+          width: 300px;
+          .set-failure-freq {
+            li {
+              height: 40px;
+              line-height: 40px;
+              display: grid;
+              grid-template-columns: 20% 71% 5%;
+              grid-column-gap: 4%;
+              align-items: center;
+              input {
+                height: 20px;
+                line-height: 20px;
+                padding: 0 5px;
+              }
+              .iconfont:hover {
+                color: #38dcff;
+              }
+            }
+          }
+          .impeller-operate-btn {
+            display: grid;
+            grid-template-columns: repeat(4, 22%);
+            grid-column-gap: 3%;
+            text-align: center;
+            button {
+              width: 70px;
+              height: 30px;
+              line-height: 30px;
+            }
+          }
+        }
+      }
+    }
+    // 故障频率明细
+    .failure-list-bg {
+      .failure-list-box {
+        position: absolute;
+        width: 500px;
+        height: 400px;
+        background-color: $btnFontColor;
+        .failure-list-title {
+          color: $popTitleColor;
+          height: 30px;
+          line-height: 30px;
+          font-size: 14px;
+          position: relative;
+          padding-left: 10px;
+          .close-failure-list {
+            height: 30px;
+            line-height: 30px;
+            width: 30px;
+            text-align: center;
+            position: absolute;
+            right: 0;
+            .iconfont {
+              display: block;
+              transform: scale(0.7);
+              color: $popCloseIconColor;
+            }
+          }
+        }
+        .failure-list-table {
+          color: $boxFontDefaultColor;
+        }
+        .failure-list-head {
+          height: 30px;
+          display: grid;
+          grid-template-columns: 60px 230px 80px 110px;
+          margin: 0 10px;
+          text-align: center;
+          align-items: center;
+          font-size: 14px;
+        }
+        .failure-list-body {
+          height: 330px;
+          overflow: auto;
+          width: 480px;
+          margin: 0 auto;
+          font-size: 12px;
+          li {
+            height: 30px;
+            display: grid;
+            grid-template-columns: 60px 230px 80px 110px;
+            text-align: center;
+            align-items: center;
+          }
+        }
+      }
+    }
+  }
+  /* 波形频谱图图谱 */
+  .my-wave-chart,
+  .my-chart {
+    .iconfont {
+      color: $popCloseIconColor;
+      &:hover {
+        color: $btnDefaultColor;
+      }
+    }
+    .chart-btn-active {
+      color: $btnDefaultColor;
+    }
+  }
+  /* (图谱)弹窗 */
+  .wave-alert-bg,
+  .pop-box-background {
+    .wave-alert-box,
+    .pop-box {
+      width: 254px;
+      background-color: $btnFontColor;
+      .pop-box-title,
+      .wave-alert-title {
+        color: $popTitleColor;
+        height: 34px;
+        line-height: 34px;
+        font-size: 14px;
+        text-align: left;
+        padding-left: 20px;
+        border-top-left-radius: 5px;
+        border-top-right-radius: 5px;
+        position: relative;
+        cursor: default;
+        .close-pop,
+        .close-wave-alert {
+          width: 34px;
+          height: 34px;
+          position: absolute;
+          right: 10px;
+          text-align: center;
+          .iconfont {
+            font-size: 12px;
+            color: $popCloseIconColor;
+            display: block;
+            transform: scale(0.75);
+          }
+        }
+      }
+      .effective-tip {
+        color: $redColor;
+      }
+      .pop-box-text {
+        color: $boxFontDefaultColor;
+      }
+      .wave-alert-unit {
+        .wave-alert-unit-value {
+          border: 1px solid $iptDefaultColor;
+        }
+        .iconfont {
+          color: $iptDefaultColor;
+        }
+      }
+      .select-pos {
+        .select-pos-box {
+          border: 1px solid $iptDefaultColor;
+          &:hover {
+            border-color: $btnDefaultColor;
+          }
+        }
+        .iconfont {
+          color: $iptDefaultColor;
+        }
+      }
+    }
+  }
+  /* 对比分析图 */
+  .my-compare-chart {
+    .chart-box {
+      border: 1px solid $btnDisableColor;
+      .chart-title {
+        color: $boxFontDefaultColor;
+      }
+    }
+    .data-list-box {
+      background-color: $btnFontColor;
+      color: $boxFontDefaultColor;
+      .operate-icon {
+        .icon-up,
+        .icon-up1,
+        .icon-up2,
+        .icon-up3 {
+          color: $btnDefaultColor;
+        }
+        .icon-cuohao {
+          color: $redColor;
+        }
+      }
+    }
+    .basic-msg {
+      background-color: $btnFontColor;
+      .basic-title {
+        color: $popTitleColor;
+      }
+      .basic-table {
+        color: $boxFontDefaultColor;
+        .basic-tbody {
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        }
+      }
+    }
+    .set-color {
+      display: inline-block;
+      height: 12px;
+      width: 12px;
+    }
+  }
+  /* 倾角分布图 */
+  .my-dip-chart {
+    .dip-chart {
+      .operation-list {
+        .eigenvalue {
+          border: 1px solid $btnDisableColor;
+          &:hover {
+            border-color: $btnHoverColor;
+          }
+          &:active {
+            border-color: $btnClickColor;
+          }
+          .iconfont {
+            color: $iptDefaultColor;
+          }
+        }
+      }
+      .chart-box {
+        border: 1px solid $btnDisableColor;
+      }
+    }
+  }
+  /* 机舱轨迹图 */
+  .my-overturn-chart {
+    .trajectory-wave {
+      .wave-y {
+        border-top: 1px solid $btnDisableColor;
+      }
+    }
+    .my-overturn {
+      .overturn-trend {
+        .iconfont {
+          color: $popCloseIconColor;
+        }
+      }
+    }
+  }
+  /* 系统日志 */
+  .my-system-log {
+    .my-system-head {
+      background-color: $theadBgColor;
+    }
+    .my-system-body {
+      li {
+        &:nth-child(even) {
+          background-color: $tbodyOddBgColor;
+        }
+        &:hover {
+          background-color: $selectHoverColor;
+        }
+      }
+    }
+  }
+  /* 统计列表 */
+  .my-census-chart-list {
+    .census-chart-list {
+      .census-screen {
+        .screen-title {
+          color: $boxFontDefaultColor;
+        }
+        .screen-list {
+          color: $boxFontHoverColor;
+          .list-val,
+          .set-speed {
+            border: 1px solid $iptDefaultColor;
+            &:focus,
+            &:hover {
+              border-color: $btnDefaultColor;
+            }
+          }
+          .list-val > .iconfont {
+            color: $iptDefaultColor;
+          }
+          .gray-tip {
+            color: $popCloseIconColor;
+          }
+          .red-tip {
+            color: $errTipColor;
+          }
+        }
+      }
+      .chart-list-box {
+        .my-census-list {
+          border: 1px solid $btnDisableColor;
+          .census-list-head-pos {
+            background-color: $theadBgColor;
+          }
+          .census-list-body-pos {
+            li {
+              &:nth-child(even) {
+                background-color: $tbodyOddBgColor;
+              }
+              &:hover {
+                background-color: $selectHoverColor;
+              }
+            }
+          }
+        }
+      }
+    }
+    .census-list-box {
+      .my-census-lists {
+        background-color: $btnFontColor;
+        .my-census-li {
+          color: $boxFontHoverColor;
+          &:hover {
+            background-color: $selectHoverColor;
+            .my-child-list {
+              background-color: $btnFontColor;
+              li {
+                &:hover {
+                  background-color: $selectHoverColor;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  /* 圆周图 */
+  .my-circle-chart {
+    .select-date-type {
+      .iconfont {
+        color: $iptDefaultColor;
+      }
+      li {
+        .iconfont {
+          font-size: 14px;
+        }
+        .icon-zhongzi_xuanzekuang1 {
+          color: $btnDefaultColor;
+        }
+      }
+      .iconfont {
+        color: $btnDefaultColor;
+      }
+      .disabled-icon {
+        color: $iptDefaultColor;
+      }
+    }
+    .circle-trend {
+      .iconfont {
+        color: $popCloseIconColor;
+        &:focus,
+        &:hover {
+          color: $btnDefaultColor;
+        }
+      }
+    }
+    .disabled-btn {
+      background-color: $btnDisableColor;
+    }
+  }
+  /* 报告 */
+  .my-report-content {
+    .my-report-title {
+      color: $popTitleColor;
+    }
+    .my-report-analysis {
+      color: $boxFontDefaultColor;
+      .my-report-fault-level {
+        div {
+          &:last-child {
+            &:hover {
+              border-color: $btnHoverColor;
+            }
+            .iconfont {
+              color: $iptDefaultColor;
+            }
+          }
+        }
+      }
+      input,
+      textarea {
+        color: $boxFontDefaultColor !important;
+      }
+    }
+  }
+  /* 左列表组织、机组、测点选择 */
+  .my-list-content {
+    overflow: hidden;
+    padding-left: 10px;
+    height: calc(100vh - 115px);
+    .input-selection {
+      height: 30px;
+      width: 100%;
+      padding-left: 1px;
+      margin-bottom: 10px;
+      input {
+        height: 28px;
+        width: calc(100% - 30px);
+        border: none;
+        padding: 0 9px;
+        font-size: 16px;
+        cursor: default;
+      }
+      i {
+        cursor: pointer;
+        font-size: 12px;
+        display: inline-block;
+        width: 20px;
+        height: 28px;
+        line-height: 28px;
+        text-align: center;
+      }
+    }
+    .set-positions {
+      height: calc(100% - 120px);
+    }
+    .pos-floating-window {
+      position: fixed;
+      z-index: 5;
+      padding: 5px;
+      font-size: 12px;
+      li {
+        height: 20px;
+        line-height: 20px;
+        display: flex;
+        // grid-template-columns: 80px 1fr;
+        div {
+          &:first-child {
+            &:after {
+              display: inline-block;
+              // width: 100px;
+              height: 0;
+              content: "";
+            }
+            text-align: justify;
+          }
+        }
+      }
+    }
+  }
+}

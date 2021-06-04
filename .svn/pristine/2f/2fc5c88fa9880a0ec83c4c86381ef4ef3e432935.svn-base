@@ -1,0 +1,291 @@
+$chartBGCColor: rgba(37, 50, 89, 0.2);
+
+// 媒体查询适配
+@media screen and (max-width: 767px) {
+  .the-chart-background {
+    padding: 48px 12px 12px 12px !important;
+  }
+}
+/* 全景（横屏）模式 */
+@media screen and (orientation: landscape) and (max-height: 767px) {
+  .the-chart-background {
+    padding: 48px 12px 12px 12px !important;
+  }
+}
+.up-down-structure {
+  // 数据检索栏
+  .search-data {
+    height: 49px;
+    line-height: 49px;
+    text-align: center;
+    width: 100%;
+    button {
+      height: 30px;
+      width: 100px;
+      margin: 0px 10px;
+    }
+    #keep_download,
+    .is-get-real {
+      display: none;
+    }
+  }
+}
+.the-chart-background {
+  background-size: 100% 100%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  box-sizing: border-box;
+}
+
+// // bode图
+.bodeChartsContentShell {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  #needToBeSaved {
+    height: calc(100% - 49px);
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    .bodeChartsContent {
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: 0px;
+    }
+    #bodeCharts {
+      height: calc(50% - 10px);
+      width: 100%;
+      // background-color: $chartBGCColor;
+      box-sizing: border-box;
+      border-radius: 4px;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    #bodeChartsTwo {
+      height: calc(50% - 10px);
+      width: 100%;
+      // background-color: $chartBGCColor;
+      box-sizing: border-box;
+      border-radius: 4px;
+    }
+
+    .bodeChartsContent-1 {
+      height: 100%;
+      width: calc(80% - 20px);
+      box-sizing: border-box;
+      padding-left: 0px;
+    }
+    .my-time-table {
+      height: 100%;
+      width: 20%;
+      margin-left: 20px;
+    }
+  }
+}
+
+//单值棒图
+.singleValueStickFigure {
+  height: calc(100% - 49px);
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 0px;
+  overflow: hidden;
+  .none-data-box {
+    height: calc(100% - 49px);
+    width: 100%;
+  }
+  #singleValueStickFigureCharts {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+}
+
+// 多值棒图
+.multipleBarChartsContentShell {
+  height: calc(100% - 49px);
+  width: 100%;
+  box-sizing: border-box;
+  #needToBeSaved {
+    height: 100%;
+    width: 100%;
+    .multipleBarChartsContent {
+      height: 100%;
+      width: 100%;
+      box-sizing: border-box;
+      padding-left: 0px;
+      padding-bottom: 10px;
+      overflow: hidden;
+      #multipleBarCharts {
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 4px;
+      }
+    }
+  }
+}
+
+// 表格
+.time-table {
+  font-size: 14px;
+  box-sizing: border-box;
+  overflow: auto;
+  .my-table-thead {
+    tr {
+      position: relative;
+      height: 40px;
+      line-height: 40px;
+      th {
+        height: 40px;
+        line-height: 40px;
+        user-select: none;
+        text-align: center;
+        font-size: 16px;
+      }
+    }
+  }
+  .my-table-tbody {
+    height: calc(100% - 40px);
+    td {
+      text-align: center;
+      height: 30px;
+      user-select: none;
+    }
+    tr {
+      height: 32px;
+    }
+    .my-table-tr-a {
+      background-color: #007eff;
+    }
+  }
+  .my-table-tr {
+    th:first-child,
+    td:first-child {
+      width: 50px;
+    }
+  }
+}
+
+// 三维全息谱图
+.threeDimensionalHolographyContent {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 0px;
+  #threeDimensionalHolography {
+    height: 100%;
+    width: 100%;
+    background-color: $chartBGCColor;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+}
+
+// 转速时间图
+.rotationTime {
+  height: 100%;
+  width: 100%;
+  .rotationTimeContentShell {
+    height: calc(100% - 49px);
+    width: 100%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: row;
+    .rotationTimeContent {
+      height: 100%;
+      width: 100%;
+      #rotationTime {
+        height: 100%;
+        width: 100%;
+        box-sizing: border-box;
+        border-radius: 4px;
+      }
+    }
+    .my-time-table {
+      height: 100%;
+      width: 29%;
+      margin-left: 20px;
+    }
+  }
+}
+
+// 频谱瀑布图、级联图
+.spectrumFallsContent {
+  height: calc(100% - 49px);
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 0px;
+  display: flex;
+  justify-content: row;
+  #spectrumFalls {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    border-radius: 4px;
+  }
+  .my-time-table {
+    height: 100%;
+    width: 29%;
+    margin-left: 20px;
+  }
+}
+
+// 全频谱图
+.fullSpectrum_box {
+  height: 100%;
+  .fullSpectrum_chartBox {
+    height: calc(100% - 49px);
+    .fullSpectrum_wave {
+      height: calc(33% - 10px);
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 10px;
+      .wave_1 {
+        height: 100%;
+        width: calc(50% - 5px);
+        margin-right: 10px;
+      }
+      .wave_2 {
+        height: 100%;
+        width: calc(50% - 5px);
+      }
+    }
+    .fullSpectrum_spectrum {
+      height: calc(33% - 10px);
+      margin-bottom: 10px;
+    }
+    .fullSpectrum_trend {
+      height: calc(33% - 10px);
+    }
+
+    .fullSpectrum_wave-1 {
+      height: calc(50% - 5px);
+      display: flex;
+      flex-direction: row;
+      margin-bottom: 10px;
+      .wave_1 {
+        height: 100%;
+        width: calc(50% - 5px);
+        margin-right: 10px;
+      }
+      .wave_2 {
+        height: 100%;
+        width: calc(50% - 5px);
+      }
+    }
+    .fullSpectrum_spectrum-1 {
+      height: calc(50% - 5px);
+    }
+  }
+}
+
+//   h5
+@media screen and (max-width: 1399px) {
+  .the-chart-background {
+    padding-top: 100px;
+  }
+}

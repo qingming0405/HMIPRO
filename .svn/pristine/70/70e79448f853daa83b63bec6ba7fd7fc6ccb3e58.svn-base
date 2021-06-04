@@ -1,0 +1,87 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name=Generator content="younghua.com">
+<link href="doc.css" type="text/css" rel="stylesheet" rev="stylesheet" />
+
+	
+<script language="JavaScript" src="../js/commonjs.js" type="text/javascript"></script>
+<link href="../css/navigation.css" type="text/css" rel="stylesheet" rev="stylesheet" />
+	<script>
+setCurTitleIndex( 31 );
+localFrame( 31);
+
+</script>
+
+<title>历史数据列表</title>	
+</head>
+<body onKeyDown="return contextkey(); " ><div id='helpdiv'>
+<h2><a name="_Toc1277"></a><a name="_Toc16685"></a><a name="_Toc14705"></a><a
+name="_Toc1014"></a><a name="_Toc10721"><span style='font-family:宋体'>历史数据列表</span></a></h2>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>历史数据列表：</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>点击<span lang=EN-US>HMI</span>界面上方的【数据分析】菜单栏。在数据分析菜单栏下方选择历史数据列表。点击历史数据列表进入历史数据列表界面。如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=553 height=300 id="图片 192" src="index.files/image084.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>历史数据列表</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>功能：</span></b><span style='font-size:
+12.0pt;font-family:宋体'>历史数据列表，列出了各类通道的历史特征值数据，反馈出各类通道的历史信息记录。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>显示：</span></b><span style='font-size:
+12.0pt;font-family:宋体'>进入历史数据列表，系统默认列出的是前一天的历史特征值。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>操作</span></b><span style='font-size:
+12.0pt;font-family:宋体'>：点击【数据检索】按钮即可编辑。如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center;line-height:150%'><span
+lang=EN-US><img border=0 width=333 height=610 id="图片 182"
+src="index.files/image085.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>数据检索</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>测点：为所选测点。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>时间：分别有<span lang=EN-US>1</span>天、<span
+lang=EN-US>1</span>周、<span lang=EN-US>1</span>月、<span lang=EN-US>1</span>季、<span
+lang=EN-US>1</span>年，代表的是，在您指定时间起，之前时间段内的数据。点击【重置】按钮，可以将时间重置为当前时间的前一天。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>开始时间：选择您要查询数据的开始时间，点击开始时间栏选择时间。系统默认开始时间为当前的系统时间。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>结束时间：一般由开始时间和时间长度决定，如果时间长度为自定义时间，则结束时间可选。点击结束时间栏选择日期。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>转速区间：输入查询的测点转速的最小值和最大值。最小值不可为负数，最大值必须大于最小值。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>查询密度：分为全部、高密度、中密度、低密度查询。</span></p>
+
+<p class=MsoNormal style='margin-left:48.0pt;text-indent:-48.0pt;line-height:
+20.0pt'><span style='font-size:12.0pt;font-family:宋体'>特征值：勾选测点的各种特征值，勾选后会在列表中显示，点击【全选】按钮，可以全部勾选，点击【反选】按钮可以全部去除选中。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>点击【导出数据】，可导出当前历史数据。</span></p>
+
+</div>
+</body >
+<script>
+forceTreeShow( 'rootNode_node_3_3' );
+highlight();
+
+</script>
+</html>

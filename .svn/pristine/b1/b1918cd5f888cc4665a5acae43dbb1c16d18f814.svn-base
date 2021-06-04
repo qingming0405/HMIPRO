@@ -1,0 +1,87 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name=Generator content="younghua.com">
+<link href="doc.css" type="text/css" rel="stylesheet" rev="stylesheet" />
+
+	
+<script language="JavaScript" src="../js/commonjs.js" type="text/javascript"></script>
+<link href="../css/navigation.css" type="text/css" rel="stylesheet" rev="stylesheet" />
+	<script>
+setCurTitleIndex( 21 );
+localFrame( 21);
+
+</script>
+
+<title>倾角分布图</title>	
+</head>
+<body onKeyDown="return contextkey(); " ><div id='helpdiv'>
+<h2><a name="_Toc15781"></a><a name="_Toc25564"></a><a name="_Toc28927"></a><a
+name="_Toc4101"></a><a name="_Toc28746"><span style='font-family:宋体'>倾角分布图</span></a></h2>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>倾角分布图：</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>点击<span lang=EN-US>HMI</span>界面上方的【图谱分析】菜单栏。在图谱分析菜单栏下方选择倾角分布图。点击倾角分布图进入倾角分布图界面。如图<span
+lang=EN-US>2-11</span>所示</span></p>
+
+<p class=MsoNormal style='margin-left:35.35pt;text-indent:-11.3pt;line-height:
+20.0pt'><b><span style='font-size:12.0pt;font-family:宋体'>功能：</span></b><span
+style='font-size:12.0pt;font-family:宋体'>可直观的显示倾角数据的分布情况。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>显示：</span></b><span style='font-size:
+12.0pt;font-family:宋体'>可以根据需要选择特征值：峰值、平均值、位移。工况<span lang=EN-US>1</span>、工况<span
+lang=EN-US>2</span>、工况<span lang=EN-US>3</span>、工况<span lang=EN-US>4</span>、其它工况的取值来自报警设置处的预警（高）和报警（高）值。勾选报警线，分布图上会显示不同报警值代表的线，可选用不同颜色加以区别，<span
+lang=EN-US>2</span>根报警线为<span lang=EN-US>1</span>组，分别代表预警（高）和报警（高）。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>操作：</span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>数据检索：</span></b><span style='font-size:
+12.0pt;font-family:宋体'>点击【数据检索】按钮即可编辑。如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=317 height=234 src="index.files/image064.png"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>数据检索</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>时间：分别有<span lang=EN-US>1</span>天、<span
+lang=EN-US>1</span>周、<span lang=EN-US>1</span>月、<span lang=EN-US>1</span>季、<span
+lang=EN-US>1</span>年，代表的是，在您指定时间起，之前时间段内的数据。点击【重置】按钮，可以将时间重置为当前时间的前一天。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>开始时间：选择您要查询数据的开始时间，点击开始时间栏选择时间。系统默认开始时间为当前的系统时间。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>结束时间：一般由开始时间和时间长度决定，如果时间长度为自定义时间，则结束时间可选。点击结束时间栏选择日期。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>转速区间：输入查询的测点转速的最小值和最大值。最小值不可为负数，最大值必须大于最小值。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>查询密度：分为全部、高密度、中密度、低密度查询。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>多倾角对比：</span></b><span
+style='font-size:12.0pt;font-family:宋体'>可在上方选择不同机组、测点，点击下方的【加入对比】按钮，将多个倾角测点的数据加入同一张倾角分布图谱，可选择不同颜色区分。点击【测点选择】按钮，可选择需要显示在图谱中的测点数据。如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=507 height=309 src="index.files/image065.png"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>测点列表</span></p>
+
+</div>
+</body >
+<script>
+forceTreeShow( 'rootNode_node_2_4' );
+highlight();
+
+</script>
+</html>

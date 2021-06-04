@@ -1,0 +1,105 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name=Generator content="younghua.com">
+<link href="doc.css" type="text/css" rel="stylesheet" rev="stylesheet" />
+
+	
+<script language="JavaScript" src="../js/commonjs.js" type="text/javascript"></script>
+<link href="../css/navigation.css" type="text/css" rel="stylesheet" rev="stylesheet" />
+	<script>
+setCurTitleIndex( 18 );
+localFrame( 18);
+
+</script>
+
+<title>油井设备模型</title>	
+</head>
+<body onKeyDown="return contextkey(); " ><div id='helpdiv'>
+<h1><a name="_Toc13212"><span style='font-family:宋体'>油井设备模型</span></a></h1>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>双击总貌图的机组或点击上方菜单栏的“设备模型”进入界面如图，可显示当前机组的接入设备健康状况，注：双击测点可进入趋势图。左侧测点数据状态中，绿色表示该测点数据正常；“—”表示当前机组未接入测点；红色表示当前测点数据处于报警状态；黄色表示当前测点数据处于预警状态。</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=553 height=298 id="图片 160" src="index.files/image025.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>油井设备模型</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>点击界面右侧上方的“电流卡片”即可进入到电流卡片界面，鼠标放置在图谱内滑动滚轮即可放大缩小，鼠标停滞在白点上方即可以查看当前数据与时间。如图，注：电流卡片图谱需要有“井下运行<span
+lang=EN-US>B</span>相电流”测点时候才会有此图谱。</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=553 height=295 id="图片 165" src="index.files/image026.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>电流卡片</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>电流卡片分为天卡、周卡、月卡，您可以点击下方“数据检索”选择时间进行筛选，点击【重置】按钮，可以将时间重置为当前时间的前一天。如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=290 height=146 id="图片 162" src="index.files/image027.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>时间检索</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>也可以根据需要选择全部、高密度、中密度、低密度筛选数据。如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=280 height=166 id="图片 164" src="index.files/image028.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>查询密度检索</span></p>
+
+<p class=MsoNormal style='margin-bottom:7.8pt;text-indent:24.0pt;line-height:
+20.0pt'><span style='font-size:12.0pt;font-family:宋体'>点击界面右侧上方的“沉没度分析”即可进入到沉没度分析界面，该图谱可以查看当前油井的液面状况：绿色表示健康，黄色表示预警，红色表示报警，无色表示未设置。点击详情，可以查看该测点的实时数据列表。沉没度趋势则显示一周内沉没度的变化趋势，将鼠标移动至图谱上方即可显示出当前时间的沉没度值。如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=549 height=296 id="图片 167" src="index.files/image029.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>沉没度分析</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>点击图谱右上角的区域所放和区域缩放还原图标，可对图谱进行放大和缩小查看。如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=103 height=67 id="图片 168" src="index.files/image030.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>图标</span></p>
+
+<p class=MsoNormal><a name="_Toc30539"></a><a name="_Toc11762"></a><a
+name="_Toc19726"></a><a name="_Toc7018"><span lang=EN-US>&nbsp;</span></a></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<b><span lang=EN-US style='font-size:22.0pt;line-height:240%;font-family:"Calibri",sans-serif'><br
+clear=all style='page-break-before:always'>
+</span></b>
+
+</div>
+</body >
+<script>
+forceTreeShow( 'rootNode_node_12' );
+highlight();
+
+</script>
+</html>

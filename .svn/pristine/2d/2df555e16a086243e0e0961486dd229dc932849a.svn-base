@@ -1,0 +1,63 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name=Generator content="younghua.com">
+<link href="doc.css" type="text/css" rel="stylesheet" rev="stylesheet" />
+
+	
+<script language="JavaScript" src="../js/commonjs.js" type="text/javascript"></script>
+<link href="../css/navigation.css" type="text/css" rel="stylesheet" rev="stylesheet" />
+	<script>
+setCurTitleIndex( 16 );
+localFrame( 16);
+
+</script>
+
+<title>水泥设备模型</title>	
+</head>
+<body onKeyDown="return contextkey(); " ><div id='helpdiv'>
+<h2><a name="_Toc24446"><span style='font-family:宋体'>水泥设备模型</span></a></h2>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>双击总貌图<span lang=EN-US>/</span>重点关注的机组或点击上方菜单栏的“设备模型”进入界面如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=553 height=299 id="图片 154" src="index.files/image021.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>水泥设备模型</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>设备模型图不同颜色反应部件的当前实时状态：</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>蓝色表示该部件运行正常；</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>灰色表示当前机组未接入测点；</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>红色表示当前部件处于报警状态，并通过独家算法自动计算并显示故障信息，如果计算发现并无故障，但有测点处于预、报警状态，则故障信息显示测点名<span
+lang=EN-US>+</span>“异常”；</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>黄色表示当前部件处于预警状态，故障信息显示方式跟报警一样。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>数值表示该部件的健康值，取自各个测点健康值的最小值。鼠标双击相应的监测部件，可以查看该部件的模型以及该部件内所有测点的实时数值和实时状态，点击详情，可以查看该测点的实时数据列表。如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=553 height=289 id="图片 155" src="index.files/image022.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>倾角部件监测</span></p>
+
+</div>
+</body >
+<script>
+forceTreeShow( 'rootNode_node_11_1' );
+highlight();
+
+</script>
+</html>

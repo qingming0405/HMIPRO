@@ -1,0 +1,15 @@
+html, body, ul, li, table, h1, h2, h3, h4, h5, h6, ol, dl, input, button, td, p {
+  margin: 0;
+  padding: 0;
+  outline: none;
+  border: none;
+}
+* {
+  /* font-family: 'Source Han Sans CN'; */
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+}
+ul, li, ol, dl {
+  list-style: none;
+}

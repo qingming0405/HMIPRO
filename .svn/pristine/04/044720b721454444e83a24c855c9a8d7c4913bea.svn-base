@@ -1,0 +1,506 @@
+$chartBGCColor: rgba(37, 50, 89, 0.2);
+
+// 媒体查询适配
+@media screen and (max-width: 767px) {
+  .the-chart-background {
+    padding: 48px 12px 12px 12px !important;
+  }
+}
+/* 全景（横屏）模式 */
+@media screen and (orientation: landscape) and (max-height: 767px) {
+  .the-chart-background {
+    padding: 48px 12px 12px 12px !important;
+  }
+}
+.up-down-structure {
+  // 数据检索栏
+  .search-data {
+    height: 49px;
+    line-height: 49px;
+    text-align: center;
+    width: 100%;
+    button {
+      height: 30px;
+      width: 100px;
+      margin: 0px 10px;
+    }
+    #keep_download,
+    .is-get-real {
+      display: none;
+    }
+  }
+}
+
+.the-chart-background {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  box-sizing: border-box;
+  padding-top: 20px;
+  padding-right: 20px;
+  padding-left: 20px;
+  overflow: hidden;
+}
+
+// 单面动平衡
+.unilateralDynamicEquilibriumContent {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding-left: 0px;
+  transition: 0.5s;
+  overflow-x: hidden;
+  .unilateralDynamicEquilibriumContentBGC {
+    height: calc(100% - 49px);
+    width: 100%;
+    box-sizing: border-box;
+    transition: 0.5s;
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+    .unilateralDynamicEquilibriumContentBGCLeft {
+      height: 100%;
+      width: calc(100% - 700px);
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .unilateralDynamicEquilibriumContentBGCRight {
+      width: 700px;
+      height: 100%;
+      right: 0px;
+      position: absolute;
+      top: 0;
+      padding-bottom: 225px;
+      box-sizing: border-box;
+      .topContent {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        .topContentInnerLeft {
+          width: 100%;
+          height: 100%;
+          box-sizing: border-box;
+          .topContentInnerLeftBGC {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            background-color: rgba(52, 70, 123, 0.2);
+            padding: 20px;
+            box-sizing: border-box;
+            overflow: auto;
+            overflow: -moz-scrollbars-none;
+            -ms-overflow-style: none;
+            .perLine {
+              display: flex;
+              align-items: center;
+              margin-bottom: 15px;
+              color: #fff;
+              justify-content: space-around;
+              .perLineHeader {
+                width: 75px;
+                display: inline-block;
+                text-align: justify;
+                -moz-text-align-last: justify;
+                text-align-last: justify;
+              }
+              .perLineBody {
+                width: 150px;
+              }
+            }
+          }
+          .topContentInnerLeftBGC::-webkit-scrollbar {
+            width: 0 !important;
+          }
+        }
+        .topContentInnerRight {
+          width: 100%;
+          height: 100%;
+          margin-left: 20px;
+          box-sizing: border-box;
+          .topContentInnerRightBGC {
+            width: 100%;
+            height: 100%;
+            border-radius: 4px;
+            background-color: rgba(52, 70, 123, 0.2);
+            padding: 20px;
+            box-sizing: border-box;
+            ul::-webkit-scrollbar {
+              width: 0 !important;
+            }
+            ul {
+              overflow: -moz-scrollbars-none;
+              -ms-overflow-style: none;
+              width: 100%;
+              height: 100%;
+              overflow-y: auto;
+              li {
+                margin-bottom: 10px;
+              }
+            }
+          }
+        }
+      }
+      .bottomContent {
+        width: 100%;
+        height: 205px;
+        position: absolute;
+        bottom: 0;
+        right: 0;
+        box-sizing: border-box;
+        .topContentInnerBottomBGC {
+          width: 100%;
+          height: 100%;
+          border-radius: 4px;
+          background-color: rgba(52, 70, 123, 0.2);
+          padding: 20px;
+          color: #fff;
+          box-sizing: border-box;
+          .topContentInnerTableHeader {
+            height: 40px;
+            background-color: #16428b;
+            width: 100%;
+            border-left: 1px solid rgb(52, 75, 128);
+            border-top: 1px solid rgb(52, 75, 128);
+            .topContentInnerTableHeaderRow {
+              padding: 0 5px;
+              height: 40px;
+              line-height: 40px;
+              display: inline-block;
+              overflow: hidden;
+              box-sizing: border-box;
+              text-align: center;
+              border-right: 1px solid rgb(52, 75, 128);
+            }
+          }
+          .topContentInnerTableBody {
+            height: 40px;
+            width: 100%;
+            border-top: 1px solid rgb(52, 75, 128);
+            border-left: 1px solid rgb(52, 75, 128);
+            font-size: 0;
+            .item {
+              box-sizing: border-box;
+              text-align: center;
+              padding: 0 5px;
+              height: 40px;
+              line-height: 40px;
+              display: inline-block;
+              border-right: 1px solid rgb(52, 75, 128);
+              font-size: 14px;
+              &:first-child {
+                width: 15%;
+              }
+              &:nth-child(2) {
+                width: 25%;
+              }
+              &:nth-child(3) {
+                width: 25%;
+              }
+              &:nth-child(4) {
+                width: 15%;
+              }
+              &:nth-child(5) {
+                width: 20%;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+#unilateralDynamicEquilibriumChart {
+  width: 100%;
+  height: 100%;
+}
+
+// 双面动平衡
+.polarDiagramContent {
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  transition: 0.5s;
+  overflow-x: hidden;
+  flex-direction: column;
+  .polarDiagramContentBGC {
+    height: calc(100% - 294px);
+    width: 100%;
+    box-sizing: border-box;
+    transition: 0.5s;
+    overflow: hidden;
+    border-radius: 4px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    .polarDiagramContentBGCLeft {
+      height: 100%;
+      width: 50%;
+      box-sizing: border-box;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .topContentInner {
+      width: 50%;
+      display: flex;
+      height: 100%;
+      flex-direction: row;
+      .topContentInnerLeft {
+        width: 100%;
+        padding: 0 0 20px 0;
+        box-sizing: border-box;
+        .topContentInnerLeftBGC {
+          height: 100%;
+          width: 100%;
+          border-radius: 4px;
+          background-color: rgba(52, 70, 123, 0.2);
+          padding: 20px;
+          box-sizing: border-box;
+          overflow: auto;
+          overflow: -moz-scrollbars-none;
+          -ms-overflow-style: none;
+          .perLine {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+            color: #fff;
+            justify-content: space-around;
+            .perLineHeader {
+              width: 75px;
+              display: inline-block;
+              text-align: justify;
+              -moz-text-align-last: justify;
+              text-align-last: justify;
+            }
+            .perLineBody {
+              width: 150px;
+            }
+          }
+        }
+      }
+      .topContentInnerRight {
+        width: 100%;
+        box-sizing: border-box;
+        padding: 0 0 20px 20px;
+        position: absolute;
+        right: 0;
+        top: 0;
+      }
+    }
+  }
+  .bottomContent {
+    width: 100%;
+    height: 245px;
+    box-sizing: border-box;
+    .topContentInnerBottomBGC {
+      width: 100%;
+      height: 100%;
+      border-radius: 4px;
+      background-color: rgba(52, 70, 123, 0.2);
+      padding: 20px;
+      color: #fff;
+      box-sizing: border-box;
+      .topContentInnerTableHeader {
+        height: 40px;
+        background-color: #16428b;
+        width: 100%;
+        border-left: 1px solid rgb(52, 75, 128);
+        border-top: 1px solid rgb(52, 75, 128);
+        .topContentInnerTableHeaderRow {
+          padding: 0 5px;
+          height: 40px;
+          line-height: 40px;
+          display: inline-block;
+          overflow: hidden;
+          box-sizing: border-box;
+          text-align: center;
+          border-right: 1px solid rgb(52, 75, 128);
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+      .topContentInnerTableBody {
+        height: 40px;
+        width: 100%;
+        border-top: 1px solid rgb(52, 75, 128);
+        border-left: 1px solid rgb(52, 75, 128);
+        font-size: 0; //防止盒子之间出现空隙
+        .itemBody {
+          box-sizing: border-box;
+          text-align: center;
+          padding: 0 5px;
+          height: 40px;
+          line-height: 40px;
+          display: inline-block;
+          border-right: 1px solid rgb(52, 75, 128);
+          width: 11.111111%;
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}
+#placeholderBody {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+#placeholderBodyTwo {
+  width: 100%;
+  height: 100%;
+  box-sizing: border-box;
+}
+
+@media screen and (max-width: 1366px) {
+  .the-chart-background {
+    padding: 0 !important;
+  }
+  .polarDiagramContent {
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    transition: 0.5s;
+    overflow-x: hidden;
+    flex-direction: column;
+    .polarDiagramContentBGC {
+      height: calc(100% - 200px);
+      width: 100%;
+      box-sizing: border-box;
+      transition: 0.5s;
+      overflow: hidden;
+      border-radius: 4px;
+      position: relative;
+      display: flex;
+      flex-direction: row;
+      .polarDiagramContentBGCLeft {
+        height: 100%;
+        width: 50%;
+        box-sizing: border-box;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .topContentInner {
+        width: 50%;
+        display: flex;
+        height: 100%;
+        flex-direction: row;
+        .topContentInnerLeft {
+          width: 100%;
+          padding: 0 0 20px 0;
+          box-sizing: border-box;
+          .topContentInnerLeftBGC {
+            height: 100%;
+            width: 100%;
+            border-radius: 4px;
+            background-color: rgba(52, 70, 123, 0.2);
+            padding: 20px;
+            box-sizing: border-box;
+            .perLine {
+              display: flex;
+              align-items: center;
+              margin-bottom: 15px;
+              color: #fff;
+              justify-content: space-around;
+              .perLineHeader {
+                width: 75px;
+                display: inline-block;
+                text-align: justify;
+                -moz-text-align-last: justify;
+                text-align-last: justify;
+              }
+              .perLineBody {
+                width: 150px;
+              }
+            }
+          }
+        }
+        .topContentInnerRight {
+          width: 100%;
+          box-sizing: border-box;
+          padding: 0 0 20px 20px;
+          position: absolute;
+          right: 0;
+          top: 0;
+        }
+      }
+    }
+    .bottomContent {
+      width: 100%;
+      height: 151px;
+      box-sizing: border-box;
+      .topContentInnerBottomBGC {
+        width: 100%;
+        height: 100%;
+        border-radius: 4px;
+        background-color: rgba(52, 70, 123, 0.2);
+        padding: 0;
+        color: #fff;
+        box-sizing: border-box;
+        .topContentInnerTableHeader {
+          height: 30px;
+          background-color: #16428b;
+          width: 100%;
+          border-left: 1px solid rgb(52, 75, 128);
+          border-top: 1px solid rgb(52, 75, 128);
+          .topContentInnerTableHeaderRow {
+            padding: 0 5px;
+            height: 30px;
+            line-height: 30px;
+            display: inline-block;
+            overflow: hidden;
+            box-sizing: border-box;
+            text-align: center;
+            border-right: 1px solid rgb(52, 75, 128);
+            white-space: nowrap;
+            text-overflow: ellipsis;
+          }
+        }
+        .topContentInnerTableBody {
+          height: 30px;
+          width: 100%;
+          border-top: 1px solid rgb(52, 75, 128);
+          border-left: 1px solid rgb(52, 75, 128);
+          font-size: 0; //防止盒子之间出现空隙
+          .itemBody {
+            box-sizing: border-box;
+            text-align: center;
+            padding: 0 5px;
+            height: 30px;
+            line-height: 30px;
+            display: inline-block;
+            border-right: 1px solid rgb(52, 75, 128);
+            width: 11.111111%;
+            font-size: 14px;
+          }
+        }
+      }
+    }
+  }
+}
+// 弹窗
+/deep/ .el-dialog__header,
+/deep/ .el-dialog__body {
+  background-color: #1f2c4a;
+  color: #fff;
+  padding: 20px;
+}
+
+/deep/ .el-dialog__body {
+  background-color: #1f2c4a;
+  color: #fff;
+  padding: 0 20px 20px 20px;
+}
+/deep/ .el-dialog__title {
+  color: #fff;
+}
+/deep/ .el-dialog__headerbtn {
+  .el-dialog__close {
+    color: #fff;
+  }
+}

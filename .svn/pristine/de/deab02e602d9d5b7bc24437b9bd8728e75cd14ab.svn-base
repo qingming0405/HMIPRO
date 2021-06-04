@@ -1,0 +1,104 @@
+<!-- saved from url=(0014)about:internet -->
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<meta name=Generator content="younghua.com">
+<link href="doc.css" type="text/css" rel="stylesheet" rev="stylesheet" />
+
+	
+<script language="JavaScript" src="../js/commonjs.js" type="text/javascript"></script>
+<link href="../css/navigation.css" type="text/css" rel="stylesheet" rev="stylesheet" />
+	<script>
+setCurTitleIndex( 26 );
+localFrame( 26);
+
+</script>
+
+<title>轨道波磨频谱瀑布</title>	
+</head>
+<body onKeyDown="return contextkey(); " ><div id='helpdiv'>
+<h2><a name="_Toc27415"></a><a name="_Toc7492"></a><a name="_Toc11006"><span
+style='font-family:宋体'>轨道波磨频谱瀑布</span></a></h2>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>轨道波磨频谱瀑布图：</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>点击<span lang=EN-US>HMI</span>界面上方的【</span><span
+style='font-size:12.0pt;font-family:宋体'>图谱分析】</span><span style='font-size:
+12.0pt;font-family:宋体'>菜单栏。在图谱分析菜单栏下方选择轨道波磨频谱瀑布谱图。点击轨道波磨频谱瀑布图进入轨道波磨频谱瀑布图界面。如图</span></p>
+
+<p class=MsoNormal><span lang=EN-US>&nbsp;</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=553 height=285 id="图片 6" src="index.files/image075.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>轨道波磨频谱瀑布图</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>功能：</span></b><span style='font-size:
+12.0pt;font-family:宋体'>由距离轴、频率轴和特征值幅值轴组成的轨道波磨频谱瀑布图谱，来显示出所选波磨测点的轨道波磨频谱瀑布图，可直观地显示出波磨测点频率、幅值相对于距离轴的变化。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>显示：</span></b><span style='font-size:
+12.0pt;font-family:宋体'>进入轨道波磨频谱瀑布图，系统默认显示前一天的波形数据。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>操作：</span></b></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>数据检索：</span></b><span style='font-size:
+12.0pt;font-family:宋体'>点击【数据检索】按钮即可编辑，如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=320 height=287 src="index.files/image076.jpg"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>数据检索</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>时间：分别有<span lang=EN-US>1</span>天、<span
+lang=EN-US>1</span>周、<span lang=EN-US>1</span>月、<span lang=EN-US>1</span>季、<span
+lang=EN-US>1</span>年，代表的是，在您指定时间起，之前时间段内的数据。点击【重置】按钮，可以将时间重置为当前时间的前一天。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>开始时间：选择您要查询数据的开始时间，点击开始时间栏选择时间。系统默认开始时间为当前的系统时间。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>结束时间：一般由开始时间和时间长度决定，如果时间长度为自定义时间，则结束时间可选。点击结束时间栏选择日期。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>上下行：可选择上性、下行，默认上行。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>轨道：可选择左轨、右轨，默认右轨。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>线路：可选择线路<span lang=EN-US>1</span>、线路<span
+lang=EN-US>2</span>、线路<span lang=EN-US>3...</span>，默认线路线路<span lang=EN-US>1</span>。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>起始站点：起点站和终点站均可选择线路内所有站点，默认第一站和第二站。</span></p>
+
+<p class=MsoNormal style='text-indent:24.0pt;line-height:20.0pt'><span
+style='font-size:12.0pt;font-family:宋体'>查询密度：分为全部、高密度、中密度、低密度查询。</span></p>
+
+<p class=MsoNormal style='text-indent:24.1pt;line-height:20.0pt'><b><span
+style='font-size:12.0pt;font-family:宋体'>幅值对比：</span></b><span style='font-size:
+12.0pt;font-family:宋体'>点击某一频率上的波形，可显示在同一频率上的所有波形数据幅值对比。如图</span></p>
+
+<p class=MsoNormal align=center style='text-align:center'><span lang=EN-US><img
+border=0 width=323 height=208 src="index.files/image077.png"></span></p>
+
+<p class=MsoNormal align=center style='margin-bottom:7.8pt;text-align:center'><span
+style='font-family:黑体'>轨道波磨频谱瀑布左视图</span></p>
+
+</div>
+</body >
+<script>
+forceTreeShow( 'rootNode_node_2_9' );
+highlight();
+
+</script>
+</html>
