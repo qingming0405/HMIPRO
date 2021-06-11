@@ -33,13 +33,13 @@ import ElementLocale from 'element-ui/lib/locale'
 import 'element-ui/lib/theme-chalk/index.css';
 
 /* pro部分的代码 */
-import router from "./router/router_pro";
+// import router from "./router/router_pro";
 
 /* edge部分的代码 */
-// import "@/assets/style/css/home_edge.scss";
-// import "@/assets/style/css/home_edge_color.scss"; //换肤css
-// import "@/assets/style/iconfont_edge/iconfont.css";
-// import router from "./router/router_edge";
+import "@/assets/style/css/home_edge.scss";
+import "@/assets/style/css/home_edge_color.scss"; //换肤css
+import "@/assets/style/iconfont_edge/iconfont.css";
+import router from "./router/router_edge";
 
 /*remo部分的代码*/
 // import "@/assets/style/iconfont_edge/iconfont.css";
