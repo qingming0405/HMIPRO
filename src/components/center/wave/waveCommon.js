@@ -1054,7 +1054,7 @@ export default {
         isNx.type = 2;
         failure.name = this.$t('wave.rank')//阶次
         failure.speedName = this.$t('wave.MoveOrder');//动阶次
-        failureHead[2] = this.$t('wave.rank')+"NX";//阶次
+        failureHead[2] = this.$t('wave.rank') + "NX";//阶次
         iconList[4].title = this.$t('wave.LowOrderFilter')//'低阶次过滤'
         iconList[5].title = this.$t('wave.EffectOrderFilter')//有效阶次过滤
       }
@@ -1078,7 +1078,7 @@ export default {
         rmsTitle = "gD：";
       }
       if (pos.position_type === 14) {
-        rmsTitle = this.$t('eigenvalue.PreloadValue')+"：";//预紧力值
+        rmsTitle = this.$t('eigenvalue.PreloadValue') + "：";//预紧力值
       }
       this.$set(this.chartData, key, {
         trend: {
@@ -1230,7 +1230,7 @@ export default {
           analogSpeed: 0 /* 模拟转速 */,
           analogValue: [
             /* 通过频率 */
-            { title: this.$t('waveFault.BPF')+'1', value: 1, name: 'BPF.1' },//通过频率
+            { title: this.$t('waveFault.BPF') + '1', value: 1, name: 'BPF.1' },//通过频率
             // { title: '通过频率2', value: 1, name: 'BPF.2' },
             // { title: '通过频率3', value: 1, name: 'BPF.3' },
             // { title: '通过频率4', value: 1, name: 'BPF.4' },
@@ -1501,7 +1501,7 @@ export default {
                 paramsData.chartData.spectrumType = "bar-line";
                 paramsData.failure.name = this.$t('wave.rank');//阶次
                 paramsData.failure.speedName = this.$t('wave.MoveOrder');//动阶次
-                paramsData.failure.list.head[2] = this.$t('wave.rank')+"NX"//阶次
+                paramsData.failure.list.head[2] = this.$t('wave.rank') + "NX"//阶次
                 paramsData.chartData.chartType = 2;
                 paramsData.iconList[4].title = this.$t('wave.LowOrderFilter')//低阶次过滤
                 paramsData.iconList[5].title = this.$t('wave.EffectOrderFilter')//有效阶次过滤
@@ -1539,7 +1539,7 @@ export default {
               dom: document.getElementsByClassName("icon-savemage_huaban_wave")[
                 btnIndex
               ],
-              imageName: this.$t('Common.trend')+ "_" + paramsData.fileName//趋势图
+              imageName: this.$t('Common.trend') + "_" + paramsData.fileName//趋势图
             }
           },
           backgroundColor: color.background
@@ -1568,7 +1568,7 @@ export default {
         paramsData.chartData.spectrumType = "bar-line";
         paramsData.failure.name = this.$t('wave.rank')//阶次
         paramsData.failure.speedName = this.$t('wave.MoveOrder');//动阶次
-        paramsData.failure.list.head[2] = this.$t('wave.rank')+"NX"//阶次
+        paramsData.failure.list.head[2] = this.$t('wave.rank') + "NX"//阶次
         paramsData.chartData.chartType = 2;
         paramsData.iconList[4].title = this.$t('wave.LowOrderFilter')//低阶次过滤
         paramsData.iconList[5].title = this.$t('wave.EffectOrderFilter')//有效阶次过滤

@@ -233,7 +233,7 @@ export default {
             isShow: true,
             val: list.pos_name,
             unit: list.unit,
-            class: this.getAlarmClass(list.alarmStatus)
+            class: this.getAlarmClass(list.alarmStatus, realData.t_root)
           }
         ];
         for (let j = 1; j < head.length; j++) {
@@ -637,11 +637,12 @@ export default {
       realData.body = body;
       realData.posInfo = posInfo;
     },
-    getAlarmClass (alarmStatus) {
+    getAlarmClass (alarmStatus, t_root) {
       switch (alarmStatus) {
         case 2:
-          return 'warning-text'
+          return t_root === 2 ? 'warn-TMS-text' : 'warning-text'
         case 3:
+          return t_root === 2 ? 'alarm1-TMS-text' : 'alarm-text'
         case 4:
           return 'alarm-text'
         default:

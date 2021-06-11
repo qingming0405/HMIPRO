@@ -1317,6 +1317,9 @@
               this._option.tools.timeDifferent.formatter(
                 Boolean(tools.flag_subTime)
               );
+              if (tools.flag_subTime) {
+                this._option.tools.timeDifferent.dom
+              }
               this.labelLineWave();
               this.drawLabelLine();
             },
@@ -5145,7 +5148,7 @@
               }
             } else {
               if (_flag.addPeakPos[i].value == opt.x.data[_flag.muchaddPeak[i].idx][_flag.addPeak[i]]) {
-                return;
+                break;
               } else {
                 //xArr变化过，需要重新取下标
                 for (let n = 0, len = xArr[_flag.muchaddPeak[i].idx].length; n < len; n++) {
@@ -5157,8 +5160,6 @@
                   }
                 }
               }
-
-
             }
           }
           if (type === 1 && l < n) {
