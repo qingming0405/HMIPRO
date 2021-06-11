@@ -679,7 +679,7 @@ const codeObj = {
     { filed: "proVal", name: "故障信息", code: 999 },
   ],
   // 智子测点
-  201:[
+  201: [
     { filed: 'saveTime_Com', name: '时间', code: 0, check: true },
     { filed: 'value', name: '智子值', code: 58000, check: true }, /* 智子值用来做故障预测 */
   ]
@@ -949,6 +949,7 @@ const defaultCode = {
     name: "故障信息",
     code: 999
   } /* 转速测点转速值 */,
+  201: { filed: 'value', name: '智子值', code: 58000, check: true }
 };
 const defaultCode_1 = {
   /* WL9100默认code */
@@ -1030,15 +1031,19 @@ const matchingRules = {
   dashboard: { includePosType: [11] }, //危险转速区间图
   trend: { excludingPosType: [200, 19] }, //趋势图
   scatter: { excludingPosType: [200] }, //散点图
-  wave: { excludingPosType: [1, 2, 5, 7, 10, 11, 13, 19] }, //波形频谱图 8000键相(postype === 19)
-  wave3d: { excludingPosType: [1, 2, 5, 7, 10, 11, 13, 14, 17, 19] }, //波形频谱图 只有2000V2(dgm_type == 2)的转速(pos_type==1)存在波形图
+  wave: { excludingPosType: [1, 2, 5, 7, 10, 11, 13, 19,201] }, //波形频谱图 8000键相(postype === 19)
+  wave3d: { excludingPosType: [1, 2, 5, 7, 10, 11, 13, 14, 17, 19,201] }, //波形频谱图 只有2000V2(dgm_type == 2)的转速(pos_type==1)存在波形图
+  realSummary: { excludingPosType: [201]},//实时数据汇总列表
   real: { excludingPosType: [200] }, //实时数据列表
   history: { excludingPosType: [200] }, //历史数据列表
   railCorrugation: { includePosType: [17] } /* 轨道波磨地图 */,
   tmswave3d: { includePosType: [17] } /* 轨道波磨地图 */,
   tmstrend: { includePosType: [17] } /* 轨道波磨地图 */,
   punchCard: { includePosType: [10] }, //电流卡片
-
+  census: { excludingPosType: [201] }, //统计报表
+  maintain: { excludingPosType: [201] }, //设备维护记录
+  equipmentParameters: { excludingPosType: [201] }, //设备参数
+  monitor: { excludingPosType: [201] }, //监测报表
   //8000
   bode: { includePosType: [3] } /* 伯德图 */,
   axisPosition: { includePosType: [3] } /* 轴心位置图 */,
@@ -1598,10 +1603,10 @@ function isVibOfPos (posType) {
 }
 ///////////////////////////////////////////////////////////实时数据相关 start/////////////////////////////////////////////////////////////////
 // 数据类型代码
-export function realCode(position_type, pos_loc) {
+export function realCode (position_type, pos_loc) {
   position_type = Number(position_type)
   pos_loc = Number(pos_loc)
-  switch(position_type) {
+  switch (position_type) {
     case 1:
       return 'speed'
     case 2:
@@ -1642,8 +1647,8 @@ export function realCode(position_type, pos_loc) {
   return ''
 }
 // 数据类型名称
-export function realCodeName(code) {
-  switch(code) {
+export function realCodeName (code) {
+  switch (code) {
     case 'speed':
       return '转速'
     case 'sta':
@@ -1689,7 +1694,7 @@ export function realCodeNameByPos (position_type, pos_loc) {
   return realCodeName(code)
 }
 // 特征值列表
-export function realCodeList(t_root, dgm_type, position_type, pos_loc = 1) {
+export function realCodeList (t_root, dgm_type, position_type, pos_loc = 1) {
   const head1 = setHead(t_root, dgm_type, position_type, pos_loc)
   let head2 = head1;
   // 走行部处理

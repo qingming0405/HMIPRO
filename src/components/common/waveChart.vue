@@ -63,7 +63,9 @@ export default {
     'chartType',
   ],
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       chart: {},
       subTime: false,
       maximization: false,
@@ -72,124 +74,129 @@ export default {
       chartBtn: [
         /* 0 */ {
           class: 'icon-selectunit_huaban',
-          title: '单位选择',
+          title: vm.$t('icon.unitSelect'),//'单位选择',
           flag: [1, 2, 0, 3, 7, 8, 9],
           viewType: [2],
         },
         /* 1 */ {
           class: 'icon-MAX_huaban',
-          title: '选框放大',
+          title: vm.$t('icon.maximize'),//'放大',
           flag: [1, 2, 0, 3, 7, 8, 9],
           viewType: [0, 1, 2],
         },
         /* 2 */ {
           class: 'icon-exporemusic_huaban',
-          title: '音频导出',
+          title: vm.$t('icon.AudioExport'),//'音频导出',
           flag: [0],
         },
         /* 3 */ {
           class: 'icon-exportdata_huaban',
-          title: '数据导出',
+          title: vm.$t('icon.dataExport'),//'数据导出',
           flag: [0, 1, 3, 7, 8],
           viewType: [0, 1, 2],
         },
         /* 4 */ {
           class: 'icon-restore_huaban',
-          title: '重置',
+          title: vm.$t('icon.resetIcon'),//'重置',
           flag: [1, 2, 0, 3, 6, 7, 8, 9],
           viewType: [0, 1, 2],
         },
         /* 5 */ {
           class: 'icon-enlarge_huaban',
-          title: '选框放大',
+          title: vm.$t('icon.openWindow'),//'选框放大',
           flag: [1, 2, 0, 3, 6, 7, 8, 9],
           viewType: [0, 1, 2],
         },
         /* 6 */ {
           class: 'icon-savemage_huaban',
-          title: '保存为图片',
+          title: vm.$t('icon.SavePicture'),//'保存为图片',
           flag: [1, 2, 0, 3, 6, 7, 8, 9],
           viewType: [0, 1, 2],
         },
         /* 7 */ {
           class: 'icon-setpower_huaban',
-          title: '所有测点有效频段设置',
+          title: vm.$t('icon.EffectiveFreqAllPos'),//'所有测点有效频段设置',
           flag: [1],
         },
-        /* 8 */ { class: 'icon-subtime_huaban', title: '时间差', flag: [0] },
+        /* 8 */ { 
+          class: 'icon-subtime_huaban', 
+          title: vm.$t('icon.TimeDifference'),//'时间差', 
+          flag: [0] 
+        },
         /* 9 */ {
           class: 'icon-pinputuduishuzuobiaoqiehuan_huaban',
-          title: '对数坐标',
+          title: vm.$t('icon.LogarithmicCoordinates'),//'对数坐标',
           flag: [1, 3, 7, 8],
           viewType: [0, 1, 2],
         },
         /* 10 */ {
           class: 'chart-btn-active icon-xiaozhunbeipin_huaban',
-          title: '校准倍频',
+          title: vm.$t('icon.CalibrationFreq'),//'校准倍频',
           flag: [3, 7],
         },
         /* 11 */ {
           class: 'icon-xunhuanxunfeng_huaban_huaban',
-          title: '循环寻峰',
+          title: vm.$t('icon.CyclePeakSearch'),//'循环寻峰',
           flag: [3, 7, 8],
           viewType: [0, 1, 2],
         },
         /* 12 */ {
           class: 'icon-quxiaobiaozhu_huaban',
-          title: '取消标注',
+          title: vm.$t('icon.CancelLabel'),//'取消标注',
           flag: [3, 7, 8],
           viewType: [0, 1, 2],
         },
         /* 13 */ {
           class: 'icon-biaozhu_huaban',
-          title: '添加标注',
+          title: vm.$t('icon.AddAnnotations'),//'添加标注',
           flag: [3, 7, 8],
           viewType: [0, 1, 2],
         },
         /* 14 */ {
           class: 'icon-biaozhubeipin_huaban',
-          title: '标注倍频',
+          title: vm.$t('icon.LabelledFreq'),//'标注倍频',
           flag: [3, 7, 8],
           viewType: [0, 1, 2],
         },
         /* 15 */ {
           class: 'icon-youxiaopinshuaishezhi_huaban',
-          title: '有效频段设置',
+          title: vm.$t('icon.EffectiveFreq'),//'有效频段设置',
           flag: [3, 7, 8],
           viewType: [0, 1, 2],
         },
         /* 16 */ {
           class: 'icon-dipinguolv_huaban',
-          title: '低频过滤',
+          title: vm.$t('icon.LowFreqFilter'),//'低频过滤',
           flag: [3, 7, 8],
           viewType: [0, 1, 2],
         },
         /* 17 */ {
           class: 'icon-dingweidaobeipin_huaban',
-          title: '定位到1倍频',
+          title: vm.$t('icon.oneFreqDoubling'),//'定位到1倍频',
           flag: [3, 7, 8],
           viewType: [0],
         },
         /* 18 */ {
           class: 'icon-qiehuanXzhoujiebi_huaban',
-          title: '切换阶比',
+          title: vm.$t('icon.SwitchingOrderRatio'),//'切换阶比',
           flag: [3, 7, 8],
           viewType: [0, 2],
         },
         /* 19 */ {
           class: 'icon-hanningchuang_huaban',
-          title: '汉宁窗',
+          title: vm.$t('icon.hanning'),//'汉宁窗',
           flag: [3, 7, 8],
           viewType: [0, 2],
         },
         /* 20 */ {
           class: 'icon-duichengpinshuaicha_huaban',
-          title: '对称频率差',
+          title: vm.$t('icon.FreqDifference'),//'对称频率差',
           flag: [3, 7, 8],
           viewType: [0, 2],
         },
       ],
       width: 0,
+      isActivity: true,
     }
   },
   computed: {},
@@ -261,6 +268,12 @@ export default {
        }
     }, */
   },
+  deactivated() {
+    this.isActivity = false
+  },
+  activated() {
+    this.isActivity = true
+  },
   methods: {
     // 点击图谱上方图标返回方法
     handler(index, e) {
@@ -276,10 +289,10 @@ export default {
         /* 最大化 */
         if (this.maximization) {
           btn[index].class = 'icon-MAX_huaban'
-          btn[index].title = '返回'
+          btn[index].title = vm.$t('Common.turnBack')//'返回'
         } else {
           btn[index].class = 'icon-back_huaban'
-          btn[index].title = '选框放大'
+          btn[index].title = vm.$t('icon.maximize')//'选框放大'
         }
         this.maximization = !this.maximization
         this.$emit('maximization', this.maximization, this.opt)
@@ -331,34 +344,37 @@ export default {
     },
     // 界面宽高变化刷新图谱
     resizeChart() {
-      const nameArr = [
-        'wave',
-        'spectrum',
-        'trend',
-        'compare',
-        'dip',
-        'overturn',
-        'scatter',
-        'expert-spectrum',
-        'expert-expert',
-        'expert-trend',
-        'census',
-        'circle',
-        'circle-trend',
-      ]
-      this.chart[nameArr[this.opt]] &&
-        this.chart[nameArr[this.opt]][this.index].resize()
+      if (this.isActivity) {
+        const nameArr = [
+          'wave',
+          'spectrum',
+          'trend',
+          'compare',
+          'dip',
+          'overturn',
+          'scatter',
+          'expert-spectrum',
+          'expert-expert',
+          'expert-trend',
+          'census',
+          'circle',
+          'circle-trend',
+        ]
+        this.chart[nameArr[this.opt]] &&
+          this.chart[nameArr[this.opt]][this.index] &&
+          this.chart[nameArr[this.opt]][this.index].resize()
+      }
     },
     // 设置标题
     setTitle(index) {
       const btn = this.chartBtn
       if (index === 15 || index === 16) {
         if (this.chartType === 1) {
-          btn[15].title = '有效时间设置'
-          btn[16].title = '最小时间过滤'
+          btn[15].title = vm.$t('WaveChart.effectiveTimeSetting')//'有效时间设置'
+          btn[16].title = vm.$t('WaveChart.minimumTimeFiltering')//'最小时间过滤'
         } else {
-          btn[15].title = '有效频段设置'
-          btn[16].title = '低频过滤'
+          btn[15].title = vm.$t('WaveChart.EffectiveFrequBandSetting')//'有效频段设置'
+          btn[16].title = vm.$t('icon.LowFreqFilter')//'低频过滤'
         }
       }
       return btn[index].title
@@ -367,11 +383,11 @@ export default {
   // 生命周期 - 创建完成（可以访问当前this实例）
   created() {},
   // 生命周期 - 挂载完成（可以访问DOM元素）
-  mounted () {
-    window.addEventListener("resize", this.resizeChart);
+  mounted() {
+    window.addEventListener('resize', this.resizeChart)
   },
-  beforeDestroy(){
-    window.removeEventListener("resize", this.resizeChart);
+  beforeDestroy() {
+    window.removeEventListener('resize', this.resizeChart)
   },
 }
 </script>
@@ -394,20 +410,20 @@ export default {
 }
 @media screen and (max-width: 1366px) {
   .my-wave-chart {
-  height: 100%;
-  width: 100%;
-  min-width: 560px;
-  position: relative;
-  overflow: hidden;
-  .iconfont {
+    height: 100%;
+    width: 100%;
+    min-width: 560px;
     position: relative;
-    z-index: 1;
-    float: right;
-    font-size: 18px;
-    margin-right: 8px;
-    margin-top: 8px;
-    cursor: pointer;
+    overflow: hidden;
+    .iconfont {
+      position: relative;
+      z-index: 1;
+      float: right;
+      font-size: 18px;
+      margin-right: 8px;
+      margin-top: 8px;
+      cursor: pointer;
+    }
   }
-}
 }
 </style>

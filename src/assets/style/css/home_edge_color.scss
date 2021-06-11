@@ -253,6 +253,7 @@ $themes: (
   ::-webkit-scrollbar-track {
     border-radius: 3px;
     background: rgb(239, 239, 239);
+    // background: #081d3b;//修改滚动条底色
   }
   //滚动条的轨道（里面装有Thumb）
   ::-webkit-scrollbar-thumb {
@@ -332,7 +333,8 @@ $themes: (
   .my-history-table,
   .my-rail-table,
   .my-alarm-table,
-  .time-table,.my-lifePredict-table{
+  .time-table,
+  .my-lifePredict-table {
     .my-table-thead {
       background: #007eff;
     }

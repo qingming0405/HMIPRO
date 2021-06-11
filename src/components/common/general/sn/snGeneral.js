@@ -390,6 +390,9 @@ const snGeneral = {
       //   name: 'snModel',
       // })
     },
-  }
+  },
+  deactivated () {
+    clearInterval(this.timer[this.currentKey])
+  },
 }
 export default snGeneral;

@@ -4,7 +4,9 @@ import { Mandarin } from "flatpickr/dist/l10n/zh";
 import "flatpickr/dist/flatpickr.min.css";
 const MyMixins = {
   data () {
+    const vm = window.vm;
     return {
+      vm:vm,
       isShow: true /* 控制显隐 */,
       resolve: "",
       reject: "",
@@ -13,30 +15,30 @@ const MyMixins = {
       dateType: {
         /* 时间类型 */
         type: 0,
-        val: "前一天"
+        val: vm.$t('Common.previousDay')//"前一天"
       },
       startTime: null /* 开始时间工具实例 */,
       endTime: null /* 结束时间工具实例 */,
       dateOption: [
         /* 时间类型 */
-        { type: "day", val: "前一天" },
-        { type: "week", val: "前一周" },
-        { type: "month", val: "前一月" },
-        { type: "quarter", val: "前一季" },
-        { type: "year", val: "前一年" }
+        { type: "day", val: vm.$t('Common.previousDay')},//"前一天" },
+        { type: "week", val: vm.$t('Common.previousWeek')},//"前一周" },
+        { type: "month", val: vm.$t('Common.previousMonth')},//"前一月" },
+        { type: "quarter", val: vm.$t('Common.PreviousQuarter')},//"前一季" },
+        { type: "year", val: vm.$t('Common.pastYear')},//"前一年" }
       ],
       densityData: [
         /* 查询密度 */
-        { type: 2, val: "全部" },
-        { type: 4, val: "高密度" },
-        { type: 8, val: "中密度" },
-        { type: 16, val: "低密度" }
+        { type: 2, val: vm.$t('Common.allText')},//"全部" },
+        { type: 4, val: vm.$t('Common.highDensity')},//"高密度" },
+        { type: 8, val: vm.$t('Common.mediumDensity')},//"中密度" },
+        { type: 16, val: vm.$t('Common.lowDensity')},// "低密度" }
         // { type: 32, val: '报警数据' },
       ],
       density: {
         /* 选中查询密度型 */
         type: 2,
-        val: "全部"
+        val: vm.$t('Common.allText')//全部
       },
       dataType: null,
       changeMsg: null /* 修改的组织、机组、测点信息 */,
@@ -72,7 +74,7 @@ const MyMixins = {
     //时间重置
     reset () {
       this.dateType.type = 0;
-      this.dateType.val = "前一天";
+      this.dateType.val = vm.$t('Common.previousDay')//"前一天";
       let endValue = new Date().valueOf();
       let stratValue = endValue - 24 * 60 * 60 * 1000;
       this.startTime = stratValue;
@@ -80,7 +82,7 @@ const MyMixins = {
     },
     changeTime () {
       this.dateType = {
-        val: "自定义",
+        val: vm.$t('Common.custom'),//"自定义",
         type: 5
       };
     },
@@ -162,15 +164,15 @@ const MyMixins = {
         let density = res.density;
 
         if (endTime <= startTime) {
-          this.$pop("结束时间必须大于开始时间");
+          this.$pop(vm.$t('Common.popTimeText'))//'结束时间必须大于开始时间'
           return;
         }
         if (!isNaN(maxSpeed) && !isNaN(minSpeed) && maxSpeed <= minSpeed) {
-          this.$pop("最大转速必须大于最小转速");
+          this.$pop(vm.$t('Common.popSpeedText'));//最大转速必须大于最小转速
           return;
         }
         if (!isNaN(lower) && !isNaN(upper) && upper <= lower) {
-          this.$pop("上限过滤必须大于下限过滤");
+          this.$pop(vm.$t('Common.popLowerText'));//上限过滤必须大于下限过滤
           return;
         }
         res.minSpeed === "" && (minSpeed = "");
@@ -205,7 +207,7 @@ const MyMixins = {
             }
           });
           if (checkNum == 0) {
-            this.$pop("请至少选择一个数据类型！");
+            this.$pop(vm.$t('Common.popDataTypeText'));//"请至少选择一个数据类型！"
             return;
           }
         }

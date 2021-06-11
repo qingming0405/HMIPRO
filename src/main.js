@@ -22,21 +22,14 @@ import DataRetrieval from "./components/common/dataRetrieval/DataRetrieval.js"; 
 Vue.use(DataRetrieval, store);
 Vue.use(MultiList, store);
 
-import VueI18n from "vue-i18n";//国际化
-import { cn } from './common/lang/HMIedge/cn'    // 引入lang文件
-import { en } from './common/lang/HMIedge/en'
-Vue.use(VueI18n);
-const i18n = new VueI18n({
-  locale: 'cn',   // 设置语言
-  messages: {
-    cn: { ...cn },
-    en: { ...en }
-  }
-})
+
 import "@/assets/style/css/home.scss";
 import "@/assets/style/iconfont/iconfont.css";
 import "@/assets/js/element.js"; /* elemnt ui */
-import Element from 'element-ui'
+import Element from 'element-ui';
+import enLocale from 'element-ui/lib/locale/lang/en';
+import zhLocale from 'element-ui/lib/locale/lang/zh-CN';
+import ElementLocale from 'element-ui/lib/locale'
 import 'element-ui/lib/theme-chalk/index.css';
 
 /* pro部分的代码 */
@@ -96,8 +89,26 @@ Vue.directive('resize', {
   }
 })
 
+import VueI18n from "vue-i18n";//国际化
+import { cn } from './common/lang/HMIedge/cn'    // 引入lang文件
+import { en } from './common/lang/HMIedge/en'
+Vue.use(VueI18n);
+const i18n = new VueI18n({
+  locale: 'cn',   // 设置语言
+  messages: {
+    cn: { 
+      ...cn ,
+      ...zhLocale
+    },
+    en: { 
+      ...en ,
+      ...enLocale
+    }
+  }
+})
+
 /* eslint-disable no-new */
-new Vue({
+window.vm = new Vue({
   el: "#app",
   store,
   router,
@@ -105,3 +116,4 @@ new Vue({
   components: { App },
   template: "<App/>",
 });
+ElementLocale.i18n((key, value) => i18n.t(key, value))

@@ -47,7 +47,7 @@
         >
           {{ param.botton[2].name }}
         </button>
-        <button @click="dataRetrieval">{{$t('YtPunchCard.filterBtn')}}</button>
+        <button @click="dataRetrieval">{{$t('Common.retrieval')}}</button>
       </div>
     </div>
   </div>

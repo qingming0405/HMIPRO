@@ -23,18 +23,21 @@
       </div>
       <!-- 有效频段、低频过滤 -->
       <div v-if='type === 0'>
+        <!-- v-if低频过滤 ||  低阶次过滤-->
         <div
           class='wave-alert-low'
-          v-if='title === "低频过滤" || title === "低阶次过滤"'
+          v-if='title === LowFreqFilter || title === LowOrderFilter'
         >
+        <!-- v-show低频过滤  过滤频率 -->
           <div
             class='wave-alert-low-title'
-            v-show='title === "低频过滤"'
-          >过滤频率</div>
+            v-show='title === LowFreqFilter'
+          >{{vm.$t('WaveAlert.filterFrequency')}}</div>
+          <!-- v-show低阶次过滤  过滤阶次 -->
           <div
             class='wave-alert-low-title'
-            v-show='title === "低阶次过滤"'
-          >过滤阶次</div>
+            v-show='title === LowOrderFilter'
+          >{{vm.$t('WaveAlert.filterOrder')}}</div>
           <input
             type="number"
             maxlength="8"
@@ -42,11 +45,13 @@
             class='radius'
           >
         </div>
+        <!-- v-if有效频段||有效阶次  -->
         <div
           class='wave-alert-lower set-effective'
-          v-if='title === "有效频段" || title === "有效阶次"'
+          v-if='title === effectiveBand || title === effecOrderRank'
         >
-          <div class='wave-alert-lower-title set-effective-title'>下限</div>
+        <!-- 下限 -->
+          <div class='wave-alert-lower-title set-effective-title'>{{vm.$t('WaveAlert.lowerLimit')}}</div>
           <input
             type="number"
             maxlength="8"
@@ -54,11 +59,13 @@
             class='radius'
           >
         </div>
+        <!-- v-if有效频段||有效阶次  -->
         <div
           class='wave-alert-upper set-effective'
-          v-if='title === "有效频段" || title === "有效阶次"'
+          v-if='title === effectiveBand || title === effecOrderRank'
         >
-          <div class='wave-alert-upper-title set-effective-title'>上限</div>
+        <!-- 上限 -->
+          <div class='wave-alert-upper-title set-effective-title'>{{vm.$t('WaveAlert.upLimit')}}</div>
           <input
             type="number"
             maxlength="8"
@@ -66,11 +73,13 @@
             class='radius'
           >
         </div>
+        <!-- v-if最小时间过滤  -->
         <div
           class='wave-alert-low'
-          v-if='title === "最小时间过滤"'
+          v-if='title === minimumTimeFiltering'
         >
-          <div class='wave-alert-low-title'>时间过滤</div>
+        <!--  时间过滤-->
+          <div class='wave-alert-low-title'>{{vm.$t('WaveAlert.filterTime')}}</div>
           <input
             type="number"
             maxlength="8"
@@ -78,11 +87,13 @@
             class='radius'
           >
         </div>
+        <!-- v-if 有效时间 -->
         <div
           class='wave-alert-lower set-effective'
-          v-if='title === "有效时间"'
+          v-if='title === effectiveTime'
         >
-          <div class='wave-alert-lower-title set-effective-title'>开始时间</div>
+        <!-- 开始时间 -->
+          <div class='wave-alert-lower-title set-effective-title'>{{vm.$t('Common.startTime')}}</div>
           <input
             type="number"
             maxlength="8"
@@ -90,11 +101,13 @@
             class='radius'
           >
         </div>
+        <!-- v-if 有效时间 -->
         <div
           class='wave-alert-upper set-effective'
-          v-if='title === "有效时间"'
+          v-if='title === effectiveTime'
         >
-          <div class='wave-alert-upper-title set-effective-title'>截止时间</div>
+        <!-- 截止时间 -->
+          <div class='wave-alert-upper-title set-effective-title'>{{vm.$t('Common.deadLine')}}</div>
           <input
             type="number"
             maxlength="8"
@@ -112,7 +125,7 @@
       <!-- 单位选择 -->
       <div v-if='type === 1'>
         <div class='wave-alert-unit select-none'>
-          <div class='wave-alert-unit-title'>单位选择:</div>
+          <div class='wave-alert-unit-title'>{{vm.$t('icon.unitSelect')}}:</div>
           <div
             class='wave-alert-unit-value radius'
             @click='openUnitList'
@@ -126,7 +139,8 @@
       <!-- 包络谱图滤波设置 -->
       <div v-if='type === 2'>
         <div class='wave-alert-lower set-effective'>
-          <div>滤波下限</div>
+          <!-- 滤波下限 -->
+          <div>{{vm.$t('Common.filterLowerLimit')}}</div>
           <input
             type="number"
             maxLength='8'
@@ -135,7 +149,8 @@
           >
         </div>
         <div class='wave-alert-upper set-effective'>
-          <div>滤波上限</div>
+          <!-- 滤波上限 -->
+          <div>{{vm.$t('Common.filterUpLimit')}}</div>
           <input
             type="number"
             maxLength='8'
@@ -153,7 +168,8 @@
       <!-- 细化谱图细化频率设置 -->
       <div v-if='type === 3'>
         <div class='wave-alert-lower set-effective'>
-          <div>开始频率</div>
+          <!-- 开始频率 -->
+          <div>{{vm.$t('Common.startFreq')}}</div>
           <input
             type="number"
             maxLength='8'
@@ -162,7 +178,8 @@
           >
         </div>
         <div class='wave-alert-upper set-effective'>
-          <div>截止频率</div>
+          <!-- 截止频率 -->
+          <div>{{vm.$t('Common.endFreq')}}</div>
           <input
             type="number"
             maxLength='8'
@@ -171,7 +188,8 @@
           >
         </div>
         <div class='wave-alert-lower set-effective'>
-          <div>点数</div>
+          <!-- 点数 -->
+          <div>{{vm.$t('Common.points')}}</div>
           <input
             type="number"
             maxLength='8'
@@ -192,7 +210,8 @@
         class='set-all-pos-freq'
       >
         <div class='select-pos set-effective'>
-          <div class='set-all-pos-freq-title'>选择测点</div>
+          <!-- 选择测点 -->
+          <div class='set-all-pos-freq-title'>{{vm.$t('Common.selectPos')}}</div>
           <div
             class='select-pos set-effective'
             style="margin:0px;"
@@ -205,7 +224,8 @@
           </div>
         </div>
         <div class='wave-alert-lower set-effective'>
-          <div class='wave-alert-lower-title set-effective-title'>开始频率</div>
+          <!-- 开始频率 -->
+          <div class='wave-alert-lower-title set-effective-title'>{{vm.$t('Common.startFreq')}}</div>
           <input
             type="number"
             maxlength="8"
@@ -215,7 +235,8 @@
           >
         </div>
         <div class='wave-alert-upper set-effective'>
-          <div class='wave-alert-upper-title set-effective-title'>截止频率</div>
+          <!-- 截止频率 -->
+          <div class='wave-alert-upper-title set-effective-title'>{{vm.$t('Common.endFreq')}}</div>
           <input
             type="number"
             maxlength="8"
@@ -232,19 +253,22 @@
         </div>
       </div>
       <div class='wave-alert-btn'>
+        <!-- 清空设置 -->
         <button
           v-if='type === 4'
           class='clearbtn'
           @click='closeAlert(2)'
-        >清空设置</button>
+        >{{vm.$t('Common.clearSet')}}</button>
+        <!-- 确定 -->
         <button
           v-bind:disabled="btndisable"
           @click='closeAlert(1)'
-        >确定</button>
+        >{{vm.$t('Common.sureBtn')}}</button>
+        <!-- 取消 -->
         <button
           class='wave-cancel-btn disable-btn'
           @click='closeAlert(0)'
-        >取消</button>
+        >{{vm.$t('Common.cancelBtn')}}</button>
       </div>
     </div>
   </div>
@@ -326,7 +350,9 @@ export default {
     },
   },
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       dragMsg: {
         ref: '',
         x: 0,
@@ -354,6 +380,12 @@ export default {
       },
       chooseFreq: [],
       btndisable: false,
+      LowFreqFilter:vm.$t('icon.LowFreqFilter'),//低频过滤
+      LowOrderFilter:vm.$t('wave.LowOrderFilter'),//低阶次过滤
+      effectiveBand:vm.$t('wave.effecFreqBand'),//有效频段
+      effecOrderRank:vm.$t('wave.effecOrderRank'),//有效阶次
+      minimumTimeFiltering:vm.$t('WaveChart.minimumTimeFiltering'),//最小时间过滤
+      effectiveTime:vm.$t('Common.effectiveTime'),//有效时间
     }
   },
   computed: {},
@@ -443,7 +475,7 @@ export default {
         if (min >= max) {
           this.errTip = {
             isShow: true,
-            text: '上限需要大于下限',
+            text: vm.$t('Common.popLowerText')//'上限需要大于下限',
           }
           this.btndisable = true
           // }
@@ -626,7 +658,12 @@ export default {
     },
   },
   // 生命周期 - 创建完成（可以访问当前this实例）
-  created() {},
+  created() {
+    this.title= {
+      /* 弹窗标题 */ type: String,
+      default: vm.$t('TMSRetrieval.effecFreqBand')//'有效频段',
+    }
+  },
   // 生命周期 - 挂载完成（可以访问DOM元素）
   mounted() {},
   // 生命周期 - 创建之前

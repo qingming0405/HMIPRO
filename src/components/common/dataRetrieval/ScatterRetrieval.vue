@@ -8,14 +8,14 @@
         @mousedown="moveDiv($event)"
         @mouseup="moveDivUp($event)"
       >
-        <span>数据检索</span>
+        <span>{{vm.$t('Common.title')}}</span>
         <div class="close-retrieval" @click="closeRetrieval(0)">
           <i class="iconfont icon-cuohao"></i>
         </div>
       </div>
       <!-- 选择时间类型 -->
       <div class="select-date-type">
-        <div class="select-title date-type-title">时间</div>
+        <div class="select-title date-type-title">{{vm.$t('Common.time')}}</div>
         <div
           class="select-value date-type-name radius text-overflow select-none outside-border edge-outside-border"
           @click.stop="changeTimeType"
@@ -26,14 +26,14 @@
       </div>
       <!-- 开始时间 -->
       <div class="select-time">
-        <div class="select-title time-title">开始时间</div>
+        <div class="select-title time-title">{{vm.$t('Common.startTime')}}</div>
         <!-- <input
           class="retrieval-start-time time-value  input-value radius text-overflow select-none outside-border edge-outside-border"
         /> -->
         <el-date-picker
           v-model="startTime"
           type="datetime"
-          placeholder="选择日期时间"
+          :placeholder="vm.$t('Common.placeholderTime')"
           value-format="timestamp"
           @change="changeTime"
           :clearable='false'
@@ -42,14 +42,14 @@
       </div>
       <!-- 结束时间 -->
       <div class="select-time">
-        <div class="select-title time-title">结束时间</div>
+        <div class="select-title time-title">{{vm.$t('Common.endTime')}}</div>
         <!-- <input
           class="retrieval-end-time time-value  input-value radius text-overflow select-none outside-border edge-outside-border"
         /> -->
         <el-date-picker
           v-model="endTime"
           type="datetime"
-          placeholder="选择日期时间"
+          :placeholder="vm.$t('Common.placeholderTime')"
           value-format="timestamp"
           @change="changeTime"
           :clearable='false'
@@ -58,7 +58,7 @@
       </div>
       <!-- 转速区间 -->
       <div class="set-speed">
-        <div class="select-title speed-title">转速区间</div>
+        <div class="select-title speed-title">{{vm.$t('Common.speedRange')}}</div>
         <input
           type="number"
           class="input-value radius outside-border edge-outside-border"
@@ -74,7 +74,7 @@
         />
       </div>
       <div class="select-date-type">
-        <div class="date-type-title">X轴特征值</div>
+        <div class="date-type-title">{{vm.$t('Common.Xeigenvalue')}}</div>
         <div
           class="select-value date-type-name radius text-overflow select-none outside-border edge-outside-border"
           @click="setCodeX"
@@ -84,7 +84,7 @@
         </div>
       </div>
       <div class="select-date-type">
-        <div class="date-type-title">Y轴特征值</div>
+        <div class="date-type-title">{{vm.$t('Common.Yeigenvalue')}}</div>
         <div
           class="select-value date-type-name radius text-overflow select-none outside-border edge-outside-border"
           @click="setCodeY"
@@ -95,17 +95,20 @@
       </div>
       <!-- 选择查询密度 -->
          <div class='select-date-type'>
-            <div class='select-title date-type-title'>查询密度</div>
+            <div class='select-title date-type-title'>{{vm.$t('Common.queryDensityBtn')}}</div>
             <div class='select-value date-type-name radius text-overflow select-none outside-border edge-outside-border' @click.stop=changeDensityType>
                {{density.val}}
                <i class='iconfont icon-zhongzi-zhankai'></i>
             </div>
          </div>
       <div class="data-retrieval-btn">
-        <button @click='reset'>重置</button>
-        <button @click.stop="closeRetrieval(1)">确定</button>
+        <!-- 重置 -->
+        <button @click='reset'>{{vm.$t('Common.resetBtn')}}</button>
+        <!-- 确定 -->
+        <button @click.stop="closeRetrieval(1)">{{vm.$t('Common.sureBtn')}}</button>
+        <!-- 取消 -->
         <button class="disable-btn" @click.stop="closeRetrieval(0)">
-          取消
+          {{vm.$t('Common.cancelBtn')}}
         </button>
       </div>
     </div>
@@ -127,7 +130,9 @@ export default {
   // import引入的组件需要注入到对象中才能使用
   components: {},
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       result: {
         msg: null
       },

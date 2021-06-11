@@ -18,11 +18,11 @@
           <span v-show='params[params.basicMsg[0].key].time > 0'>{{params.basicMsg[0].time}}</span>
           <span
             v-if="params[params.basicMsg[0].key].speed < 100000000"
-            v-show='params[params.basicMsg[0].key].speed > 0 && params.basicMsg[0].pos.position_type != 14 && params.basicMsg[0].pos.dgm_type != 10'
+            v-show='params.basicMsg[0].pos.position_type != 14 && params.basicMsg[0].pos.dgm_type != 10'
           >rpm: {{params[params.basicMsg[0].key].speed}}</span>
           <span
             v-else
-            v-show='params[params.basicMsg[0].key].speed > 0 && params.basicMsg[0].pos.position_type != 14 && params.basicMsg[0].pos.dgm_type != 10'
+            v-show='params.basicMsg[0].pos.position_type != 14 && params.basicMsg[0].pos.dgm_type != 10'
           >rpm: 无数据</span>
         </div>
       </div>
@@ -455,7 +455,7 @@
                 <button @click.stop='addFailure'>添加频率</button>
               </li>
               <li>
-                <button @click.stop='setMarkLine'>标注频率</button>
+                <button @click.stop='params.failure.isStartFailure = true;setMarkLine()'>标注频率</button>
               </li>
               <li>
                 <button @click.stop='clearFailure'>清除标注</button>
@@ -468,59 +468,6 @@
               </li>
             </ul>
           </div>
-        </div>
-      </div>
-      <!-- 故障频率明细 -->
-      <div
-        class="failure-list-bg pop-bg"
-        v-show='params.failure.isShowList'
-      >
-        <div
-          class='failure-list-box box-shadow radius'
-          ref='failureList'
-        >
-          <!-- 标题 -->
-          <div
-            class='failure-list-title'
-            @mousedown.stop='dragElem(1, "failureList", $event)'
-            @mouseup.stop='dragElem(0, "failureList", $event)'
-          >
-            故障频率明细
-            <span
-              class='close-failure-list'
-              @click.stop='closeFailureList'
-            >
-              <i class='iconfont icon-cuohao'></i>
-            </span>
-          </div>
-          <!-- 头部 -->
-          <ul class='failure-list-head failure-list-table'>
-            <li
-              v-for='(data, idx) in params.failure.list.head'
-              :key="'head' + idx"
-            >{{data}}</li>
-          </ul>
-          <!-- 内容 -->
-          <ul class='failure-list-body failure-list-table'>
-            <li
-              v-for='(item, id) in params.failure.list.body'
-              :key="'body' + id"
-            >
-              <div>{{item.flag}}</div>
-              <div
-                class='text-overflow'
-                :title='item.name'
-              >{{item.name}}</div>
-              <div
-                class='text-overflow'
-                :title='item.freq'
-              >{{item.freq}}</div>
-              <div
-                class='text-overflow'
-                :title='item.amplitude'
-              >{{item.amplitude}}</div>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -858,8 +805,7 @@ export default {
             },
             failure: {
               /* 故障频率窗口信息 */
-              name:
-                failure.name /* 故障频率传动链名字尾缀，阶次测点显示“阶次”，其他测点显示“频率” */,
+              name: failure.name /* 故障频率传动链名字尾缀，阶次测点显示“阶次”，其他测点显示“频率” */,
               speedName:
                 failure.speedName /* 故障频率传动链转速名字尾缀，阶次测点显示“动阶次”，其他测点显示“频” */,
               clickNum: 0 /* 点击次数 */,
@@ -875,7 +821,7 @@ export default {
                 // { title: '通过频率5', value: 1, name: 'BPF.5' },
                 // { title: '通过频率6', value: 1, name: 'BPF.6' },
               ],
-              isShowList: false /* 故障频率明细显隐 */,
+              isStartFailure: false, //是否标注叶片故障频率
               list: {
                 /* 故障频率明细 */
                 head: failureHead /* 表头 */,
@@ -1534,8 +1480,8 @@ export default {
     setMarkLine() {
       const currentKey = this.currentKey
       const params = this.paramsData[currentKey]
-      const spectrum = this.chartData[currentKey][params.basicMsg[0].key]
-        .spectrum
+      const spectrum =
+        this.chartData[currentKey][params.basicMsg[0].key].spectrum
       const maxFreq = spectrum.srcX[spectrum.srcX.length - 1]
       const failure = params.failure
       const failureList = params.failureList
@@ -1601,27 +1547,29 @@ export default {
           }
         }
       } else {
-        // 叶片
-        const freq = failure.analogValue
-        freq.map((value) => {
-          if (value.value <= maxFreq) {
-            body.push({
-              flag: value.name,
-              name: value.title,
-              freq: round(value.value, 4),
-              amplitude: round(
-                spectrum.srcY[
-                  this.getIndex(value.value, params.basicMsg[0].key, 2)
-                ],
-                4
-              ),
-            })
-            arr.push({
-              name: value.name,
-              xAxis: this.getIndex(value.value, params.basicMsg[0].key, 2),
-            })
-          }
-        })
+        if (failure.isStartFailure) {
+          // 叶片
+          const freq = failure.analogValue
+          freq.map((value) => {
+            if (value.value <= maxFreq) {
+              body.push({
+                flag: value.name,
+                name: value.title,
+                freq: round(value.value, 4),
+                amplitude: round(
+                  spectrum.srcY[
+                    this.getIndex(value.value, params.basicMsg[0].key, 2)
+                  ],
+                  4
+                ),
+              })
+              arr.push({
+                name: value.name,
+                xAxis: this.getIndex(value.value, params.basicMsg[0].key, 2),
+              })
+            }
+          })
+        }
       }
       params.failure.list.body = body
       const xAxis = []
@@ -1689,6 +1637,7 @@ export default {
       const currentKey = this.currentKey
       const param = this.paramsData[currentKey]
       param.failure.list.body = []
+      param.failure.isStartFailure = false
       this.chartData[currentKey][param.basicMsg[0].key].spectrum.markLine = []
       this.setSpectrum()
     },
@@ -1733,10 +1682,6 @@ export default {
       }
       this.setMarkLine()
     },
-    // 关闭故障频率明细
-    closeFailureList() {
-      this.paramsData[this.currentKey].failure.isShowList = false
-    },
     /* info{
       pos,
       time: currentTime,
@@ -1774,8 +1719,16 @@ export default {
             console.log('开始请求波形数据')
             if (res) {
               const info = res.info
-              if (info && info.length > 0 && info[0]) {
+              if (info && info.length > 0 && info[0] && info[0].waveObject) {
                 const time = info[0].value.saveTime_Com
+                for (let i = 0, len = params.basicMsg.length; i < len; i++) {
+                  if (
+                    params.basicMsg[i].pos.machine_id == mId &&
+                    params.basicMsg[i].pos.position_id == pId &&
+                    params.basicMsg[i].pos.position_type == pType
+                  ) {
+                  }
+                }
                 let chartType = 1
                 const defaultCode = getdefaultCode(pos.dgm_type)
                 const code = defaultCode[pType]
@@ -2005,6 +1958,9 @@ export default {
                 }
                 // 判断是否需要更换趋势
                 const trend = this.trendData[this.currentKey]
+                if (data.index != -1 && params[flag]) {
+                  pd.isShow = params[flag].isShow
+                }
                 params[flag] = pd
                 const store = {
                   wave: {
@@ -2058,10 +2014,17 @@ export default {
                 if (
                   Number(params.freq.lowerLimit) != 0 ||
                   Number(params.freq.upperLimit) != 0 ||
-                  Number(params.freq.lowerLimit) != 0
+                  Number(params.freq.lowerLimit) != 0 ||
+                  params.isLog
                 ) {
                   for (const k in chart) {
-                    this.getFreq(k)
+                    let data = chart[k].spectrum
+                    if (data.curUnitY === data.srcUnitY) {
+                      this.getFreq(k)
+                    } else {
+                      //若当前单位切换过，getFreq处理数据时取curY
+                      this.getFreq(k, 1)
+                    }
                   }
                 }
                 this.setOption()
@@ -2286,68 +2249,78 @@ export default {
             that.$store.commit('setCurrentTime', params.val)
             param.isRequestDown = true
             if (!param.isCtrlkeydown) {
-              // 点击更换波形趋势（同一机组下的同任务id进行更换）
-              for (let i = 0, l = param.basicMsg.length; i < l; i++) {
-                let isTimeSame = false //当前测点是否存在选中时间的数据
-                let sameTimeIndex = -1 //存在同一测点相同时间的basicMsg数据下标
-                if (param.basicMsg[i].flag == 0) {
-                  // 判断当前测点是否存在选中时间的数据
-                  for (let j = 0, l = param.basicMsg.length; j < l; j++) {
-                    const pos = param.basicMsg[j].pos
-                    if (
-                      pos.machine_id == param.basicMsg[i].pos.machine_id &&
-                      pos.position_id == param.basicMsg[i].pos.position_id &&
-                      pos.position_type ==
-                        param.basicMsg[i].pos.position_type &&
-                      param[param.basicMsg[j].key] &&
-                      param[param.basicMsg[j].key].time == params.val
-                    ) {
-                      isTimeSame = true
-                      sameTimeIndex = j
-                    }
-                  }
-                  let flag = false
-                  // 判断是否为同一机组，是否为同一taskid，是否存在当前时间数据
-                  if (
-                    param.basicMsg[i].pos.machine_id !=
-                      param.basicMsg[0].pos.machine_id ||
-                    param.basicMsg[i].pos.task_id !=
-                      param.basicMsg[0].pos.task_id ||
-                    param[param.basicMsg[i].key].time == params.val
-                  ) {
-                    flag = true
-                  }
-
-                  if (!flag) {
-                    if (isTimeSame) {
-                      const chart = that.chartData[that.currentKey]
-                      const basicItem = cloneObj(
-                        param.basicMsg[sameTimeIndex],
-                        true
-                      )
-                      basicItem.color = param.basicMsg[i].color
-                      basicItem.key = param.basicMsg[i].key
-                      basicItem.flag = 0
-                      param.basicMsg[i] = cloneObj(basicItem, true)
-                      chart[basicItem.key] = cloneObj(
-                        chart[param.basicMsg[sameTimeIndex].key],
-                        true
-                      )
-                      param[basicItem.key] = cloneObj(
-                        param[param.basicMsg[sameTimeIndex].key],
-                        true
-                      )
-                      param[basicItem.key].color = basicItem.color
-                      that.setOption()
-                    } else {
-                      let basic = param.basicMsg[i]
-                      const info = {
-                        pos: basic.pos,
-                        time: params.val,
-                        flag: 0,
-                        index: i,
+              if (param.basicMsg.length == 0) {
+                const info = {
+                  pos: param.pos,
+                  time: params.val,
+                  flag: 0,
+                  index: -1,
+                }
+                that.getWaveData(info)
+              } else {
+                // 点击更换波形趋势（同一机组下的同任务id进行更换）
+                for (let i = 0, l = param.basicMsg.length; i < l; i++) {
+                  let isTimeSame = false //当前测点是否存在选中时间的数据
+                  let sameTimeIndex = -1 //存在同一测点相同时间的basicMsg数据下标
+                  if (param.basicMsg[i].flag == 0) {
+                    // 判断当前测点是否存在选中时间的数据
+                    for (let j = 0, l = param.basicMsg.length; j < l; j++) {
+                      const pos = param.basicMsg[j].pos
+                      if (
+                        pos.machine_id == param.basicMsg[i].pos.machine_id &&
+                        pos.position_id == param.basicMsg[i].pos.position_id &&
+                        pos.position_type ==
+                          param.basicMsg[i].pos.position_type &&
+                        param[param.basicMsg[j].key] &&
+                        param[param.basicMsg[j].key].time == params.val
+                      ) {
+                        isTimeSame = true
+                        sameTimeIndex = j
                       }
-                      that.getWaveData(info)
+                    }
+                    let flag = false
+                    // 判断是否为同一机组，是否为同一taskid，是否存在当前时间数据
+                    if (
+                      param.basicMsg[i].pos.machine_id !=
+                        param.basicMsg[0].pos.machine_id ||
+                      param.basicMsg[i].pos.task_id !=
+                        param.basicMsg[0].pos.task_id ||
+                      param[param.basicMsg[i].key].time == params.val
+                    ) {
+                      flag = true
+                    }
+
+                    if (!flag) {
+                      if (isTimeSame) {
+                        const chart = that.chartData[that.currentKey]
+                        const basicItem = cloneObj(
+                          param.basicMsg[sameTimeIndex],
+                          true
+                        )
+                        basicItem.color = param.basicMsg[i].color
+                        basicItem.key = param.basicMsg[i].key
+                        basicItem.flag = 0
+                        param.basicMsg[i] = cloneObj(basicItem, true)
+                        chart[basicItem.key] = cloneObj(
+                          chart[param.basicMsg[sameTimeIndex].key],
+                          true
+                        )
+                        param[basicItem.key] = cloneObj(
+                          param[param.basicMsg[sameTimeIndex].key],
+                          true
+                        )
+                        param[basicItem.key].color = basicItem.color
+                        that.setOption()
+                      } else {
+                        let basic = param.basicMsg[i]
+                        const info = {
+                          pos: basic.pos,
+                          time: params.val,
+                          flag: 0,
+                          index: i,
+                        }
+                        that.getWaveData(info)
+                      }
                     }
                   }
                 }
@@ -3345,9 +3318,8 @@ export default {
       const spectrumComapreEl = this.$refs.spectrumCompare[currentIndex]
       const trendEl = this.$refs.trendCompare[currentIndex]
       const shieldUnit = ['gD', '°', 'mV', 'rpm']
-      const developIcon = document.getElementsByClassName('develop-macCompare')[
-        currentIndex
-      ]
+      const developIcon =
+        document.getElementsByClassName('develop-macCompare')[currentIndex]
       params[`${type}Max`] = !params[`${type}Max`]
       const isMax = params[`${type}Max`]
       if (index === 1) {
@@ -3396,9 +3368,12 @@ export default {
               document.getElementsByClassName('macCompare-chart-base-title')[
                 currentIndex
               ].style.display = 'none'
-              params.waveChart.resize()
-              params.spectrumChart.resize()
-              trend.trendChart.resize()
+              this.$nextTick(() => {
+                params.waveChart.resize()
+                params.spectrumChart.resize()
+                trend.trendChart.resize()
+              })
+
               changeClass(tag, 'icon-back_huaban', 'icon-MAX_huaban')
             } else {
               waveComapreEl.style = null
@@ -3408,9 +3383,11 @@ export default {
               document.getElementsByClassName('macCompare-chart-base-title')[
                 currentIndex
               ].style = null
-              params.waveChart.resize()
-              params.spectrumChart.resize()
-              trend.trendChart.resize()
+              this.$nextTick(() => {
+                params.waveChart.resize()
+                params.spectrumChart.resize()
+                trend.trendChart.resize()
+              })
               changeClass(tag, 'icon-MAX_huaban', 'icon-back_huaban')
             }
             break
@@ -3444,12 +3421,22 @@ export default {
           case 1 /* 最大化、还原 */:
             if (isMax) {
               spectrumComapreEl.style = 'height:100%;boder:none;'
-              waveComapreEl.style.display = 'none'
-              trendEl.style.display = 'none'
+              // waveComapreEl.style.display = 'none'
+              // trendEl.style.display = 'none'
               developIcon.style.display = 'none'
+              waveComapreEl.getElementsByClassName(
+                'my-chart'
+              )[0].style.display = 'none'
+              trendEl.getElementsByClassName('my-chart')[0].style.display =
+                'none'
               document.getElementsByClassName('macCompare-chart-base-title')[
                 currentIndex
               ].style.display = 'none'
+              this.$nextTick(() => {
+                params.waveChart.resize()
+                params.spectrumChart.resize()
+                trend.trendChart.resize()
+              })
               changeClass(tag, 'icon-back_huaban', 'icon-MAX_huaban')
             } else {
               spectrumComapreEl.style = null
@@ -3459,6 +3446,11 @@ export default {
               document.getElementsByClassName('macCompare-chart-base-title')[
                 currentIndex
               ].style = null
+              this.$nextTick(() => {
+                params.waveChart.resize()
+                params.spectrumChart.resize()
+                trend.trendChart.resize()
+              })
               changeClass(tag, 'icon-MAX_huaban', 'icon-back_huaban')
             }
             break
@@ -3502,7 +3494,14 @@ export default {
                 if (freq.lowerLimit !== 0 || freq.upperLimit !== 0)
                   params.isSetPower = true
                 for (const k in chart) {
-                  this.getFreq(k)
+                  let data = chart[k].spectrum
+                  //打开对数坐标
+                  if (data.curUnitY === data.srcUnitY) {
+                    this.getFreq(k)
+                  } else {
+                    //若当前单位切换过，getFreq则处理时取curY
+                    this.getFreq(k, 1)
+                  }
                 }
                 this.setSpectrum()
               }
@@ -3517,7 +3516,14 @@ export default {
               if (res) {
                 freq.lowFreq = Number(res.lowFreq)
                 for (const k in chart) {
-                  this.getFreq(k)
+                  let data = chart[k].spectrum
+                  //打开对数坐标
+                  if (data.curUnitY === data.srcUnitY) {
+                    this.getFreq(k)
+                  } else {
+                    //若当前单位切换过，getFreq则处理时取curY
+                    this.getFreq(k, 1)
+                  }
                 }
                 this.setSpectrum()
               }
@@ -3554,12 +3560,19 @@ export default {
       const developChart = params.developChart
       const trend = this.trendData[currentKey]
       const compareChart = this.$refs.macCompareChart[currentIndex]
+      const waveComapreEl = this.$refs.waveCompare[currentIndex]
+      const spectrumCompareEl = this.$refs.spectrumCompare[currentIndex]
+
       if (params.developChart.chart == 'wave') {
         if (hasClass(compareChart, 'macCompare-chart-wave')) {
           removeClass(compareChart, 'macCompare-chart-wave')
+          spectrumCompareEl.getElementsByClassName('my-chart')[0].style = null
           developChart.icon = '+'
         } else {
           addClass(compareChart, 'macCompare-chart-wave')
+          spectrumCompareEl.getElementsByClassName(
+            'my-chart'
+          )[0].style.display = 'none'
           developChart.icon = '-'
         }
         params.waveChart.resize()
@@ -3568,9 +3581,12 @@ export default {
       } else if (params.developChart.chart == 'spectrum') {
         if (hasClass(compareChart, 'macCompare-chart-spectrum')) {
           removeClass(compareChart, 'macCompare-chart-spectrum')
+          waveComapreEl.getElementsByClassName('my-chart')[0].style = null
           developChart.icon = '+'
         } else {
           addClass(compareChart, 'macCompare-chart-spectrum')
+          waveComapreEl.getElementsByClassName('my-chart')[0].style.display =
+            'none'
           developChart.icon = '-'
         }
         params.waveChart.resize()
@@ -3652,6 +3668,7 @@ export default {
         }
         chart.curY = curY
         chart.curUnitY = newUnit
+        chart.isRefresh = true
         // type === 1 && this.getFreq(1);
       }
     },
@@ -3703,6 +3720,7 @@ export default {
         }
         data.curY = y
       }
+      data.isRefresh = true
       this.chartData[currentKey][key].spectrum = data
     },
     // 频谱图根据值确定下标
@@ -3730,6 +3748,13 @@ export default {
       // if (compareList[`wave_pos_${posMsg.posFlag}_${time}`]) return;
       const currentKey = this.currentKey
       const params = this.paramsData[currentKey]
+      let key = `wave_pos_${mId}_${pId}_${pType}_0`
+      for (let i = 0, len = params.basicMsg.length; i < len; i++) {
+        if (params.basicMsg[i].key == key) {
+          this.$pop('当前对比分析图存在该测点！')
+          return
+        }
+      }
       const info = {
         pos: posMsg,
         time: currentTime,

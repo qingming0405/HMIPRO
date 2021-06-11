@@ -13,7 +13,7 @@
       @dragover.prevent
     >
       <div class='chart-base-title'>
-        <span>{{item.fileName}}-波形频谱图</span>
+        <span>{{item.fileName}}-{{$t('Common.Wave')}}</span>
         <span v-show='chartData[index].wave.curX.length > 0'>{{item.chartData.time}}</span>
         <span
           v-if="item.chartData.speed < 100000000"
@@ -22,7 +22,7 @@
         <span
           v-else
           v-show='chartData[index].wave.curX.length > 0 && item.pos.position_type != 14 && item.pos.dgm_type != 10'
-        >rpm: 无数据</span>
+        >rpm: {{$t('Common.noDataText')}}</span>
         <span
           v-if="item.chartData.rms < 100000000"
           v-show='chartData[index].wave.curX.length > 0 && item.pos.dgm_type != 10 '
@@ -30,7 +30,7 @@
         <span
           v-else
           v-show='chartData[index].wave.curX.length > 0 && item.pos.dgm_type != 10 '
-        >{{item.chartData.rmsTitle}} 无数据</span>
+        >{{item.chartData.rmsTitle}} {{$t('Common.noDataText')}}</span>
         <span v-show='isViewP() && item.pos.dgm_type != 10 && item.pos.dgm_type != 11'>p: {{item.chartData.p}}{{item.chartData.pUnit}}</span>
         <span v-show='isViewP() && item.pos.dgm_type != 10 && item.pos.dgm_type != 11'>pp: {{item.chartData.pp}}{{item.chartData.ppUnit}}</span>
         <!-- 8000总振值 -->
@@ -172,7 +172,8 @@
             @mousedown.stop='dragElem(1, "setFailure", $event)'
             @mouseup.stop='dragElem(0, "setFailure", $event)'
           >
-            故障频率
+            <!-- 故障频率 -->
+            {{$t('Common.failure')}}
             <span
               class='close-failure'
               @click.stop='closeFailure'
@@ -188,10 +189,12 @@
             <div class='set-failure-speed'>
               <span @click='setSpeed'>
                 <i :class='setIcon(item.failure.isSetSpeed, 2)'></i>
-                是否启用模拟转速
+                <!-- 是否启用模拟转速 -->
+                {{$t('wave.AnalogSpeed')}}
               </span>
               <span>
-                基准转速：<input
+                <!-- 基准转速 -->
+                {{$t('wave.referenceSpeed')}}：<input
                   class='radius'
                   type="text"
                   :disabled='!item.failure.isSetSpeed'
@@ -307,19 +310,31 @@
             </ul>
             <ul class='impeller-operate-btn'>
               <li>
-                <button @click.stop='addFailure'>添加频率</button>
+                <button @click.stop='addFailure'>
+                  <!-- 添加频率 -->
+                  {{$t('wave.AddFrequency')}}
+                </button>
               </li>
               <li>
-                <button @click.stop='setMarkLine'>标注频率</button>
+                <button @click.stop='item.failure.isStartFailure = true;setMarkLine()'>
+                  <!-- 标注频率 -->
+                  {{$t('wave.LabelingFrequency')}}
+                </button>
               </li>
               <li>
-                <button @click.stop='clearFailure'>清除标注</button>
+                <button @click.stop='clearFailure'>
+                  <!-- 清除标注 -->
+                  {{$t('wave.unnmark')}}
+                </button>
               </li>
               <li>
                 <button
                   class='disable-btn'
                   @click.stop='closeFailure'
-                >关闭</button>
+                >
+                  <!-- 关闭 -->
+                  {{$t('wave.shutDown')}}
+                </button>
               </li>
             </ul>
           </div>
@@ -340,7 +355,8 @@
             @mousedown.stop='dragElem(1, "failureList", $event)'
             @mouseup.stop='dragElem(0, "failureList", $event)'
           >
-            故障频率明细
+            <!-- 故障频率明细 -->
+            {{$t('icon.FaultFrequencyDetail')}}
             <span
               class='close-failure-list'
               @click.stop='closeFailureList'
@@ -356,7 +372,10 @@
             >{{data}}</li>
           </ul>
           <!-- 内容 -->
-          <ul class='failure-list-body failure-list-table'>
+          <ul
+            v-if="item.failure.list.body.length > 0"
+            class='failure-list-body failure-list-table'
+          >
             <li
               v-for='(item, id) in item.failure.list.body'
               :key="'body' + id"
@@ -376,6 +395,13 @@
               >{{item.amplitude}}</div>
             </li>
           </ul>
+          <div
+            v-else
+            class="failure-none"
+          >
+            <!-- 请选择故障频率 -->
+            {{$t('wave.selectFrequency')}}
+          </div>
         </div>
       </div>
       <div class='search-data'>
@@ -383,20 +409,29 @@
           v-show="Number(item.pos.position_type) === 200"
           :class="item.isSpectrum ? '':'disable-btn'"
           @click='isGetSpectrumData(1)'
-        >开启频谱图</button>
+        >
+          <!-- 开启频谱图 -->
+          {{$t('wave.spectrumDiagram')}}
+        </button>
         <button
           v-show="Number(item.pos.position_type) !== 200"
           @click='getRealData'
           class='get-real-data'
           ref='waveRealData'
           :class='item.getReal.class'
-        >实时数据</button>
+        >
+          <!-- 实时数据 -->
+          {{$t('Common.realData')}}
+        </button>
         <button
           v-show="Number(item.pos.dgm_type) == 1 && (Number(item.pos.position_type) === 3 || Number(item.pos.position_type) === 4)"
           @click='getDegreeData'
           class='get-real-data'
           :class='item.getDegree.class'
-        >阶次</button>
+        >
+          <!-- 阶次 -->
+          {{$t('wave.rank')}}
+        </button>
         <button
           v-show='item.chartType'
           @click='setSpeedType'
@@ -404,14 +439,29 @@
         <button
           class='save-image'
           @click='keepPage'
-        >保存图片</button>
+        >
+          <!-- 保存图片 -->
+          {{$t('wave.SavePic')}}
+        </button>
         <button
           @click='openFailure'
           v-show="item.pos.dgm_type != 11"
-        >故障频率</button>
-        <button @click='changeStructure'>布局切换</button>
-        <button @click='item.isTrendClose = !item.isTrendClose;closeTrend()'>{{item.isTrendClose?'开启趋势':'关闭趋势'}}</button>
-        <button @click='dataRetrieval'>数据检索</button>
+        >
+          <!-- 故障频率 -->
+          {{$t('Common.failure')}}
+        </button>
+        <button @click='changeStructure'>
+          <!-- 布局切换 -->
+          {{$t('wave.LayoutSwitch')}}
+        </button>
+        <button @click='item.isTrendClose = !item.isTrendClose;closeTrend()'>
+          <!-- 开启趋势 关闭趋势 -->
+          {{item.isTrendClose?$t('wave.OpenTrend'):$t('wave.CloseTrend')}}
+        </button>
+        <button @click='dataRetrieval'>
+          <!-- 数据检索 -->
+          {{$t('Common.retrieval')}}
+        </button>
         <input
           type="checkbox"
           v-model='item.getReal.isGetReal'
@@ -608,13 +658,20 @@ export default {
       width: 100%;
       button {
         height: 30px;
-        width: 100px;
-        margin: 0px 10px;
+        min-width: 100px;
+        margin: 5px 10px;
       }
       #keep_download,
       .is-get-real {
         display: none;
       }
+    }
+    .failure-none {
+      color: #666;
+      height: calc(100% - 100px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
   }
 }

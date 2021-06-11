@@ -1,5 +1,5 @@
 import {
-  getCodeObj, getTime, round, cloneObj, setPosMsg, matchRule, addClass, removeClass
+  getCodeObj, getTime, round, cloneObj, matchRule, addClass, removeClass
 } from 'utils/utils.js';
 import json2csv from 'json2csv'
 import { getMenuItem, getMenus, showRightMenu } from 'common/menus/Menus.js'
@@ -11,13 +11,13 @@ export default {
       alarmData: {} /* 报警日志信息 */,
       requestData: {} /* 报警日志请求信息 */,
       head: {
-        /* 所有类型报警日志表头 */ tree: ['组织名称', '机组名称', '报警次数', '报警类型'],
-        mac: ['序号', '机组名称', '通道名称', '报警次数', '报警类型'],
+        /* 所有类型报警日志表头 */ tree: [],
+        mac: [],
         //通道报警日志表头
-        enter: ['通道名称', '测点名称', '报警次数', '报警类型'],
-        pos: ['序号', '测点名称', '事件时间', '事件描述', '工况类型', '报警类型', '报警值', '报警(高)', '预警(高)', '预警(低)', '报警(低)',],
-        pos2: ['序号', '测点名称', '事件时间', '事件描述', '报警类型', '报警值', 'Ⅱ级报警(高)', 'Ⅰ级报警(高)', '预警(高)', /*'预警(低)', 'Ⅰ级报警(低)', 'Ⅱ级报警(低)'*/], //t_toot为2时
-        pos3: ['序号', '测点名称', '事件时间', '事件描述', '报警类型', '报警值'], //t_root为-1时,dgmType为10
+        enter: [],
+        pos: [],
+        pos2: [], //t_toot为2时
+        pos3: [], //t_root为-1时,dgmType为10
       },
       type: -1 /* 0: 组织, 1: 机组, 2: 通道,3: 测点 */,
       flag: '' /* 选中显示标记 */,
@@ -50,6 +50,14 @@ export default {
   },
   created () {
     this.$store.commit("set_keepAlive", { method: "add", keepAlive: "alarm" });
+    this.head = {
+      tree: [this.$t('Common.treeName'), this.$t('Common.macName'), this.$t('Alarm.alarmNum'), this.$t('Alarm.AlarmType')],
+      mac: [this.$t('Common.order'), this.$t('Common.macName'), this.$t('Alarm.ChannelName'), this.$t('Alarm.alarmNum'), this.$t('Alarm.AlarmType')],
+      enter: [this.$t('Alarm.ChannelName'), this.$t('Common.posName'), this.$t('Alarm.alarmNum'), this.$t('Alarm.AlarmType')],
+      pos: [this.$t('Common.order'), this.$t('Common.posName'), this.$t('Alarm.EventTime'), this.$t('Alarm.EventDescription'), this.$t('Alarm.condType'), this.$t('Alarm.AlarmType'), this.$t('Alarm.AlarmValue'), this.$t('Alarm.Alarmh'), this.$t('Alarm.Warnh'), this.$t('Alarm.Warnl'), this.$t('Alarm.Alarml')],
+      pos2: [this.$t('Common.order'), this.$t('Common.posName'), this.$t('Alarm.EventTime'), this.$t('Alarm.EventDescription'), this.$t('Alarm.AlarmType'), this.$t('Alarm.AlarmValue'), this.$t('Alarm.SecondAlarmh'), this.$t('Alarm.FirstAlarmh'), this.$t('Alarm.Warnh')],
+      pos3: [this.$t('Common.order'), this.$t('Common.posName'), this.$t('Alarm.EventTime'), this.$t('Alarm.EventDescription'), this.$t('Alarm.AlarmType'), this.$t('Alarm.AlarmValue')]
+    }
     if (this.$store.state.ChName) {
       this.setChName(this.$store.state.ChName)
     }
@@ -311,49 +319,49 @@ export default {
       let event = {}
       if (msg.tRoot == 2) {
         event = {
-          19: 'Ⅱ级报警(高)',
-          3: 'Ⅰ级报警(高)',
-          2: '预警(高)',
-          44: 'Ⅱ级报警(低)',
-          12: 'Ⅰ级报警(低)',
-          8: '预警(低)',
-          0: '正常'
+          19: this.$t('Alarm.SecondAlarmh'),//Ⅱ级报警(高)
+          3: this.$t('Alarm.FirstAlarmh'),//Ⅰ级报警(高)
+          2: this.$t('Alarm.Warnh'),//预警(高)
+          44: this.$t('Alarm.SecondAlarml'),//Ⅱ级报警(低)
+          12: this.$t('Alarm.FirstAlarml'),//Ⅰ级报警(低)
+          8: this.$t('Alarm.Warnl'),//预警(低)
+          0: this.$t('Alarm.Normal')//正常
         };
       } else {
         event = {
-          0: '从正常到报警（高）',
-          1: '从正常到预警（高）',
-          2: '从正常到报警（低）',
-          3: '从正常到预警（低）',
-          4: '从预警（高）到报警（高）',
-          5: '从预警（低）到报警（低）',
-          6: '从报警（高）到预警（低）',
-          7: '从报警（高）到报警（低）',
-          8: '从预警（高）到预警（低）',
-          9: '从预警（高）到报警（低）',
-          10: '从预警（低）到预警（高）',
-          11: '从预警（低）到报警（高）',
-          12: '从报警（低）到预警（高）',
-          13: '从报警（低）到报警（高）',
-          14: `趋势增长${this.setGrowth(val.alarm_hh)}%预警`,
-          15: `趋势负增长${this.setGrowth(val.alarm_ll)}%预警`,
-          16: `趋势增长${this.setGrowth(val.alarm_h)}%报警`,
-          17: `趋势负增长${this.setGrowth(val.alarm_l)}%报警`,
-          18: `趋势增长${this.setGrowth(val.alarm_h)}%平均值`,
-          128: '从报警（高）恢复到正常',
-          129: '从预警（高）恢复到正常',
-          130: '从报警（低）恢复到正常',
-          131: '从预警（低）恢复到正常',
-          132: '从报警（高）回到预警（高）',
-          133: '从报警（低）回到预警（低）',
-          200: '设备异常',//智子测点的报警描述：异常
+          0: this.$t('Alarm.NormalToAlarmh'),//从正常到报警（高）
+          1: this.$t('Alarm.NormalToWarnh'),//从正常到预警（高）
+          2: this.$t('Alarm.NormalToAlarml'),//从正常到报警（低）
+          3: this.$t('Alarm.NormalToWarnl'),//从正常到预警（低）
+          4: this.$t('Alarm.WarnhToAlarmh'),//从预警（高）到报警（高）
+          5: this.$t('Alarm.WarnlToAlarml'),//从预警（低）到报警（低）
+          6: this.$t('Alarm.AlarmhToWarnl'),//从报警（高）到预警（低）
+          7: this.$t('Alarm.AlarmhToAlarml'),//从报警（高）到报警（低）
+          8: this.$t('Alarm.WarnhToWarnl'),//从预警（高）到预警（低）
+          9: this.$t('Alarm.WarnhToAlarml'),//从预警（高）到报警（低）
+          10: this.$t('Alarm.WarnlToWarnh'),//从预警（低）到预警（高）
+          11: this.$t('Alarm.WarnlToAlarmh'),//从预警（低）到报警（高）
+          12: this.$t('Alarm.AlarmlToWarnh'),//从报警（低）到预警（高）
+          13: this.$t('Alarm.AlarmlToAlarmh'),//从报警（低）到报警（高）
+          14: `${this.$t('Alarm.TrendGrowth')}${this.setGrowth(val.alarm_hh)}%${this.$t('Alarm.Warn')}`,//趋势增长  %预警
+          15: `${this.$t('Alarm.NegativeGrowth')}${this.setGrowth(val.alarm_ll)}%${this.$t('Alarm.Warn')}`,//趋势负增长  %预警
+          16: `${this.$t('Alarm.TrendGrowth')}${this.setGrowth(val.alarm_h)}%${this.$t('Alarm.Alarm')}`,//趋势增长  %报警
+          17: `${this.$t('Alarm.NegativeGrowth')}${this.setGrowth(val.alarm_l)}%${this.$t('Alarm.Alarm')}`,//趋势负增长  %报警
+          18: `${this.$t('Alarm.TrendGrowth')}${this.setGrowth(val.alarm_h)}%${this.$t('Alarm.average')}`,//趋势增长  %平均值
+          128: this.$t('Alarm.AlarmhToNormal'),//从报警（高）恢复到正常
+          129: this.$t('Alarm.WarnhToNormal'),//从预警（高）恢复到正常
+          130: this.$t('Alarm.AlarmlToNormal'),//从报警（低）恢复到正常
+          131: this.$t('Alarm.WarnlToNormal'),//从预警（低）恢复到正常
+          132: this.$t('Alarm.AlarmhToWarnh'),//从报警（高）回到预警（高）
+          133: this.$t('Alarm.AlarmlToWarnl'),//从报警（低）回到预警（低）
+          200: this.$t('Alarm.AbnormalEquipment'),//设备异常 智子测点的报警描述：异常
         }
       }
       const pos = alarmData.msg;
       if (pos.type == 99) {//窑结圈，辊皮脱落测点
-        return '重度窑结圈故障'
+        return this.$t('Alarm.kilnRing')//'重度窑结圈故障'
       }
-      return event[type] === undefined ? `未定义${type}` : `${pos.name}-${event[type]}`;
+      return event[type] === undefined ? `${this.$t('Alarm.Undefined')}${type}` : `${pos.name}-${event[type]}`;
     },
     // 设置显示横杠或数据
     setViewData (data) {
@@ -422,23 +430,23 @@ export default {
           head = cloneObj(this.head[`${type}3`]);
         }
         const classList = {
-          0: ['', '正常'],
-          9: ['', '正常'],
-          2: ['warning-text', '预警'],
-          8: ['warning-text', '预警'],
-          3: ['alarm-text', '报警'],
-          12: ['alarm-text', '报警'],
+          0: ['', this.$t('Alarm.Normal')],//正常
+          9: ['', this.$t('Alarm.Normal')],//正常
+          2: ['warning-text', this.$t('Alarm.Warn')],//预警
+          8: ['warning-text', this.$t('Alarm.Warn')],//预警
+          3: ['alarm-text', this.$t('Alarm.Alarm')],//报警
+          12: ['alarm-text', this.$t('Alarm.Alarm')],//报警
         }
         const msg = alarmData.msg
         if (type === 'pos') {
-          const cond = ['工况1', '工况2', '工况3', '工况4', '其它工况'];
+          const cond = [this.$t('Common.Case1'), this.$t('Common.Case2'), this.$t('Common.Case3'), this.$t('Common.Case4'), this.$t('Common.OtherCond')];//工况1,工况2,工况3,工况4,其它工况
           let i = 1;
           const posType = alarmData.msg.type;
           if (posType == 99) {//窑结圈，辊皮脱落测点
             head = [
-              '序号',
-              '事件时间',
-              '事件描述',
+              this.$t('Common.order'),//'序号'
+              this.$t('Alarm.EventTime'),//事件时间
+              this.$t('Alarm.EventDescription'),//事件描述
             ]
           }
           // 冲击与冲击阶次特征值与包络、包络阶次一致
@@ -558,25 +566,25 @@ export default {
               if (Number(alarmData.msg.dgmType) === 10) { /* WL报警特征值对应表*/
                 switch (val.char_type) {
                   case 0:
-                    alarmType = '加速度有效值';
+                    alarmType = this.$t('eigenvalue.accelerationValue');//加速度有效值
                     break;
                   case 1:
-                    alarmType = '速度有效值';
+                    alarmType = this.$t('eigenvalue.speedValue');//速度有效值
                     break;
                   case 2:
-                    alarmType = '位移有效值';
+                    alarmType = this.$t('eigenvalue.displacementValue');//位移有效值
                     break;
                   case 3:
-                    alarmType = '峭度';
+                    alarmType = this.$t('eigenvalue.Kurtosis');//峭度
                     break;
                   case 4:
-                    alarmType = '包络';
+                    alarmType = this.$t('eigenvalue.envelope');//包络
                     break;
                   case 5:
-                    alarmType = '温度';
+                    alarmType = this.$t('eigenvalue.temperature');//温度
                     break;
                   case 6:
-                    alarmType = '电量';
+                    alarmType = this.$t('eigenvalue.electricity');//电量
                     break;
                 }
               }
@@ -724,7 +732,7 @@ export default {
       } else {
         alarmData.noData = {
           isShow: true,
-          text: `无数据`
+          text: this.$t('Common.noDataText')//`无数据`
         }
         alarmData.body = [];
       }
@@ -806,7 +814,7 @@ export default {
     //滚动翻页
     handleScroll (e) {
       const data = this.alarmData[this.currentIndex];
-      if(data.getReal) {
+      if (data.getReal) {
         return
       }
       const scrollDistance = e.target.scrollHeight - e.target.scrollTop - e.target.clientHeight;
@@ -904,7 +912,7 @@ export default {
           .then(res1 => {
             let positions = res1.positions
             if (positions && positions.length > 0) {
-              let pos = setPosMsg(positions);
+              let pos = positions;
               pos.forEach(item => {
                 item.name = item.position_name;
                 item.isShow = true;
@@ -941,7 +949,7 @@ export default {
         const [mId, pType, id] = item.id.split('_')
         let posArr = state.pos[msg.machineId]
         if (!posArr || (posArr && posArr.length <= 0)) {
-          this.$pop('当前通道无测点！')
+          this.$pop(this.$t('Alarm.chNoData'))
           return;
         }
         for (let i = 0; i < posArr.length; i++) {
@@ -958,7 +966,7 @@ export default {
         if (this.tRootContent.indexOf(Number(msg.tRoot)) !== -1) {
           key = `alarm_pos_${msg.machineId}_${id}_${pType}`
         }
-        let name = `${msg.name}-${item.val}-报警日志`
+        let name = `${msg.name}-${item.val}-${this.$t('Common.AlarmLog')}`
         this.$bus.$emit("choiceChartType", key, name)
         // 机组或组织
       } else if (data.type === 'mac' || data.type === 'tree') {
@@ -967,7 +975,7 @@ export default {
           tree: [`alarm_mac_${item.id}`, 'treeId'],
           mac: [`alarm_enter_${item.id}`, 'machineId'], // macid_dgmid_chtype_chid
         }
-        let name = `${msg.name}-报警日志`
+        let name = `${msg.name}-${this.$t('Common.AlarmLog')}`
         if (data.type === 'mac') {
           this.setChName(item.val)
         }
@@ -975,7 +983,7 @@ export default {
         //将数据推入vuex checkMsg
         if (data.type === 'tree') {
           macArr = state.mac[msg.id]
-          name = `${msg.name}-${item.val}-报警日志`
+          name = `${msg.name}-${item.val}-${this.$t('Common.AlarmLog')}`
         } else if (data.type === 'mac') {
           macArr = state.mac[msg.parentId]
         }
@@ -1008,13 +1016,13 @@ export default {
       else {
         let flag = matchRule(data.msg.type, "wave", data.msg.dgmType, data.msg.tRoot);
         if (!flag) {
-          this.$pop("该测点没有波形图");
+          this.$pop(this.$t('Common.noWaveAtPos'));
           return;
         }
         const key = `wave_pos_${data.msg.parentId}_${data.msg.id}_${data.msg.type}`
         this.$store.commit('setCurrentTime', item.time)
         // this.$parent.$parent.$refs.header.choiceChartType(key, '波形频谱图')
-        let name = `${msg.name}-波形频谱图`
+        let name = `${msg.name}-${this.$t('Common.Wave')}`
         this.$bus.$emit("choiceChartType", key, name)
       }
     },
@@ -1037,18 +1045,18 @@ export default {
       }
       else if (data.type === 'mac') {
         // 机组跳转到组织
-        menuItem.val = '组织报警日志'
+        menuItem.val = this.$t('Alarm.treeTitle')
         info.type = 'tree'
         info.tree = this.$store.getters.getTree(msg.parentId)
         info.mac = this.$store.getters.getMac(msg.parentId, msg.id)
       }
       else if (data.type === 'enter') {
-        menuItem.val = '机组报警日志'
+        menuItem.val = this.$t('Alarm.macTitle')
         info.type = 'mac'
         info.mac = this.$store.getters.getMac(msg.treeId, msg.machineId)
       }
       else {
-        menuItem.val = '机组报警日志'
+        menuItem.val = this.$t('Alarm.macTitle')
         info.type = 'mac'
         info.mac = this.$store.getters.getMac(msg.treeId, msg.machineId)
         info.pos = this.$store.getters.getPos(msg.machineId, msg.type, msg.id)
@@ -1178,64 +1186,124 @@ export default {
       let exportHead = []
       let exportBody = []
       if (data.type === 'tree') {
-        exportHead = ['机组名称', '报警次数', '报警类型']
-        for (let k = 0; k < data.body.length; k++) {
-          exportBody.push({
-            机组名称: data.body[k].val,
-            报警次数: data.body[k].count,
-            报警类型: data.body[k].status,
-          })
-        }
-      } else if (data.type === 'mac') {
-        exportHead = ['通道名称', '报警次数', '报警类型']
-        for (let k = 0; k < data.body.length; k++) {
-          exportBody.push({
-            通道名称: data.body[k].val,
-            报警次数: data.body[k].count,
-            报警类型: data.body[k].status,
-          })
-        }
-      } else if (data.type === 'enter') {
-        exportHead = ['测点名称', '报警次数', '报警类型']
-        for (let k = 0; k < data.body.length; k++) {
-          exportBody.push({
-            测点名称: data.body[k].val,
-            报警次数: data.body[k].count,
-            报警类型: data.body[k].status,
-          })
-        }
-      } else if (data.type === 'pos' && data.msg.tRoot === 2) {
-        if (data.msg.dgmType !== 1) {
-          exportHead = ['序号', '事件时间', '事件描述', '报警类型', '报警值', 'Ⅱ级报警(高)', 'Ⅰ级报警(高)', '预警(高)', '预警(低)', 'Ⅰ级报警(低)', 'Ⅱ级报警(低)']
+        exportHead = [this.$t('Common.macName'), this.$t('Alarm.alarmNum'), this.$t('Alarm.AlarmType')]
+        if (this.$t('Common.macName') == '机组名称') {
           for (let k = 0; k < data.body.length; k++) {
             exportBody.push({
-              序号: data.body[k].order,
-              事件时间: data.body[k].viewTime,
-              事件描述: data.body[k].eventType,
-              报警类型: data.body[k].alarmType,
-              报警值: data.body[k].value,
-              'Ⅱ级报警(高)': data.body[k].alarmHh,
-              'Ⅰ级报警(高)': data.body[k].alarmH,
-              '预警(高)': data.body[k].warningH,
-              '预警(低)': data.body[k].warningL,
-              'Ⅰ级报警(低)': data.body[k].alarmL,
-              'Ⅱ级报警(低)': data.body[k].alarmLl,
+              机组名称: data.body[k].val,
+              报警次数: data.body[k].count,
+              报警类型: data.body[k].status,
             })
           }
         } else {
-          exportHead = ['序号', '事件时间', '事件描述']
           for (let k = 0; k < data.body.length; k++) {
             exportBody.push({
-              序号: data.body[k].order,
-              事件时间: data.body[k].viewTime,
-              事件描述: data.body[k].eventType,
+              'Unit Name': data.body[k].val,
+              'Number Of Alarms': data.body[k].count,
+              'Alarm Type': data.body[k].status,
             })
+          }
+        }
+      } else if (data.type === 'mac') {
+        exportHead = [this.$t('Alarm.ChannelName'), this.$t('Alarm.alarmNum'), this.$t('Alarm.AlarmType')]
+        if (this.$t('Alarm.ChannelName') == '通道名称') {
+          for (let k = 0; k < data.body.length; k++) {
+            exportBody.push({
+              通道名称: data.body[k].val,
+              报警次数: data.body[k].count,
+              报警类型: data.body[k].status,
+            })
+          }
+        } else {
+          for (let k = 0; k < data.body.length; k++) {
+            exportBody.push({
+              'Channel Name': data.body[k].val,
+              'Number Of Alarms': data.body[k].count,
+              'Alarm Type': data.body[k].status,
+            })
+          }
+        }
+      } else if (data.type === 'enter') {
+        exportHead = [this.$t('Common.posName'), this.$t('Alarm.alarmNum'), this.$t('Alarm.AlarmType')]
+        if (this.$t('Common.posName') == '测点名称') {
+          for (let k = 0; k < data.body.length; k++) {
+            exportBody.push({
+              测点名称: data.body[k].val,
+              报警次数: data.body[k].count,
+              报警类型: data.body[k].status,
+            })
+          }
+        } else {
+          for (let k = 0; k < data.body.length; k++) {
+            exportBody.push({
+              'Name Of Measuring Point': data.body[k].val,
+              'Number Of Alarms': data.body[k].count,
+              'Alarm Type': data.body[k].status,
+            })
+          }
+        }
+      } else if (data.type === 'pos' && data.msg.tRoot === 2) {
+        if (data.msg.dgmType !== 1) {
+          exportHead = [this.$t('Common.order'), this.$t('Alarm.EventTime'), this.$t('Alarm.EventDescription'), this.$t('Alarm.AlarmType'), this.$t('Alarm.AlarmValue'), this.$t('Alarm.SecondAlarmh'), this.$t('Alarm.FirstAlarmh'), this.$t('Alarm.Warnh'), /* '预警(低)', 'Ⅰ级报警(低)', 'Ⅱ级报警(低)' */]
+          if (this.$t('Common.order') == '序号') {
+            for (let k = 0; k < data.body.length; k++) {
+              exportBody.push({
+                序号: data.body[k].order,
+                事件时间: data.body[k].viewTime,
+                事件描述: data.body[k].eventType,
+                报警类型: data.body[k].alarmType,
+                报警值: data.body[k].value,
+                'Ⅱ级报警(高)': data.body[k].alarmHh,
+                'Ⅰ级报警(高)': data.body[k].alarmH,
+                '预警(高)': data.body[k].warningH,
+                // '预警(低)': data.body[k].warningL,
+                // 'Ⅰ级报警(低)': data.body[k].alarmL,
+                // 'Ⅱ级报警(低)': data.body[k].alarmLl,
+              })
+            }
+          } else {
+            for (let k = 0; k < data.body.length; k++) {
+              exportBody.push({
+                'Serial Number': data.body[k].order,
+                'Event Time': data.body[k].viewTime,
+                'Event Description': data.body[k].eventType,
+                'Alarm Type': data.body[k].alarmType,
+                'Alarm Value': data.body[k].value,
+                'Secondary Alarm High': data.body[k].alarmHh,
+                'First Level Alarm High': data.body[k].alarmH,
+                'High Early Warning': data.body[k].warningH,
+                // '预警(低)': data.body[k].warningL,
+                // 'Ⅰ级报警(低)': data.body[k].alarmL,
+                // 'Ⅱ级报警(低)': data.body[k].alarmLl,
+              })
+            }
+          }
+
+        } else {
+          exportHead = [this.$t('Common.order'), this.$t('Alarm.EventTime'), this.$t('Alarm.EventDescription')]//'序号', '事件时间', '事件描述'
+          if (this.$t('Common.order') == '序号') {
+            for (let k = 0; k < data.body.length; k++) {
+              exportBody.push({
+                序号: data.body[k].order,
+                事件时间: data.body[k].viewTime,
+                事件描述: data.body[k].eventType,
+              })
+            }
+          } else {
+            for (let k = 0; k < data.body.length; k++) {
+              exportBody.push({
+                'Serial Number': data.body[k].order,
+                'Event Time': data.body[k].viewTime,
+                'Event Description': data.body[k].eventType,
+              })
+            }
           }
         }
       } else if (data.type === 'pos' && data.msg.tRoot !== 2) {
         if (data.msg.dgmType !== 1) {
           exportHead = [
-            '序号',
+            this.$t('Common.order'), this.$t('Alarm.EventTime'), this.$t('Alarm.EventDescription'), this.$t('Alarm.condType'), this.$t('Alarm.AlarmType'), this.$t('Alarm.AlarmValue'), this.$t('Alarm.Alarmh'), this.$t('Alarm.Warnh'), this.$t('Alarm.Alarml'), this.$t('Alarm.Warnl')
+          ]/* '序号',
             '事件时间',
             '事件描述',
             '工况类型',
@@ -1244,30 +1312,56 @@ export default {
             '报警(高)',
             '预警(高)',
             '报警(低)',
-            '预警(低)',
-          ]
-          for (let k = 0; k < data.body.length; k++) {
-            exportBody.push({
-              序号: data.body[k].order,
-              事件时间: data.body[k].viewTime,
-              事件描述: data.body[k].eventType,
-              工况类型: data.body[k].cond,
-              报警类型: data.body[k].alarmType,
-              报警值: data.body[k].value,
-              '报警(高)': data.body[k].alarmH,
-              '预警(高)': data.body[k].warningH,
-              '报警(低)': data.body[k].alarmL,
-              '预警(低)': data.body[k].warningL,
-            })
+            '预警(低)', */
+          if (this.$t('Common.order') == '序号') {
+            for (let k = 0; k < data.body.length; k++) {
+              exportBody.push({
+                序号: data.body[k].order,
+                事件时间: data.body[k].viewTime,
+                事件描述: data.body[k].eventType,
+                工况类型: data.body[k].cond,
+                报警类型: data.body[k].alarmType,
+                报警值: data.body[k].value,
+                '报警(高)': data.body[k].alarmH,
+                '预警(高)': data.body[k].warningH,
+                '报警(低)': data.body[k].alarmL,
+                '预警(低)': data.body[k].warningL,
+              })
+            }
+          } else {
+            for (let k = 0; k < data.body.length; k++) {
+              exportBody.push({
+                'Serial Number': data.body[k].order,
+                'Event Time': data.body[k].viewTime,
+                'Event Description': data.body[k].eventType,
+                'Type Of Working Condition': data.body[k].cond,
+                'Alarm Type': data.body[k].alarmType,
+                'Alarm Value': data.body[k].value,
+                'Alarm High': data.body[k].alarmH,
+                'High Early Warning': data.body[k].warningH,
+                'Alarm Low': data.body[k].alarmL,
+                'Low Early Warning': data.body[k].warningL,
+              })
+            }
           }
         } else {
-          exportHead = ['序号', '事件时间', '事件描述']
-          for (let k = 0; k < data.body.length; k++) {
-            exportBody.push({
-              序号: data.body[k].order,
-              事件时间: data.body[k].viewTime,
-              事件描述: data.body[k].eventType,
-            })
+          exportHead = [this.$t('Common.order'), this.$t('Alarm.EventTime'), this.$t('Alarm.EventDescription')]//'序号', '事件时间', '事件描述'
+          if (this.$t('Common.order') == '序号') {
+            for (let k = 0; k < data.body.length; k++) {
+              exportBody.push({
+                序号: data.body[k].order,
+                事件时间: data.body[k].viewTime,
+                事件描述: data.body[k].eventType,
+              })
+            }
+          } else {
+            for (let k = 0; k < data.body.length; k++) {
+              exportBody.push({
+                'Serial Number': data.body[k].order,
+                'Event Time': data.body[k].viewTime,
+                'Event Description': data.body[k].eventType,
+              })
+            }
           }
         }
       }
@@ -1277,7 +1371,7 @@ export default {
       csv = '\ufeff' + csv
       var aTag = document.createElement('a')
       var blob = new Blob([csv])
-      aTag.download = `${data.msg.fileName}_报警日志.csv`
+      aTag.download = `${data.msg.fileName}_${this.$t('Common.AlarmLog')}.csv`//报警日志
       aTag.href = URL.createObjectURL(blob)
       aTag.click()
       URL.revokeObjectURL(blob)

@@ -299,7 +299,7 @@
                 <button @click.stop='addFailure'>添加频率</button>
               </li>
               <li>
-                <button @click.stop='setMarkLine'>标注频率</button>
+                <button @click.stop='item.failure.isStartFailure = true;setMarkLine()'>标注频率</button>
               </li>
               <li>
                 <button @click.stop='clearFailure'>清除标注</button>

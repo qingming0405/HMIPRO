@@ -11,7 +11,6 @@ import {
   cloneObj,
   getUnit,
   round,
-  setPosMsg,
   setHead
 } from "utils/utils.js";
 export default {
@@ -39,8 +38,8 @@ export default {
         { type: "year", val: "前一年", key: "time" }
       ],
       statisticalType: [
-        { val: "平均值", type: "0", key: "statistical" },
-        { val: "方差", type: "1", key: "statistical" },
+        { val: "平均值", title: '平均值', type: "0", key: "statistical" },
+        { val: "方差", title: '方差:在概率论和统计方差衡量随机变量或一组数据时离散程度的度量', type: "1", key: "statistical" },
         { val: "最大10%平均值", type: "2", key: "statistical" }
       ],
       srcList: [],
@@ -69,6 +68,22 @@ export default {
         background: "#fff" /* 背景颜色 */
       }
     };
+  },
+  created () {
+    this.$store.commit("set_keepAlive", { method: "add", keepAlive: "census" });
+    this.dateType = [
+      /* 时间类型选择 */
+      { type: "day", val: this.$t('Common.previousDay'), key: "time" },
+      { type: "week", val: this.$t('Common.previousWeek'), key: "time" },
+      { type: "month", val: this.$t('Common.previousMonth'), key: "time" },
+      { type: "quarter", val: this.$t('Common.PreviousQuarter'), key: "time" },
+      { type: "year", val: this.$t('Common.pastYear'), key: "time" }
+    ]
+    this.statisticalType = [
+      { val: this.$t('Census.average'), title: this.$t('Census.average'), type: "0", key: "statistical" },
+      { val: this.$t('Census.variance'), title: this.$t('Census.explainedVariance'), type: "1", key: "statistical" },
+      { val: this.$t('Census.MaximumTenAverage'), title: this.$t('Census.MaximumTenAverage'), type: "2", key: "statistical" }
+    ]
   },
   watch: {
     //监听搜索tree
@@ -174,10 +189,10 @@ export default {
           this.currentIndex = keyArr.length;
           const state = this.$store.state;
           const defaultName = {
-            tree: ["请选择组织", "gray-tip"],
-            mac: ["请选择机组", "gray-tip"],
-            pos: ["请选择测点", "gray-tip"],
-            code: ["请选择特征值", "gray-tip"]
+            tree: [this.$t('Census.selectTree'), "gray-tip"],
+            mac: [this.$t('Census.selectMac'), "gray-tip"],
+            pos: [this.$t('Census.selectPos'), "gray-tip"],
+            code: [this.$t('Census.selectEigen'), "gray-tip"]
           };
           const checkMsg = state.checkMsg;
           let tree = [];
@@ -186,15 +201,15 @@ export default {
           let code = [];
           //选择中的tree ischecked为true
           let checkTree = {
-            name: "请输入组织", //显示的名称
+            name: this.$t('Census.enterTree'), //显示的名称
             msg: {}
           };
           const viewCondition = [
-            { isCheck: false, name: "工况1" },
-            { isCheck: false, name: "工况2" },
-            { isCheck: false, name: "工况3" },
-            { isCheck: false, name: "工况4" },
-            { isCheck: false, name: "其它工况" }
+            { isCheck: false, name: this.$t('Common.Case1') },
+            { isCheck: false, name: this.$t('Common.Case2') },
+            { isCheck: false, name: this.$t('Common.Case3') },
+            { isCheck: false, name: this.$t('Common.Case4') },
+            { isCheck: false, name: this.$t('Common.OtherCond') }
           ];
           let unitShow = false
           if (checkMsg.type === "pos") {
@@ -216,10 +231,12 @@ export default {
                 unitShow = true;
               }
             })
-            if (dgmType.indexOf(1) !== -1) {
+            // 采集器为2000V1(1),TMS(7),2200(2),MHD(4),E821(6),2600(5),WL9100(10)默认工况为其他工况
+            if (dgmType.indexOf(1) !== -1 || dgmType.indexOf(7) !== -1 || dgmType.indexOf(2) !== -1 || dgmType.indexOf(4) !== -1 || dgmType.indexOf(6) !== -1 || dgmType.indexOf(5) !== -1 || dgmType.indexOf(10) !== -1) {
               viewCondition[4].isCheck = true;
             }
-            if (dgmType.indexOf(3) !== -1) {
+            // 采集器为2000V2(3),2000E(9)默认工况为工况4
+            if (dgmType.indexOf(3) !== -1 || dgmType.indexOf(9) !== -1) {
               viewCondition[3].isCheck = true;
             }
             code = setHead(
@@ -266,33 +283,33 @@ export default {
             condition: [] /* 工况 */,
             viewMsg: [
               /* 0 */ {
-                name: "组织",
+                name: this.$t('Common.tree'),//组织
                 msg: defaultName.tree[0],
                 class: defaultName.tree[1]
               },
               /* 1 */ {
-                name: "机组",
+                name: this.$t('Common.mac'),//"机组"
                 msg: defaultName.mac[0],
                 class: defaultName.mac[1]
               },
               /* 2 */ {
-                name: "测点",
+                name: this.$t('Common.pos'),//"测点"
                 msg: defaultName.pos[0],
                 class: defaultName.pos[1]
               },
               /* 3 */ {
-                name: "特征值",
+                name: this.$t('Common.eigenvalue'),//"特征值"
                 msg: defaultName.code[0],
                 class: defaultName.code[1]
               },
-              /* 4 */ { name: "比例", msg: "" },
-              /* 5 */ { name: "振动单位", msg: "请选择单位" },
-              /* 6 */ { name: "时间", msg: "前一月" },
-              /* 7 */ { name: "开始时间", msg: time.start },
-              /* 8 */ { name: "结束时间", msg: time.end },
-              /* 9 */ { name: "统计方式", msg: "平均值" },
-              /* 10 */ { name: "转速区间", msg: ["", ""] },
-              /* 11 */ { name: "统计工况", msg: viewCondition }
+              /* 4 */ { name: this.$t('Census.proportion'), msg: "" },//"比例"
+              /* 5 */ { name: this.$t('Census.vibUnit'), msg: this.$t('Census.selectUnit') },//"振动单位"  请选择单位
+              /* 6 */ { name: this.$t('Census.time'), msg: this.$t('Common.previousMonth') },//"时间"  "前一月"
+              /* 7 */ { name: this.$t('Census.startTime'), msg: time.start },//"开始时间"
+              /* 8 */ { name: this.$t('Census.endTime'), msg: time.end },//"结束时间"
+              /* 9 */ { name: this.$t('Census.statisticalWays'), msg: this.$t('Census.average') },//"统计方式"  "平均值"
+              /* 10 */ { name: this.$t('Census.SpeedRange'), msg: ["", ""] },//"转速区间"
+              /* 11 */ { name: this.$t('Census.StatisticalCond'), msg: viewCondition }//"统计工况"
             ],
             viewList: {},
             chart: {
@@ -332,7 +349,7 @@ export default {
               defaultDate: time.start,
               onChange (params) {
                 const time = new Date(params[0]).valueOf();
-                time !== val.time.start && (val.viewMsg[5].msg = "自定义");
+                time !== val.time.start && (val.viewMsg[5].msg = this.$t('Common.custom'));
                 val.time.start = time;
               }
             });
@@ -346,7 +363,7 @@ export default {
               defaultDate: time.end,
               onChange (params) {
                 const time = new Date(params[0]).valueOf();
-                time !== val.time.end && (val.viewMsg[5].msg = "自定义");
+                time !== val.time.end && (val.viewMsg[5].msg = this.$t('Common.custom'));
                 val.time.end = time;
               }
             });
@@ -428,10 +445,10 @@ export default {
         })
       }
       const defaultName = [
-        "请选择组织",
-        "请选择机组",
-        "请选择测点",
-        "请选择特征值"
+        this.$t('Census.selectTree'),//"请选择组织",
+        this.$t('Census.selectMac'),//"请选择机组",
+        this.$t('Census.selectPos'),//"请选择测点",
+        this.$t('Census.selectEigen'),//"请选择特征值"
       ];
       const defaultClass = "gray-tip";
       this.censusData[this.currentKey].viewMsg[1].msg = defaultName[1];
@@ -613,7 +630,7 @@ export default {
             isChild: false,
             hasOpen: false,
             isOpen: false,
-            val: "全部",
+            val: this.$t('Census.entirety'),//全部
             id: -1,
             child: []
           });
@@ -629,7 +646,7 @@ export default {
         }
       } else if (index === 2 && pos !== null) {
         /* 测点下拉 */
-        this.placeholder = "搜索测点";
+        this.placeholder = this.$t('Census.SearchPos');//搜索测点
         let checkAll = true;
         for (let m = 0, n = check.mac.length; m < n; m++) {
           const val = check.mac[m];
@@ -689,7 +706,7 @@ export default {
             isChild: false,
             hasOpen: false,
             isOpen: false,
-            val: "全部",
+            val: this.$t('Census.entirety'),//全部
             id: -1,
             child: []
           });
@@ -808,10 +825,10 @@ export default {
         const text = this.srcList;
         let arr = [];
         const defaultName = [
-          "请选择组织",
-          "请选择机组",
-          "请选择测点",
-          "请选择特征值"
+          this.$t('Census.selectTree'),//"请选择组织",
+          this.$t('Census.selectMac'),//"请选择机组",
+          this.$t('Census.selectPos'),//"请选择测点",
+          this.$t('Census.selectEigen'),//"请选择特征值"
         ];
         const defaultClass = "gray-tip";
         const getNext = [
@@ -889,9 +906,9 @@ export default {
         } else if (idx === 1) {
           /* 机组 */
           let i = 1;
-          if (text[0].val === "全部" && text[0].isCheck) {
+          if (text[0].val === this.$t('Census.entirety') && text[0].isCheck) {//全部
             let request = []
-            viewText = "全部";
+            viewText = this.$t('Census.entirety')//全部;
             let macIDS = []
             for (; i < length; i++) {
               const children = text[i].child;
@@ -1038,7 +1055,7 @@ export default {
                 }
               })
             }
-            checkNum === length && (viewText = "全部");
+            checkNum === length && (viewText = this.$t('Census.entirety'));
           }
           viewText.indexOf(",") > -1 && (viewText = viewText.slice(0, -1));
           if (viewText !== "") {
@@ -1058,8 +1075,8 @@ export default {
           let typeArr = [];
           let i = 1;
           let dgm = [];
-          if (text[0].val === "全部" && text[0].isCheck) {
-            viewText = "全部";
+          if (text[0].val === this.$t('Census.entirety') && text[0].isCheck) {
+            viewText = this.$t('Census.entirety');
             for (; i < length; i++) {
               const value1 = text[i];
               const children = value1.child;
@@ -1091,7 +1108,7 @@ export default {
                 }
               }
             }
-            checkNum === length && (viewText = "全部");
+            checkNum === length && (viewText = this.$t('Census.entirety'));
           }
           // 判断采集器类型
           i = 0;
@@ -1276,7 +1293,7 @@ export default {
             item.ch_id = item.tt_ch_id
           }
         });
-        const pos = setPosMsg(positions);
+        const pos = positions;
         this.$store.commit("getMsg", {
           key: "pos",
           keys: id,
@@ -1326,31 +1343,31 @@ export default {
       let toSpeed =
         data.viewMsg[10].msg[1] === "" ? null : data.viewMsg[10].msg[1];
       /* 比例 */
-      const num = checkPercentage.slice(0, -1);
+      let num = checkPercentage.slice(0, -1);
       const unit = checkPercentage.slice(-1);
-      const err = ["输入比例格式有误，请重新输入", "请输入比例"];
-      const unitArr = ["%", "个"];
+      const err = [this.$t('Census.errorInpur'), this.$t('Census.enterProportion')];//输入比例格式有误，请重新输入  请输入比例
+      const unitArr = ["%", this.$t('Census.one')];//个
       const defaultName = [
-        "请选择组织",
-        "请选择机组",
-        "请选择测点",
-        "请选择特征值"
+        this.$t('Census.selectTree'),//"请选择组织",
+        this.$t('Census.selectMac'),//"请选择机组",
+        this.$t('Census.selectPos'),//"请选择测点",
+        this.$t('Census.selectEigen'),//"请选择特征值"
       ];
       /* 限制转速区间 */
       if (fromSpeed !== null && toSpeed !== null) {
         fromSpeed = Number(fromSpeed);
         toSpeed = Number(toSpeed);
         if (fromSpeed < 0) {
-          this.$pop("请输入正确的转速区间！");
+          this.$pop(this.$t('Census.enterSpeedRange'));
           return;
         }
         if (toSpeed < 0) {
-          this.$pop("请输入正确的转速区间！");
+          this.$pop(this.$t('Census.enterSpeedRange'));
           return;
         }
         if (fromSpeed < toSpeed) {
         } else {
-          this.$pop("请输入正确的转速区间！");
+          this.$pop(this.$t('Census.enterSpeedRange'));
           return;
         }
         // if (fromSpeed >= 0 && toSpeed >= 0) {
@@ -1378,7 +1395,7 @@ export default {
         data.viewMsg[3].class = "red-tip";
         return;
       }
-      if (unitArr.includes(unit)) {
+      if (unitArr.includes(unit) || this.$t('Census.one') === '') {
         if (isNaN(Number(num))) {
           this.$pop(err[0]);
           return;
@@ -1391,7 +1408,15 @@ export default {
               } else {
                 percentage = checkPercentage;
               }
-            } else if (unit == "个") {
+            } else if (this.$t('Census.one') == "个" && unit == "个") {
+              if (num.indexOf(".") > -1) {
+                this.$pop(err[0]);
+                return;
+              }
+              percentage = num;
+            } else if (this.$t('Census.one') === '') {
+              // 若翻译为英文，则无需对数据进行分割
+              num = checkPercentage
               if (num.indexOf(".") > -1) {
                 this.$pop(err[0]);
                 return;
@@ -1435,7 +1460,7 @@ export default {
         conditions
       };
       /* 组织、机组、测点 */
-      if (checkMacMsg === "全部") {
+      if (checkMacMsg === this.$t('Census.entirety')) {
         for (let i = 0, l = checkTree.length; i < l; i++) {
           const tree = checkTree[i];
           const obj = {};
@@ -1513,19 +1538,19 @@ export default {
       const list = data.statistics;
       const x = {
         data: [],
-        unit: "测点"
+        unit: this.$t('Common.pos')
       };
       const y = {
         data: [],
         unit: []
       };
       const head = [
-        "序号",
-        "特征值",
-        "数值",
-        "组织名称",
-        "机组名称",
-        "测点名称"
+        this.$t('Common.order'),//"序号",
+        this.$t('Common.eigenvalue'),//"特征值",
+        this.$t('Census.value'),//"数值",
+        this.$t('Common.treeName'),//"组织名称",
+        this.$t('Common.macName'),//"机组名称",
+        this.$t('Common.posName'),//"测点名称"
       ];
       const body = [];
       const unitArr = ["g", "m/s²"];
@@ -1764,85 +1789,6 @@ export default {
         },
         backgroundColor: color.background
       };
-      // let unity = []
-      // for(let i = 0; i < data.y.unit.length;i++){
-      //   let value = data.y.unit[i]
-      //   if (unity.indexOf(value) === -1){
-      //     unity.push(value)
-      //   }
-      //   // console.log(unity.indexOf(value))
-      // }
-      // const option = {
-      //   xAxis: {
-      //     name: '测点',
-      //     type: 'category',
-      //     data: data.x.data,
-      //     // fontStyle: {
-      //     //   color: color.axis.font,
-      //     //   size: "14px"
-      //     // },
-      //     axisTick: { //坐标轴刻度相关设置。
-      //       show: false,
-      //     },
-      //     axisLine:{
-      //       lineStyle: {
-      //         color: color.axis.line
-      //       },
-      //     },
-      //   },
-      //   yAxis: {
-      //     min: -0.01,
-      //     name: `${unity} ${params.viewMsg[3].msg}`,
-      //     onZero: false,
-      //     // nameStyle: {
-      //     //   color: color.axis.name,
-      //     //   size: "14px",
-      //     //   bold: "normal"
-      //     // },
-      //     // fontStyle: {
-      //     //   color: color.axis.font,
-      //     //   size: "14px"
-      //     // },
-      //     axisLine: {
-      //       lineStyle: {
-      //         color: color.axis.line
-      //       },
-      //     },
-      //   },
-      //   dataZoom: [
-      //     {
-      //       // 内置于坐标系中，使用户可以在坐标系上通过鼠标拖拽、鼠标滚轮、手指滑动（触屏上）来缩放或漫游坐标系
-      //       type: "inside",
-      //       show:true, //是否显示 组件。如果设置为 false，不会显示，但是数据过滤的功能还存在。
-      //       start: 0,
-      //       end: 50,
-      //       zoomOnMouseWheel: true,//如何触发缩放。可选值为：true：表示不按任何功能键，鼠标滚轮能触发缩放。false：表示鼠标滚轮不能触发缩放。'shift'：表示按住 shift 和鼠标滚轮能触发缩放。'ctrl'：表示按住 ctrl 和鼠标滚轮能触发缩放。'alt'：表示按住 alt 和鼠标滚轮能触发缩放。
-      //     }
-      //   ],
-      //   series: [
-      //     {
-      //     type: 'bar',
-      //     data: data.y.data,
-      //     // lineStyle: {
-      //     //   // 样式
-      //     //   color: color.series.line, // 颜色，默认 '#0032ff
-      //     //   width: 1 // 粗细，默认 1
-      //     // },
-      //     // itemStyle: {
-      //     //   //通常情况下：
-      //     //   normal: {
-      //     //     //每个柱子的颜色即为colorList数组里的每一项，如果柱子数目多于colorList的长度，则柱子颜色循环使用该数组中的颜色
-      //     //     color: color.series.line, // 颜色，默认 '#0032ff
-      //     //   },
-      //     //   //鼠标悬停时：
-      //     //   emphasis: {
-      //     //     shadowBlur: 10,
-      //     //     shadowOffsetX: 0,
-      //     //     shadowColor: 'rgba(0, 0, 0, 0.5)'
-      //     //   }
-      //     // }
-      //   }]
-      // }
       (params.barChart === null || params.barChart === undefined) &&
         (params.barChart = myChart.init(
           this.$refs.myCensusChart[this.currentIndex]
@@ -1854,17 +1800,6 @@ export default {
     toTrend (item) {
       const posFlag = `${item.mId}_${item.id}_${item.type}`;
       const checkPos = this.censusData[this.currentKey].checkMsg.pos;
-      // for (let i = 0, l = checkPos.length; i < l; i++) {
-      //   const value = checkPos[i];
-      //   console.log(item)
-      //   if (value.posFlag === posFlag) {
-      //     this.$store.commit("getCheckMsg", {
-      //       type: "pos",
-      //       msg: value
-      //     });
-      //     break;
-      //   }
-      // }
       let posArr = this.$store.state.pos[item.mId];
       if (!posArr) {
         this.$getApi
@@ -2022,7 +1957,7 @@ export default {
       const blob = new Blob([str]);
       const active = this.$refs.exportData[this.currentIndex];
       active.href = URL.createObjectURL(blob);
-      active.download = `${fileName.slice(0, -1)}振动值统计.csv`;
+      active.download = `${fileName.slice(0, -1)}${this.$t('Census.StatisticsVibValues')}.csv`;
       active.click();
     },
     resize () {
@@ -2031,7 +1966,4 @@ export default {
       }
     }
   },
-  created () {
-    this.$store.commit("set_keepAlive", { method: "add", keepAlive: "census" });
-  }
 };

@@ -5,7 +5,7 @@
       class="login-img"
       :src="bgURL"
     />
-    <select
+    <!-- <select
       v-model="language"
       @change="changeLang()"
       class="select-language"
@@ -15,7 +15,7 @@
         :title="item.text"
         :value="item.key"
       >{{item.text}}</option>
-    </select>
+    </select> -->
     <div
       class="login-box"
       @keydown.13="login"

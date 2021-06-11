@@ -131,7 +131,7 @@
 import { round, cloneObj } from 'utils/utils.js'
 import general from 'common/general/general.js'
 export default {
-  name: 'fdGeneral',
+  name: 'gjGeneral',
   mixins: [general],
   data() {
     return {
@@ -360,21 +360,6 @@ export default {
         }
       }
     },
-    // 航海时选择车辆
-    changeTree(item) {
-      console.log(item)
-      this.$store.commit('getCheckMsg', {
-        msg: cloneObj(item),
-        type: 'tree',
-      })
-      this.$bus.$emit(
-        'generalRouting',
-        'gjGeneral',
-        '总貌图',
-        'icon-shijingsanwei-'
-      )
-      return
-    },
     getTreeStatus(status) {
       const param = this.general[this.currentKey]
       let filterTreeList = []
@@ -471,6 +456,21 @@ export default {
         }
       })
     },
+    // 航海时选择车辆
+    changeTree(item) {
+      console.log(item)
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        this.$store.commit('getCheckMsg', {
+          msg: cloneObj(item),
+          type: 'tree',
+        })
+        resolve('成功')
+      }).then(() => {
+        this.$bus.$emit('generalRouting', 'gjGeneral', '总貌图', 'icon-shouye1')
+      })
+      return
+    },
     //双击进入mac的model页
     toMacModel(machine) {
       /* 从vuex中获取当前机组 */
@@ -486,8 +486,9 @@ export default {
       let mac
       let choosetree = cloneObj(this.$store.state.checkMsg.tree)
       let choosemac = cloneObj(this.$store.state.checkMsg.mac)
-      if (choosemac !== null) {
-        if (choosemac.pump_id == pump_id) {
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        if (choosemac !== null && choosemac.pump_id == pump_id) {
           if (choosemac.t_id != choosetree.t_id) {
             let treeArray = this.$store.state.tree
             treeArray.forEach((tree) => {
@@ -500,57 +501,46 @@ export default {
                   msg: cloneObj(choosemac),
                   type: 'mac',
                 })
-                // this.$store.dispatch('addAsync', {
-                //   msg: cloneObj(choosemac),
-                //   type: 'mac',
-                // })
+                resolve('成功')
               }
             })
           }
-          // this.$router.push('gjModel')
-          this.$bus.$emit(
-            'generalRouting',
-            'gjModel',
-            '设备模型',
-            'icon-shijingsanwei-'
-          )
-          return
-        }
-      }
-      macList.forEach((item) => {
-        if (item.pump_id === pump_id) {
-          mac = item
-          return
-        }
-      })
-      /* 设置当前的机组 */
-      if (mac.t_id != choosetree.t_id) {
-        let treeArray = this.$store.state.tree
-        treeArray.forEach((tree) => {
-          if (mac.t_id == tree.t_id) {
-            this.$store.commit('getCheckMsg', {
-              msg: cloneObj(tree),
-              type: 'tree',
+          resolve('成功')
+        } else {
+          macList.forEach((item) => {
+            if (item.pump_id === pump_id) {
+              mac = item
+              return
+            }
+          })
+          /* 设置当前的机组 */
+          if (mac.t_id != choosetree.t_id) {
+            let treeArray = this.$store.state.tree
+            treeArray.forEach((tree) => {
+              if (mac.t_id == tree.t_id) {
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(tree),
+                  type: 'tree',
+                })
+              }
             })
           }
-        })
-      }
-      // this.$store.dispatch('addAsync', {
-      //   msg: cloneObj(mac),
-      //   type: 'mac',
-      // })
-      // 取机组
-      this.$store.commit('getCheckMsg', {
-        msg: cloneObj(mac),
-        type: 'mac',
+          // 取机组
+          this.$store.commit('getCheckMsg', {
+            msg: cloneObj(mac),
+            type: 'mac',
+          })
+          resolve('成功')
+        }
+      }).then(() => {
+        /* 设置当前的机组 */
+        this.$bus.$emit(
+          'generalRouting',
+          'gjModel',
+          '设备模型',
+          'icon-shijingsanwei-'
+        )
       })
-      /* 设置当前的机组 */
-      this.$bus.$emit(
-        'generalRouting',
-        'gjModel',
-        '设备模型',
-        'icon-shijingsanwei-'
-      )
     },
     getStatus(status) {
       const param = this.general[this.currentKey]

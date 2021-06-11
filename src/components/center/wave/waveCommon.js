@@ -124,7 +124,7 @@ export default {
         ref: "" /* 需要移动dom的ref */
       },
       clickTrend: false, /* 是否点击趋势图 */
-      speedType: ['高密度波形', '低密度波形'], /* 波形密度下拉选择 */
+      speedType: [this.$t('wave.HighWaveform'), this.$t('wave.LowWaveform')], /* 波形密度下拉选择//高密度波形 低密度波形 */
       allFreq: {}, /* 所有测点有效频率上下限 */
       dropPos: null, /* 拖入测点信息 */
       charts: {},//Charts图表实例
@@ -203,6 +203,80 @@ export default {
       ]
     };
   },
+  created () {
+    this.$store.commit("set_keepAlive", { method: "add", keepAlive: "wave" });
+    this.speedType = [this.$t('wave.HighWaveform'), this.$t('wave.LowWaveform')]
+    this.chartBtn = [
+        /* 0 */ {
+        class: "icon-selectunit_huaban",
+        title: this.$t('icon.unitSelect'),//单位选择
+        flag: [1, 2, 0, 3, 7, 8, 9],
+        viewType: [2]
+      },
+        /* 1 */ {
+        class: "icon-MAX_huaban",
+        title: this.$t('icon.maximize'),//最大化
+        flag: [1, 2, 0, 3, 7, 8, 9],
+        viewType: [0, 1, 2]
+      },
+        /* 2 */ {
+        class: "icon-exporemusic_huaban",
+        title: this.$t('icon.AudioExport'),//音频导出
+        flag: [0]
+      },
+        /* 3 */ {
+        class: "icon-exportdata_huaban",
+        title: this.$t('icon.dataExport'),//数据导出
+        flag: [0, 1, 3, 7, 8],
+        viewType: [0, 1, 2]
+      },
+        /* 4 */ {
+        class: "icon-restore_huaban",
+        title: this.$t('icon.reset'),//重置
+        flag: [1, 2, 0, 3, 6, 7, 8, 9],
+        viewType: [0, 1, 2]
+      },
+        /* 5 */ {
+        class: "icon-enlarge_huaban",
+        title: this.$t('icon.openWindow'),//开窗放大
+        flag: [1, 2, 0, 3, 6, 7, 8, 9],
+        viewType: [0, 1, 2]
+      },
+        /* 6 */ {
+        class: "icon-savemage_huaban",
+        title: this.$t('icon.SavePicture'),//保存为图片
+        flag: [1, 2, 0, 3, 6, 7, 8, 9],
+        viewType: [0, 1, 2]
+      },
+        /* 7 */ {
+        class: "icon-setpower_huaban",
+        title: this.$t('icon.EffectiveFreqAllPos'),//所有测点有效频率设置
+        flag: [1]
+      },
+        /* 8 */ {
+        class: "icon-subtime_huaban",
+        title: this.$t('icon.TimeDifference'),//时间差
+        flag: [0]
+      },
+        /* 9 */ {
+        class: "icon-pinputuduishuzuobiaoqiehuan_huaban",
+        title: this.$t('icon.LogarithmicCoordinates'),//对数坐标
+        flag: [1, 3, 7, 8],
+        viewType: [0, 1, 2]
+      },
+        /* 10 */ {
+        class: "icon-zhuansumaichong_huaban1",
+        title: this.$t('icon.SpeedPulse'),//转速脉冲
+        flag: [0] //opt 图谱类型为0显示
+        // viewType: [0, 1, 2]
+      },
+        /* 11 */ {
+        class: "icon-youxiaopinshuaishezhi_huaban",
+        title: this.$t('icon.TimeWaveformFilter'),//时域波形过滤
+        flag: [0]
+      }
+    ]
+  },
   computed: {
     waveOption () {
       /* 波形图 */
@@ -222,7 +296,7 @@ export default {
           },
           title: {
             show: true,
-            name: "波形图",
+            name: that.$t('wave.Waveform'),
             fontStyle: {
               weight: "bold", // 粗细，默认 'bold'
               size: "18px", // 大小，默认 '20px'
@@ -351,11 +425,11 @@ export default {
               dom: document.getElementsByClassName("icon-savemage_huaban_wave")[
                 btnIndex
               ],
-              imageName: "波形图_" + fileName
+              imageName: that.$t('wave.Waveform') + "_" + fileName
             },
             // 导出数据
             exportData: {
-              fileName: "波形图_" + fileName,
+              fileName: that.$t('wave.Waveform') + "_" + fileName,
               show: true,
               dom: document.getElementsByClassName(
                 "icon-exportdata_huaban_wave"
@@ -363,7 +437,7 @@ export default {
             },
             // 导出音频
             exportAudio: {
-              fileName: "音频_" + fileName,
+              fileName: that.$t('wave.Audio') + "_" + fileName,
               show: true,
               dom: document.getElementsByClassName(
                 "icon-exporemusic_huaban_wave"
@@ -411,7 +485,7 @@ export default {
           },
           title: {
             show: true,
-            name: "频谱图",
+            name: that.$t('wave.spectrogram'),//频谱图
             fontStyle: {
               weight: "bold", // 粗细，默认 'bold'
               size: "18px", // 大小，默认 '20px'
@@ -596,11 +670,11 @@ export default {
               dom: document.getElementsByClassName("icon-savemage_huaban_wave")[
                 btnIndex
               ],
-              imageName: "频谱图_" + fileName
+              imageName: that.$t('wave.spectrogram') + "_" + fileName
             },
             // 导出数据
             exportData: {
-              fileName: "频谱图_" + fileName,
+              fileName: that.$t('wave.spectrogram') + "_" + fileName,
               show: true,
               dom: document.getElementsByClassName(
                 "icon-exportdata_huaban_wave"
@@ -642,9 +716,6 @@ export default {
     }
   },
   methods: {
-    WindowsResiza () {
-      this.$store.commit("changeDomStructure");
-    },
     // 打开图谱
     openChartList (key, type) {
       if (typeof key !== "string") return;
@@ -673,7 +744,7 @@ export default {
         const trendDensity = params.density; /* 趋势数据查询密度 */
         let speedType = 0//转速密度，默认为低密度
         if (this.paramsData && this.paramsData[key]) {
-          speedType = Number(this.paramsData[key].speedType == '高密度波形')
+          speedType = Number(this.paramsData[key].speedType == this.$t('wave.HighWaveform'))//高密度波形
         }
         this.requestData = {
           trend: {
@@ -757,6 +828,7 @@ export default {
             this.getTrendData();
           }
           this.$nextTick(() => {
+            this.$store.commit("changeDomStructure");
             if (this.chartData[key].trend.srcY.length > 0) {
               if (this.charts[key].trend) {
                 if (this.charts[key].trend.chart) {
@@ -901,73 +973,73 @@ export default {
         /* 右侧按钮 */
         {
           class: "icon-duichengpinshuaicha_huaban",
-          title: "对称频率差",
+          title: this.$t('icon.FreqDifference'),//对称频率差
           isCheck: false,
           parentClass: ""
         },
         {
           class: "icon-hanningchuang_huaban",
-          title: "汉宁窗",
+          title: this.$t('icon.hanning'),//汉宁窗
           isCheck: true,
           parentClass: "check-icon"
         },
         {
           class: "icon-qiehuanXzhoujiebi_huaban",
-          title: "切换阶比",
+          title: this.$t('icon.SwitchingOrderRatio'),//切换阶比
           isCheck: isNx.isCheck,
           parentClass: isNx.className
         },
         {
           class: "icon-dingweidaobeipin_huaban",
-          title: "定位到1倍频",
+          title: this.$t('icon.oneFreqDoubling'),//定位到1倍频
           isCheck: false,
           parentClass: ""
         },
         {
           class: "icon-dipinguolv_huaban",
-          title: "低频过滤",
+          title: this.$t('icon.LowFreqFilter'),//低频过滤
           isCheck: false,
           parentClass: ""
         },
         {
           class: "icon-youxiaopinshuaishezhi_huaban",
-          title: "有效频率设置",
+          title: this.$t('icon.EffectiveFreq'),//有效频率设置
           isCheck: false,
           parentClass: ""
         },
         {
           class: "icon-biaozhubeipin_huaban",
-          title: "标注倍频",
+          title: this.$t('icon.LabelledFreq'),//标注倍频
           isCheck: false,
           parentClass: ""
         },
         {
           class: "icon-biaozhu_huaban",
-          title: "添加标注",
+          title: this.$t('icon.AddAnnotations'),//添加标注
           isCheck: false,
           parentClass: ""
         },
         {
           class: "icon-quxiaobiaozhu_huaban",
-          title: "取消标注",
+          title: this.$t('icon.CancelLabel'),//取消标注
           isCheck: false,
           parentClass: ""
         },
         {
           class: "icon-xunhuanxunfeng_huaban_huaban",
-          title: "循环寻峰",
+          title: this.$t('icon.CyclePeakSearch'),//循环寻峰
           isCheck: false,
           parentClass: ""
         },
         {
           class: "icon-guzhangpinshuaimingxi_huaban_huaban",
-          title: "故障频率明细",
+          title: this.$t('icon.FaultFrequencyDetail'),//故障频率明细
           isCheck: false,
           parentClass: ""
         },
         {
           class: "icon-xiaozhunbeipin_huaban",
-          title: "校准倍频",
+          title: this.$t('icon.CalibrationFreq'),//校准倍频
           isCheck: false,
           parentClass: ""
         }
@@ -980,11 +1052,11 @@ export default {
         isNx.className = "check-icon";
         isNx.chartType = "bar-line";
         isNx.type = 2;
-        failure.name = "阶次";
-        failure.speedName = "动阶次";
-        failureHead[2] = "阶次NX";
-        iconList[4].title = '低阶次过滤'
-        iconList[5].title = '有效阶次过滤'
+        failure.name = this.$t('wave.rank')//阶次
+        failure.speedName = this.$t('wave.MoveOrder');//动阶次
+        failureHead[2] = this.$t('wave.rank')+"NX";//阶次
+        iconList[4].title = this.$t('wave.LowOrderFilter')//'低阶次过滤'
+        iconList[5].title = this.$t('wave.EffectOrderFilter')//有效阶次过滤
       }
       const density = {
         isSpeed: false,
@@ -994,9 +1066,9 @@ export default {
       if (posType == 1) {
         density.isSpeed = true; /* 是否为转速测点 */
         if (pos.dgm_type != 4) {
-          density.type = "低密度波形";
+          density.type = this.$t('wave.LowWaveform');//低密度波形
         } else {
-          density.type = "高密度波形";
+          density.type = this.$t('wave.HighWaveform');//高密度波形
           requestData.trend.waveType = 1 /* 高密度波形 */
           requestData.wave.type = 1
         }
@@ -1006,7 +1078,7 @@ export default {
         rmsTitle = "gD：";
       }
       if (pos.position_type === 14) {
-        rmsTitle = "预紧力值：";
+        rmsTitle = this.$t('eigenvalue.PreloadValue')+"：";//预紧力值
       }
       this.$set(this.chartData, key, {
         trend: {
@@ -1069,11 +1141,11 @@ export default {
         empty: {
           wave: {
             isShow: true,
-            text: `${pos.position_name}无数据`
+            text: `${pos.position_name}${this.$t('Common.noDataText')}`
           },
           trend: {
             isShow: true,
-            text: `${pos.position_name}无数据`
+            text: `${pos.position_name}${this.$t('Common.noDataText')}`
           }
         },
         structure: 0 /* 结构样式, 0: 左右下; 1: 上中下 */,
@@ -1158,13 +1230,14 @@ export default {
           analogSpeed: 0 /* 模拟转速 */,
           analogValue: [
             /* 通过频率 */
-            { title: '通过频率1', value: 1, name: 'BPF.1' },
+            { title: this.$t('waveFault.BPF')+'1', value: 1, name: 'BPF.1' },//通过频率
             // { title: '通过频率2', value: 1, name: 'BPF.2' },
             // { title: '通过频率3', value: 1, name: 'BPF.3' },
             // { title: '通过频率4', value: 1, name: 'BPF.4' },
             // { title: '通过频率5', value: 1, name: 'BPF.5' },
             // { title: '通过频率6', value: 1, name: 'BPF.6' },
           ],
+          isStartFailure: false,//是否标注叶片故障频率
           isShowList: false /* 故障频率明细显隐 */,
           list: {
             /* 故障频率明细 */
@@ -1205,9 +1278,9 @@ export default {
           spectrum: false,
         },
         dataType: [
-          { val: '定时历史数据', isChecked: true, type: 1 },
-          { val: '启停机数据', isChecked: false, type: 2 },
-          { val: '报警存储数据', isChecked: false, type: 3 },
+          { val: this.$t('Common8000.TimedHisData'), isChecked: true, type: 1 },//定时历史数据
+          { val: this.$t('Common8000.StartStopData'), isChecked: false, type: 2 },//启停机数据
+          { val: this.$t('Common8000.AlarmStorageData'), isChecked: false, type: 3 },//报警存储数据
         ],//8000数据类型选择
         isTrendClose: false,//趋势图谱是否显示
       });
@@ -1299,6 +1372,10 @@ export default {
         // const data = chart[index].trend;
         const btnIndex = 3 * this.currentIndex + 2;
         let option = {
+          type: {
+            chart: 1,/* 1.波形频谱图 2.对比分析 */
+            chartType: 'trend',/* 波形（wave）,频谱（spectrum）,趋势图（trend） */
+          },
           title: {
             show: true,
             name: "趋势图",
@@ -1422,12 +1499,12 @@ export default {
                 paramsData.iconList[2].isCheck = true;
                 paramsData.iconList[2].parentClass = "check-icon";
                 paramsData.chartData.spectrumType = "bar-line";
-                paramsData.failure.name = "阶次";
-                paramsData.failure.speedName = "动阶次";
-                paramsData.failure.list.head[2] = "阶次NX"
+                paramsData.failure.name = this.$t('wave.rank');//阶次
+                paramsData.failure.speedName = this.$t('wave.MoveOrder');//动阶次
+                paramsData.failure.list.head[2] = this.$t('wave.rank')+"NX"//阶次
                 paramsData.chartData.chartType = 2;
-                paramsData.iconList[4].title = '低阶次过滤'
-                paramsData.iconList[5].title = '有效阶次过滤'
+                paramsData.iconList[4].title = this.$t('wave.LowOrderFilter')//低阶次过滤
+                paramsData.iconList[5].title = this.$t('wave.EffectOrderFilter')//有效阶次过滤
               }
               that.chartData[that.currentKey].spectrum.isRefresh = true
               that.getWaveData();
@@ -1462,7 +1539,7 @@ export default {
               dom: document.getElementsByClassName("icon-savemage_huaban_wave")[
                 btnIndex
               ],
-              imageName: "趋势图_" + paramsData.fileName
+              imageName: this.$t('Common.trend')+ "_" + paramsData.fileName//趋势图
             }
           },
           backgroundColor: color.background
@@ -1489,12 +1566,12 @@ export default {
         paramsData.iconList[2].isCheck = true;
         paramsData.iconList[2].parentClass = "check-icon";
         paramsData.chartData.spectrumType = "bar-line";
-        paramsData.failure.name = "阶次";
-        paramsData.failure.speedName = "动阶次";
-        paramsData.failure.list.head[2] = "阶次NX"
+        paramsData.failure.name = this.$t('wave.rank')//阶次
+        paramsData.failure.speedName = this.$t('wave.MoveOrder');//动阶次
+        paramsData.failure.list.head[2] = this.$t('wave.rank')+"NX"//阶次
         paramsData.chartData.chartType = 2;
-        paramsData.iconList[4].title = '低阶次过滤'
-        paramsData.iconList[5].title = '有效阶次过滤'
+        paramsData.iconList[4].title = this.$t('wave.LowOrderFilter')//低阶次过滤
+        paramsData.iconList[5].title = this.$t('wave.EffectOrderFilter')//有效阶次过滤
       } else {
         if (Number(paramsData.pos.position_type) == 14) {
           chart.wave.curUnitX = "μs";
@@ -1508,12 +1585,12 @@ export default {
         paramsData.iconList[2].isCheck = false;
         paramsData.iconList[2].parentClass = "";
         paramsData.chartData.spectrumType = "line";
-        paramsData.failure.name = "频率";
-        paramsData.failure.speedName = "频";
-        paramsData.failure.list.head[2] = "频率(Hz)"
+        paramsData.failure.name = this.$t('Common.freq');//频率
+        paramsData.failure.speedName = this.$t('wave.freq1')//"频"
+        paramsData.failure.list.head[2] = this.$t('Common.freq') + "(Hz)"//频率
         paramsData.chartData.chartType = 1;
-        paramsData.iconList[4].title = '低频过滤'
-        paramsData.iconList[5].title = '有效频率过滤'
+        paramsData.iconList[4].title = this.$t('icon.LowFreqFilter')//'低频过滤'
+        paramsData.iconList[5].title = this.$t('wave.EffectFreqFilter')//有效频率过滤
       }
       let failure = {
         name: paramsData.failure.name,
@@ -1617,7 +1694,7 @@ export default {
       const waveFreq = this.paramsData[this.currentKey].waveFreq
       this.$WavePop({
         type: 0,
-        title: '有效频段',
+        title: this.$t('wave.effecFreqBand'),//'有效频段',
         upperLimit: waveFreq.upperLimit,
         lowerLimit: waveFreq.lowerLimit,
       }).then(res => {
@@ -1728,7 +1805,11 @@ export default {
 
             }
           }
-          this.getFreq();
+          let type = 0
+          if (this.chartData[this.currentKey].spectrum.srcUnitY != this.chartData[this.currentKey].spectrum.curUnitY) {
+            type = 1
+          }
+          this.getFreq(this.currentKey, type);
         }
       });
     },
@@ -2129,7 +2210,7 @@ export default {
           }
           // 8000总振值
           if (pos.dgm_type == 11 && pType == 3) {
-            chartData.direc = '无数据'
+            chartData.direc = this.$t('Common.noDataText')//'无数据'
             if (info.value.Direc) {
               chartData.direc = round(info.value.Direc, 4);
             }
@@ -2261,12 +2342,12 @@ export default {
                   }
                   //高密度波形时
                   if (
-                    this.paramsData[this.currentKey].speedType == "高密度波形"
+                    this.paramsData[this.currentKey].speedType == this.$t('wave.HighWaveform')//"高密度波形"
                   ) {
                     msg.spectrum.curUnitY = "mV";
                     msg.wave.curUnitY = "mV";
                   } else if (
-                    this.paramsData[this.currentKey].speedType == "低密度波形"
+                    this.paramsData[this.currentKey].speedType == this.$t('wave.LowWaveform')//"低密度波形"
                   ) {
                     msg.wave.curUnitY = "rpm";
                     msg.spectrum.curUnitY = "rpm";
@@ -2348,7 +2429,7 @@ export default {
         // 实时数据不是第一次请求
         if (rd.wave.isReal === 1 && rd.wave.currTime[0] !== 0) {
           //防止2000v2（pos.dgm_type == 3）、MHD、TMS高密度波形出现空窗口，
-          if (rd.wave.type != 1 || (rd.wave.type == 1 && (pos.dgm_type == 4 || pos.dgm_type == 3 || pos.dgm_type == 7))) {
+          if (rd.wave.type != 1 || (rd.wave.type == 1 && (pos.dgm_type == 4 || pos.dgm_type == 3 || pos.dgm_type == 7 || pos.dgm_type == 13))) {
             clearTimeout(params.getReal.timer);
             params.getReal.timer = setTimeout(this.getWaveData, 6000);
           } else {
@@ -2447,7 +2528,6 @@ export default {
             wave[0].style.height = "calc(100% - 50px)";
             wave[0].style.width = "calc(96% + 10px)";
             params.maximization.wave = true
-            console.log('波形图放大')
             break;
           case 1:
             wave[0].style.display = "none";
@@ -2479,7 +2559,6 @@ export default {
         for (let i = 0, l = wave.length; i < l; i++) {
           wave[i].style = null;
         }
-        console.log('波形图缩小')
         chart.style = null;
         this.$store.commit("changeDomStructure");
         this.reportMsg[this.currentKey].waveMaximization = 255;
@@ -2518,10 +2597,10 @@ export default {
             break;
           case 2 /* 切换阶比 */:
             if (speed === 0 || isNaN(speed)) {
-              this.$pop("转速为0，切换为阶比功能不可用！");
+              this.$pop(this.$t('wave.switchOrderNo1'));//转速为0，切换为阶比功能不可用！
               return;
             } else if (params.type === 8 || params.type === 9) {
-              this.$pop("已为阶比，切换为阶比功能不可用！");
+              this.$pop(this.$t('wave.switchOrderNo2'));//已为阶比，切换为阶比功能不可用！
               return;
             }
             const value = list[index];
@@ -2556,9 +2635,9 @@ export default {
             }
             break;
           case 4:
-            let title_1 = '低频过滤'
+            let title_1 = this.$t('icon.LowFreqFilter')//'低频过滤'
             if (this.paramsData[this.currentKey].chartData.chartType == 2) {
-              title_1 = '低阶次过滤'
+              title_1 = this.$t('wave.LowOrderFilter')//'低阶次过滤'
             }
             this.$WavePop({
               lowFreq: freq.lowFreq,
@@ -2567,14 +2646,18 @@ export default {
             }).then(res => {
               if (res) {
                 freq.lowFreq = Number(res.lowFreq);
-                this.getFreq();
+                let type = 0
+                if (chart.srcUnitY != chart.curUnitY) {
+                  type = 1
+                }
+                this.getFreq(idx, type);
               }
             });
             break;
           case 5 /* 有效频率 */:
-            let title = '有效频段'
+            let title = this.$t('wave.effecFreqBand')//'有效频段'
             if (this.paramsData[this.currentKey].chartData.chartType == 2) {
-              title = '有效阶次'
+              title = this.$t('wave.effecOrderRank')//'有效阶次'
             }
             this.$WavePop({
               type: 0,
@@ -2588,23 +2671,28 @@ export default {
                     Number(res.lowerLimit) < 0 ||
                     Number(res.upperLimit) < 0
                   ) {
-                    this.$pop("有效频率输入不正确！");
+                    this.$pop(this.$t('wave.effectFreqError'));//有效频率输入不正确！
                     return;
                   } else if (Number(res.upperLimit) > 0) {
                     if (Number(res.lowerLimit) > Number(res.upperLimit)) {
-                      this.$pop("有效频率输入不正确！");
+                      this.$pop(this.$t('wave.effectFreqError'));//有效频率输入不正确！
                       return;
                     }
                   }
                 } else {
-                  this.$pop("有效频率输入不正确！");
+                  this.$pop(this.$t('wave.effectFreqError'));//有效频率输入不正确！
                   return;
                 }
                 freq.lowerLimit = Number(res.lowerLimit);
                 freq.upperLimit = Number(res.upperLimit);
                 if (freq.lowerLimit !== 0 || freq.upperLimit !== 0)
                   params.chartData.isSetPower = true;
-                this.getFreq();
+                console.log(params.chartData, chart)
+                let type = 0
+                if (chart.srcUnitY != chart.curUnitY) {
+                  type = 1
+                }
+                this.getFreq(idx, type);
               }
             });
             break;
@@ -2627,7 +2715,7 @@ export default {
       if (chart.curY.length > 0) {
         this.$WavePop({
           type: 1,
-          title: "单位选择",
+          title: this.$t('icon.unitSelect'),//单位选择
           src: chart.srcUnitY,
           cur: chart.curUnitY,
           opt: type,
@@ -2759,7 +2847,6 @@ export default {
         }
       }
       this.isNewChart = true;
-
       // 有效频率
       data.curX = srcX.slice(start, end);
       data.curY = arrY.slice(start, end);
@@ -2778,6 +2865,7 @@ export default {
         //设置isNewChart为true,达到刷新图谱效果
         params.isNewChart.spectrum = true;
       }
+      data.isRefresh = true;
       this.$set(this.chartData[idx], "spectrum", data);
       if (this.chartData[currentKey].spectrum.markLine.length > 0) {
         this.setMarkLine()
@@ -3313,7 +3401,7 @@ export default {
           obj = {
             name: `BPF.${index}`,
             value: Number(parts.speedRate) * Number(parts.baseInfo.compNum),
-            title: `通过频率${index}`
+            title: `${this.$t('waveFault.BPF')}${index}`//通过频率
           };
           pd.failure.analogValue[index - 1] = obj
           // pd.failure.analogValue.push(obj);
@@ -3533,23 +3621,24 @@ export default {
           }
         }
       } else {
-
-        // 叶片
-        const freq = failure.analogValue;
-        freq.map(value => {
-          if (value.value <= maxFreq) {
-            body.push({
-              flag: value.name,
-              name: value.title,
-              freq: round(value.value, 4),
-              amplitude: round(spectrum.srcY[this.getIndex(value.value, 2)], 4)
-            });
-            arr.push({
-              name: value.name,
-              xAxis: this.getIndex(value.value, 2)
-            });
-          }
-        });
+        if (failure.isStartFailure) {
+          // 叶片
+          const freq = failure.analogValue;
+          freq.map(value => {
+            if (value.value <= maxFreq) {
+              body.push({
+                flag: value.name,
+                name: value.title,
+                freq: round(value.value, 4),
+                amplitude: round(spectrum.srcY[this.getIndex(value.value, 2)], 4)
+              });
+              arr.push({
+                name: value.name,
+                xAxis: this.getIndex(value.value, 2)
+              });
+            }
+          });
+        }
       }
       params.failure.list.body = body;
       const xAxis = [];
@@ -3581,7 +3670,6 @@ export default {
         }
       }
       if (flag) {
-        console.log('修改markLine')
         spectrum.markLine = markLine;
       }
       // }
@@ -3591,7 +3679,7 @@ export default {
       const params = this.paramsData[this.currentKey];
       const failure = params.failure;
       const freq = failure.analogValue;
-      freq.push({ title: `通过频率${freq.length + 1}`, value: 1, name: `BPF.${freq.length + 1}` })
+      freq.push({ title: `${this.$t('waveFault.BPF')}${freq.length + 1}`, value: 1, name: `BPF.${freq.length + 1}` })//通过频率
     },
     // 删除单个叶轮故障频率
     deleteFailure (i) {
@@ -3608,6 +3696,7 @@ export default {
     clearFailure () {
       const currentKey = this.currentKey;
       this.paramsData[currentKey].failure.list.body = [];
+      this.paramsData[currentKey].failure.isStartFailure = false;
       this.chartData[currentKey].spectrum.markLine = [];
     },
     // 自定义转速
@@ -3693,19 +3782,17 @@ export default {
       const [macId, posId, posType] = pos.posFlag.split("_");
       const vibType = [1, 3, 4, 6, 8, 9, 12, 17, 200];
       if (!matchRule(posType, 'wave', pos.dgm_type, pos.t_root, pos)) {
-        this.$pop("该测点无波形数据");
+        this.$pop(this.$t('wave.noWaveData'));//当前没有波形数据
         return;
       }
       this.dropPos = pos;
       let name = "wave"; //实时数据列表
-      let val = "波形频谱图";
-      let icon = "icon-boxing_huaban";
       let key = `wave_pos_${pos.posFlag}`;
       this.$store.commit("getCheckMsg", {
         msg: cloneObj(pos),
         type: "pos"
       });
-      let titleName = pos.mac_name + "-" + pos.name + "-波形频谱图";
+      let titleName = pos.mac_name + "-" + pos.name + "-" + this.$t('Common.Wave');//波形频谱图
       // let titleName = pos.name + "波形频谱图";
       // let delKey = this.currentKey
       this.$bus.$emit("choiceChartType", key, name, titleName);
@@ -3749,7 +3836,7 @@ export default {
         this.getTrendData();
         this.getWaveData();
       } else {
-        this.$pop('当前测点无低密度波形！')
+        this.$pop(this.$t('wave.noLowWaveData'))
       }
     },
     // 是否显示峰值
@@ -3800,9 +3887,6 @@ export default {
   // 生命周期 - 挂载完成（可以访问DOM元素）
   mounted () {
     window.addEventListener("resize", this.resizeChart);
-  },
-  created () {
-    this.$store.commit("set_keepAlive", { method: "add", keepAlive: "wave" });
   },
   beforeDestroy () {
     window.removeEventListener("resize", this.resizeChart);

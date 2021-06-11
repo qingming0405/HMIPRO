@@ -11,7 +11,8 @@
         @mousedown="moveDiv"
         @mouseup="moveDivUp"
       >
-        <span>波磨数据</span>
+      <!--  波磨数据-->
+        <span>{{$t('Common.waveData')}}</span>
         <div
           class="close-retrieval"
           @click="closeRetrieval"
@@ -21,7 +22,7 @@
       </div>
       <!-- 测点选择 -->
       <div class="select-box">
-        <div class="select-title msg-title">测点</div>
+        <div class="select-title msg-title">{{$t('Common.pos')}}</div>
         <div
           class="select-value viewMsg-name radius text-overflow select-none outside-border edge-outside-border"
           @click.stop="changePos"
@@ -33,7 +34,8 @@
       <!-- 组织、机组、测点选择 -->
       <div class="check-eigenvalue-box scroll-style-edge">
         <div class="select-title">
-          <p>时间列表</p>
+          <!-- 时间列表 -->
+          <p>{{$t('Common.timeList')}}</p>
         </div>
         <div
           class="radius select-none"
@@ -49,14 +51,16 @@
         </div>
       </div>
       <div class="data-retrieval-btn">
+        <!-- 加入测点 -->
         <button
           class="add-pos"
           @click="addPos"
-        >加入测点</button>
+        >{{$t('Common.addPos')}}</button>
+        <!-- 取消 -->
         <button
           class="disable-btn"
           @click="closeRetrieval"
-        >取消</button>
+        >{{$t('Common.cancelBtn')}}</button>
       </div>
     </div>
   </div>

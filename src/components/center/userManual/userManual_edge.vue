@@ -32,7 +32,13 @@ export default {
   methods: {
     openChartList(type) {
       this.userManualSrc = 'userManual/index.htm'
-      let t_root = this.$route.query.t_root
+      let t_root = this.$store.state.checkMsg.tree.t_root
+      if (
+        this.$route.query.t_root !== null &&
+        this.$route.query.t_root !== undefined
+      ) {
+        t_root = this.$route.query.t_root
+      }
       if (this.$route.query.toPart) {
         this.userManualSrc =
           this.userManualSrc +

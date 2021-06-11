@@ -4,38 +4,38 @@ import { matchRule, cloneObj, posTypeName } from 'utils/utils.js'
  * 第一级目录
  * @returns []
  */
-export function menusFirstLevl() {
+export function menusFirstLevl () {
   return [
     {
-      val: '总貌图',
+      val: window.vm.$t('HeaderEdge.firstLevel1'),//'总貌图',
       icon: 'icon-shouye1',
       isAll: true,
       exceptTRoot: [],
       isShow: true,
     },
     {
-      val: '图谱分析',
+      val: window.vm.$t('HeaderEdge.firstLevel2'),//'图谱分析',
       icon: 'icon-zhongzi-chakanjiemian-boxing-',
       isAll: false,
       exceptTRoot: [],
       isShow: true,
     },
     {
-      val: '启停机分析',
+      val: window.vm.$t('HeaderEdge.firstLevel3'),//'启停机分析',
       icon: 'icon-guanji',
       isAll: false,
       includeTRoot: [4],
       isShow: true,
     },
     {
-      val: '数据分析',
+      val: window.vm.$t('HeaderEdge.firstLevel4'),//'数据分析',
       icon: 'icon-zhongzi-chakanjiemian-shuju-',
       isAll: false,
       exceptTRoot: [],
       isShow: true,
     },
     {
-      val: '日志列表',
+      val: window.vm.$t('HeaderEdge.firstLevel5'),//'日志列表',
       icon: 'icon-rizhiliebiao',
       isAll: false,
       exceptTRoot: [],
@@ -49,26 +49,26 @@ export function menusFirstLevl() {
  * 第二级目录
  * @returns []
  */
-export function menusSecondLevel() {
-  return  [
+export function menusSecondLevel () {
+  return [
     [
       /* 风电总貌图 */
       {
-        val: '总貌图',
+        val: window.vm.$t('HeaderEdge.secondLevel1_1'),//'总貌图',
         icon: 'icon-shouye1',
         name: 'fdGeneral',
         general: true,
         t_root: 0,
       },
       {
-        val: '重点关注',
+        val: window.vm.$t('HeaderEdge.secondLevel1_2'),//'重点关注',
         icon: 'icon-shoucang',
         name: 'fdFocus',
         general: true,
         t_root: 0,
       },
       {
-        val: '设备模型',
+        val: window.vm.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
         icon: 'icon-shijingsanwei-',
         name: 'windModel',
         general: true,
@@ -76,21 +76,21 @@ export function menusSecondLevel() {
       },
       /* 水泥总貌图 */
       {
-        val: '总貌图',
+        val: window.vm.$t('HeaderEdge.secondLevel1_1'),//'总貌图',
         icon: 'icon-shouye1',
         name: 'snGeneral',
         general: true,
         t_root: 1,
       },
       {
-        val: '重点关注',
+        val: window.vm.$t('HeaderEdge.secondLevel1_2'),//'重点关注',
         icon: 'icon-shoucang',
         name: 'snFocus',
         general: true,
         t_root: 1,
       },
       {
-        val: '设备模型',
+        val: window.vm.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
         icon: 'icon-shijingsanwei-',
         name: 'snModel',
         general: true,
@@ -98,21 +98,21 @@ export function menusSecondLevel() {
       },
       /* 轨交总貌图 */
       {
-        val: '总貌图',
+        val: window.vm.$t('HeaderEdge.secondLevel1_1'),//'总貌图',
         icon: 'icon-shouye1',
         name: 'gjGeneral',
         general: true,
         t_root: 2,
       },
       {
-        val: '重点关注',
+        val: window.vm.$t('HeaderEdge.secondLevel1_2'),//'重点关注',
         icon: 'icon-shoucang',
         name: 'gjFocus',
         general: true,
         t_root: 2,
       },
       {
-        val: '设备模型',
+        val: window.vm.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
         icon: 'icon-shijingsanwei-',
         name: 'gjModel',
         general: true,
@@ -120,21 +120,21 @@ export function menusSecondLevel() {
       },
       /* 油田总貌图 */
       {
-        val: '总貌图',
+        val: window.vm.$t('HeaderEdge.secondLevel1_1'),//'总貌图',
         icon: 'icon-shouye1',
         name: 'ytGeneral',
         general: true,
         t_root: 3,
       },
       {
-        val: '重点关注',
+        val: window.vm.$t('HeaderEdge.secondLevel1_2'),//'重点关注',
         icon: 'icon-shoucang',
         name: 'ytFocus',
         general: true,
         t_root: 3,
       },
       {
-        val: '油田设备模型',
+        val: window.vm.$t('HeaderEdge.secondLevel1_3'),//'油田设备模型',
         icon: 'icon-shijingsanwei-',
         name: 'ytModel',
         general: true,
@@ -142,21 +142,21 @@ export function menusSecondLevel() {
       },
       // 化工
       {
-        val: '总貌图',
+        val: window.vm.$t('HeaderEdge.secondLevel1_1'),//'总貌图',
         icon: 'icon-shouye1',
         name: 'hgGeneral',
         general: true,
         t_root: 5,
       },
       {
-        val: '重点关注',
+        val: window.vm.$t('HeaderEdge.secondLevel1_2'),//'重点关注',
         icon: 'icon-shoucang',
         name: 'hgFocus',
         general: true,
         t_root: 5,
       },
       {
-        val: '设备模型',
+        val: window.vm.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
         icon: 'icon-shijingsanwei-',
         name: 'hgModel',
         general: true,
@@ -164,21 +164,21 @@ export function menusSecondLevel() {
       },
       /* 通用总貌图 */
       {
-        val: '总貌图',
+        val: window.vm.$t('HeaderEdge.secondLevel1_1'),//'总貌图',
         icon: 'icon-shouye1',
         name: 'tyGeneral',
         general: true,
         t_root: -1,
       },
       {
-        val: '重点关注',
+        val: window.vm.$t('HeaderEdge.secondLevel1_2'),//'重点关注',
         icon: 'icon-shoucang',
         name: 'tyFocus',
         general: true,
         t_root: -1,
       },
       {
-        val: '设备模型',
+        val: window.vm.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
         icon: 'icon-shijingsanwei-',
         name: 'tyModel',
         general: true,
@@ -187,7 +187,7 @@ export function menusSecondLevel() {
     ],
     [
       {
-        val: '智能诊断趋势',
+        val: window.vm.$t('HeaderEdge.secondLevel2_1'),//'智能诊断趋势',
         icon: 'icon-boxing_huaban',
         name: 'diagnosisTrend',
         controlShow: true, //后来配置这样表是否显示
@@ -195,7 +195,7 @@ export function menusSecondLevel() {
         includeTRoot: [0] /* 当t_root在exceptTRoot中时标题不显示 */,
       },
       {
-        val: '波形频谱图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_2'),//'波形频谱图',
         icon: 'icon-boxing_huaban',
         name: 'wave',
         controlShow: true, //后来配置这样表是否显示
@@ -203,7 +203,7 @@ export function menusSecondLevel() {
         exceptTRoot: [3] /* 当t_root在exceptTRoot中时标题不显示 */,
       },
       {
-        val: '趋势图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_3'),//'趋势图',
         icon: 'icon-qushitu_huaban1',
         name: 'trend',
         controlShow: true, //后来配置这样表是否显示
@@ -211,7 +211,7 @@ export function menusSecondLevel() {
         exceptTRoot: [],
       },
       {
-        val: '三维频谱图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_4'),//'三维频谱图',
         icon: 'icon-sanweipinputu_huaban',
         name: 'wave3d',
         controlShow: true, //后来配置这样表是否显示
@@ -219,7 +219,7 @@ export function menusSecondLevel() {
         exceptTRoot: [3],
       },
       {
-        val: '轨道波磨图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_5'),//'轨道波磨图',
         icon: 'icon-guidao',
         name: 'tmstrend',
         controlShow: true, //后来配置这样表是否显示
@@ -227,7 +227,7 @@ export function menusSecondLevel() {
         includeTRoot: [2],
       },
       {
-        val: '轨道波磨频谱瀑布',
+        val: window.vm.$t('HeaderEdge.secondLevel2_6'),//'轨道波磨频谱瀑布',
         icon: 'icon-sanweipinputu_huaban',
         name: 'tmswave3d',
         controlShow: true, //后来配置这样表是否显示
@@ -242,7 +242,7 @@ export function menusSecondLevel() {
       //   isShow: true
       // },
       {
-        val: '倾角分布图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_7'),//'倾角分布图',
         icon: 'icon-qingjiaofenbutu_huaban_huaban',
         name: 'dip',
         controlShow: true, //后来配置这样表是否显示
@@ -250,7 +250,7 @@ export function menusSecondLevel() {
         exceptTRoot: [1, 2, 3, 4, 5],
       },
       {
-        val: '机舱轨迹图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_8'),//'机舱轨迹图',
         icon: 'icon-jicangguijitu',
         name: 'overturn',
         controlShow: true, //后来配置这样表是否显示
@@ -258,7 +258,7 @@ export function menusSecondLevel() {
         exceptTRoot: [1, 2, 3, 4, 5],
       },
       {
-        val: '散点图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_9'),//'散点图',
         icon: 'icon-sandiantu_huaban',
         name: 'scatter',
         controlShow: true, //后来配置这样表是否显示
@@ -266,7 +266,7 @@ export function menusSecondLevel() {
         exceptTRoot: [4],
       },
       {
-        val: '危险转速区间监测',
+        val: window.vm.$t('HeaderEdge.secondLevel2_10'),//'危险转速区间监测',
         icon: 'icon-yibiaopan',
         name: 'dashboard',
         controlShow: true, //后来配置这样表是否显示
@@ -274,7 +274,7 @@ export function menusSecondLevel() {
         includeTRoot: [0],
       },
       {
-        val: '轨道波磨地图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_11'),//'轨道波磨地图',
         icon: 'icon-iconditietu',
         name: 'railCorrugation',
         controlShow: true, //后来配置这样表是否显示
@@ -282,7 +282,7 @@ export function menusSecondLevel() {
         includeTRoot: [2],
       },
       {
-        val: '单值棒图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_12'),//'单值棒图',
         icon: 'icon-danzhibangtu_huaban1',
         name: 'singleBar',
         controlShow: true, //后来配置这样表是否显示
@@ -290,7 +290,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '多值棒图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_13'),//'多值棒图',
         icon: 'icon-duozhibangtu_huaban1',
         name: 'multiBar',
         controlShow: true, //后来配置这样表是否显示
@@ -299,7 +299,7 @@ export function menusSecondLevel() {
       },
 
       {
-        val: '全频谱图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_14'),//'全频谱图',
         icon: 'icon-quanpinputu_huaban1',
         name: 'fullSpectrum',
         controlShow: true, //后来配置这样表是否显示
@@ -316,7 +316,7 @@ export function menusSecondLevel() {
       // },
 
       {
-        val: '多频谱图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_15'),//'多频谱图',
         icon: 'icon-duopinputu_huaban1',
         name: 'multiSpectrum',
         controlShow: true, //后来配置这样表是否显示
@@ -324,7 +324,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '单面动平衡',
+        val: window.vm.$t('HeaderEdge.secondLevel2_16'),//'单面动平衡',
         icon: 'icon-9danmiandongpingheng_huaban1',
         name: 'singledynamicBalance',
         controlShow: true, //后来配置这样表是否显示
@@ -332,7 +332,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '双面动平衡',
+        val: window.vm.$t('HeaderEdge.secondLevel2_17'),//'双面动平衡',
         icon: 'icon-10shuangmiandongpingheng_huaban1',
         name: 'doubledynamicBalance',
         controlShow: true, //后来配置这样表是否显示
@@ -340,7 +340,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '极坐标图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_18'),//'极坐标图',
         icon: 'icon-14jizuobiao_huaban1',
         name: 'polarDiagram',
         controlShow: true, //后来配置这样表是否显示
@@ -348,7 +348,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '轴心轨迹图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_19'),//'轴心轨迹图',
         icon: 'icon-22zhouxinguijitu_huaban1',
         name: 'axisLocus',
         controlShow: true, //后来配置这样表是否显示
@@ -356,7 +356,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '轴心位置图',
+        val: window.vm.$t('HeaderEdge.secondLevel2_20'),//'轴心位置图',
         icon: 'icon-21zhouxinweizhitu_huaban1',
         name: 'axisPosition',
         controlShow: true, //后来配置这样表是否显示
@@ -375,7 +375,7 @@ export function menusSecondLevel() {
     [
       // 启停机分析
       {
-        val: '转速时间图',
+        val: window.vm.$t('HeaderEdge.secondLevel3_1'),//'转速时间图',
         icon: 'icon-12zhuansushijiantu_huaban1',
         name: 'speedTime',
         controlShow: true, //后来配置这样表是否显示
@@ -383,7 +383,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '奈奎斯特图',
+        val: window.vm.$t('HeaderEdge.secondLevel3_2'),//'奈奎斯特图',
         icon: 'icon-25naikuisitetu_huaban1',
         name: 'nyquist',
         controlShow: true, //后来配置这样表是否显示
@@ -391,7 +391,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '伯德图',
+        val: window.vm.$t('HeaderEdge.secondLevel3_3'),//'伯德图',
         icon: 'icon-13bodetu_huaban1',
         name: 'bode',
         controlShow: true, //后来配置这样表是否显示
@@ -399,7 +399,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '启停机频谱瀑布图',
+        val: window.vm.$t('HeaderEdge.secondLevel3_4'),//'启停机频谱瀑布图',
         icon: 'icon-19pinpupubutuqitingji_huaban1',
         name: 'ssSpectrumWaterfall',
         controlShow: true, //后来配置这样表是否显示
@@ -407,7 +407,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '级联图',
+        val: window.vm.$t('HeaderEdge.secondLevel3_5'),//'级联图',
         icon: 'icon-20jiliantu_huaban1',
         name: 'cascade',
         controlShow: true, //后来配置这样表是否显示
@@ -415,7 +415,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '启停机数据列表',
+        val: window.vm.$t('HeaderEdge.secondLevel3_6'),//'启停机数据列表',
         icon: 'icon-qitingjishujuliebiao_huaban1',
         name: 'startStop',
         controlShow: true, //后来配置这样表是否显示
@@ -425,7 +425,7 @@ export function menusSecondLevel() {
     ],
     [
       {
-        val: '实时数据汇总列表',
+        val: window.vm.$t('HeaderEdge.secondLevel4_1'),//'实时数据汇总列表',
         icon: 'icon-huizong',
         name: 'realSummary',
         controlShow: true, //后来配置这样表是否显示
@@ -433,7 +433,7 @@ export function menusSecondLevel() {
         includeTRoot: [1, 3],
       },
       {
-        val: '实时数据列表',
+        val: window.vm.$t('HeaderEdge.secondLevel4_2'),//'实时数据列表',
         icon: 'icon-shishishuju_huaban',
         name: 'real',
         controlShow: true, //后来配置这样表是否显示
@@ -441,7 +441,7 @@ export function menusSecondLevel() {
         exceptTRoot: [],
       },
       {
-        val: '历史数据列表',
+        val: window.vm.$t('HeaderEdge.secondLevel4_3'),//'历史数据列表',
         icon: 'icon-lishishujuliebiao_huaban',
         name: 'history',
         controlShow: true, //后来配置这样表是否显示
@@ -449,7 +449,7 @@ export function menusSecondLevel() {
         exceptTRoot: [],
       },
       {
-        val: '监测报表',
+        val: window.vm.$t('HeaderEdge.secondLevel4_4'),//'监测报表',
         icon: 'icon-jiancebaobiao_huaban_huaban',
         name: 'monitor',
         controlShow: true, //后来配置这样表是否显示
@@ -457,7 +457,7 @@ export function menusSecondLevel() {
         exceptTRoot: [4],
       },
       {
-        val: '设备参数',
+        val: window.vm.$t('HeaderEdge.secondLevel4_5'),//'设备参数',
         icon: 'icon-00-shujujilu-05',
         name: 'equipmentParameters',
         controlShow: true, //后来配置这样表是否显示
@@ -466,7 +466,7 @@ export function menusSecondLevel() {
       },
       {
         // 机组
-        val: '设备维护记录',
+        val: window.vm.$t('HeaderEdge.secondLevel4_6'),//'设备维护记录',
         icon: 'icon-shebei',
         name: 'maintain',
         controlShow: true, //后来配置这样表是否显示
@@ -474,7 +474,7 @@ export function menusSecondLevel() {
         exceptTRoot: [4],
       },
       {
-        val: '统计列表',
+        val: window.vm.$t('HeaderEdge.secondLevel4_7'),//'统计列表',
         icon: 'icon-tongjiliebiao_huaban',
         name: 'census',
         controlShow: true, //后来配置这样表是否显示
@@ -482,7 +482,7 @@ export function menusSecondLevel() {
         exceptTRoot: [4],
       },
       {
-        val: '专家系统',
+        val: window.vm.$t('HeaderEdge.secondLevel4_8'),//'专家系统',
         icon: 'icon-17zhuanjiaxitong_huaban11',
         name: 'expertSystem',
         controlShow: true, //后来配置这样表是否显示
@@ -490,17 +490,41 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '实时报警汇总列表', //声光报警，不在左导航栏显示
+        val: window.vm.$t('HeaderEdge.secondLevel4_9'),//'实时报警汇总列表', //声光报警，不在左导航栏显示
         icon: '',
         name: 'realAlarm',
         controlShow: false, //后来配置这样表是否显示
         isShow: false,
         includeTRoot: [],
       },
+      {
+        val: window.vm.$t('HeaderEdge.secondLevel4_10'),//踏面测量数据
+        icon: 'icon-tamianceliangshuju',
+        name: 'treadData',
+        controlShow: true,
+        isShow: true,
+        includeTRoot: [2],
+      },
+      {
+        val: window.vm.$t('HeaderEdge.secondLevel4_11'),//踏面磨损趋势
+        icon: 'icon-tamianmosunqushi',
+        name: 'wearTrend',
+        controlShow: true,
+        isShow: true,
+        includeTRoot: [2],
+      },
+      {
+        val: window.vm.$t('HeaderEdge.secondLevel4_12'),//踏面寿命预估
+        icon: 'icon-tamianshoumingyugu',
+        name: 'lifePredict',
+        controlShow: true,
+        isShow: false,
+        includeTRoot: [2],
+      },
     ],
     [
       {
-        val: '报警日志',
+        val: window.vm.$t('HeaderEdge.secondLevel5_1'),//'报警日志',
         icon: 'icon-baojing_huaban',
         name: 'alarm',
         controlShow: true, //后来配置这样表是否显示
@@ -509,7 +533,7 @@ export function menusSecondLevel() {
       },
       // 8000报警日志
       {
-        val: '报警日志',
+        val: window.vm.$t('HeaderEdge.secondLevel5_1'),//'报警日志',
         icon: 'icon-baojing_huaban',
         name: 'alarm1',
         controlShow: true, //后来配置这样表是否显示
@@ -517,7 +541,7 @@ export function menusSecondLevel() {
         includeTRoot: [4],
       },
       {
-        val: '服务器信息',
+        val: window.vm.$t('HeaderEdge.secondLevel5_2'),//'服务器信息',
         icon: 'icon-fuwuqi',
         name: 'server',
         controlShow: true, //后来配置这样表是否显示
@@ -525,14 +549,18 @@ export function menusSecondLevel() {
         exceptTRoot: [4],
       },
       {
-        val: '系统日志',
+        val: window.vm.$t('HeaderEdge.secondLevel5_3'),//'系统日志',
         icon: 'icon-xitongrizhi_',
         name: 'system',
         controlShow: true, //后来配置这样表是否显示
         isShow: true,
       },
+      { 
+        val: window.vm.$t('HeaderEdge.secondLevel5_4'),// 使用手册
+        icon: 'icon-icon-test', 
+        name: 'userManual' 
+      },
     ],
-    // [{ val: "使用手册", icon: "icon-icon-test", name: "" }]
   ]
 }
 
@@ -540,7 +568,7 @@ export function menusSecondLevel() {
  * 只能由组织打开的总貌图
  * @returns 
  */
-export function generalOnlyTree() {
+export function generalOnlyTree () {
   return [
     'fdGeneral',
     'fdFocus',
@@ -561,7 +589,7 @@ export function generalOnlyTree() {
  * 只能由机组打开的总貌图
  * @returns 
  */
-export function generalOnlyMac() {
+export function generalOnlyMac () {
   return [
     'fdModel',
     'windModel',
@@ -577,7 +605,7 @@ export function generalOnlyMac() {
  * 只能由组织打开的图谱
  * @returns 
  */
-export function requiredTree() {
+export function requiredTree () {
   return ['realSummary', 'equipmentParameters']
 }
 
@@ -585,7 +613,7 @@ export function requiredTree() {
  * 只能由机组打开的图谱
  * @returns 
  */
-export function requiredMac() {
+export function requiredMac () {
   return [
     'maintain',
     'monitor',
@@ -600,7 +628,7 @@ export function requiredMac() {
  * 只能由测点打开的图谱
  * @returns 
  */
-export function requiredPos() {
+export function requiredPos () {
   return [
     'real',
     'history',
@@ -641,11 +669,11 @@ export function requiredPos() {
  * @param {*} name 
  * @returns 
  */
-export function getMenuItem(name) {
+export function getMenuItem (name) {
   let menuItem
-  for(let arr of menusSecondLevel()) {
+  for (let arr of menusSecondLevel()) {
     menuItem = arr.find(item => item.name === name)
-    if(menuItem) {
+    if (menuItem) {
       break;
     }
   }
@@ -657,8 +685,8 @@ export function getMenuItem(name) {
  * @param {*} names 
  * @returns 
  */
-export function getMenus(names = null) {
-  if(names === null || names.length === 0) {
+export function getMenus (names = null) {
+  if (names === null || names.length === 0) {
     // 不传参就获取所有菜单项
     return [].concat(...menusSecondLevel())
   }
@@ -670,7 +698,7 @@ export function getMenus(names = null) {
  * 显示右键菜单列表 
  * @param {事件} e 
  */
-export function showRightMenu(that, e, menuList, info) {
+export function showRightMenu (that, e, menuList, info) {
   const size = e.currentTarget.getBoundingClientRect()
   that.$list({
     text: menuList,
@@ -692,23 +720,23 @@ export function showRightMenu(that, e, menuList, info) {
 /**
  * 打开总貌图
  */
-export function generalRouting(that, menuItem, info = null) {
-  if(info == null) {
+export function generalRouting (that, menuItem, info = null) {
+  if (info == null) {
     info = that.$store.state.checkMsg
   }
-  const {tree, mac} = info
+  const { tree, mac } = info
   const name = menuItem.name
   if (generalOnlyTree().includes(name)) {
     if (!tree) {
       /* 没有组织 */
-      that.$pop('请选择组织')
+      that.$pop(that.$t('Common.popTreeTips'))//'请选择组织'
       return
     }
     /* 标题只显示组织 */
   } else if (generalOnlyMac().includes(name)) {
     if (!mac) {
       /* 没有机组*/
-      that.$pop('请选择机组')
+      that.$pop(that.$t('Common.popMacTips'))//'请选择机组'
       return
     }
   }
@@ -722,32 +750,32 @@ export function generalRouting(that, menuItem, info = null) {
  * @param {*} that 
  * @param {*} info 
  */
-function setCheckMsg(that, info) {
+function setCheckMsg (that, info) {
   let isChanged = true // 判断选中是否改变
   let curInfo = that.$store.state.checkMsg
-  const {tree, mac, pos, type} = info 
-  let msg 
-  switch(type){
+  const { tree, mac, pos, type } = info
+  let msg
+  switch (type) {
     case 'tree':
-      if(curInfo.tree != null && tree.t_id === curInfo.tree.t_id) {
+      if (curInfo.tree != null && tree.t_id === curInfo.tree.t_id) {
         isChanged = false
       }
       msg = tree
       break;
     case 'mac':
-      if(curInfo.mac != null && mac.machine_id === curInfo.mac.machine_id) {
+      if (curInfo.mac != null && mac.machine_id === curInfo.mac.machine_id) {
         isChanged = false
       }
       msg = mac;
       break;
     default:
-      if(curInfo.pos != null && pos.machine_id === curInfo.pos.machine_id && pos.position_type === curInfo.pos.position_type && pos.position_id === curInfo.pos.position_id) {
+      if (curInfo.pos != null && pos.machine_id === curInfo.pos.machine_id && pos.position_type === curInfo.pos.position_type && pos.position_id === curInfo.pos.position_id) {
         isChanged = false
       }
       msg = pos
   }
   // 如果选中的信息都没有改变，只需要更新更改选中类型
-  if(isChanged === false) {
+  if (isChanged === false) {
     that.$store.commit('setCheckType', type)
   }
   else {
@@ -761,15 +789,15 @@ function setCheckMsg(that, info) {
 /**
  * 打开其它图谱
  */
-export function chartRouting(that, menuItem, info = null) {
-  if(info == null) {
+export function chartRouting (that, menuItem, info = null) {
+  if (info == null) {
     info = that.$store.state.checkMsg
   }
   else {
     setCheckMsg(that, info)
   }
-  const {name, val, icon} = menuItem
-  const {tree, mac, pos, type} = info
+  const { name, val, icon } = menuItem
+  const { tree, mac, pos, type } = info
   let key
   // 是否只能由测点打开
   if (name === 'server') {
@@ -777,21 +805,21 @@ export function chartRouting(that, menuItem, info = null) {
   } else if (requiredPos().includes(name)) {
     if (!pos) {
       // 如果不存在测点的选择
-      that.$pop('请选择测点')
+      that.$pop(that.$t('Common.popPosTips'))//'请选择测点'
       return
     } else {
       if (
         !matchRule(pos.position_type, name, pos.dgm_type, pos.t_root, pos)
       ) {
         //未能匹配
-        that.$pop('该测点没有此图谱')
+        that.$pop(that.$t('Common.noPosChartTips'))//'该测点没有此图谱'
         return
       }
     }
     key = `${name}_pos_${pos.machine_id}_${pos.position_id}_${pos.position_type}`
   } else if (requiredMac().includes(name)) {
     if (!mac) {
-      that.$pop('请选择机组')
+      that.$pop(that.$t('Common.popMacTips'))//'请选择机组'
       return
     }
     // 存在机泵
@@ -802,7 +830,7 @@ export function chartRouting(that, menuItem, info = null) {
     }
   } else if (requiredTree().includes(name)) {
     if (!tree) {
-      that.$pop('请选择组织')
+      that.$pop(that.$t('Common.popTreeTips'))//'请选择组织'
       return
     }
     key = `${name}_tree_${tree.t_id}_${tree.t_root}`
@@ -811,7 +839,7 @@ export function chartRouting(that, menuItem, info = null) {
       if (type === 'pos') {
         if (pos && pos.position_type == 1) {
           //转速测点无报警
-          that.$pop('该类型测点没有此图谱')
+          that.$pop(that.$t('Common.noChartTips'))//'该类型测点没有此图谱'
           return
         }
         key = `${name}_pos_${pos.machine_id}_${pos.position_id}_${pos.position_type}`
@@ -823,7 +851,7 @@ export function chartRouting(that, menuItem, info = null) {
         /* 实时数据列表汇总需要用到t_root */
         key = `${name}_tree_${tree.t_id}_${tree.t_root}`
       } else {
-        that.$pop('请选择组织')
+        that.$pop(that.$t('Common.popTreeTips'))//'请选择组织'
         return
       }
     } else {
@@ -835,7 +863,7 @@ export function chartRouting(that, menuItem, info = null) {
         /* 实时数据列表汇总需要用到t_root */
         key = `${name}_tree_${tree.t_id}_${tree.t_root}`
       } else {
-        that.$pop('请选择组织')
+        that.$pop(that.$t('Common.popTreeTips'))//'请选择组织'
         return
       }
     }
@@ -845,7 +873,9 @@ export function chartRouting(that, menuItem, info = null) {
     name,
     val,
     icon,
+    t_root: tree ? tree.t_root : (mac ? mac.t_root : (pos ? pos.t_root : 0)),//都去不到默认为风电
   }
+  console.log('t_root未取到默认风电')
   that.$bus.$emit('getPath', params)
   that.$bus.$emit('scrollLabel', 1)
 }

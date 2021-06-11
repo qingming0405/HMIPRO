@@ -133,7 +133,6 @@
 // import 《组件名称》 from '《组件路径》';
 import {
   cloneObj,
-  setPosMsg,
   addClass,
   removeClass,
   setMacMsg,
@@ -809,7 +808,7 @@ export default {
             }
           }
         }
-        const pos = setPosMsg(data.positions)
+        const pos = data.positions
         pos.forEach((item) => {
           item.name = item.position_name
           item.posFlag = `${item.machine_id}_${item.position_id}_${item.position_type}`

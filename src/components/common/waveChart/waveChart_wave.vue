@@ -50,80 +50,83 @@ export default {
     'isSpeedPulse',
   ],
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       chart: {},
       maximization: false,
       logChart: false,
       chartBtn: [
         /* 0 */ {
           class: 'icon-selectunit_huaban',
-          title: '单位选择',
+          title: vm.$t('icon.unitSelect'),//'单位选择',
           flag: [1, 2, 0, 3, 7, 8, 9],
           viewType: [2],
         },
         /* 1 */ {
           class: 'icon-MAX_huaban',
-          title: '最大化',
+          title: vm.$t('icon.maximize'),//'最大化',
           flag: [1, 2, 0, 3, 7, 8, 9],
           viewType: [0, 1, 2],
         },
         /* 2 */ {
           class: 'icon-exporemusic_huaban',
-          title: '音频导出',
+          title: vm.$t('icon.AudioExport'),//'音频导出',
           flag: [0],
         },
         /* 3 */ {
           class: 'icon-exportdata_huaban',
-          title: '数据导出',
+          title:  vm.$t('icon.dataExport'),//'数据导出',
           flag: [0, 1, 3, 7, 8],
           viewType: [0, 1, 2],
         },
         /* 4 */ {
           class: 'icon-restore_huaban',
-          title: '重置',
+          title: vm.$t('icon.resetIcon'),//'重置',
           flag: [1, 2, 0, 3, 6, 7, 8, 9],
           viewType: [0, 1, 2],
         },
         /* 5 */ {
           class: 'icon-enlarge_huaban',
-          title: '选框放大',
+          title: vm.$t('icon.openWindow'),//'选框放大',
           flag: [1, 2, 0, 3, 6, 7, 8, 9],
           viewType: [0, 1, 2],
         },
         /* 6 */ {
           class: 'icon-savemage_huaban',
-          title: '保存为图片',
+          title: vm.$t('icon.SavePicture'),//'保存为图片',
           flag: [1, 2, 0, 3, 6, 7, 8, 9],
           viewType: [0, 1, 2],
         },
         /* 7 */ {
           class: 'icon-setpower_huaban',
-          title: '所有测点有效频段设置',
+          title: vm.$t('icon.EffectiveFreqAllPos'),//'所有测点有效频段设置',
           flag: [1],
         },
         /* 8 */ {
           class: 'icon-subtime_huaban',
-          title: '时间差',
+          title: vm.$t('icon.TimeDifference'),//'时间差',
           flag: [0],
         },
         /* 9 */ {
           class: 'icon-pinputuduishuzuobiaoqiehuan_huaban',
-          title: '对数坐标',
+          title: vm.$t('icon.LogarithmicCoordinates'),//'对数坐标',
           flag: [1, 3, 7, 8],
           viewType: [0, 1, 2],
         },
         /* 10 */ {
           class: 'icon-zhuansumaichong_huaban1',
-          title: '转速脉冲',
+          title: vm.$t('icon.SpeedPulse'),//'转速脉冲',
           flag: [0], //opt 图谱类型为0显示
           // viewType: [0, 1, 2]
         },
         /* 11 */ {
           class: 'icon-youxiaopinshuaishezhi_huaban',
-          title: '时域波形过滤',
+          title: vm.$t('icon.TimeWaveformFilter'),//'时域波形过滤',
           flag: [0],
         },
       ],
+      isActivity: true,
     }
   },
   watch: {
@@ -173,6 +176,12 @@ export default {
        }
     }, */
   },
+  deactivated() {
+    this.isActivity = false
+  },
+  activated() {
+    this.isActivity = true
+  },
   methods: {
     // 点击图谱上方图标返回方法
     handler(index, e) {
@@ -183,10 +192,10 @@ export default {
         /* 最大化 */
         if (this.maximization) {
           btn[index].class = 'icon-MAX_huaban'
-          btn[index].title = '最大化'
+          btn[index].title = vm.$t('icon.maximize')//'最大化'
         } else {
           btn[index].class = 'icon-back_huaban'
-          btn[index].title = '返回'
+          btn[index].title = vm.$t('Common.turnBack')//'返回'
         }
         this.maximization = !this.maximization
         this.$emit('maximization', this.maximization, this.opt)
@@ -230,10 +239,12 @@ export default {
     setViewIcon(item) {
       const opt = this.opt
       const viewOpt = item.flag.includes(opt)
-      if (item.title == '转速脉冲') {
+      // '转速脉冲'
+      if (item.title == vm.$t('icon.SpeedPulse')) {
         if (this.isSpeedPulse) {
           if (
-            (this.isSpeedPulse.posType != 3 && this.isSpeedPulse.posType != 17) ||
+            (this.isSpeedPulse.posType != 3 &&
+              this.isSpeedPulse.posType != 17) ||
             this.isSpeedPulse.isDegree == true ||
             (this.isSpeedPulse.dgmType != 1 && this.isSpeedPulse.dgmType != 7)
           ) {
@@ -243,14 +254,16 @@ export default {
         }
       }
       //WL9100默认单位为m/s²
-      if(item.title == '单位选择'){
+      // '单位选择'
+      if (item.title == vm.$t('icon.unitSelect')) {
         if (this.isSpeedPulse) {
           if (this.isSpeedPulse.dgmType == 10) {
             return false
           }
         }
       }
-      if (viewOpt && item.title == '时域波形过滤') {
+      // '时域波形过滤'
+      if (viewOpt && item.title == vm.$t('icon.TimeWaveformFilter')) {
         let flag = true
         if (this.isSpeedPulse && this.isSpeedPulse.isDegree == true) {
           //振动测点时显示转速脉冲,阶次开启时无转速脉冲,dgm_type不为1时无转速脉冲
@@ -266,9 +279,12 @@ export default {
     },
     // 界面宽高变化刷新图谱
     resizeChart() {
-      const nameArr = ['wave', 'spectrum', 'trend']
-      this.chart[nameArr[this.opt]] && this.chart[nameArr[this.opt]][this.index] && 
-        this.chart[nameArr[this.opt]][this.index].resize()
+      if (this.isActivity) {
+        const nameArr = ['wave', 'spectrum', 'trend']
+        this.chart[nameArr[this.opt]] &&
+          this.chart[nameArr[this.opt]][this.index] &&
+          this.chart[nameArr[this.opt]][this.index].resize()
+      }
     },
     // 设置标题
     setTitle(index) {

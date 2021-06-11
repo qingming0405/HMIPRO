@@ -17,7 +17,7 @@
         </div>
       </div>
       <div class="search-data">
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval">{{$t('Common.retrieval')}}</button>
       </div>
     </div>
   </div>
@@ -70,7 +70,7 @@ export default {
             endTime: this.$store.state.srcParams.time.end,
             empty: {
               isShow: true,
-              text: '无数据',
+              text: this.$t('Common.noDataText'),
             },
           })
           let requestData = {
@@ -120,116 +120,116 @@ export default {
           el.fault_type = el.fault_type.replace(/\s+/g, '') //去除所有空格
           let fault = [
             {
-              '[5]': '主轴前轴承外圈故障',
-              '[6]': '主轴前轴承内圈故障',
-              '[7]': '主轴前轴承滚动体故障',
-              '[8]': '主轴前轴承保持架故障',
-              '[1,2,3,4]': '主轴前轴承跑圈',
-              '[0,9]': '主轴前轴承松动',
-              '[10]': '电气故障',
-              '[0]': '气动不平衡',
+              '[5]': this.$t('diagnosisTrend.fault01'), //主轴前轴承外圈故障
+              '[6]': this.$t('diagnosisTrend.fault02'), //主轴前轴承内圈故障
+              '[7]': this.$t('diagnosisTrend.fault03'), //主轴前轴承滚动体故障
+              '[8]': this.$t('diagnosisTrend.fault04'), //主轴前轴承保持架故障
+              '[1,2,3,4]': this.$t('diagnosisTrend.fault05'), //主轴前轴承跑圈
+              '[0,9]': this.$t('diagnosisTrend.fault06'), //主轴前轴承松动
+              '[10]': this.$t('diagnosisTrend.fault07'), //电气故障
+              '[0]': this.$t('diagnosisTrend.fault08'), //气动不平衡
             },
             {
-              '[5]': '主轴后轴承外圈故障',
-              '[6]': '主轴后轴承内圈故障',
-              '[7]': '主轴后轴承滚动体故障',
-              '[8]': '主轴后轴承保持架故障',
-              '[1,2,3,4]': '主轴后轴承跑圈',
-              '[0,9]': '主轴后轴承松动',
-              '[10]': '电气故障',
-              '[0]': '气动不平衡',
+              '[5]': this.$t('diagnosisTrend.fault11'), //主轴后轴承外圈故障
+              '[6]': this.$t('diagnosisTrend.fault12'), //主轴后轴承内圈故障
+              '[7]': this.$t('diagnosisTrend.fault13'), //主轴后轴承滚动体故障
+              '[8]': this.$t('diagnosisTrend.fault14'), //主轴后轴承保持架故障
+              '[1,2,3,4]': this.$t('diagnosisTrend.fault15'), //主轴后轴承跑圈
+              '[0,9]': this.$t('diagnosisTrend.fault16'), //主轴后轴承松动
+              '[10]': this.$t('diagnosisTrend.fault07'), //电气故障
+              '[0]': this.$t('diagnosisTrend.fault08'), //气动不平衡
             },
             {
-              '[5]': '行星架叶轮侧轴承外圈故障',
-              '[6]': '行星架叶轮侧轴承内圈故障',
-              '[7]': '行星架叶轮侧轴承滚动体故障',
-              '[8]': '行星架叶轮侧轴承保持架故障',
-              '[9]': '行星架电机侧轴承内圈故障',
-              '[10]': '行星架电机侧轴承滚动体故障',
-              '[11]': '行星架电机侧轴承滚动体故障',
-              '[12]': '行星架电机侧轴承保持架故障',
-              '[1,2,3,4]': '齿轮箱输入轴轴承跑圈',
-              '[0,13]': '齿轮箱输入轴轴承松动',
-              '[14]': '电气故障',
+              '[5]': this.$t('diagnosisTrend.fault21'), //行星架叶轮侧轴承外圈故障
+              '[6]': this.$t('diagnosisTrend.fault22'), //行星架叶轮侧轴承内圈故障
+              '[7]': this.$t('diagnosisTrend.fault23'), //行星架叶轮侧轴承滚动体故障
+              '[8]': this.$t('diagnosisTrend.fault24'), //行星架叶轮侧轴承保持架故障
+              '[9]': this.$t('diagnosisTrend.fault25'), //行星架电机侧轴承外圈故障
+              '[10]': this.$t('diagnosisTrend.fault26'), //行星架电机侧轴承内圈故障
+              '[11]': this.$t('diagnosisTrend.fault27'), //行星架电机侧轴承滚动体故障
+              '[12]': this.$t('diagnosisTrend.fault28'), //行星架电机侧轴承保持架故障
+              '[1,2,3,4]': this.$t('diagnosisTrend.fault29'), //齿轮箱输入轴轴承跑圈
+              '[0,13]': this.$t('diagnosisTrend.fault210'), //齿轮箱输入轴轴承松动
+              '[14]': this.$t('diagnosisTrend.fault07'), //电气故障
             },
             {
-              '[10]': '低速轴叶轮侧轴承外圈故障',
-              '[11]': '低速轴叶轮侧轴承内圈故障',
-              '[12]': '低速轴叶轮侧轴承滚动体故障',
-              '[13]': '低速轴叶轮侧轴承保持架故障',
-              '[14]': '低速轴电机侧轴承外圈故障',
-              '[15]': '低速轴电机侧轴承内圈故障',
-              '[16]': '低速轴电机侧轴承滚动体故障',
-              '[17]': '低速轴电机侧轴承保持架故障',
-              '[18]': '滑环轴承外圈故障',
-              '[19]': '滑环轴承内圈故障',
-              '[20]': '滑环轴承滚动体故障',
-              '[21]': '滑环轴承保持架故障',
-              '[5,24]': '太阳轮故障',
-              '[7,26]': '行星轮故障',
-              '[6,25]': '内齿圈故障',
-              '[8,9]': '行星级齿轮啮合不良',
-              '[1,2,3,4]': '齿轮箱低速轴轴承跑圈',
-              '[0,22]': '齿轮箱低速轴轴承松动',
-              '[27]': '电气故障',
+              '[10]': this.$t('diagnosisTrend.fault31'), //低速轴叶轮侧轴承外圈故障
+              '[11]': this.$t('diagnosisTrend.fault32'), //低速轴叶轮侧轴承内圈故障
+              '[12]': this.$t('diagnosisTrend.fault33'), //低速轴叶轮侧轴承滚动体故障
+              '[13]': this.$t('diagnosisTrend.fault34'), //低速轴叶轮侧轴承保持架故障
+              '[14]': this.$t('diagnosisTrend.fault35'), //低速轴电机侧轴承外圈故障
+              '[15]': this.$t('diagnosisTrend.fault36'), //低速轴电机侧轴承内圈故障
+              '[16]': this.$t('diagnosisTrend.fault37'), //低速轴电机侧轴承滚动体故障
+              '[17]': this.$t('diagnosisTrend.fault38'), //低速轴电机侧轴承保持架故障
+              '[18]': this.$t('diagnosisTrend.fault39'), //滑环轴承外圈故障
+              '[19]': this.$t('diagnosisTrend.fault310'), //滑环轴承内圈故障
+              '[20]': this.$t('diagnosisTrend.fault311'), //滑环轴承滚动体故障
+              '[21]': this.$t('diagnosisTrend.fault312'), //滑环轴承保持架故障
+              '[5,24]': this.$t('diagnosisTrend.fault313'), //太阳轮故障
+              '[7,26]': this.$t('diagnosisTrend.fault314'), //行星轮故障
+              '[6,25]': this.$t('diagnosisTrend.fault315'), //内齿圈故障
+              '[8,9]': this.$t('diagnosisTrend.fault316'), //行星级齿轮啮合不良
+              '[1,2,3,4]': this.$t('diagnosisTrend.fault317'), //齿轮箱低速轴轴承跑圈
+              '[0,22]': this.$t('diagnosisTrend.fault318'), //齿轮箱低速轴轴承松动
+              '[27]': this.$t('diagnosisTrend.fault07'), //电气故障
             },
             {
-              '[7]': '中间轴叶轮侧轴承外圈故障',
-              '[8]': '中间轴叶轮侧轴承内圈故障',
-              '[9]': '中间轴叶轮侧轴承滚动体故障',
-              '[10]': '中间轴叶轮侧轴承保持架故障',
-              '[11]': '中间轴电机侧轴承1外圈故障',
-              '[12]': '中间轴电机侧轴承1内圈故障',
-              '[13]': '中间轴电机侧轴承1滚动体故障',
-              '[14]': '中间轴电机侧轴承1保持架故障',
-              '[15]': '中间轴电机侧轴承2外圈故障',
-              '[16]': '中间轴电机侧轴承2内圈故障',
-              '[17]': '中间轴电机侧轴承2滚动体故障',
-              '[18]': '中间轴电机侧轴承2保持架故障',
-              '[19]': '中间轴小齿轮啮合不良或大齿轮断齿',
-              '[5,6]': '中间级齿轮不对中（偏载）',
-              '[20]': '小齿轮断齿',
-              '[8,9]': '行星级齿轮啮合不良',
-              '[1,2,3,4]': '齿轮箱中间轴轴承跑圈',
-              '[0]': '齿轮箱中间轴轴承松动',
-              '[21]': '电气故障',
+              '[7]': this.$t('diagnosisTrend.fault41'), //中间轴叶轮侧轴承外圈故障
+              '[8]': this.$t('diagnosisTrend.fault42'), //中间轴叶轮侧轴承内圈故障
+              '[9]': this.$t('diagnosisTrend.fault43'), //中间轴叶轮侧轴承滚动体故障
+              '[10]': this.$t('diagnosisTrend.fault44'), //中间轴叶轮侧轴承保持架故障
+              '[11]': this.$t('diagnosisTrend.fault45'), //中间轴电机侧轴承1外圈故障
+              '[12]': this.$t('diagnosisTrend.fault46'), //中间轴电机侧轴承1内圈故障
+              '[13]': this.$t('diagnosisTrend.fault47'), //中间轴电机侧轴承1滚动体故障
+              '[14]': this.$t('diagnosisTrend.fault48'), //中间轴电机侧轴承1保持架故障
+              '[15]': this.$t('diagnosisTrend.fault49'), //中间轴电机侧轴承2外圈故障
+              '[16]': this.$t('diagnosisTrend.fault410'), //中间轴电机侧轴承2内圈故障
+              '[17]': this.$t('diagnosisTrend.fault411'), //中间轴电机侧轴承2滚动体故障
+              '[18]': this.$t('diagnosisTrend.fault412'), //中间轴电机侧轴承2保持架故障
+              '[19]': this.$t('diagnosisTrend.fault413'), //中间轴小齿轮啮合不良或大齿轮断齿
+              '[5,6]': this.$t('diagnosisTrend.fault414'), //中间级齿轮不对中（偏载）
+              '[20]': this.$t('diagnosisTrend.fault415'), //小齿轮断齿
+              '[8,9]': this.$t('diagnosisTrend.fault316'), //行星级齿轮啮合不良
+              '[1,2,3,4]': this.$t('diagnosisTrend.fault416'), //齿轮箱中间轴轴承跑圈
+              '[0]': this.$t('diagnosisTrend.fault417'), //齿轮箱中间轴轴承松动
+              '[21]': this.$t('diagnosisTrend.fault07'), //电气故障
             },
             {
-              '[9]': '高速轴叶轮侧轴承外圈故障',
-              '[10]': '高速轴叶轮侧轴承内圈故障',
-              '[11]': '高速轴叶轮侧轴承滚动体故障',
-              '[12]': '高速轴叶轮侧轴承保持架故障',
-              '[13]': '高速轴电机侧轴承外圈故障',
-              '[14]': '高速轴电机侧轴承内圈故障',
-              '[15]': '高速轴电机侧轴承滚动体故障',
-              '[16]': '高速轴电机侧轴承保持架故障',
-              '[17,18]': '高速级大小齿轮啮合不良',
-              '[17]': '中间级小齿轮啮合不良',
-              '[5,6]': '高速级齿轮不对中（偏载）',
-              '[7,8,17]': '中间级齿轮不对中（偏载）',
-              '[0,1,2]': '联轴器不对中',
-              '[1,2,3,4]': '齿轮箱输出轴轴承跑圈',
-              '[0]': '齿轮箱输出轴轴承松动',
-              '[19]': '电气故障',
+              '[9]': this.$t('diagnosisTrend.fault51'), //高速轴叶轮侧轴承外圈故障
+              '[10]': this.$t('diagnosisTrend.fault52'), //高速轴叶轮侧轴承内圈故障
+              '[11]': this.$t('diagnosisTrend.fault53'), //高速轴叶轮侧轴承滚动体故障
+              '[12]': this.$t('diagnosisTrend.fault54'), //高速轴叶轮侧轴承保持架故障
+              '[13]': this.$t('diagnosisTrend.fault55'), //高速轴电机侧轴承外圈故障
+              '[14]': this.$t('diagnosisTrend.fault56'), //高速轴电机侧轴承内圈故障
+              '[15]': this.$t('diagnosisTrend.fault57'), //高速轴电机侧轴承滚动体故障
+              '[16]': this.$t('diagnosisTrend.fault58'), //高速轴电机侧轴承保持架故障
+              '[17,18]': this.$t('diagnosisTrend.fault59'), //高速级大小齿轮啮合不良
+              '[17]': this.$t('diagnosisTrend.fault510'), //中间级小齿轮啮合不良
+              '[5,6]': this.$t('diagnosisTrend.fault511'), //高速级齿轮不对中（偏载）
+              '[7,8,17]': this.$t('diagnosisTrend.fault414'), //中间级齿轮不对中（偏载）
+              '[0,1,2]': this.$t('diagnosisTrend.fault512'), //联轴器不对中
+              '[1,2,3,4]': this.$t('diagnosisTrend.fault513'), //齿轮箱输出轴轴承跑圈
+              '[0]': this.$t('diagnosisTrend.fault514'), //齿轮箱输出轴轴承松动
+              '[19]': this.$t('diagnosisTrend.fault07'), //电气故障
             },
             {
-              '[5]': '发电机前轴承外圈故',
-              '[6]': '发电机前轴承内圈故障',
-              '[7]': '发电机前轴承滚动体故障',
-              '[8]': '发电机前轴承保持架故障',
-              '[1,2,3,4]': '发电机前轴承跑圈',
-              '[0,9]': '发电机前轴承松动',
-              '[10]': '电气故障',
-              '[0]': '联轴器不对中',
+              '[5]': this.$t('diagnosisTrend.fault61'), //发电机前轴承外圈故
+              '[6]': this.$t('diagnosisTrend.fault62'), //发电机前轴承内圈故障
+              '[7]': this.$t('diagnosisTrend.fault63'), //发电机前轴承滚动体故障
+              '[8]': this.$t('diagnosisTrend.fault64'), //发电机前轴承保持架故障
+              '[1,2,3,4]': this.$t('diagnosisTrend.fault65'), //发电机前轴承跑圈
+              '[0,9]': this.$t('diagnosisTrend.fault66'), //发电机前轴承松动
+              '[10]': this.$t('diagnosisTrend.fault07'), //电气故障
+              '[0]': this.$t('diagnosisTrend.fault512'), //联轴器不对中
             },
             {
-              '[5]': '发电机后轴承外圈故障',
-              '[6]': '发电机后轴承内圈故障',
-              '[7]': '发电机后轴承滚动体故障',
-              '[8]': '发电机后轴承保持架故障',
-              '[1,2,3,4]': '发电机后轴承跑圈',
-              '[0,9]': '发电机后轴承松动',
-              '[10]': '电气故障',
+              '[5]': this.$t('diagnosisTrend.fault71'), //发电机后轴承外圈故障
+              '[6]': this.$t('diagnosisTrend.fault72'), //发电机后轴承内圈故障
+              '[7]': this.$t('diagnosisTrend.fault73'), //发电机后轴承滚动体故障
+              '[8]': this.$t('diagnosisTrend.fault74'), //发电机后轴承保持架故障
+              '[1,2,3,4]': this.$t('diagnosisTrend.fault75'), //发电机后轴承跑圈
+              '[0,9]': this.$t('diagnosisTrend.fault76'), //发电机后轴承松动
+              '[10]': this.$t('diagnosisTrend.fault07'), //电气故障
             },
           ]
           if (el.id && fault[Number(el.id)]) {

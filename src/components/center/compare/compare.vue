@@ -601,8 +601,10 @@ export default {
           break
         case 1 /* 切换图表 */:
           this.paramsData[key].isShow = true
-          this.paramsData[key].waveChart.resize()
-          this.paramsData[key].spectrumChart.resize()
+          this.$nextTick(() => {
+            this.paramsData[key].waveChart.resize()
+            this.paramsData[key].spectrumChart.resize()
+          })
           break
         case 2 /* 关闭图表 */:
           this.paramsData[key].waveChart.destory()
@@ -1529,10 +1531,18 @@ export default {
               waveComapreEl.style.height = '100%'
               spectrumComapreEl.style.display = 'none'
               changeClass(tag, 'icon-back_huaban', 'icon-MAX_huaban')
+              this.$nextTick(() => {
+                params.waveChart.resize()
+                params.spectrumChart.resize()
+              })
             } else {
               waveComapreEl.style = null
               spectrumComapreEl.style = null
               changeClass(tag, 'icon-MAX_huaban', 'icon-back_huaban')
+              this.$nextTick(() => {
+                params.waveChart.resize()
+                params.spectrumChart.resize()
+              })
             }
             break
         }
@@ -1555,7 +1565,7 @@ export default {
                   let flag = value.curUnitY === res.unit
                   if (!shieldUnit.includes(value.srcUnitY)) {
                     this.setUnit(1, res.unit, k)
-                    !flag && this.getFreq(k, 1)
+                    !flag && this.getFreq(k, 1);
                   }
                 }
                 this.setSpectrum()
@@ -1611,7 +1621,14 @@ export default {
                 freq.lowerLimit = Number(res.lowerLimit)
                 freq.upperLimit = Number(res.upperLimit)
                 for (const k in chart) {
-                  this.getFreq(k)
+                  let data = chart[k].spectrum
+                  //打开对数坐标
+                  if (data.curUnitY === data.srcUnitY) {
+                    this.getFreq(k)
+                  } else {
+                  //若当前单位切换过，getFreq则处理时取curY
+                    this.getFreq(k, 1)
+                  }
                 }
                 this.setSpectrum()
               }
@@ -1626,7 +1643,14 @@ export default {
               if (res) {
                 freq.lowFreq = Number(res.lowFreq)
                 for (const k in chart) {
-                  this.getFreq(k)
+                  let data = chart[k].spectrum
+                  //打开对数坐标
+                  if (data.curUnitY === data.srcUnitY) {
+                    this.getFreq(k)
+                  } else {
+                  //若当前单位切换过，getFreq则处理时取curY
+                    this.getFreq(k, 1)
+                  }
                 }
                 this.setSpectrum()
               }
@@ -1805,7 +1829,9 @@ export default {
       const currentTime = state.currentTime
       const compareList = cloneObj(state.compareData, true)
       // 同一测点同一时间无法拖入
-      // if (compareList[`wave_pos_${posMsg.posFlag}_${time}`]) return;
+      if (currentTime != 0) {
+        if (compareList[`wave_pos_${posMsg.posFlag}_${currentTime}`]) return
+      }
       const currentKey = this.currentKey
       const chart = this.chartData[currentKey]
       const params = this.paramsData[currentKey]
@@ -1829,6 +1855,16 @@ export default {
             const info = res.info
             if (info && info.length > 0 && info[0]) {
               const time = info[0].value.saveTime_Com
+              // 若当前baseMsg中存在当前测点的当前时间波形数据
+              for (let i = 0, len = params.basicMsg.length; i < len; i++) {
+                if (
+                  params.basicMsg[i].key ==
+                  `wave_pos_${mId}_${pId}_${pType}_${time}`
+                ) {
+                  this.$pop('当前对比分析图存在该测点！')
+                  return
+                }
+              }
               let chartType = 1
               const defaultCode = getdefaultCode(posMsg.dgm_type)
               const code = defaultCode[pType]

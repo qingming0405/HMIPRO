@@ -86,7 +86,7 @@
             <input
               type="text"
               class="form-input"
-              placeholder="搜索组织"
+              :placeholder="$t('Left.searchTreeText')"
               v-model="tree.val"
               @keyup="searchByKeydown('tree')"
             />
@@ -101,7 +101,7 @@
             <input
               type="text"
               class="form-input"
-              placeholder="搜索机组"
+              :placeholder="$t('Left.searchMacText')"
               v-model="mac.val"
               @keyup="searchByKeydown('mac')"
             />
@@ -147,19 +147,23 @@
             :style="viewPosMsg.style"
           >
             <li>
-              <div>测点名称</div>
+              <!-- 测点名称 -->
+              <div>{{$t('Left.posNameToolTip')}}</div>
               <div>：{{ viewPosMsg.posName }}</div>
             </li>
             <li>
-              <div>测点类型</div>
+              <!-- 测点类型 -->
+              <div>{{$t('Left.posTypeToolTip')}}</div>
               <div>：{{ viewPosMsg.posTypeName }}</div>
             </li>
             <li>
-              <div>采集器名称</div>
+              <!-- 采集器名称 -->
+              <div>{{$t('Left.dgmNameToolTip')}}</div>
               <div>：{{ viewPosMsg.dgmName }}</div>
             </li>
             <li>
-              <div>关联通道名称</div>
+              <!-- 关联通道名称 -->
+              <div>{{$t('Left.chNameToolTip')}}</div>
               <div>：{{ viewPosMsg.channelName }}</div>
             </li>
           </ul>
@@ -171,8 +175,18 @@
 
 <script>
 import { matchRule, cloneObj, posTypeName } from 'utils/utils.js'
-import { menusFirstLevl, menusSecondLevel, generalOnlyTree, generalOnlyMac, requiredTree, requiredMac, requiredPos,
- showRightMenu, generalRouting, chartRouting } from 'common/menus/Menus.js'
+import {
+  menusFirstLevl,
+  menusSecondLevel,
+  generalOnlyTree,
+  generalOnlyMac,
+  requiredTree,
+  requiredMac,
+  requiredPos,
+  showRightMenu,
+  generalRouting,
+  chartRouting,
+} from 'common/menus/Menus.js'
 
 export default {
   name: 'left_edge',
@@ -538,7 +552,7 @@ export default {
       }, 500)
     },
     // 关闭测点信息弹窗
-    closeFloatingWindow() {
+    closeFloatingWindow(e) {
       // this.viewPosMsg.isShow = false;
       setTimeout(() => {
         this.viewPosMsg.isShow = false
@@ -767,10 +781,9 @@ export default {
     /* 点击菜单 */
     menuClick(item) {
       let checkMsg = this.$store.state.checkMsg
-      if(item.general) {
+      if (item.general) {
         generalRouting(this, item, checkMsg)
-      }
-      else {
+      } else {
         chartRouting(this, item, checkMsg)
       }
     },
@@ -786,7 +799,7 @@ export default {
       let flag = false
       this.secondLevel.forEach((item) => {
         for (let k in item) {
-          if (name === item[k].val) {
+          if (type === item[k].name) {
             if (item[k].controlShow !== undefined && !item[k].controlShow) {
               /* 后台配置不显示该页面 */
               flag = true
@@ -1225,6 +1238,9 @@ export default {
       max-width: 100%;
     }
   }
+  .form-input {
+    background: #081d3b !important;
+  }
   .line {
     width: 132px;
     height: 1px;
@@ -1320,6 +1336,7 @@ export default {
   .select-box-pos {
     overflow: auto;
     height: calc(100% - 95px);
+    border: 1px solid #9b9b9b;
     .pos-li {
       width: 100%;
       height: 40px;
@@ -1337,6 +1354,11 @@ export default {
       background: #007eff;
     }
   }
+}
+::-webkit-scrollbar-track {
+  border-radius: 3px;
+  // background: rgb(239, 239, 239);
+  background: #081d3b !important; //修改滚动条底色
 }
 @media screen and (max-width: 1366px) {
   .my-left-content {

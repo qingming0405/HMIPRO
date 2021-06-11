@@ -318,7 +318,7 @@
 </template>
 
 <script>
-import { cloneObj, round, setHead, setPosMsg } from 'utils/utils.js'
+import { cloneObj, round, setHead } from 'utils/utils.js'
 import focus from 'common/general/focus.js'
 export default {
   name: 'fdFocus',
@@ -340,7 +340,7 @@ export default {
           if (res) {
             if (params.isDataRight) {
               if (res.data.length == 0 && type == 1) {
-                this.$pop('筛选无数据')
+                this.$pop($t('Common.noDataText'))//'筛选无数据'
               }
               res.data.forEach((item) => {
                 let obj = {}

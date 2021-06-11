@@ -1,6 +1,10 @@
 <template>
-  <div class="wave3d box-shadow">
-    <div class="title">当前频率：{{ frequence }}</div>
+  <div
+    class="wave3d box-shadow"
+    @drop="addPos(idx, $event)"
+    @dragover.prevent
+  >
+    <div class="title"><!-- 当前频率 -->{{$t('wave3d.CurrentFreq')}}：{{ frequence }}</div>
     <div
       class="histogram"
       v-show="histogramIsShow"
@@ -23,16 +27,16 @@
           v-if="!val.isHanning"
           @click="sethanning(key)"
         >
-          <i class="iconfont icon-hanningchuang_huaban"></i>汉宁窗
+          <i class="iconfont icon-hanningchuang_huaban"></i><!-- 汉宁窗 -->{{$t('icon.hanning')}}
         </li>
         <li
           v-else
           @click="sethanning(key)"
         >
-          <i class="iconfont icon-hanningchuang_huaban"></i>取消汉宁窗
+          <i class="iconfont icon-hanningchuang_huaban"></i><!-- 取消汉宁窗 -->{{$t('wave3d.CancelHanning')}}
         </li>
         <li @click="savePic(key)">
-          <i class="iconfont icon-savemage_huaban"></i>保存界面
+          <i class="iconfont icon-savemage_huaban"></i><!-- 保存为图片 -->{{$t('icon.SavePicture')}}
         </li>
       </ul>
       <div
@@ -43,7 +47,7 @@
       ></div>
     </div>
     <div class="search-3d-data">
-      <button @click="retrieval">数据检索</button>
+      <button @click="retrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
     </div>
   </div>
 </template>
@@ -51,7 +55,7 @@
 <script>
 import echarts from 'echarts'
 import 'echarts-gl'
-import { getTime, cloneObj } from 'utils/utils.js'
+import { getTime, cloneObj, matchRule } from 'utils/utils.js'
 export default {
   name: 'wave3d',
   data() {
@@ -66,7 +70,7 @@ export default {
       lineColor: '#000',
       t_root: 0,
       station: [], //站点信息
-      colorList: [] // 备选颜色
+      colorList: [], // 备选颜色
     }
   },
   mounted() {
@@ -119,7 +123,7 @@ export default {
           pos,
           vdata: [],
           dataY: [],
-          dataYUnit: '时间',
+          dataYUnit: this.$t('wave3d.time'), //时间
           echart: '', //3d图谱的实例
           histogram: '', //柱状图的实例
           MenuShowflag: false, //右键菜单是否显示
@@ -175,8 +179,8 @@ export default {
               this.$store.commit('setCurrentTime', time)
               let key = 'wave' + this.key.slice(6) //wave3d_pos_14121310332547010_0_3
               //跳转到波形图
-              let name = '波形频谱图'
-              let titleName = value.pos.mac_name + '-' + '波形频谱图'
+              let name = this.$t('Common.Wave') //波形频谱图
+              let titleName = value.pos.mac_name + '-' + this.$t('Common.Wave') //波形频谱图
               this.$bus.$emit('choiceChartType', key, name, titleName)
             } else {
               this.update_histogram()
@@ -220,7 +224,7 @@ export default {
         color: this.colorList,
         xAxis3D: {
           type: 'value',
-          name: '频率(Hz)',
+          name: this.$t('Common.freq') + '(Hz)', //频率
           scale: true,
           nameTextStyle: {
             color: this.lineColor,
@@ -234,6 +238,12 @@ export default {
             lineStyle: {
               //坐标轴颜色
               color: this.lineColor,
+            },
+          },
+          splitArea: {
+            show: true,
+            areaStyle: {
+              color: '#0e264c' /* #092e55 */,
             },
           },
         },
@@ -258,10 +268,16 @@ export default {
               color: this.lineColor,
             },
           },
+          splitArea: {
+            show: true,
+            areaStyle: {
+              color: '#0e264c',
+            },
+          },
         },
         zAxis3D: {
           type: 'value',
-          name: '幅值',
+          name: this.$t('Common.amplitude'), //幅值
           nameGap: 30,
           // max: 'dataMax',
           nameTextStyle: {
@@ -276,6 +292,12 @@ export default {
             lineStyle: {
               //坐标轴颜色
               color: this.lineColor,
+            },
+          },
+          splitArea: {
+            show: true,
+            areaStyle: {
+              color: '#0e264c',
             },
           },
         },
@@ -304,9 +326,9 @@ export default {
           trigger: 'item',
           formatter: (prams, d, callback) => {
             this.update_frequence(prams.value[0])
-            return `频率:${prams.value[0]}Hz<br/>
-                    幅值:${prams.value[2]}<br/>
-                    时间:${prams.value[1]}<br/>`
+            return `${this.$t('Common.freq')}:${prams.value[0]}Hz<br/>
+                    ${this.$t('Common.amplitude')}:${prams.value[2]}<br/>
+                    ${this.$t('wave3d.time')}:${prams.value[1]}<br/>` //频率  幅值  时间
           },
         },
         series: series,
@@ -337,15 +359,18 @@ export default {
       for (let key in obj) {
         let val = obj[key][freq] || 0
         let colorIndex = (index - 1) % this.colorList.length
-        sData.push({value: val, itemStyle: {color: this.colorList[colorIndex]}})
+        sData.push({
+          value: val,
+          itemStyle: { color: this.colorList[colorIndex] },
+        })
         xData.push(index)
-        histoData.push({time: key, val: val})
+        histoData.push({ time: key, val: val })
         index++
       }
       let option = {
         title: {
           show: true,
-          text: '左视图',
+          text: this.$t('wave3d.leftView'), //左视图
           textAlign: 'center',
           x: 'right',
           textStyle: {
@@ -362,10 +387,17 @@ export default {
             let tip = ''
             if (params.length > 0 && params[0].data != null) {
               let dataIndex = params[0].dataIndex
-              tip = '时间：' + histoData[dataIndex].time + '<br>' + '幅值：' + histoData[dataIndex].val
+              tip =
+                this.$t('wave3d.time') +
+                '：' + //时间
+                histoData[dataIndex].time +
+                '<br>' +
+                this.$t('Common.amplitude') +
+                '：' + //幅值
+                histoData[dataIndex].val
             }
             return tip
-          }
+          },
         },
         grid: {
           left: '3%',
@@ -375,7 +407,7 @@ export default {
         },
         xAxis: [
           {
-            name: '序号',
+            name: this.$t('Common.order'), //序号
             nameTextStyle: {
               color: this.lineColor, //坐标名颜色
             },
@@ -398,7 +430,7 @@ export default {
         ],
         yAxis: [
           {
-            name: '幅值',
+            name: this.$t('Common.amplitude'), //幅值
             nameTextStyle: {
               color: this.lineColor, //坐标名颜色
             },
@@ -416,7 +448,7 @@ export default {
         ],
         series: [
           {
-            name: '幅值',
+            name: this.$t('Common.amplitude'), //幅值
             type: 'bar',
             barWidth: '40%',
             data: sData,
@@ -459,7 +491,7 @@ export default {
         this.$emit('loadingImg', false)
         if (res) {
           if (res.info.length == 0) {
-            this.$pop('当前时间没有数据')
+            this.$pop(this.$t('Common.noDataText')) //无数据
             return
           }
           let vdata = [],
@@ -561,11 +593,11 @@ export default {
       var pictureURI = picture.toDataURL()
       let downLoad = document.createElement('a')
       downLoad.href = pictureURI
-      downLoad.download = '3D频谱图.png'
+      downLoad.download = this.$t('Common.wave3d') + '.png' //三维频谱图
       downLoad.dispatchEvent(new MouseEvent('click'))
     },
     resize() {
-      if(this.chartData[this.key] && this.chartData[this.key].echart){
+      if (this.chartData[this.key] && this.chartData[this.key].echart) {
         this.chartData[this.key].echart.resize()
       }
     },
@@ -612,6 +644,24 @@ export default {
           )
         }
       })
+    },
+    addPos(index, e) {
+      const pos = JSON.parse(e.dataTransfer.getData('flag'))
+      const [macId, posId, posType] = pos.posFlag.split('_')
+      if (!matchRule(posType, 'wave3d', pos.dgm_type, pos.t_root, pos)) {
+        this.$pop(this.$t('Common.noChartTips')) //该类型测点没有此图谱
+        return
+      }
+      let name = 'wave3d' //实时数据列表
+      let key = `wave3d_pos_${pos.posFlag}`
+      this.$store.commit('getCheckMsg', {
+        msg: cloneObj(pos),
+        type: 'pos',
+      })
+      let titleName = pos.mac_name + '-' + this.$t('Common.wave3d') //三维频谱图
+      // let titleName = pos.name + "波形频谱图";
+      // let delKey = this.currentKey
+      this.$bus.$emit('choiceChartType', key, name, titleName)
     },
   },
   created() {

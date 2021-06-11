@@ -577,6 +577,7 @@ export default {
     /* 获取沉没度 */
     getSubmergenceInfo(macId) {
       let requestData = { mac_id: macId }
+      const param = this.ytAnalyse[this.currentKey]
       this.$getApi.getSubmergenceInfo(requestData).then((res) => {
         if (res) {
           param.ytData = []

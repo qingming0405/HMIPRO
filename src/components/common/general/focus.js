@@ -1,4 +1,4 @@
-import { cloneObj, round, setHead, setPosMsg } from 'utils/utils.js'
+import { cloneObj, round, setHead } from 'utils/utils.js'
 export default focus = {
   data () {
     return {
@@ -537,7 +537,6 @@ export default focus = {
                   // pos[i].isChecked = false
                   params.pArray.push(pos[i])
                 }
-                params.pArray = setPosMsg(params.pArray)
               }
             })
         }

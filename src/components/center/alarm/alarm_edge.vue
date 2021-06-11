@@ -252,22 +252,26 @@
         v-model="searchkeyword"
         class='input-value radius text-overflow select-none outside-border'
       >
+      <!-- 查询 -->
       <button
         @click='search'
         v-show="alarmData[currentIndex] && alarmData[currentIndex].body.length > 0"
-      >查询</button>
+      >{{$t('Common.inquiry')}}</button>
+      <!-- 实时数据 -->
       <button
         v-if="type == 3"
         @click="getRealData"
         class="get-real-data disable-btn"
       >
-        实时数据
+        {{$t('Common.realData')}}
       </button>
-      <button @click='dataRetrieval'>数据检索</button>
+      <!-- 数据检索 -->
+      <button @click='dataRetrieval'>{{$t('Common.retrieval')}}</button>
+      <!-- 导出数据 -->
       <button
         @click='dataExport'
         v-show="alarmData[currentIndex] && alarmData[currentIndex].body.length > 0"
-      >导出数据</button>
+      >{{$t('Common.derivedData')}}</button>
     </div>
   </div>
 </template>

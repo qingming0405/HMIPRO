@@ -74,14 +74,20 @@
             class="no-data"
             v-else
           >
-            轨道状况良好，无故障
+            <!-- 轨道状况良好，无故障 -->{{$t('railCorrugation.goodCondition')}}
           </div>
         </table>
       </div>
       <div class="search-data">
-        <button @click="sampling">手动波磨采样</button>
-        <button @click="chooseData">波磨数据</button>
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="sampling">
+          <!-- 手动波磨采样 -->{{$t('railCorrugation.ManualGrindSample')}}
+        </button>
+        <button @click="chooseData">
+          <!-- 波磨数据 -->{{$t('railCorrugation.PolishData')}}
+        </button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{$t('Common.retrieval')}}
+        </button>
       </div>
       <div
         class="none-data-box"
@@ -115,6 +121,16 @@ export default {
       time: '' /* CSS效果定时器 */,
     }
   },
+  created() {
+    this.$store.commit('set_keepAlive', {
+      method: 'add',
+      keepAlive: 'railCorrugation',
+    })
+    this.noData = {
+      isShow: true,
+      text: this.$t('railCorrugation.NoSiteInfo'), //'无站点信息'
+    }
+  },
   watch: {
     '$store.state.railCorrugationMsg': {
       handler(value) {
@@ -144,7 +160,14 @@ export default {
         // 新开
         this.$set(this.railData, key, {
           isShow: true,
-          head: ['方向', '站点', '轨道', '波磨区间', '最大峰值', '最大有效值'],
+          head: [
+            this.$t('railCorrugation.direction'),
+            this.$t('railCorrugation.site'),
+            this.$t('railCorrugation.rail'),
+            this.$t('railCorrugation.corrugationInterval'),
+            this.$t('railCorrugation.maxCrest'),
+            this.$t('railCorrugation.MaxEffectValue'),
+          ], //'方向', '站点', '轨道', '波磨区间', '最大峰值', '最大有效值'
           body: [],
           chooseTime: {
             startTime: null,
@@ -249,7 +272,7 @@ export default {
         }
         this.setdrawTrackData()
       } else {
-        console.log('站点信息为空！')
+        console.log(this.$t('railCorrugation.NoSiteInfo'))//无站点信息
         this.noData.isShow = true
       }
       this.getAlarmTimeData(
@@ -307,9 +330,8 @@ export default {
       let railData = this.railData[this.currentKey]
       railData.upTrackdom = this.$refs[`up_track${this.currentKey}`][0]
       if (railData.upTrackdom !== null) {
-        railData.upTrack = railData.upTrackdom.getContext(
-          '2d'
-        ) /* 创建canvas对象 */
+        railData.upTrack =
+          railData.upTrackdom.getContext('2d') /* 创建canvas对象 */
         const BW = (railData.upTrackdom.width = document.getElementById(
           `my-up${this.currentKey}`
         ).clientWidth)
@@ -338,7 +360,7 @@ export default {
         railData.upTrack.fillStyle = '#ffffff'
         railData.upTrack.save()
         railData.upTrack.textBaseline = 'top'
-        railData.upTrack.fillText('上行轨道', 30, 30)
+        railData.upTrack.fillText(this.$t('railCorrugation.upRail'), 30, 30)//上行轨道
         if (lineNum > 1) {
           this.drawTrack(
             50,
@@ -359,9 +381,8 @@ export default {
       }
       railData.downTrackdom = this.$refs[`down_track${this.currentKey}`][0]
       if (railData.downTrackdom !== null) {
-        railData.downTrack = railData.downTrackdom.getContext(
-          '2d'
-        ) /* 创建canvas对象 */
+        railData.downTrack =
+          railData.downTrackdom.getContext('2d') /* 创建canvas对象 */
         const BW = (railData.downTrackdom.width = document.getElementById(
           `my-up${this.currentKey}`
         ).clientWidth)
@@ -387,7 +408,7 @@ export default {
         railData.downTrack.fillStyle = '#ffffff'
         railData.downTrack.save()
         railData.downTrack.textBaseline = 'top'
-        railData.downTrack.fillText('下行轨道', 30, 30)
+        railData.downTrack.fillText(this.$t('railCorrugation.downRail'), 30, 30)//下行轨道
         if (lineNum > 1) {
           this.drawTrack(
             50,
@@ -543,12 +564,10 @@ export default {
           this.railData[this.currentKey].alarmTime = res.info
         }
         if (this.railData[this.currentKey].alarmTime.length > 0) {
-          requestData.startTime = this.railData[
-            this.currentKey
-          ].alarmTime[0].startTime
-          requestData.endTime = this.railData[
-            this.currentKey
-          ].alarmTime[0].endTime
+          requestData.startTime =
+            this.railData[this.currentKey].alarmTime[0].startTime
+          requestData.endTime =
+            this.railData[this.currentKey].alarmTime[0].endTime
           this.railData[this.currentKey].chooseTime.startTime =
             requestData.startTime
           this.railData[this.currentKey].chooseTime.endTime =
@@ -631,8 +650,8 @@ export default {
                 /* 上下行车头一致,且上行车头为1 */
                 if (
                   flag == 1 ||
-                  (item.direction == '上行' && flag == 3) ||
-                  (item.direction == '下行' && flag == 4)
+                  (item.direction == this.$t('railCorrugation.upstroke') && flag == 3) ||//上行
+                  (item.direction == this.$t('railCorrugation.downstream') && flag == 4)//下行
                 ) {
                   if (car_id <= carNum / 2) {
                     /* 1,2车厢 */
@@ -641,13 +660,13 @@ export default {
                     if (
                       left.indexOf(`${info.pos_class}-${info.pos_loc}`) != -1
                     ) {
-                      item.track_position = '左轨'
+                      item.track_position = this.$t('railCorrugation.leftTrack')//左轨
                     } else if (
                       right.indexOf(`${info.pos_class}-${info.pos_loc}`) != -1
                     ) {
-                      item.track_position = '右轨'
+                      item.track_position = this.$t('railCorrugation.rightTrack')//右轨
                     } else {
-                      item.track_position = '缺少安装位置信息'
+                      item.track_position = this.$t('railCorrugation.missLocInfo')//'缺少安装位置信息'
                     }
                   } else {
                     /* 3,4车厢 */
@@ -656,20 +675,20 @@ export default {
                     if (
                       left.indexOf(`${info.pos_class}-${info.pos_loc}` != -1)
                     ) {
-                      item.track_position = '左轨'
+                      item.track_position = this.$t('railCorrugation.leftTrack')//左轨
                     } else if (
                       right.indexOf(`${info.pos_class}-${info.pos_loc}`) != -1
                     ) {
-                      item.track_position = '右轨'
+                      item.track_position = this.$t('railCorrugation.rightTrack')//右轨
                     } else {
-                      item.track_position = '缺少安装位置信息'
+                      item.track_position = this.$t('railCorrugation.missLocInfo')//'缺少安装位置信息'
                     }
                   }
                 }
                 if (
                   flag == 2 ||
-                  (item.direction == '下行' && flag == 3) ||
-                  (item.direction == '上行' && flag == 4)
+                  (item.direction == this.$t('railCorrugation.downstream') && flag == 3) ||//下行
+                  (item.direction == this.$t('railCorrugation.upstroke') && flag == 4)//上行
                 ) {
                   if (car_id <= carNum / 2) {
                     /* 1,2车厢 */
@@ -678,13 +697,13 @@ export default {
                     if (
                       left.indexOf(`${info.pos_class}-${info.pos_loc}`) != -1
                     ) {
-                      item.track_position = '左轨'
+                      item.track_position = this.$t('railCorrugation.leftTrack')//左轨
                     } else if (
                       right.indexOf(`${info.pos_class}-${info.pos_loc}`) != -1
                     ) {
-                      item.track_position = '右轨'
+                      item.track_position = this.$t('railCorrugation.rightTrack')//右轨
                     } else {
-                      item.track_position = '缺少安装位置信息'
+                      item.track_position = this.$t('railCorrugation.missLocInfo')//'缺少安装位置信息'
                     }
                   } else {
                     /* 3,4车厢 */
@@ -693,21 +712,21 @@ export default {
                     if (
                       left.indexOf(`${info.pos_class}-${info.pos_loc}` != -1)
                     ) {
-                      item.track_position = '左轨'
+                      item.track_position = this.$t('railCorrugation.leftTrack')//左轨
                     } else if (
                       right.indexOf(`${info.pos_class}-${info.pos_loc}`) != -1
                     ) {
-                      item.track_position = '右轨'
+                      item.track_position = this.$t('railCorrugation.rightTrack')//右轨
                     } else {
-                      item.track_position = '缺少安装位置信息'
+                      item.track_position = this.$t('railCorrugation.missLocInfo')//'缺少安装位置信息'
                     }
                   }
                 }
               } else {
-                item.track_position = '缺少车厢设置'
+                item.track_position = this.$t('railCorrugation.missCarSet')//'缺少车厢设置'
               }
             } else {
-              item.track_position = '缺少车厢号设置'
+              item.track_position = this.$t('railCorrugation.missCarNumSet')//'缺少车厢号设置'
             }
             item.isChoose = false
             for (let i = 0; i < data.length; i++) {
@@ -751,9 +770,8 @@ export default {
       let upTrackAlarmdom = this.$refs[`up_track_rail${this.currentKey}`][0]
       let downTrackAlarmdom = this.$refs[`down_track_rail${this.currentKey}`][0]
       if (upTrackAlarmdom != null && downTrackAlarmdom != null) {
-        railData.upTrackAlarm = upTrackAlarmdom.getContext(
-          '2d'
-        ) /* 创建canvas对象 */
+        railData.upTrackAlarm =
+          upTrackAlarmdom.getContext('2d') /* 创建canvas对象 */
 
         const BW = (upTrackAlarmdom.width = document.getElementById(
           `my-up${this.currentKey}`
@@ -769,9 +787,8 @@ export default {
           upTrackAlarmdom.width,
           upTrackAlarmdom.height
         )
-        railData.downTrackAlarm = downTrackAlarmdom.getContext(
-          '2d'
-        ) /* 创建canvas对象 */
+        railData.downTrackAlarm =
+          downTrackAlarmdom.getContext('2d') /* 创建canvas对象 */
         const BW1 = (downTrackAlarmdom.width = document.getElementById(
           `my-up${this.currentKey}`
         ).clientWidth)
@@ -791,17 +808,17 @@ export default {
           if (body[i].isChoose == true) {
             choosealarm = body[i]
           }
-          if (body[i].direction == '上行') {
+          if (body[i].direction == this.$t('railCorrugation.upstroke')) {//上行
             this.drawAlarmData(body[i], railData.upTrackAlarm)
-          } else if (body[i].direction == '下行') {
+          } else if (body[i].direction == this.$t('railCorrugation.downstream')) {//下行
             this.drawAlarmData(body[i], railData.downTrackAlarm)
           }
         }
         //这一步是为了选中报警画在canvas最上方
         if (choosealarm) {
-          if (choosealarm.direction == '上行') {
+          if (choosealarm.direction == this.$t('railCorrugation.upstroke')) {//上行
             this.drawAlarmData(choosealarm, railData.upTrackAlarm, 1)
-          } else if (choosealarm.direction == '下行') {
+          } else if (choosealarm.direction == this.$t('railCorrugation.downstream')) {//下行
             this.drawAlarmData(choosealarm, railData.downTrackAlarm, 1)
           }
         }
@@ -822,7 +839,7 @@ export default {
       // 上行时x轴坐标
       let x1 = data.from_staInfo.x + distance
       let x2 = data.from_staInfo.x + distance + x0
-      if (data.direction == '下行') {
+      if (data.direction == this.$t('railCorrugation.downstream')) {//下行
         /* 下行时x轴坐标 */
         x1 = data.from_staInfo.x - distance
         x2 = data.from_staInfo.x - distance + x0
@@ -860,12 +877,12 @@ export default {
     clickEventUp(e) {
       let upTrackAlarmdom = this.$refs[`up_track_rail${this.currentKey}`][0]
       var p = this.getEventPosition(e, upTrackAlarmdom)
-      this.tableLocation(p, '上行')
+      this.tableLocation(p, this.$t('railCorrugation.upstroke'))//上行
     },
     clickEventDown(e) {
       let downTrackAlarmdom = this.$refs[`down_track_rail${this.currentKey}`][0]
       var p = this.getEventPosition(e, downTrackAlarmdom)
-      this.tableLocation(p, '下行')
+      this.tableLocation(p, this.$t('railCorrugation.downstream'))//下行
     },
     // 定位表格位置
     tableLocation(p, direction) {
@@ -991,16 +1008,10 @@ export default {
       }
       this.$getApi.getCorrugationByClick(requestData).then((res) => {
         if (res) {
-          this.$pop(`${mac.mac_me || mac.mac_name}采样命令发送成功`)
+          this.$pop(`${mac.mac_me || mac.mac_name}${this.$t('railCorrugation.sampSentSuccess')}`)//采样命令发送成功
         }
       })
     },
-  },
-  created() {
-    this.$store.commit('set_keepAlive', {
-      method: 'add',
-      keepAlive: 'railCorrugation',
-    })
   },
 }
 </script>
@@ -1081,7 +1092,7 @@ export default {
     text-align: center;
     button {
       height: 30px;
-      width: 100px;
+      min-width: 100px;
       margin: 20px 5px;
     }
   }

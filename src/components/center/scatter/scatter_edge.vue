@@ -28,7 +28,6 @@
         :index=index
         :isNewChart='isNewChart'
         :structure='structure'
-        v-resize='resize'
       ></wave-chart>
     </div>
     <div class='search-data'>

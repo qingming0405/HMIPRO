@@ -11,7 +11,7 @@
         @mousedown="moveDiv($event)"
         @mouseup="moveDivUp($event)"
       >
-        <span>数据检索</span>
+        <span>{{vm.$t('Common.title')}}</span>
         <div
           class='close-retrieval'
           @click='closeRetrieval(0)'
@@ -21,21 +21,21 @@
       </div>
       <!-- 机组选择 -->
       <div class='select-box'>
-        <div class='select-title msg-title'>机组</div>
+        <div class='select-title msg-title'>{{vm.$t('Common.mac')}}</div>
         <div class='select-value viewMsg-name radius text-overflow select-none outside-border edge-outside-border'>
           {{macName}}
           <!-- <i class='iconfont icon-zhongzi-zhankai'></i> -->
         </div>
       </div>
       <div class='select-box'>
-        <div class='select-title msg-title'>数据类型</div>
+        <div class='select-title msg-title'>{{vm.$t('Common.dataType')}}</div>
         <div class='select-value viewMsg-name radius text-overflow select-none outside-border edge-outside-border' @click.stop=changePosType>
           {{posTypeObj.val}}
         </div>
       </div>
       <!-- 特征值选择显隐 -->
       <div class='check-eigenvalue-box'>
-        <div class='check-eigenvalue-title select-title'>特征值</div>
+        <div class='check-eigenvalue-title select-title'>{{vm.$t('Common.typeEignin')}}</div>
         <ul class='check-eigenvalue radius'>
           <li
             v-for='(item, index) in viewMsg.eigenvalue'
@@ -53,13 +53,17 @@
       </div>
       <!-- 操作按钮 -->
       <div class='data-retrieval-btn'>
-        <button @click='checkAll'>全选</button>
-        <button @click=reverseCheck>反选</button>
-        <button @click='closeRetrieval(1)'>确定</button>
+        <!-- 全选 -->
+        <button @click='checkAll'>{{vm.$t('Common.allBtn')}}</button>
+        <!-- 反选 -->
+        <button @click=reverseCheck>{{vm.$t('Common.reverseBtn')}}</button>
+        <!-- 确认 -->
+        <button @click='closeRetrieval(1)'>{{vm.$t('Common.sureBtn')}}</button>
+        <!-- 取消 -->
         <button
           class='disable-btn'
           @click='closeRetrieval(0)'
-        >取消</button>
+        >{{vm.$t('Common.cancelBtn')}}</button>
       </div>
     </div>
   </div>
@@ -74,7 +78,9 @@ export default {
   // import引入的组件需要注入到对象中才能使用
   components: {},
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       macName: '',
       posTypeObj: {},
       result: {

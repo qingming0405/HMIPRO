@@ -8,7 +8,8 @@
         @mousedown="moveDiv($event)"
         @mouseup="moveDivUp($event)"
       >
-        <span>数据检索</span>
+        <!--  数据检索标题-->
+        <span>{{vm.$t('Common.title')}}</span>
         <div
           class="close-retrieval"
           @click="closeRetrieval(0)"
@@ -18,7 +19,7 @@
       </div>
       <!-- 选择时间类型 -->
       <div class="select-date-type">
-        <div class="select-title date-type-title">时间</div>
+        <div class="select-title date-type-title">{{vm.$t('Common.time')}}</div>
         <div
           class="select-value date-type-name radius text-overflow select-none outside-border edge-outside-border"
           @click.stop="changeTimeType"
@@ -29,12 +30,12 @@
       </div>
       <!-- 开始时间 -->
       <div class="select-time">
-        <div class="select-title time-title">开始时间</div>
+        <div class="select-title time-title">{{vm.$t('Common.startTime')}}</div>
         <!-- <input class="retrieval-start-time time-value input-value radius text-overflow select-none outside-border edge-outside-border" /> -->
         <el-date-picker
           v-model="startTime"
           type="datetime"
-          placeholder="选择日期时间"
+          :placeholder="vm.$t('Common.placeholderTime')"
           value-format="timestamp"
           @change="changeTime"
           :clearable='false'
@@ -43,12 +44,12 @@
       </div>
       <!-- 结束时间 -->
       <div class="select-time">
-        <div class="select-title time-title">结束时间</div>
+        <div class="select-title time-title">{{vm.$t('Common.endTime')}}</div>
         <!-- <input class="retrieval-end-time time-value input-value radius text-overflow select-none outside-border edge-outside-border" /> -->
         <el-date-picker
           v-model="endTime"
           type="datetime"
-          placeholder="选择日期时间"
+          :placeholder="vm.$t('Common.placeholderTime')"
           value-format="timestamp"
           @change="changeTime"
           :clearable='false'
@@ -57,11 +58,12 @@
       </div>
       <!-- 趋势预测结束时间 -->
       <div class="select-time">
-        <div class="select-title time-title">预测截止</div>
+        <!-- 预测截止 -->
+        <div class="select-title time-title">{{vm.$t('TrendRetrieval.predictionCutoff')}}</div>
         <el-date-picker
           v-model="predTime"
           type="datetime"
-          placeholder="选择日期时间"
+          :placeholder="vm.$t('Common.placeholderTime')"
           value-format="timestamp"
           :clearable='false'
         >
@@ -69,7 +71,7 @@
         <!-- <input class="retrieval-pred-time time-value input-value radius text-overflow select-none outside-border edge-outside-border" /> -->
       </div>
       <div class="set-alp">
-        <div class="select-title time-title">阈值(0-1)</div>
+        <div class="select-title time-title">{{vm.$t('TrendRetrieval.threshold')}}(0-1)</div>
         <input
           type="number"
           @blur="blurAlp($event)"
@@ -79,7 +81,7 @@
       </div>
       <!-- 转速区间 -->
       <div class="set-speed">
-        <div class="select-title speed-title">转速区间</div>
+        <div class="select-title speed-title">{{vm.$t('Common.speedRange')}}</div>
         <input
           type="number"
           min="0"
@@ -98,7 +100,7 @@
       </div>
       <!-- 趋势图上限过滤 -->
       <div class="set-limit">
-        <div class="select-title limit-title">上限过滤</div>
+        <div class="select-title limit-title">{{vm.$t('Common.filterUp')}}</div>
         <input
           type="number"
           class="limit-value input-value radius text-overflow select-none outside-border edge-outside-border"
@@ -107,7 +109,7 @@
       </div>
       <!-- 趋势图下限过滤 -->
       <div class="set-limit">
-        <div class="select-title limit-title">下限过滤</div>
+        <div class="select-title limit-title">{{vm.$t('Common.filterDown')}}</div>
         <input
           type="number"
           class="limit-value input-value radius text-overflow select-none outside-border edge-outside-border"
@@ -116,7 +118,7 @@
       </div>
       <!-- 选择查询密度 -->
       <div class="select-date-type">
-        <div class="select-title date-type-title">查询密度</div>
+        <div class="select-title date-type-title">{{vm.$t('Common.queryDensityBtn')}}</div>
         <div
           class="select-value date-type-name radius text-overflow select-none outside-border edge-outside-border"
           @click.stop="changeDensityType"
@@ -127,7 +129,7 @@
       </div>
       <!-- 报警门限 -->
       <div class="check-alarm-threshold">
-        <div class="select-title alarm-title">报警门限</div>
+        <div class="select-title alarm-title">{{vm.$t('TrendRetrieval.alarmLimit')}}</div>
         <ul class="alarm-value">
           <li
             v-for="(item, index) in result.cond"
@@ -171,13 +173,17 @@
         </ul>
       </div>
       <div class="data-retrieval-btn">
-        <button @click="reset">重置</button>
-        <button @click="trendPrediction">趋势预测</button>
-        <button @click="closeRetrieval()">确定</button>
+        <!-- 重置 -->
+        <button @click="reset">{{vm.$t('Common.resetBtn')}}</button>
+        <!-- 趋势预测 -->
+        <button @click="trendPrediction">{{vm.$t('TrendRetrieval.trendPredict')}}</button>
+        <!-- 确定 -->
+        <button @click="closeRetrieval()">{{vm.$t('Common.sureBtn')}}</button>
+        <!-- 取消 -->
         <button
           class="disable-btn"
           @click="closeRetrieval(0)"
-        >取消</button>
+        >{{vm.$t('Common.cancelBtn')}}</button>
       </div>
     </div>
   </div>
@@ -191,14 +197,16 @@ export default {
   // import引入的组件需要注入到对象中才能使用
   components: {},
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       result: {
         cond: [
-          { name: '工况1', isShow: false },
-          { name: '工况2', isShow: false },
-          { name: '工况3', isShow: false },
-          { name: '工况4', isShow: false },
-          { name: '其它工况', isShow: false },
+          { name: vm.$t('Common.Case1'), isShow: false },//'工况1'
+          { name: vm.$t('Common.Case2'), isShow: false },//'工况2'
+          { name: vm.$t('Common.Case3'), isShow: false },//'工况3'
+          { name: vm.$t('Common.Case4'), isShow: false },//'工况4'
+          { name: vm.$t('Common.OtherCond'), isShow: false },//'其它工况'
         ],
       },
       predTime: '', //趋势预测时间
@@ -248,7 +256,7 @@ export default {
     blurAlp(e) {
       let val = e.target.value
       if (val === '' || parseFloat(val) <= 0 || parseFloat(val) >= 1) {
-        this.$pop('阈值范围0-1')
+        this.$pop(`${vm.t('TrendRetrieval.thresholdRange')}0-1`)
         this.alp = 0.2
       }
     },

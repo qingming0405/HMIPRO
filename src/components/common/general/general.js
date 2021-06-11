@@ -499,6 +499,10 @@ const general = {
         }
       });
     }
-  }
+  },
+  deactivated () {
+    // 当不在活跃状态时，清除定时器
+    clearInterval(this.timer[this.currentKey]);
+  },
 };
 export default general;

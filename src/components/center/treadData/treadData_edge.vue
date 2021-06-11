@@ -20,11 +20,25 @@
           <table class="tread-table scroll-style-edge">
             <thead ref="theadTr1">
               <tr>
-                <th rowspan="2">车号 <i
-                    @click="openSel"
-                    class="iconfont icon-zhongzi-xiangxia"
-                  ></i></th>
-                <th rowspan="1">时间</th>
+                <th
+                  rowspan="2"
+                  ref="th-ch"
+                  class="th-ch"
+                >
+                  <div style="height:128px;">
+                    车号 <i
+                      @click="openSel"
+                      class="iconfont icon-zhongzi-xiangxia"
+                    ></i>
+                  </div>
+                </th>
+                <th
+                  ref="th-sj"
+                  rowspan="1"
+                  class="th-sj"
+                >
+                  <div style="height:43px">时间</div>
+                </th>
 
                 <th
                   rowspan="1"
@@ -55,7 +69,13 @@
       </th>
       </tr>
       <tr>
-        <th rowspan="1">测量参数</th>
+        <th
+          ref="th-cl"
+          rowspan="1"
+          class="th-cl"
+        >
+          <div style="height:82px">测量参数</div>
+        </th>
         <th
           rowspan="1"
           :colspan="maxLength*5"
@@ -91,8 +111,10 @@
           :title="carriageInfo[item].macName"
           valign="middle"
           :class="k%2 == 0?'oddColr1':'evenColor1'"
+          ref="td-ch"
+          class="td-ch"
         >
-          <p>{{carriageInfo[item].macName}}</p>
+          <div>{{carriageInfo[item].macName}}</div>
         </td>
 
         <td
@@ -100,179 +122,232 @@
           :colspan="maxLength > 0? (maxLength-1)*5 + 6 : 0"
         >
           <div v-for="(data,index) in carriageInfo[item].data">
-      <tr v-for="(pos,index) in data.posArray">
-        <td
-          rowspan="1"
-          colspan="1"
-          :title="pos.tms_wheel!==null && pos.tms_wheel!==''?pos.tms_wheel:pos.channel_name"
-        >
-          <p>{{pos.tms_wheel!==null && pos.tms_wheel!==''?pos.tms_wheel:pos.channel_name}}</p>
-        </td>
-        <!-- 获取到的已保存的踏面测量数据 -->
-        <!-- <td
-              v-if="index === 0"
-              :rowspan="data.posArray.length"
-              colspan="5"
-              v-for="item in maxLength"
-            >
-              <tr>
-                <td
-                  rowspan="1"
-                  colspan="1"
-                >{{tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train[item-1].diameter}}</td>
-                <td
-                  rowspan="1"
-                  colspan="1"
-                >{{tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train[item-1].thickness}}</td>
-                <td
-                  rowspan="1"
-                  colspan="1"
-                >{{tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train[item-1].height}}</td>
-                <td
-                  rowspan="1"
-                  colspan="1"
-                >{{tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train[item-1].type}}</td>
-                <td
-                  :rowspan="index === 0 ? data.posArray.length : 1"
-                  colspan="1"
-                >{{tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train[item-1].mileage}}</td>
-              </tr>
-              <tr
-                v-if="tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`] && tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train"
-                v-for="item in (data.posArray.length-1)"
+            <tr v-for="(pos,index) in data.posArray">
+              <td
+                rowspan="1"
+                colspan="1"
+                ref="td-cl"
+                class="td-cl"
+                :title="pos.tms_wheel!==null && pos.tms_wheel!==''?pos.tms_wheel:pos.channel_name"
               >
-                <td
-                  rowspan="1"
-                  colspan="1"
-                ></td>
-                <td
-                  rowspan="1"
-                  colspan="1"
-                ></td>
-                <td
-                  rowspan="1"
-                  colspan="1"
-                ></td>
-                <td
-                  rowspan="1"
-                  colspan="1"
-                ></td>
-              </tr>
-              <tr
-                v-else
-                v-for="item in (data.posArray.length-1)"
+                <div>{{pos.tms_wheel!==null && pos.tms_wheel!==''?pos.tms_wheel:pos.channel_name}}</div>
+              </td>
+              <td rowspan="1" colspan="5" v-for="item in maxLength">
+                <div style="display:flex;flex-direction: row;">
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  ><input
+                      type="number"
+                      v-model="pos.editdata_train.diameter[item-1]"
+                    /></td>
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  ><input
+                      type="number"
+                      v-model="pos.editdata_train.thickness[item-1]"
+                    /></td>
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  ><input
+                      type="number"
+                      v-model="pos.editdata_train.height[item-1]"
+                    /></td>
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  >
+                    <select v-model="pos.editdata_train.type[item-1]">
+                      <option value="X">镟轮</option>
+                      <option value="H">换轮</option>
+                      <option value="N">未镟轮或换轮</option>
+                      <option value="SX">首次镟轮</option>
+                    </select>
+                  </td>
+                  <td
+                    :rowspan="data.posArray.length"
+                    colspan="1"
+                    v-if="index === 0"
+                  >
+                    <div style="position: relative;width: 100%;height: 100%;">
+                      <textarea
+                        class="textarea"
+                        :style="'height:'+data.posArray.length*40+'px;vertical-align: middle;'"
+                        type="number"
+                        v-model="data.mileage[item-1]"
+                      />
+                      </textarea>
+                    </div>
+                  </td>
+                </div>
+              </td>
+              <!-- 获取到的已保存的踏面测量数据 -->
+              <!-- <td
+                    v-if="index === 0"
+                    :rowspan="data.posArray.length"
+                    colspan="5"
+                    v-for="item in maxLength"
+                  >
+                    <tr>
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      >{{tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train[item-1].diameter}}</td>
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      >{{tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train[item-1].thickness}}</td>
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      >{{tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train[item-1].height}}</td>
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      >{{tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train[item-1].type}}</td>
+                      <td
+                        :rowspan="index === 0 ? data.posArray.length : 1"
+                        colspan="1"
+                      >{{tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train[item-1].mileage}}</td>
+                    </tr>
+                    <tr
+                      v-if="tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`] && tableData[`${pos.machine_id}_${pos.position_id}_${pos.type}`].data_train"
+                      v-for="item in (data.posArray.length-1)"
+                    >
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      ></td>
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      ></td>
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      ></td>
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      ></td>
+                    </tr>
+                    <tr
+                      v-else
+                      v-for="item in (data.posArray.length-1)"
+                    >
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      ></td>
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      ></td>
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      ></td>
+                      <td
+                        rowspan="1"
+                        colspan="1"
+                      ></td>
+                    </tr>
+                  </td> -->
+              <!-- 可输入踏面测量数据 -->
+              <!-- <td
+                v-if="index === 0"
+                :rowspan="data.posArray.length"
+                colspan="5"
+                v-for="item in maxLength"
               >
-                <td
-                  rowspan="1"
-                  colspan="1"
-                ></td>
-                <td
-                  rowspan="1"
-                  colspan="1"
-                ></td>
-                <td
-                  rowspan="1"
-                  colspan="1"
-                ></td>
-                <td
-                  rowspan="1"
-                  colspan="1"
-                ></td>
-              </tr>
-            </td> -->
-        <!-- 可输入踏面测量数据 -->
-        <td
-          v-if="index === 0"
-          :rowspan="data.posArray.length"
-          colspan="5"
-          v-for="item in maxLength"
-        >
-      <tr>
-        <td
-          rowspan="1"
-          colspan="1"
-        ><input
-            type="number"
-            v-model="pos.editdata_train.diameter[item-1]"
-          /></td>
-        <td
-          rowspan="1"
-          colspan="1"
-        ><input
-            type="number"
-            v-model="pos.editdata_train.thickness[item-1]"
-          /></td>
-        <td
-          rowspan="1"
-          colspan="1"
-        ><input
-            type="number"
-            v-model="pos.editdata_train.height[item-1]"
-          /></td>
-        <td
-          rowspan="1"
-          colspan="1"
-        >
-          <select v-model="pos.editdata_train.type[item-1]">
-            <option value="X">镟轮</option>
-            <option value="H">换轮</option>
-            <option value="N">未镟轮或换轮</option>
-            <option value="SX">首次镟轮</option>
-          </select>
-        </td>
-        <td
-          :rowspan="data.posArray.length"
-          colspan="1"
-        >
-          <div>
-            <textarea
-              class="textarea"
-              :style="'height:'+data.posArray.length*40+'px;vertical-align: middle;'"
-              type="number"
-              v-model="data.mileage[item-1]"
-            />
-            </textarea>
+                <tr>
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  ><input
+                      type="number"
+                      v-model="pos.editdata_train.diameter[item-1]"
+                    /></td>
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  ><input
+                      type="number"
+                      v-model="pos.editdata_train.thickness[item-1]"
+                    /></td>
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  ><input
+                      type="number"
+                      v-model="pos.editdata_train.height[item-1]"
+                    /></td>
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  >
+                    <select v-model="pos.editdata_train.type[item-1]">
+                      <option value="X">镟轮</option>
+                      <option value="H">换轮</option>
+                      <option value="N">未镟轮或换轮</option>
+                      <option value="SX">首次镟轮</option>
+                    </select>
+                  </td>
+                  <td
+                    :rowspan="data.posArray.length"
+                    colspan="1"
+                  >
+                    <div style="position: relative;width: 100%;height: 100%;">
+                      <textarea
+                        class="textarea"
+                        :style="'height:'+data.posArray.length*40+'px;vertical-align: middle;'"
+                        type="number"
+                        v-model="data.mileage[item-1]"
+                      />
+                      </textarea>
+                    </div>
+                  </td>
+                </tr>
+                <tr v-for="number in data.posArray.length-1">
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  ><input
+                      type="number"
+                      v-model="data.posArray[number].editdata_train.diameter[item-1]"
+                    /></td>
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  ><input
+                      type="number"
+                      v-model="data.posArray[number].editdata_train.thickness[item-1]"
+                    /></td>
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  ><input
+                      type="number"
+                      v-model="data.posArray[number].editdata_train.height[item-1]"
+                    /></td>
+                  <td
+                    rowspan="1"
+                    colspan="1"
+                  ><select v-model="data.posArray[number].editdata_train.type[item-1]">
+                      <option value="X">镟轮</option>
+                      <option value="H">换轮</option>
+                      <option value="N">未镟轮或换轮</option>
+                      <option value="SX">首次镟轮</option>
+                    </select>
+                  </td>
+                </tr>
+              </td> -->
+            </tr>
           </div>
         </td>
       </tr>
-      <tr v-for="number in data.posArray.length-1">
-        <td
-          rowspan="1"
-          colspan="1"
-        ><input
-            type="number"
-            v-model="data.posArray[number].editdata_train.diameter[item-1]"
-          /></td>
-        <td
-          rowspan="1"
-          colspan="1"
-        ><input
-            type="number"
-            v-model="data.posArray[number].editdata_train.thickness[item-1]"
-          /></td>
-        <td
-          rowspan="1"
-          colspan="1"
-        ><input
-            type="number"
-            v-model="data.posArray[number].editdata_train.height[item-1]"
-          /></td>
-        <td
-          rowspan="1"
-          colspan="1"
-        ><select v-model="data.posArray[number].editdata_train.type[item-1]">
-            <option value="X">镟轮</option>
-            <option value="H">换轮</option>
-            <option value="N">未镟轮或换轮</option>
-            <option value="SX">首次镟轮</option>
-          </select>
-        </td>
-      </tr>
-      </td>
-      </tr>
-    </div>
-    </td>
-    </tr>
     </div>
   </tbody>
   </table>
@@ -318,7 +393,7 @@
       <el-tooltip
         class="item"
         effect="dark"
-        content="训练模型至少需要练各组数据"
+        content="训练模型至少需要两组数据"
         placement="top-start"
       >
         <i class="iconfont icon-tishiwenzi"></i>
@@ -380,7 +455,6 @@ export default {
       immediate: true,
     },
   },
-  mounted() {},
   methods: {
     openChartList(key, type) {
       this.carriageInfo = {}
@@ -451,6 +525,10 @@ export default {
         if (res) {
           if (res.data && Object.keys(res.data).length > 0) {
             this.setData(res.data)
+          } else {
+            this.maxLength = 3
+            this.timeList = [null, null, null]
+            this.carriageInfo = this.trendData
           }
         }
       })
@@ -461,6 +539,49 @@ export default {
       /* 横向滚动，title 随着动 */
       let title = this.$refs.theadTr1
       title.scrollLeft = tag.scrollLeft
+      if (tag.scrollLeft > 0) {
+        this.$refs['th-ch'].style.position = 'relative'
+        this.$refs['th-ch'].style.left = tag.scrollLeft + 'px'
+        this.$refs['th-ch'].children[0].style.marginRight = '-2px'
+        this.$refs['th-ch'].children[0].style.borderRight = '1px solid #979797'
+        this.$refs['th-sj'].style.position = 'relative'
+        this.$refs['th-sj'].style.left = tag.scrollLeft + 'px'
+        this.$refs['th-sj'].children[0].style.marginRight = '-1px'
+        this.$refs['th-sj'].children[0].style.borderRight = '1px solid #979797'
+        this.$refs['th-cl'].style.position = 'relative'
+        this.$refs['th-cl'].style.left = tag.scrollLeft + 'px'
+        this.$refs['th-cl'].children[0].style.marginRight = '-1px'
+        this.$refs['th-cl'].children[0].style.borderRight = '1px solid #979797'
+        this.$refs['td-ch'].forEach((el) => {
+          el.style.position = 'relative'
+          el.style.left = tag.scrollLeft + 'px'
+          // el.children[0].style.marginRight = '-1px'
+          // el.children[0].style.borderRight = '1px solid #979797'
+        })
+        this.$refs['td-cl'].forEach((el) => {
+          el.style.position = 'relative'
+          el.style.left = tag.scrollLeft + 'px'
+          // el.children[0].style.marginRight = '-1px'
+          el.children[0].style.borderRight = '1px solid #979797'
+          el.children[0].style.borderTop = '1px solid #979797'
+          el.children[0].style.borderLeft = '1px solid #979797'
+          el.children[0].style.margin = '-1px -1px 0px -1px'
+        })
+      } else {
+        this.$refs['th-ch'].style = null
+        this.$refs['th-sj'].style = null
+        this.$refs['th-cl'].style = null
+        this.$refs['th-cl'].children[0].style.borderRight = null
+        this.$refs['th-sj'].children[0].style.borderRight = null
+        this.$refs['td-ch'].forEach((el) => {
+          el.style = null
+          el.children[0].style = null
+        })
+        this.$refs['td-cl'].forEach((el) => {
+          el.style = null
+          el.children[0].style = null
+        })
+      }
     },
     setData(data) {
       this.timeList = [] //获取保存踏面数据的时间list
@@ -793,7 +914,13 @@ export default {
         overflow-x: auto;
         border: 1px solid #979797;
         border-bottom: none;
-
+        .th-ch,
+        .th-cl,
+        .th-sj {
+          z-index: 9;
+          background-color: #092e55;
+          border-right: 1px solid #979797;
+        }
         tr {
           position: relative;
           left: 0px;
@@ -829,6 +956,18 @@ export default {
         overflow-y: scroll;
 
         top: -8px;
+        .td-ch,
+        .td-cl {
+          z-index: 9;
+          background-color: #092e55;
+          border-right: 1px solid #979797;
+          div {
+            width: 98px;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            white-space: nowrap;
+          }
+        }
         .tbody-div {
           width: 100%;
           border-left: none;
@@ -857,12 +996,7 @@ export default {
           text-align: center;
           border-right: 1px solid #979797;
           border-bottom: 1px solid #979797;
-          p {
-            width: 98px;
-            text-overflow: ellipsis;
-            overflow: hidden;
-            white-space: nowrap;
-          }
+
           &:last-child {
             // border-right: 1px solid #979797;
           }
@@ -902,7 +1036,7 @@ export default {
     }
     .textarea {
       width: 100%;
-      position: relative;
+      position: absolute;
       display: block;
       text-align: center;
       border: none;

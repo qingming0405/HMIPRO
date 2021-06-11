@@ -637,6 +637,7 @@ export default {
       code = String(code);
       info = JSON.parse(info);
       let codeObj = {
+        "0": '未描述',
         "1": `列车（id=${dgm_id}）下的前置（id=${info.sub_id}）重启`,
         "2": `列车（id=${dgm_id}）下的主机（id=${info.sub_id}）重启`,
         "3": `列车（id=${dgm_id}）下的前置（id=${info.sub_id}）自检通过`,

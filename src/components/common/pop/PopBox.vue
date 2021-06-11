@@ -26,26 +26,29 @@
       </div>
       <div class="pop-box-text">{{ content }}</div>
       <div class="pop-box-button">
+        <!-- 确认 -->
         <button
           v-show="btnNum === 2"
           class="pop-btn pop-btn-ok"
           @click="closeAlert(1)"
         >
-          确认
+         {{vm.$t('Common.sureBtn')}}
         </button>
+        <!-- 取消 -->
         <button
           v-show="btnNum === 2"
           class="pop-btn pop-btn-cancel disable-btn"
           @click="closeAlert(0)"
         >
-          取消
+          {{vm.$t('Common.cancelBtn')}}
         </button>
+        <!-- 确定 -->
         <button
           v-show="btnNum === 1"
           class="pop-btn pop-btn-ok"
           @click="closeAlert(1)"
         >
-          确定
+          {{vm.$t('Common.sureBtn')}}
         </button>
         <button
           v-show="btnNum === 3"
@@ -68,7 +71,9 @@ export default {
   //import引入的组件需要注入到对象中才能使用
   name: 'PopBox',
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       offset: {
         x: 0,
         y: 0,
@@ -90,7 +95,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: '提示',
+      default: '提示',//'提示',
     },
     content: {
       type: String,
@@ -107,6 +112,9 @@ export default {
         return [{ name: '', index: 0 }]
       },
     },
+  },
+  created(){
+    this.title = vm.$t('Common.tips')//'提示'
   },
   mounted() {
     let that = this

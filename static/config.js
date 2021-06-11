@@ -5,7 +5,7 @@ let config = {
   loginlogo: 'loginLogoBg_edge',/* 登陆页logo: loginLogoBg_edge:正常中自庆安logo；loginLogoBg_edge1:航天光电科技发展（天津）有限公司；loginLogoBg_edge0:透明无logo */
   logo: 'logo',/*主页左上角logo:  logo:正常中自庆安logo；logo1:航天光电科技发展（天津）有限公司；logo0:透明无logo*/
   loginName: '',//配置登录页标题，若为‘’则取后端返回值（临时现场需要）
-  loginPhoneNum: 1,//配置登录页底部联系方式，若为0则不显示，若为1则根据当前标题数据显示
+  loginPhoneNum: 0,//配置登录页底部联系方式，若为0则不显示，若为1则根据当前标题数据显示
   generalStutas: 0,//总貌图状态配置（离线机组变为在线）=》目前只针对轨道交通 0:不变化保持原样；1：离线机组变为在线
   fdDiagnosis: 0,//风电智能诊断-0:取diagnosis；1：东汽智能诊断取fault_type，目前都只有风电传动链存在智能诊断
 }

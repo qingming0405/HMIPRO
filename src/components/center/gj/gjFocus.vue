@@ -372,7 +372,7 @@
 </template>
 
 <script>
-import { cloneObj, round, setHead, setPosMsg } from 'utils/utils.js'
+import { cloneObj, round, setHead } from 'utils/utils.js'
 import focus from 'common/general/focus.js'
 export default {
   name: 'gjFocus',

@@ -423,6 +423,7 @@
 </template>
 
 <script>
+import { cloneObj } from 'utils/utils.js'
 export default {
   name: 'fdModel',
   data() {
@@ -508,7 +509,7 @@ export default {
       // 设备模型跳转设备模型使用同一个key值调用getPath方法
       let params = {
         key: this.currentKey,
-        val: '设备模型',
+        val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
         name: 'windModel',
         icon: 'icon-shijingsanwei-',
       }
@@ -520,49 +521,49 @@ export default {
       switch (index) {
         case 0:
           data = {
-            name: '传动链',
+            name: this.$t('FdModel.locName1'),//'传动链',
             router: 'fddrivechain',
             index: 0,
           }
           break
         case 1:
           data = {
-            name: '塔筒',
+            name: this.$t('FdModel.locName2'),//'塔筒',
             router: 'fdtowerdrum',
             index: 1,
           }
           break
         case 2:
           data = {
-            name: '螺栓',
+            name: this.$t('FdModel.locName3'),//'螺栓',
             router: 'fdbolt',
             index: 2,
           }
           break
         case 3:
           data = {
-            name: '叶轮',
+            name: this.$t('FdModel.locName4'),//'叶轮',
             router: 'fdimpeller',
             index: 3,
           }
           break
         case 4:
           data = {
-            name: '油液',
+            name: this.$t('FdModel.locName5'),//'油液',
             router: 'fdoil',
             index: 4,
           }
           break
         case 5:
           data = {
-            name: '锚栓',
+            name: this.$t('FdModel.locName6'),//'锚栓',
             router: 'fdanchorbolt',
             index: 5,
           }
           break
         case 6:
           data = {
-            name: '基础',
+            name: this.$t('FdModel.locName7'),//'基础',
             router: 'fdbasics',
             index: 6,
           }
@@ -586,7 +587,7 @@ export default {
       // 设备模型跳转设备模型使用同一个key值调用getPath方法
       let params = {
         key: this.currentKey,
-        val: '设备模型',
+        val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
         name: 'fdModelitem',
         icon: 'icon-shijingsanwei-',
       }
@@ -619,13 +620,13 @@ export default {
                     param.modelItems[k].alarm_status == 0 ||
                     param.modelItems[k].alarm_status == null
                   ) {
-                    param.modelItems[k].status = '离线'
+                    param.modelItems[k].status = this.$t('Common.offlineText')//'离线'
                   } else if (param.modelItems[k].alarm_status == 1) {
-                    param.modelItems[k].status = '正常'
+                    param.modelItems[k].status = this.$t('Common.normalText')//'正常'
                   } else if (param.modelItems[k].alarm_status == 2) {
-                    param.modelItems[k].status = '预警'
+                    param.modelItems[k].status = this.$t('Common.warnText')//'预警'
                   } else if (param.modelItems[k].alarm_status == 3) {
-                    param.modelItems[k].status = '报警'
+                    param.modelItems[k].status = this.$t('Common.alarmText')//'报警'
                   }
                 }
               }
@@ -800,7 +801,6 @@ export default {
                   }
                 }
               }
-
               //画健康值百分比、拼模型小标题的数组
               this.$nextTick(() => {
                 if (param.modelItems.driveChain.health !== null) {

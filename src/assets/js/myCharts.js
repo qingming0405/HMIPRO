@@ -3140,8 +3140,8 @@
               dataCtx.beginPath();
               dataCtx.lineWidth = series.lineStyle.width;
               dataCtx.strokeStyle = series.lineStyle.color;
-              // 大于两万个点时，再进行数据少画
-              if (xArr.length > 20000) {
+              // 大于两万个点时且是波形图或者频谱图，再进行数据少画
+              if (opt.type && opt.type.chartType && (opt.type.chartType == 'wave' || opt.type.chartType == 'spectrum') && xArr.length > 20000) {
                 var tmp_r = (xk * xArr[1] + xb) - (xk * xArr[0] + xb) /* 第一个点与第二个点的像素差 */
                 if (tmp_r < 1) {
                   if (tmp_r <= Number.MIN_VALUE)
@@ -3651,7 +3651,8 @@
               break;
           }
           flag.tools.flag_wave_Pulse && this.drawWavePulse();
-          flag.addPeakPos.length > 0 && this.drawAddLabel(2);
+          // flag.addPeakPos.length > 0 && (type === 1 ? this.drawAddLabel(1) : this.drawAddLabel(2))
+          flag.addPeakPos.length > 0 && this.drawAddLabel(2)
           this._option.series.markLine.data && this._option.series.markLine.data.length > 0 && this.drawMarkLine();
         },
         // 绘制开窗放大范围
@@ -5127,6 +5128,39 @@
           let xArr = opt.x.data;
           let yArr = opt.y.data;
           let xMax = xArr[xArr.length - 1];
+          for (let i = 0; i < l; i++) {
+            // 增加判断，防止有效频段过滤频率后产生偏差
+            if (!Array.isArray(xArr[0])) {
+              if (_flag.addPeakPos[i].value == opt.x.data[_flag.addPeak[i]]) {
+                break;
+              } else {
+                //xArr变化过，需要重新取下标
+                for (let n = 0, len = xArr.length; n < len; n++) {
+                  if (_flag.addPeakPos[i].value == xArr[n]) {
+                    _flag.addPeak[i] = n
+                    _flag.line.key = n
+                    _flag.line.val = xArr[n]
+                  }
+                }
+              }
+            } else {
+              if (_flag.addPeakPos[i].value == opt.x.data[_flag.muchaddPeak[i].idx][_flag.addPeak[i]]) {
+                return;
+              } else {
+                //xArr变化过，需要重新取下标
+                for (let n = 0, len = xArr[_flag.muchaddPeak[i].idx].length; n < len; n++) {
+                  if (_flag.addPeakPos[i].value == xArr[_flag.muchaddPeak[i].idx][n]) {
+                    _flag.addPeak[i] = n
+                    _flag.line.key = n
+                    _flag.line.val = xArr[_flag.muchaddPeak[i].idx][n]
+                    _flag.muchaddPeak[i].key = n
+                  }
+                }
+              }
+
+
+            }
+          }
           if (type === 1 && l < n) {
             if (l !== 0) {
               for (let i = 0; i < l; i++) {
@@ -5180,6 +5214,7 @@
                 }
                 _flag.addPeakPos.push({
                   xName: opt.x.name[idx],
+                  value: xFreq,
                   freq: this.round(xFreq),
                   x: i * (size.width + 5) + opt.grid.left + 0.5,
                   y: opt.grid.top,
@@ -5191,6 +5226,7 @@
               for (let i = 0; i < l; i++) {
                 _flag.addPeakPos.push({
                   xName: opt.x.name,
+                  value: opt.x.data[_flag.addPeak[i]],
                   freq: this.round(opt.x.data[_flag.addPeak[i]]),
                   x: i * (size.width + 5) + opt.grid.left + 0.5,
                   y: opt.grid.top,

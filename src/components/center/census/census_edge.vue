@@ -8,7 +8,7 @@
       v-show="data.isShow"
     >
       <div class="census-screen radius box-shadow">
-        <div class="screen-title">筛选条件</div>
+        <div class="screen-title">{{$t('Census.screenCondition')}}</div><!-- 筛选条件 -->
         <ul class="screen-list">
           <li
             v-show="idx !== 5 || (idx === 5 && data.unitShow)"
@@ -41,12 +41,13 @@
               {{ item.msg }}
               <i class="iconfont icon-zhongzi-zhankai"></i>
             </div>
+            <!-- 请输入比例：*%或*个 -->
             <input
               type="text"
               class="list-val radius"
               v-if="idx === 4"
               v-model="item.msg"
-              placeholder="请输入比例：*%或*个"
+              :placeholder="$t('Census.InputRatio')"
             />
             <input
               class="list-val radius text-overflow"
@@ -101,15 +102,16 @@
           </li>
         </ul>
         <div class="get-data-btn">
-          <button @click="setRequestData">数据筛选</button>
+          <!-- 数据筛选 -->
+          <button @click="setRequestData">{{$t('Common.dataScreening')}}</button>
         </div>
       </div>
       <div class="chart-list-box radius box-shadow">
         <div class="chart-list-title">
-          {{ data.isList ? "统计列表" : "统计图谱" }}
+          {{ data.isList ? $t('Common.StatisticalList') : $t('Census.StatisticAtlas') }}
         </div>
         <div class="chart-list-btn">
-          <button @click.stop="exportData">导出</button>
+          <button @click.stop="exportData">{{$t('Common.derivation')}}</button>
           <a
             href=""
             class="hide"
@@ -117,7 +119,7 @@
           ></a>
           <button>
             <label :for="'changeChart' + key">
-              {{ data.isList ? "柱状图" : "列表图" }}
+              {{ data.isList ? $t('Census.histogram') : $t('Census.ListDiagram') }}
             </label>
           </button>
           <input
@@ -174,7 +176,7 @@
             class="none-data-box radius"
             v-show="data.showEmpty"
           >
-            <div>无数据</div>
+            <div>{{$t('Common.noDataText')}}</div>
           </div>
         </div>
         <div
@@ -186,7 +188,7 @@
             class="none-data-box radius"
             v-show="data.showEmpty"
           >
-            <div>无数据</div>
+            <div>{{$t('Common.noDataText')}}</div>
           </div>
           <div
             ref="myCensusChart"
@@ -416,7 +418,8 @@ export default {
         button {
           height: 30px;
           line-height: 30px;
-          width: 60px;
+          min-width: 60px;
+          padding:0px 5px;
           &:first-child {
             margin-right: 10px;
           }

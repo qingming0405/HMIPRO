@@ -75,8 +75,8 @@
         <button
           class="get-real-data"
           @click="timeList"
-        >数据列表</button>
-        <button @click="dataRetrieval">数据检索</button>
+        ><!-- 数据列表 -->{{$t('tmsTrend.DataList')}}</button>
+        <button @click="dataRetrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
       </div>
     </div>
   </div>

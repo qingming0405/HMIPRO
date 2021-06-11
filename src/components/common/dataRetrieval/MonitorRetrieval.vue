@@ -8,7 +8,7 @@
         @mousedown="moveDiv($event)"
         @mouseup="moveDivUp($event)"
       >
-        <span>数据检索</span>
+        <span>{{vm.$t('Common.title')}}</span>
         <div
           class="close-retrieval"
           @click="closeRetrieval(0)"
@@ -25,7 +25,7 @@
       </div> -->
       <!-- 选择时间类型 -->
       <div class="select-date-type">
-        <div class="select-title date-type-title">时间</div>
+        <div class="select-title date-type-title">{{vm.$t('Common.time')}}</div>
         <div
           class="select-value date-type-name radius text-overflow select-none outside-border edge-outside-border"
           @click.stop="changeTimeType"
@@ -36,12 +36,12 @@
       </div>
       <!-- 开始时间 -->
       <div class='select-time'>
-        <div class='select-title time-title'>开始时间</div>
+        <div class='select-title time-title'>{{vm.$t('Common.startTime')}}</div>
         <!-- <input class='retrieval-start-time time-value  input-value radius text-overflow select-none outside-border edge-outside-border'> -->
         <el-date-picker
           v-model="startTime"
           type="datetime"
-          placeholder="选择日期时间"
+          :placeholder="vm.$t('Common.placeholderTime')"
           value-format="timestamp"
           @change="changeTime"
           :clearable='false'
@@ -50,12 +50,12 @@
       </div>
       <!-- 结束时间 -->
       <div class='select-time'>
-        <div class='select-title time-title'>结束时间</div>
+        <div class='select-title time-title'>{{vm.$t('Common.endTime')}}</div>
         <!-- <input class='retrieval-end-time time-value  input-value radius text-overflow select-none outside-border edge-outside-border'> -->
         <el-date-picker
           v-model="endTime"
           type="datetime"
-          placeholder="选择日期时间"
+          :placeholder="vm.$t('Common.placeholderTime')"
           value-format="timestamp"
           @change="changeTime"
           :clearable='false'
@@ -64,7 +64,7 @@
       </div>
       <!-- 转速区间 -->
       <div class="set-speed">
-        <div class="select-title speed-title">转速区间</div>
+        <div class="select-title speed-title">{{vm.$t('Common.speedRange')}}</div>
         <input
           type="number"
           class="input-value radius outside-border edge-outside-border"
@@ -81,7 +81,7 @@
       </div>
       <!-- 选择查询密度 -->
       <div class="select-date-type">
-        <div class="select-title date-type-title">查询密度</div>
+        <div class="select-title date-type-title">{{vm.$t('Common.queryDensityBtn')}}</div>
         <div
           class="select-value date-type-name radius text-overflow select-none outside-border edge-outside-border"
           @click.stop="changeDensityType"
@@ -92,14 +92,15 @@
       </div>
       <!-- 实时值是否显示 -->
       <div class="set-realtimeValue">
-        <div class="select-title">实时值</div>
+        <div class="select-title">{{vm.$t('MonitorRetrieval.realTimeValue')}}</div>
         <div class="set-realtimeInput">
           <input
             type="radio"
             v-model="result.isReal"
             value="1"
           />
-          <label>显示</label>
+          <!-- 显示 -->
+          <label>{{vm.$t('Common.show')}}</label>
         </div>
         <div class="set-realtimeInput">
           <input
@@ -107,19 +108,21 @@
             v-model="result.isReal"
             value="0"
           />
-          <label>隐藏</label>
+          <!-- 隐藏 -->
+          <label>{{vm.$t('Common.hide')}}</label>
         </div>
       </div>
       <!-- 预警报警值 -->
       <div class="set-realtimeValue">
-        <div class="select-title">预警报警值</div>
+        <div class="select-title">{{vm.$t('MonitorRetrieval.warningAlarmValue')}}</div>
         <div class="set-realtimeInput">
           <input
             type="radio"
             value="1"
             v-model="isShowAlarm"
           />
-          <label>显示</label>
+          <!-- 显示 -->
+          <label>{{vm.$t('Common.show')}}</label>
         </div>
         <div class="set-realtimeInput">
           <input
@@ -127,19 +130,21 @@
             value="0"
             v-model="isShowAlarm"
           />
-          <label>隐藏</label>
+          <!-- 隐藏 -->
+          <label>{{vm.$t('Common.hide')}}</label>
         </div>
       </div>
       <!-- 统计方式 -->
       <div class="set-realtimeValue">
-        <div class="select-title">统计方式</div>
+        <div class="select-title">{{vm.$t('MonitorRetrieval.statisticalWays')}}</div>
         <div class="set-realtimeInput">
           <input
             type="radio"
             value="1"
             v-model="vital"
           />
-          <label>小时</label>
+          <!-- 小时 -->
+          <label>{{vm.$t('Common.hour')}}</label>
         </div>
         <div class="set-realtimeInput">
           <input
@@ -147,7 +152,8 @@
             value="2"
             v-model="vital"
           />
-          <label>天</label>
+          <!-- 天 -->
+          <label>{{vm.$t('Common.day')}}</label>
         </div>
         <div class="set-realtimeInput">
           <input
@@ -155,7 +161,8 @@
             value="3"
             v-model="vital"
           />
-          <label>月</label>
+          <!-- 月 -->
+          <label>{{vm.$t('Common.mouth')}}</label>
         </div>
         <div class="set-realtimeInput">
           <input
@@ -163,7 +170,8 @@
             value="0"
             v-model="vital"
           />
-          <label>不统计</label>
+          <!-- 不统计 -->
+          <label>{{vm.$t('MonitorRetrieval.noStatistics')}}</label>
         </div>
       </div>
 
@@ -172,7 +180,7 @@
         class="check-eigenvalue-box scroll-style-edge"
         v-show="info.isMac"
       >
-        <div class="select-title">所有机组</div>
+        <div class="select-title">{{vm.$t('Common.allMac')}}</div>
         <ul
           class="check-eigenvalue radius select-none"
           id="my-pos"
@@ -218,7 +226,7 @@
         class="check-eigenvalue-box scroll-style-edge"
         v-show="info.isMac"
       >
-        <div class="select-title">所有测点</div>
+        <div class="select-title">{{vm.$t('Common.allPosition')}}</div>
         <ul
           class="check-eigenvalue radius select-none"
           id="my-pos"
@@ -269,7 +277,7 @@
       <div class="check-eigenvalue-box scroll-style-edge">
         <div class="select-title">
           <p>{{ valueName }}</p>
-          <p>特征值</p>
+          <p>{{vm.$t('Common.typeEignin')}}</p>
         </div>
         <div
           class="check-eigenvalue radius select-none"
@@ -310,19 +318,22 @@
       </div>
       <!-- 操作按钮 -->
       <div class="data-retrieval-btn">
-        <button @click="macInverse">机组全选</button>
-        <button @click="posInverse">测点全选</button>
-        <button @click="valueInverse">特征值全选</button>
+        <!-- 机组全选 -->
+        <button @click="macInverse">{{vm.$t('Common.allMac')}}</button>
+        <!-- 测点全选 -->
+        <button @click="posInverse">{{vm.$t('Common.allPosition')}}</button>
+        <!-- 特征值全选 -->
+        <button @click="valueInverse">{{vm.$t('Common.allEignin')}}</button>
       </div>
       <div class="data-retrieval-btn">
-        <button @click="reset">重置</button>
+        <button @click="reset">{{vm.$t('Common.resetBtn')}}</button>
         <!-- <button @click="posInverse">测点</button>
         <button @click="valueInverse">特征值</button> -->
-        <button @click="closeRetrieval(1)">确定</button>
+        <button @click="closeRetrieval(1)">{{vm.$t('Common.sureBtn')}}</button>
         <button
           class="disable-btn"
           @click="closeRetrieval(0)"
-        >取消</button>
+        >{{vm.$t('Common.cancelBtn')}}</button>
       </div>
     </div>
   </div>
@@ -335,9 +346,11 @@ import { setHead, posType_name, cloneObj } from 'utils/utils.js'
 export default {
   // import引入的组件需要注入到对象中才能使用
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       info: {
-        title: '当前机组',
+        title: vm.$t('MonitorRetrieval.nowMac'),//'当前机组',
         value: null,
         isMac: true,
         key: null, //若从机组进入
@@ -442,7 +455,7 @@ export default {
       } else if (params.type == 'pos') {
         this.posChoose = []
         //测点
-        this.info.title = '当前测点'
+        this.info.title = vm.$t('MonitorRetrieval.nowPos'),//'当前测点'
         this.info.isMac = false
         this.info.value = params.msg.position_name
         !flag && this.get_value_choose(params.msg) //初始化信息
@@ -484,15 +497,15 @@ export default {
         let density = res.density
 
         if (endTime <= startTime) {
-          this.$pop('结束时间必须大于开始时间')
+          this.$pop(vm.$t('Common.popTimeText'))//'结束时间必须大于开始时间'
           return
         }
         if (!isNaN(maxSpeed) && !isNaN(minSpeed) && maxSpeed <= minSpeed) {
-          this.$pop('最大转速必须大于最小转速')
+          this.$pop(vm.$t('Common.popSpeedText'))//'最大转速必须大于最小转速')
           return
         }
         if (!isNaN(lower) && !isNaN(upper) && upper <= lower) {
-          this.$pop('上限过滤必须大于下限过滤')
+          this.$pop(vm.$t('Common.popLowerText'))//'上限过滤必须大于下限过滤')
           return
         }
         res.minSpeed === '' && (minSpeed = '')
@@ -527,7 +540,7 @@ export default {
             }
           })
           if (checkNum == 0) {
-            this.$pop('请至少选择一个数据类型！')
+            this.$pop(vm.$t('Common.popDataTypeText'))//'请至少选择一个数据类型！')
             return
           }
         }

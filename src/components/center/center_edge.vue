@@ -6,10 +6,7 @@
         @loadingImg="loadingImg"
       />
     </keep-alive>
-    <div
-      class="loading"
-      v-show="loading"
-    >
+    <div class="loading" v-show="loading">
       <div id="loading-center">
         <div
           id="loading-center-absolute"

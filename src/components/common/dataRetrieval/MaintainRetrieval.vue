@@ -7,7 +7,7 @@
     <div class="data-retrieval-box radius box-shadow">
       <!-- 头部标题 -->
       <div class="data-retrieval-title">
-        <span>数据检索</span>
+        <span>{{vm.$t('Common.title')}}</span>
         <div
           class="close-retrieval"
           @click="closeRetrieval(0)"
@@ -28,7 +28,7 @@
       </div>
       <!-- 选择时间类型 -->
       <div class="select-date-type">
-        <div class="select-title date-type-title">时间</div>
+        <div class="select-title date-type-title">{{vm.$t('Common.time')}}</div>
         <div
           class="select-value date-type-name radius text-overflow select-none outside-border edge-outside-border"
           @click.stop="changeTimeType"
@@ -39,12 +39,12 @@
       </div>
       <!-- 开始时间 -->
       <div class='select-time'>
-        <div class='select-title time-title'>开始时间</div>
+        <div class='select-title time-title'>{{vm.$t('Common.startTime')}}</div>
         <!-- <input class='retrieval-start-time time-value  input-value radius text-overflow select-none outside-border edge-outside-border'> -->
         <el-date-picker
           v-model="startTime"
           type="datetime"
-          placeholder="选择日期时间"
+          :placeholder="vm.$t('Common.placeholderTime')"
           value-format="timestamp"
           @change="changeTime"
           :clearable='false'
@@ -54,12 +54,12 @@
       </div>
       <!-- 结束时间 -->
       <div class='select-time'>
-        <div class='select-title time-title'>结束时间</div>
+        <div class='select-title time-title'>{{vm.$t('Common.endTime')}}</div>
         <!-- <input class='retrieval-end-time time-value  input-value radius text-overflow select-none outside-border edge-outside-border'> -->
         <el-date-picker
           v-model="endTime"
           type="datetime"
-          placeholder="选择日期时间"
+          :placeholder="vm.$t('Common.placeholderTime')"
           value-format="timestamp"
           @change="changeTime"
           :clearable='false'
@@ -67,12 +67,12 @@
         </el-date-picker>
       </div>
       <div class="data-retrieval-btn">
-        <button @click="reset">重置</button>
-        <button @click="closeRetrieval(1)">确定</button>
+        <button @click="reset">{{vm.$t('Common.resetBtn')}}</button>
+        <button @click="closeRetrieval(1)">{{vm.$t('Common.sureBtn')}}</button>
         <button
           class="disable-btn"
           @click="closeRetrieval(0)"
-        >取消</button>
+        >{{vm.$t('Common.cancelBtn')}}</button>
       </div>
     </div>
   </div>
@@ -86,8 +86,10 @@ export default {
   // import引入的组件需要注入到对象中才能使用
   components: {},
   data() {
+    const vm = window.vm;
     return {
       result: {
+        vm:vm,
         msg: null,
       },
     }
@@ -108,9 +110,9 @@ export default {
     initParams() {
       const msg = this.viewMsg
       const typeObj = {
-        pos: '测点',
-        mac: '机组',
-        tree: '测点',
+        pos: vm.$t('AlarmRetrieval.typePos'),//'测点',
+        mac: vm.$t('AlarmRetrieval.typeMac'),//'机组',
+        tree: vm.$t('AlarmRetrieval.typePos'),//'测点',
       }
       this.msgTitle = typeObj[msg.type]
       if (this.result.msg === null || this.result.msg === undefined)

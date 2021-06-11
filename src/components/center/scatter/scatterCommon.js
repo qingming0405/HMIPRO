@@ -1,5 +1,5 @@
 import WaveChart from "../../common/waveChart";
-import { getdefaultCode, getTime, getUnit } from "utils/utils.js";
+import { getdefaultCode, getTime, getUnit, setHead } from "utils/utils.js";
 
 export default {
   // import引入的组件需要注入到对象中才能使用
@@ -239,7 +239,7 @@ export default {
         let posKey = mac.pump_id ? `${mac.mac_id}_${mac.ch_class}` : mac.mac_id
         const pos = this.$store.state.pos[posKey];
         const currentPos = this.$store.state.checkMsg.pos;
-        let comparePos
+        let comparePos = currentPos /* 初始化自己与自己比 */
         if (pos && pos.length > 0) {
           for (let i = 0, l = pos.length; i < l; i++) {
             if (pos[i].position_type == currentPos.position_type && pos[i].position_id != currentPos.position_id) {
@@ -293,9 +293,13 @@ export default {
       } else if (type == 1) {
         //切换
         this.scatterData[key].isShow = true;
+        this.$nextTick(() => {
+          this.resize()
+        })
       } else if (type == 2) {
         //删除
         this.$delete(this.scatterData, key);
+        this.$delete(this.paramsData, key);
       }
     },
     /* 获取数据 */
@@ -311,15 +315,42 @@ export default {
       const density = this.$store.state.srcParams.density;
       const currentPos = scatterData.currentPos;
       let defaultCode = getdefaultCode(scatterData.comparePos.dgm_type)
-      const filedsX = defaultCode[scatterData.comparePos.position_type]; // y为当前机组的第一个测点
+      let filedsX = defaultCode[scatterData.comparePos.position_type]; // y为当前机组的同类型测点
       defaultCode = getdefaultCode(currentPos.dgm_type)
-      const filedsY = defaultCode[posType]; // X轴为原测点
+      let filedsY = defaultCode[posType]; // X轴为原测点
       const t_rootX = scatterData.comparePos.t_root;
       const t_rootY = currentPos.t_root;
       const dgmTypeX = scatterData.comparePos.dgm_type;
       const dgmTypeY = currentPos.dgm_type;
       const posLocX = scatterData.comparePos.pos_loc;
       const posLocY = currentPos.pos_loc;
+      // 获取X轴特征值
+      let x = setHead(t_rootX, dgmTypeX, scatterData.comparePos.position_type, posLocX);
+      // 获取Y轴特征值
+      let y = setHead(t_rootY, dgmTypeY, posType, posLocY);
+      console.log(x, y)
+      // 若特征值存在转速则默认x轴特征值为转速
+      for (let i = 0, l = x.length; i < l; i++) {
+        if (x[i].filed == 'speed') {
+          filedsX = {
+            filed: x[i].filed,
+            name: x[i].val,
+            code: x[i].code
+          }
+          break;
+        }
+      }
+      // 若特征值存在有效值则默认x轴特征值为有效值
+      for (let i = 0, l = y.length; i < l; i++) {
+        if (y[i].filed == 'vib_rms') {
+          filedsY = {
+            filed: y[i].filed,
+            name: y[i].val,
+            code: y[i].code
+          }
+          break;
+        }
+      }
       let unitX = "";
       let unitY = "";
       if (currentPos.units) {
@@ -338,6 +369,7 @@ export default {
       ) {
         unitX = "°";
       }
+
       let posMsg = scatterData.posMsg;
       posMsg.codeNameX = filedsX.name;
       posMsg.codeNameY = filedsY.name;
@@ -463,13 +495,9 @@ export default {
       const type = posMsg.position_type;
       const pName = posMsg.position_name;
       const defaultCode = getdefaultCode(posMsg.dgm_type)
-      const fileds = defaultCode[type];
-      let unit = "";
-      if (posMsg.units) {
-        unit = getUnit(fileds.code, posMsg);
-      } else if (posMsg.position_type == 12 || posMsg.position_type == 13) {
-        unit = "°";
-      }
+      let fileds = defaultCode[type];
+      let filedsArray = setHead(posMsg.t_root, posMsg.dgm_type, posMsg.position_type, posMsg.pos_loc);
+
       let p1x = e.offsetX; //拖动点的x距离
       let p1y = e.offsetY; //拖动点的y距离
       let w = domInfo.width; //图表区域的宽
@@ -480,6 +508,23 @@ export default {
       let rd = scatterData.rd;
       if (p1y <= k0) {
         //45度角上方的点为y轴的测点
+        // 若可以取到上一次的特征值则取上一次特征值
+        for (let i = 0, l = filedsArray.length; i < l; i++) {
+          if (filedsArray[i].filed == msg.codeFiledY) {
+            fileds = {
+              filed: filedsArray[i].filed,
+              name: filedsArray[i].val,
+              code: filedsArray[i].code
+            }
+            break;
+          }
+        }
+        let unit = "";
+        if (posMsg.units) {
+          unit = getUnit(fileds.code, posMsg);
+        } else if (posMsg.position_type == 12 || posMsg.position_type == 13) {
+          unit = "°";
+        }
         scatterData.currentPos = posMsg
         rd.positionTypeY = type;
         rd.positionIdY = pId;
@@ -497,6 +542,23 @@ export default {
         msg.posLocY = posMsg.pos_loc;
       } else {
         //45度角下方的点为x轴的测点
+        // 若可以取到上一次的特征值则取上一次特征值
+        for (let i = 0, l = filedsArray.length; i < l; i++) {
+          if (filedsArray[i].filed == msg.codeFiledX) {
+            fileds = {
+              filed: filedsArray[i].filed,
+              name: filedsArray[i].val,
+              code: filedsArray[i].code
+            }
+            break;
+          }
+        }
+        let unit = "";
+        if (posMsg.units) {
+          unit = getUnit(fileds.code, posMsg);
+        } else if (posMsg.position_type == 12 || posMsg.position_type == 13) {
+          unit = "°";
+        }
         scatterData.comparePos = posMsg
         rd.positionTypeX = type;
         rd.positionIdX = pId;

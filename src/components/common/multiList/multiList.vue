@@ -241,12 +241,12 @@ export default {
   }
   ::-webkit-scrollbar-track {
     border-radius: 3px;
-    background: rgb(239, 239, 239);
+    background: #0a53a0;
   }
   //滚动条的轨道（里面装有Thumb）
   ::-webkit-scrollbar-thumb {
     border-radius: 10px;
-    background: #0a53a0;
+    background: #3b87ff;
   }
   //滚动条的轨道的两端按钮，允许通过点击微调小方块的位置。
   ::-webkit-scrollbar-thumb:hover {

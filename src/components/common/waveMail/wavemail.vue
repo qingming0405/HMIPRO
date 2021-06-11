@@ -7,14 +7,16 @@
         @mousedown="moveDiv"
         @mouseup="moveDivUp"
       >
-        <span>波磨数据</span>
+      <!-- 波磨数据 -->
+        <span>{{$t('Common.waveData')}}</span>
         <div class="close-retrieval" @click="closeRetrieval(0)">
           <i class="iconfont icon-cuohao"></i>
         </div>
       </div>
       <!-- 显示机组（列车） -->
       <div class="select-box">
-        <div class="select-title msg-title">列车</div>
+        <!-- 列车 -->
+        <div class="select-title msg-title">{{$t('Common.train')}}</div>
         <div
           class="select-value viewMsg-name radius text-overflow select-none outside-border edge-outside-border"
         >
@@ -23,7 +25,7 @@
       </div>
       <!-- 测点选择 -->
       <div class="select-box">
-        <div class="select-title msg-title">测点</div>
+        <div class="select-title msg-title">{{$t('Common.pos')}}</div>
         <div
           class="select-value viewMsg-name radius text-overflow select-none outside-border edge-outside-border"
         >
@@ -32,7 +34,8 @@
       </div>
       <!-- 组织、机组、测点选择 -->
       <div class="select-box">
-        <div class="select-title msg-title">波磨数据</div>
+        <!-- 波磨数据 -->
+        <div class="select-title msg-title">{{$t('Common.waveData')}}</div>
 
         <div
           class="select-value viewMsg-name radius text-overflow select-none outside-border edge-outside-border"
@@ -43,8 +46,10 @@
         </div>
       </div>
       <div class="data-retrieval-btn">
-        <button @click="closeRetrieval(1)">确定</button>
-        <button class="disable-btn" @click="closeRetrieval(0)">取消</button>
+        <!-- 确定 -->
+        <button @click="closeRetrieval(1)">{{$t('Common.sureBtn')}}</button>
+        <!-- 取消 -->
+        <button class="disable-btn" @click="closeRetrieval(0)">{{$t('Common.cancelBtn')}}</button>
       </div>
     </div>
   </div>

@@ -39,6 +39,9 @@ export default {
       immediate: true
     }
   },
+  deactivated () {
+    this.realData[this.currentKey].isActive = false
+  },
   methods: {
     // 打开历史数据
     openChartList (key, type, delKey) {
@@ -50,7 +53,11 @@ export default {
         this.currentIndex = keyArr.indexOf(key);
         this.currentKey = key;
         for (let k in this.realData) {
-          k !== key && clearTimeout(this.realData[k].timer);
+          // 若关闭3s刷新，需要清除所有定时器
+          if (config.tsRefresh == 0) {
+            k !== key && clearTimeout(this.realData[k].timer);
+          }
+          // k !== key && clearTimeout(this.realData[k].timer);
           this.realData[k].isShow = false;
         }
       }
@@ -100,18 +107,23 @@ export default {
             },
             lastData: {},/* 上一次不同时间的数据保存 */
             isMMS2: isMMS2 /* 趋势图单位是否要处理为mm/s2 */,
+            isActive: true,/* 是否焦距当前页面 */
           });
           this.Data[this.currentKey] = {}
-          this.getData();
+          this.getData(this.currentKey);
           break;
         case 1 /* 切换图表 */:
           this.realData[key].isShow = true;
+          this.realData[this.currentKey].isActive = true
           //将头部的栏目移动到开始位置
           this.scrollBar();
-          // 切换之前判断是否需要获取实时数据
-          if (this.realData[key].getReal) {
-            this.getData();
+          // 若关闭3s刷新，切换之前判断是否需要获取实时数据
+          if (config.tsRefresh == 0) {
+            if (this.realData[key].getReal) {
+              this.getData(this.currentKey);
+            }
           }
+
           break;
         case 2 /* 关闭图表 */:
           clearTimeout(this.realData[key].timer);
@@ -132,39 +144,53 @@ export default {
       return typePosObj
     },
     // 获取实时数据
-    getData () {
-      let realData = this.realData[this.currentKey];
+    getData (key) {
+      let realData = this.realData[key];
       let requestData = realData.requestData;
       let pos = realData.pos;
       if (pos.pos_loc) {
         requestData.tt_pos_loc = pos.pos_loc;
       }
-      this.$getApi.getRealMap(requestData).then(res => {
-        if (res) {
-          clearTimeout(realData.timer);
-          if (res.list && res.list.length > 0) {
-            realData.empty.isShow = false;
-            this.setData(res);
-            let tsRefresh = config.tsRefresh == 1
-            let time = 1000
-            if (tsRefresh) {
-              // 若开启3s刷新则定时器时间更改为3s
-              time = 3000
+      if (this.realData[key].isActive) {
+        this.$getApi.getRealMap(requestData).then(res => {
+          if (res) {
+            clearTimeout(realData.timer);
+            if (res.list && res.list.length > 0) {
+              realData.empty.isShow = false;
+              this.setData(res, key);
+              let tsRefresh = config.tsRefresh == 1
+              let time = 1000
+              if (tsRefresh) {
+                // 若开启3s刷新则定时器时间更改为3s
+                time = 3000
+              }
+              realData.timer = setTimeout(() => {
+                this.getData(key);
+              }, time);
+            } else {
+              realData.getReal = false;
+              realData.empty.isShow = true;
             }
-            realData.timer = setTimeout(() => {
-              this.getData();
-            }, time);
-          } else {
-            realData.getReal = false;
-            realData.empty.isShow = true;
           }
+        });
+      } else {
+        let tsRefresh = config.tsRefresh == 1
+        if (tsRefresh) {
+          let time = 1000
+          if (tsRefresh) {
+            // 若开启3s刷新则定时器时间更改为3s
+            time = 3000
+          }
+          realData.timer = setTimeout(() => {
+            this.getData(key);
+          }, time);
         }
-      });
+      }
     },
     // 组合数据
-    setData (data) {
+    setData (data, key) {
       /* list 没数据的测点不返回 */
-      let realData = this.realData[this.currentKey];
+      let realData = this.realData[key];
       let head = realData.head;
       let body = [];
       let posInfo = [];
@@ -342,7 +368,7 @@ export default {
           } else {
             // 开启实时数据3s刷新
             // 当前数据与上一次请求存储saveTime_Com一致则说明非第一次请求且与为同一波数据，lastData存在则说明存在一波旧数据，时间进行+3s的处理
-            if (this.Data[this.currentKey] && this.Data[this.currentKey][`${list.mac_id}_${list.pos_id}_${list.pos_type}`] && this.Data[this.currentKey][`${list.mac_id}_${list.pos_id}_${list.pos_type}`].saveTime_Com == list.saveTime_Com && lastData && lastData[`${list.mac_id}_${list.pos_id}_${list.pos_type}`]
+            if (this.Data[key] && this.Data[key][`${list.mac_id}_${list.pos_id}_${list.pos_type}`] && this.Data[key][`${list.mac_id}_${list.pos_id}_${list.pos_type}`].saveTime_Com == list.saveTime_Com && lastData && lastData[`${list.mac_id}_${list.pos_id}_${list.pos_type}`]
             ) {
               if (value.filed === "saveTime_Com" || value.filed === "time") {
                 if (list[value.filed]) {
@@ -591,18 +617,18 @@ export default {
             若this.Data无数据，则代表本次数据为第一次请求数据，存储入lastData（上一次的数据）与this.Data
             若this.Data存在数据，则判断saveTime_Com是否一致，若一致则说明是旧数据,若不一致则保存新数据;
           */
-          if (this.Data[this.currentKey] && this.Data[this.currentKey][`${list.mac_id}_${list.pos_id}_${list.pos_type}`]) {
-            if (Number(this.Data[this.currentKey][`${list.mac_id}_${list.pos_id}_${list.pos_type}`].saveTime_Com) < Number(list.saveTime_Com)) {
-              lastData[`${list.mac_id}_${list.pos_id}_${list.pos_type}`] = this.Data[this.currentKey][`${list.mac_id}_${list.pos_id}_${list.pos_type}`]
+          if (this.Data[key] && this.Data[key][`${list.mac_id}_${list.pos_id}_${list.pos_type}`]) {
+            if (Number(this.Data[key][`${list.mac_id}_${list.pos_id}_${list.pos_type}`].saveTime_Com) < Number(list.saveTime_Com)) {
+              lastData[`${list.mac_id}_${list.pos_id}_${list.pos_type}`] = this.Data[key][`${list.mac_id}_${list.pos_id}_${list.pos_type}`]
               // lastData[`${list.mac_id}_${list.pos_id}_${list.pos_type}`].time = lastData[`${list.mac_id}_${list.pos_id}_${list.pos_type}`].saveTime_Com
               // if (`21050816440112845_11_3` == `${list.mac_id}_${list.pos_id}_${list.pos_type}`) {
               //   console.log('更换后：' + lastData[`21050816440112845_11_3`].vib_rms)
               // }
-              this.Data[this.currentKey][`${list.mac_id}_${list.pos_id}_${list.pos_type}`] = list
+              this.Data[key][`${list.mac_id}_${list.pos_id}_${list.pos_type}`] = list
             }
-          } else if (!this.Data[this.currentKey][`${list.mac_id}_${list.pos_id}_${list.pos_type}`]) {
-            this.Data[this.currentKey][`${list.mac_id}_${list.pos_id}_${list.pos_type}`] = list
-            lastData[`${list.mac_id}_${list.pos_id}_${list.pos_type}`] = this.Data[this.currentKey][`${list.mac_id}_${list.pos_id}_${list.pos_type}`]
+          } else if (!this.Data[key][`${list.mac_id}_${list.pos_id}_${list.pos_type}`]) {
+            this.Data[key][`${list.mac_id}_${list.pos_id}_${list.pos_type}`] = list
+            lastData[`${list.mac_id}_${list.pos_id}_${list.pos_type}`] = this.Data[key][`${list.mac_id}_${list.pos_id}_${list.pos_type}`]
             // lastData[`${list.mac_id}_${list.pos_id}_${list.pos_type}`].time = lastData[`${list.mac_id}_${list.pos_id}_${list.pos_type}`].saveTime_Com
           }
         }
@@ -656,14 +682,14 @@ export default {
       }).then(res => {
         if (res) {
           if (res.mId !== data.mId) {
-            this.getData();
+            this.getData(this.currentKey);
           }
           else if (res.curCode !== data.curCode) {
             data.curCode = res.curCode
             data.pos = data.typePosObj[data.curCode].pos
             data.head = data.codeObj[data.curCode]
             data.requestData.positionType = data.pos.position_type
-            this.getData()
+            this.getData(this.currentKey)
           }
         }
       });
@@ -681,7 +707,7 @@ export default {
       const data = this.realData[this.currentKey];
       data.getReal = !data.getReal;
       if (data.getReal) {
-        this.getData();
+        this.getData(this.currentKey);
         removeClass(tag, "disable-btn");
       } else {
         clearTimeout(data.timer);
@@ -717,13 +743,5 @@ export default {
       keepAlive: "real"
     });
   },
-  activated () {
-    let realData = this.realData[this.currentKey];
-    if (realData.getReal) {
-      this.getData()
-    }
-  },
-  deactivated () {
-    clearTimeout(this.realData[this.currentKey].timer);
-  }
+
 };
