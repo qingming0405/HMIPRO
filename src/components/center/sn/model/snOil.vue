@@ -7,7 +7,7 @@
       v-show="param.isShow"
     >
       <div class="oil-model-box1 Model-box">
-        <div class="Model-header">测点列表 </div>
+        <div class="Model-header">{{$t('SnModel.titleBtn2')}} </div>
         <table class="model-table">
           <tbody class="my-table-tbody pro-scrollbar">
             <tr v-for="(item,index) in param.oilData">
@@ -33,12 +33,13 @@
                 ></div>
                 <div>{{item.pos_name}}</div>
               </td>
-              <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+              <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
               <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
+              <!-- 详情 -->
               <td
                 class="model-td3"
                 @click="toReal(item)"
-              >详情</td>
+              >{{$t('Common.moreText')}}</td>
             </tr>
           </tbody>
         </table>
@@ -61,6 +62,14 @@ import oil from 'common/general/sn/model/oil.js'
 export default {
   name: 'snOil',
   mixins: [oil],
+  data() {
+    return {
+      noDataText:'无数据',
+    }
+  },
+  created () {
+    this.noDataText = this.$t('Common.noDataText')
+  }
 }
 </script>
 <style scoped lang="scss">

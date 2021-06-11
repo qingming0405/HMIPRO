@@ -37,7 +37,7 @@
                   ></div>
                   <div>{{item.pos_name}}</div>
                 </td>
-                <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+                <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
@@ -77,7 +77,7 @@
                   ></div>
                   <div>{{item.pos_name}}</div>
                 </td>
-                <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+                <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
@@ -117,7 +117,7 @@
                   ></div>
                   <div>{{item.pos_name}}</div>
                 </td>
-                <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+                <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
@@ -187,7 +187,7 @@ export default {
           this.$set(this.fdModelInfo, key, {
             mac,
             towerDrumData: [],
-            towerDrumDataName: ['机舱', '塔顶', '塔筒'], //塔筒部件名称
+            towerDrumDataName: [this.$t('Common.engineroom'), this.$t('Common.towertop'), this.$t('Common.tower')], //塔筒部件名称:'机舱', '塔顶', '塔筒'
             towerImg: '',
             isRequestDown: true,
             isShow: true,
@@ -261,7 +261,7 @@ export default {
                 )
               } else {
                 //不存在
-                eigenvalue.value = '无数据'
+                eigenvalue.value = this.$t('Common.noDataText')//'无数据'
                 eigenvalue.unit = getUnit(
                   defaultCode[element.pos_type].code,
                   element
@@ -275,7 +275,7 @@ export default {
           }
         } else {
           eigenvalue.unit = getUnit(defaultCode[element.pos_type].code, element)
-          eigenvalue.value = '无数据'
+          eigenvalue.value = this.$t('Common.noDataText')//'无数据'
           if (eigenvalue.unit instanceof Array) {
             eigenvalue.unit = eigenvalue.unit[0] //默认取第一个
           }
@@ -350,7 +350,7 @@ export default {
           ) {
             // 取晃度x
             if (
-              value.eigenvalue.value != '无数据' &&
+              value.eigenvalue.value != this.$t('Common.noDataText') &&
               value.eigenvalue.rvalue > 0
             ) {
               ac1 = value.eigenvalue.rvalue
@@ -363,7 +363,7 @@ export default {
           ) {
             //取晃度y
             if (
-              value.eigenvalue.value != '无数据' &&
+              value.eigenvalue.value != this.$t('Common.noDataText') &&
               value.eigenvalue.rvalue > 0
             ) {
               ac2 = value.eigenvalue.rvalue

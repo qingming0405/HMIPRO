@@ -7,7 +7,8 @@
       v-show="param.isShow"
     >
       <div class="drivechain-line1-box1 Model-box">
-        <div class="Model-header">测点列表</div>
+        <!-- 测点列表 -->
+        <div class="Model-header">{{$t('SnModel.titleBtn2')}}</div>
         <table class="model-table">
           <tbody class="my-table-tbody pro-scrollbar">
             <tr v-for="(item, index) in param.mainbearData.public">
@@ -33,24 +34,25 @@
                 ></div>
                 <div>{{ item.pos_name }}</div>
               </td>
-              <td v-if="item.eigenvalue.value != '无数据'">
+              <td v-if="item.eigenvalue.value != noDataText">
                 {{ item.eigenvalue.name }}:{{ item.eigenvalue.value
                 }}{{ item.eigenvalue.unit }}
               </td>
-              <td v-else="item.eigenvalue.value != '无数据'">
+              <td v-else="item.eigenvalue.value != noDataText">
                 {{ item.eigenvalue.name }}:{{ item.eigenvalue.value
                 }}
               </td>
               <td
                 class="model-td3"
                 @click="toReal(item)"
-              >详情</td>
+              >{{$t('Common.moreText')}}</td>
             </tr>
           </tbody>
         </table>
       </div>
       <div class="drivechain-line1-box2 Model-box">
-        <div class="Model-header">数字孪生</div>
+        <!-- 数字孪生 -->
+        <div class="Model-header">{{$t('TyVib.tableTitle2')}}</div>
         <div
           id="container"
           :class="'container'+key"
@@ -65,8 +67,13 @@ import vib from 'common/general/sn/model/vib.js'
 export default {
   mixins: [vib],
   data() {
-    return {}
+    return { 
+      noDataText:'无数据',
+    }
   },
+  created () {
+    this.noDataText = this.$t('Common.noDataText')
+  }
 }
 </script>
 <style scoped lang="scss">

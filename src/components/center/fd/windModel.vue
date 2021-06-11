@@ -234,7 +234,7 @@ export default {
             chainHeight: '',
             selectedObjects: [],
             windType: true, //风机模式：true白色，false网格
-            windTypeText: '透视效果',
+            windTypeText: this.$t('WindModel.btnPerspective'),//'透视效果',
             model: {
               //弹窗部件信息
               name: '', //弹窗部件名
@@ -775,7 +775,7 @@ export default {
       // 设备模型跳转设备模型使用同一个key值调用getPath方法
       let params = {
         key: this.currentKey,
-        val: '设备模型',
+        val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
         name: 'fdModel',
         icon: 'icon-shijingsanwei-',
       }
@@ -974,49 +974,49 @@ export default {
       switch (name) {
         case '传动链':
           data = {
-            name: '传动链',
+            name: this.$t('FdModel.locName1'),//'传动链',
             router: 'fddrivechain',
             index: 0,
           }
           break
         case '塔筒':
           data = {
-            name: '塔筒',
+            name: this.$t('FdModel.locName2'),//'塔筒',
             router: 'fdtowerdrum',
             index: 1,
           }
           break
         case '螺栓':
           data = {
-            name: '螺栓',
+            name: this.$t('FdModel.locName3'),//'螺栓',
             router: 'fdbolt',
             index: 2,
           }
           break
         case '叶轮':
           data = {
-            name: '叶轮',
+            name: this.$t('FdModel.locName4'),//'叶轮',
             router: 'fdimpeller',
             index: 3,
           }
           break
         case '油液':
           data = {
-            name: '油液',
+            name: this.$t('FdModel.locName5'),//'油液',
             router: 'fdoil',
             index: 4,
           }
           break
         case '锚栓':
           data = {
-            name: '锚栓',
+            name: this.$t('FdModel.locName6'),//'锚栓',
             router: 'fdanchorbolt',
             index: 5,
           }
           break
         case '基础':
           data = {
-            name: '基础',
+            name: this.$t('FdModel.locName7'),//'基础',
             router: 'fdbasics',
             index: 6,
           }
@@ -1047,7 +1047,7 @@ export default {
       // 设备模型跳转设备模型使用同一个key值调用getPath方法
       let params = {
         key: this.currentKey,
-        val: '设备模型',
+        val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
         name: 'fdModelitem',
         icon: 'icon-shijingsanwei-',
       }
@@ -1128,22 +1128,22 @@ export default {
                 diagnosis_str = driveChainDia.toString(2)
                 if (diagnosis_str.length > 0) {
                   if (Number(diagnosis_str[0]) > 0) {
-                    diagnosis.push('轴承缺陷')
+                    diagnosis.push(this.$t('FdModel.bearingDefect'))//'轴承缺陷'
                   }
                 }
                 if (diagnosis_str.length > 1) {
                   if (Number(diagnosis_str[1]) > 0) {
-                    diagnosis.push('齿轮缺陷')
+                    diagnosis.push(this.$t('FdModel.gearDefect'))//'齿轮缺陷')
                   }
                 }
                 if (diagnosis_str.length > 2) {
                   if (Number(diagnosis_str[2]) > 0) {
-                    diagnosis.push('电机不平衡或松动')
+                    diagnosis.push(this.$t('FdModel.motorDefect'))//'电机不平衡或松动')
                   }
                 }
                 if (diagnosis_str.length > 3) {
                   if (Number(diagnosis_str[3]) > 0) {
-                    diagnosis.push('齿轮箱载荷过重')
+                    diagnosis.push(this.$t('FdModel.gearBoxDefect'))//'齿轮箱载荷过重')
                   }
                 }
                 param.diagnosis.driveChain = {
@@ -1162,20 +1162,20 @@ export default {
     },
     //报警状态对应的文字
     getAlarmText(status) {
-      let text = '正常'
+      let text = this.$t('Common.normalText')//'正常'
       switch (status) {
         case 0:
         case null:
-          text = '离线'
+          text = this.$t('Common.offlineText')//'离线'
           break
         case 1:
-          text = '正常'
+          text = this.$t('Common.normalText')//'正常'
           break
         case 2:
-          text = '预警'
+          text = this.$t('Common.warnText')//'预警'
           break
         case 3:
-          text = '报警'
+          text = this.$t('Common.alarmText')//'报警'
           break
       }
       return text
@@ -1281,7 +1281,7 @@ export default {
     finishRotate(newVal, oldVal) {
       if (this.finishRotate) {
         this.windType = false
-        this.windTypeText = '风机外观'
+        this.windTypeText = that.$t('btnPerspective.btnPhysical') //'风机外观'
         this.$forceUpdate()
         scene.traverse(function (obj) {
           if (obj.type === 'Mesh' && obj.name.indexOf('baiseshiti') != -1) {

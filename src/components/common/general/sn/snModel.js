@@ -102,7 +102,7 @@ const snModel = {
           // 设备模型跳转设备模型使用同一个key值调用getPath方法
           let params = {
             key: this.currentKey,
-            val: '设备模型',
+            val: this.$t('YtModel.macModel'),//'设备模型',
             name: param.monitorePos[i].router,
             icon: 'icon-shijingsanwei-',
           }
@@ -117,10 +117,12 @@ const snModel = {
       param.modelTitle = this.$store.state.windmodelTitle
       let dip = false, oil = false
       for (let i = 0, l = param.modelTitle.length; i < l; i++) {
-        if (param.modelTitle[i].name == '塔筒' || param.modelTitle[i].name == '基础') {
+        /* 塔筒 || 基础 */ 
+        if (param.modelTitle[i].name == this.$t('FdModel.locName2') || param.modelTitle[i].name == this.$t('FdModel.locName7')) {
           dip = true;
         }
-        if (param.modelTitle[i].name == '油液') {
+        // 油液
+        if (param.modelTitle[i].name == this.$t('FdModel.locName5')) {
           oil = true;
         }
       }
@@ -129,7 +131,7 @@ const snModel = {
       // 默认推到水泥设备模型中
       let params = {
         key: this.currentKey,
-        val: '设备模型',
+        val: this.$t('YtModel.macModel'),//'设备模型',
         name: 'snMechineModel',
         icon: 'icon-shijingsanwei-',
       }

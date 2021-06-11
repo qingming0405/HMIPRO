@@ -369,7 +369,7 @@ const snGeneral = {
           this.$bus.$emit(
             'generalRouting',
             'snModel',
-            '设备模型',
+            this.$t('YtModel.macModel'),//'设备模型',
             'icon-shijingsanwei-'
           )
           return
@@ -383,7 +383,7 @@ const snGeneral = {
       this.$bus.$emit(
         'generalRouting',
         'snModel',
-        '设备模型',
+        this.$t('YtModel.macModel'),//'设备模型',
         'icon-shijingsanwei-'
       )
       // this.$router.push({

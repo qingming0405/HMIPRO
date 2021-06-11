@@ -6,7 +6,11 @@ export default {
       time: "",
       driveChainArr: [], //传动链部件信息
       isRequestDown: true,
+      noDataText:'无数据',
     };
+  },
+  created() {
+    this.noDataText = this.$t('Common.noDataText');
   },
   methods: {
     // 跳转实时数据列表

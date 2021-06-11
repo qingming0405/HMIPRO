@@ -491,7 +491,7 @@ export default {
           },
         },
         yAxis: {
-          name: '沉没度(m)',
+          name: `${this.$t('YtAnalyse.sinkVal')}(m)`,//沉没度
           type: 'value',
           /* 坐标线 */
           axisLine: {
@@ -633,11 +633,11 @@ export default {
             )
           ) {
             //未能匹配
-            this.$pop('该类型测点没有此图谱')
+            this.$pop(this.$t('Common.noChartTips'))//该类型测点没有此图谱
             return
           }
           let name = 'real' //实时数据列表
-          let val = '实时数据列表'
+          let val = this.$t('HeaderEdge.secondLevel4_2');//'实时数据列表'
           let icon = 'icon-shishishuju_huaban'
           let key = `${name}_pos_${item.mac_id}_${posArray[i].position_id}_${posArray[i].position_type}`
           this.$bus.$emit('choiceChartType', key, val)

@@ -40,7 +40,7 @@
                   ></div>
                   <div>{{item.pos_name}}</div>
                 </td>
-                <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+                <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
@@ -83,7 +83,7 @@
                   ></div>
                   <div>{{item.pos_name}}</div>
                 </td>
-                <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+                <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
@@ -126,7 +126,7 @@
                   ></div>
                   <div>{{item.pos_name}}</div>
                 </td>
-                <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+                <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
@@ -146,7 +146,7 @@
             <tbody class="my-table-tbody pro-scrollbar">
               <tr
                 v-for="(item,index) in param.impellerData"
-                v-show="item.list_name == '公共'"
+                v-show="item.list_name == publicText"
               >
                 <td
                   class="model-td"
@@ -170,7 +170,7 @@
                   ></div>
                   <div>{{item.pos_name}}</div>
                 </td>
-                <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+                <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
@@ -211,9 +211,12 @@ export default {
       fdModelInfo: {},
       currentKey: '',
       isAdmin: false, //是否为超级管理员
+      publicText:'公共'
     }
   },
   created() {
+    this.publicText = this.$t('Impeller.public')//'公共'
+
     this.$store.commit('set_keepAlive', {
       method: 'add',
       keepAlive: 'fdimpeller',
@@ -261,7 +264,7 @@ export default {
           this.$set(this.fdModelInfo, key, {
             mac,
             impellerData: [],
-            impellerDataName: ['叶轮1', '叶轮2', '叶轮3'], //叶片部件名称
+            impellerDataName: [this.$t('Impeller.impeller1'), this.$t('Impeller.impeller2'), this.$t('Impeller.impeller3')], //叶片部件名称:叶轮1、叶轮2、叶轮3
             isRequestDown: true,
             isShow: true,
           })
@@ -332,7 +335,7 @@ export default {
                 )
               } else {
                 //不存在
-                eigenvalue.value = '无数据'
+                eigenvalue.value = this.noDataText;//'无数据'
                 eigenvalue.unit = getUnit(
                   defaultCode[element.pos_type].code,
                   element
@@ -346,7 +349,7 @@ export default {
           }
         } else {
           eigenvalue.unit = getUnit(defaultCode[element.pos_type].code, element)
-          eigenvalue.value = '无数据'
+          eigenvalue.value = this.noDataText;//'无数据'
           if (eigenvalue.unit instanceof Array) {
             eigenvalue.unit = eigenvalue.unit[0] //默认取第一个
           }

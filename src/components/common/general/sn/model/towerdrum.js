@@ -36,7 +36,7 @@ const towerdrum = {
         case 0 /* 打开图表 */:
           this.$set(this.snTowerdrum, key, {
             mac,
-            towerDrumDataName: ['倾角', '沉降'],
+            towerDrumDataName: [this.$t('Towerdrum.angle'), this.$t('Towerdrum.sink')],//倾角、沉降
             towerDrumData: [],/* 倾角 */
             basicsData: [],/* 沉降 */
             timer: null,
@@ -117,11 +117,11 @@ const towerdrum = {
             )
           ) {
             //未能匹配
-            this.$pop("该类型测点没有此图谱");
+            this.$pop(this.$t('Common.noChartTips'));//该类型测点没有此图谱
             return;
           }
           let name = "real"; //实时数据列表
-          let val = "实时数据列表";
+          let val = this.$t('HeaderEdge.secondLevel4_2');//"实时数据列表";
           let icon = "icon-shishishuju_huaban";
           let key = `${name}_pos_${item.mac_id}_${item.pos_id}_${item.pos_type}`;
           this.$bus.$emit("choiceChartType", key, val);
@@ -154,7 +154,7 @@ const towerdrum = {
                 )
               } else {
                 //不存在
-                eigenvalue.value = '无数据'
+                eigenvalue.value = this.$t('Common.noDataText');//'无数据'
                 eigenvalue.unit = getUnit(
                   defaultCode[element.pos_type].code,
                   element
@@ -168,7 +168,7 @@ const towerdrum = {
           }
         } else {
           eigenvalue.unit = getUnit(defaultCode[element.pos_type].code, element)
-          eigenvalue.value = '无数据'
+          eigenvalue.value = this.$t('Common.noDataText');//'无数据'
           if (eigenvalue.unit instanceof Array) {
             eigenvalue.unit = eigenvalue.unit[0] //默认取第一个
           }
@@ -246,7 +246,7 @@ const towerdrum = {
         // 设置颜色
         canvas.fillStyle = '#ffffff'
         canvas.fillText(
-          '倾角',
+          this.$t('Towerdrum.angle'),//'倾角',
           x + 35, y + 28
         )
 
@@ -254,7 +254,7 @@ const towerdrum = {
         let y2 = dom.height - 44
         canvas.drawImage(hgtitle, x, y2, 302, 44)
         canvas.fillText(
-          '沉降',
+          this.$t('Towerdrum.sink'),//'沉降',
           x + 35, y2 + 28
         )
 
@@ -268,7 +268,7 @@ const towerdrum = {
           // 设置颜色
           canvas.fillStyle = '#ffffff'
           canvas.fillText(
-            '倾角',
+            this.$t('Towerdrum.angle'),//'倾角',
             x + 35, y + 25
           )
 
@@ -276,7 +276,7 @@ const towerdrum = {
           let y2 = dom.height - 44
           canvas.drawImage(hgtitle, x, y2, 302, 44)
           canvas.fillText(
-            '沉降',
+            this.$t('Towerdrum.sink'),//'沉降',
             x + 35, y2 + 28
           )
         }

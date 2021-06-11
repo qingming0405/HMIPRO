@@ -561,7 +561,7 @@ const mechineModel = {
         }
       })
       let name = "trend"; //实时数据列表
-      let val = "趋势图";
+      let val = this.$t('Common.trend');//"趋势图";
       let icon = "icon-qushitu_huaban1";
       let key = `${name}_pos_${item.mac_id}_${item.pos_id}_${item.pos_type}`;
       this.$bus.$emit("choiceChartType", key, val);

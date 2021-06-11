@@ -321,7 +321,7 @@ export default focus = {
         this.$bus.$emit(
           'generalRouting',
           toPage,
-          '设备模型',
+          this.$t('SnModel.titleBtn1'),//'设备模型',
           'icon-shijingsanwei-'
         )
       })
@@ -484,7 +484,7 @@ export default focus = {
         text.unshift({
           isShow: true,
           isCheck: false,
-          val: '全部',
+          val: this.$t('Common.allText'),//'全部',
           id: -1,
         })
       }
@@ -625,7 +625,7 @@ export default focus = {
           this.MacSelect(requestData, type)
           this.MacSelecttimer()
         } else {
-          this.$pop('筛选数据有误')
+          this.$pop(this.$t('YtFocus.filterError'))//筛选数据有误
         }
       } else {
         if (
@@ -648,7 +648,7 @@ export default focus = {
           }
           params.timer.seltimer = setInterval(fn(), 6000)
         } else {
-          this.$pop('筛选数据有误')
+          this.$pop(this.$t('YtFocus.filterError'))//筛选数据有误
         }
       }
     },

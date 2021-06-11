@@ -271,7 +271,7 @@ export default {
       // })
       let params = {
         key: this.currentKey,
-        val: '设备模型',
+        val: this.$t('YtModel.macModel'),//'设备模型',
         name: 'gjModelInfo',
         icon: 'icon-shijingsanwei-',
       }

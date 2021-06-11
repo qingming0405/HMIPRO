@@ -38,7 +38,7 @@
                 ></div>
                 <div>{{item.pos_name}}</div>
               </td>
-              <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+              <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
               <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
               <td
                 class="model-td3"
@@ -80,9 +80,12 @@ export default {
     return {
       fdModelInfo: {},
       currentKey: '',
+      noDataText:'无数据',
     }
   },
   created() {
+    this.noDataText = this.$t('Common.noDataText');
+
     this.$store.commit('set_keepAlive', {
       method: 'add',
       keepAlive: 'fdanchorbolt',
@@ -193,7 +196,7 @@ export default {
                 )
               } else {
                 //不存在
-                eigenvalue.value = '无数据'
+                eigenvalue.value = this.$t('Common.noDataText')//'无数据'
                 eigenvalue.unit = getUnit(
                   defaultCode[element.pos_type].code,
                   element
@@ -206,7 +209,7 @@ export default {
           }
         } else {
           eigenvalue.unit = getUnit(defaultCode[element.pos_type].code, element)
-          eigenvalue.value = '无数据'
+          eigenvalue.value = this.$t('Common.noDataText')//'无数据'
           if (eigenvalue.unit instanceof Array) {
             eigenvalue.unit = eigenvalue.unit[0] //默认取第一个
           }

@@ -175,7 +175,7 @@ export default {
             return
           }
           let name = 'real' //实时数据列表
-          let val = '实时数据列表'
+          let val = this.$t('HeaderEdge.secondLevel4_2')//'实时数据列表'
           let icon = 'icon-shishishuju_huaban'
           let key = `${name}_pos_${item.mac_id}_${item.pos_id}_${item.pos_type}`
           this.$bus.$emit('choiceChartType', key, val)

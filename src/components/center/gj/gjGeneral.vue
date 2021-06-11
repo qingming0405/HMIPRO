@@ -16,12 +16,13 @@
       </div>
       <div class="general-view-title">
         <div class="general-view-itemize">
+          <!-- itemize[6].name 关注 -->
           <a
             class="general-view-item"
             :class="{'active':item.chooseflag}"
             v-for="(item,index) in param.itemize"
             @click="!param.isShowTree?filterByStatus(item):filterTreeByStatus(item)"
-            v-show="(param.isShowTree && item.name !== '关注') || !param.isShowTree"
+            v-show="(param.isShowTree && item.name !== itemize[6].name) || !param.isShowTree"
           >
             {{item.name}} {{item.number}}
           </a>
@@ -39,12 +40,13 @@
             v-resize="resize"
             v-show="!param.isShowTree"
           >
+          <!-- itemize[1].name 正常； itemize[4].name 预警； itemize[3].name Ⅰ级报警； itemize[2].name 'Ⅱ级报警'； itemize[5].name '离线'-->
             <div
               v-for="(item,index) in param.searchmac"
               class="view-content "
               @click="choosemac"
               @dblclick.prevent="toMacModel(item)"
-              :class="{'general-view-citem':item.status==='正常', 'general-view-citem-warning':item.status==='预警','general-view-citem-alarm1':item.status==='Ⅰ级报警','general-view-citem-alarm2':item.status==='Ⅱ级报警','general-view-citem-abnormal':item.status==='自检异常','general-view-citem-offline':item.status==='离线',}"
+              :class="{'general-view-citem':item.status=== itemize[1].name, 'general-view-citem-warning':item.status=== itemize[4].name,'general-view-citem-alarm1':item.status===itemize[3].name,'general-view-citem-alarm2':item.status===itemize[2].name,'general-view-citem-abnormal':item.status==='自检异常','general-view-citem-offline':item.status===itemize[5].name,}"
               v-show="item.isShow"
             >
               <div class="general-view-ctitle">
@@ -81,12 +83,13 @@
             v-resize="resize"
             v-show="param.isShowTree"
           >
+          <!-- itemize[1].name 正常； itemize[4].name 预警； itemize[3].name Ⅰ级报警； itemize[2].name 'Ⅱ级报警'； itemize[5].name '离线'-->
             <div
               v-for="(item,index) in param.treeData"
               class="view-content "
               @click="choosemac"
               @dblclick.prevent="changeTree(item)"
-              :class="{'general-view-citem':item.status==='正常', 'general-view-citem-warning':item.status==='预警','general-view-citem-alarm1':item.status==='Ⅰ级报警','general-view-citem-alarm2':item.status==='Ⅱ级报警','general-view-citem-abnormal':item.status==='自检异常','general-view-citem-offline':item.status==='离线',}"
+              :class="{'general-view-citem':item.status=== itemize[1].name, 'general-view-citem-warning':item.status=== itemize[4].name,'general-view-citem-alarm1':item.status===itemize[3].name,'general-view-citem-alarm2':item.status===itemize[2].name,'general-view-citem-abnormal':item.status==='自检异常','general-view-citem-offline':item.status===itemize[5].name,}"
               v-show="item.isShow"
             >
               <div class="general-view-ctitle">
@@ -157,6 +160,15 @@ export default {
       isRequstDown: true,
       isDataRight: true, //请求机组数据时点击收藏会出现数据错误显现，标识是否会存在数据错误
     }
+  },
+  created() {
+    this.itemize[0].name = this.$t('Common.allText');//全部
+    this.itemize[1].name = this.$t('Common.normalText');//正常
+    this.itemize[2].name = this.$t('GjModel.alarm2Text');//Ⅱ级报警
+    this.itemize[3].name = this.$t('GjModel.alarm1Text');//Ⅰ级报警
+    this.itemize[4].name = this.$t('GjModel.warnText');//预警
+    this.itemize[5].name = this.$t('GjModel.offlineText');//离线
+    this.itemize[6].name = this.$t('Common.focausText');//关注
   },
   mounted() {
     let gjModelflag = config.gjModel
@@ -261,23 +273,23 @@ export default {
           }
           switch (item.alarmStatus) {
             case 0:
-              item.status = '离线'
+              item.status = this.$t('GjModel.offlineText')//'离线'
               param.itemize[5].number++
               break
             case 1:
-              item.status = '正常'
+              item.status = this.$t('GjModel.normalText')//'正常'
               if (stutas) {
                 param.itemize[1].number++
               }
               break
             case 2:
-              item.status = '预警'
+              item.status = this.$t('GjModel.warnText')//'预警'
               break
             case 3:
-              item.status = 'Ⅰ级报警'
+              item.status = this.$t('GjModel.alarm1Text')//'Ⅰ级报警'
               break
             case 4:
-              item.status = 'Ⅱ级报警'
+              item.status = this.$t('GjModel.alarm2Text')//'Ⅱ级报警'
               break
           }
           item.name = item.mac_me
@@ -326,23 +338,23 @@ export default {
           }
           switch (item.alarmStatus) {
             case 0:
-              item.status = '离线'
+              item.status = this.$t('GjModel.offlineText')//'离线'
               param.itemize[5].number++
               break
             case 1:
-              item.status = '正常'
+              item.status = this.$t('GjModel.normalText')//'正常'
               param.itemize[1].number++
               break
             case 2:
-              item.status = '预警'
+              item.status = this.$t('GjModel.warnText')//'预警'
               param.itemize[4].number++
               break
             case 3:
-              item.status = 'Ⅰ级报警'
+              item.status = this.$t('GjModel.alarm1Text')//'Ⅰ级报警'
               param.itemize[3].number++
               break
             case 4:
-              item.status = 'Ⅱ级报警'
+              item.status = this.$t('GjModel.alarm2Text')//'Ⅱ级报警'
               param.itemize[2].number++
               break
           }
@@ -397,7 +409,7 @@ export default {
             }
             break
           case 5:
-            if (item.status == '离线') {
+            if (item.status == this.$t('GjModel.offlineText')) {//'离线'
               item.isShow = true
             } else {
               item.isShow = false
@@ -467,7 +479,7 @@ export default {
         })
         resolve('成功')
       }).then(() => {
-        this.$bus.$emit('generalRouting', 'gjGeneral', '总貌图', 'icon-shouye1')
+        this.$bus.$emit('generalRouting', 'gjGeneral', this.$t('HeaderEdge.firstLevel1'), 'icon-shouye1')//'总貌图'
       })
       return
     },
@@ -477,7 +489,7 @@ export default {
       if (machine.pumps && machine.pumps.length) {
         machine.pump_id = machine.pumps[0].pump_id
       } else {
-        this.$pop('该机组无总貌图')
+        this.$pop(this.$t('Common.noOverviewTips'))//该机组无总貌图
         return
       }
       let pump_id = machine.pump_id
@@ -537,7 +549,7 @@ export default {
         this.$bus.$emit(
           'generalRouting',
           'gjModel',
-          '设备模型',
+          this.$t('YtModel.macModel'),//'设备模型',
           'icon-shijingsanwei-'
         )
       })
@@ -579,7 +591,7 @@ export default {
             }
             break
           case 5:
-            if (item.status == '离线') {
+            if (item.status == this.$t('GjModel.offlineText')) {//'离线'
               item.isShow = true
             } else {
               item.isShow = false

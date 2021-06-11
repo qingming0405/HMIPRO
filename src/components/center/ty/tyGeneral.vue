@@ -179,7 +179,7 @@ export default {
         if (res) {
           /* 收藏成功 */
           this.itemize.forEach((item1) => {
-            if (item1.name === '关注') {
+            if (item1.name === this.$t('Common.focausText')) {//关注
               if (item.isFocus) {
                 item1.number++
               } else {

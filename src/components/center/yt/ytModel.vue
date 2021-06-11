@@ -131,7 +131,7 @@ export default {
           // 设备模型跳转设备模型使用同一个key值调用getPath方法
           let params = {
             key: this.currentKey,
-            val: '设备模型',
+            val: this.$t('YtModel.macModel'),//'设备模型',
             name: param.monitorePos[i].router,
             icon: 'icon-shijingsanwei-',
           }
@@ -155,7 +155,7 @@ export default {
       // 默认推到水泥设备模型中
       let params = {
         key: this.currentKey,
-        val: '设备模型',
+        val: this.$t('YtModel.macModel'),//'设备模型',
         name: router,
         icon: 'icon-shijingsanwei-',
       }

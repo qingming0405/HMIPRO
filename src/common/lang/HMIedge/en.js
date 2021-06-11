@@ -13,6 +13,7 @@ export const en = {
     normalText: 'Normal',//报警状态正常
     warnText: 'Warning',//报警状态预警
     alarmText: 'Alarm',//报警状态报警
+    abnormalText:'Abnormal self-test',//自检异常
     focausText: 'Focus',//关注
     allText: 'All',//全部
     chainText: 'Drive chain',//传动链
@@ -119,6 +120,12 @@ export const en = {
     selectPos:'Select Postion',//选择测点
     clearSet:'Clear Settings',//清空设置
     effectiveTime:'Effective Time',//有效时间
+    loadingUnfinished:'The model is not loaded',//模型未加载完成
+    engineroom:'Engineroom',//机舱
+    towertop:'Towertop',//塔顶
+    tower:'Tower',//塔筒
+    noOverviewTips:'No overview of the unit',//该机组无总貌图
+    noAlarmTips:'No alarm for speed channel',//转速通道无报警
   },
   Common8000: {
     TimedHisData: 'Timed historical data',//定时历史数据
@@ -266,6 +273,9 @@ export const en = {
   Impeller: {
     public: 'Public',//公共
     moreText: 'more',//详情
+    impeller1:'impeller1',//叶轮1
+    impeller2:'impeller2',//叶轮2
+    impeller3:'impeller3',//叶轮3
   },
   //风电模型-油液
   Oil: {
@@ -319,6 +329,14 @@ export const en = {
     warnAdvice: 'If the fault cannot be eliminated, it is recommended to return to the warehouse after the operation of the day is ended',//设备预警的建议文字
     alarm1Advice: 'If the fault cannot be eliminated, it is recommended to exit the operation after the end of the operation',//设备Ⅰ级报警的建议文字
     alarm2Advice: 'If the fault cannot be eliminated, it is recommended to quit operation after clearing the passengers at the next stop',//设备Ⅱ级报警的建议文字
+    axis1:'1 axis',//1轴
+    axis2:'2 axis',//2轴
+    axis3:'3 axis',//3轴
+    axis4:'4 axis',//4轴
+    advice1:'Normal',//正常
+    advice2:'Requires attention',//需要注意
+    advice3:'Requires repair',//需要维修
+    advice4:'Offline',//已离线
   },
   //油田总貌图
   YtGeneral: {

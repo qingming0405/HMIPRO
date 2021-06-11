@@ -302,7 +302,7 @@ const general = {
         if (res) {
           /* 收藏成功 */
           param.itemize.forEach(item1 => {
-            if (item1.name === "关注") {
+            if (item1.name === this.$t('Common.focausText')) {//关注
               if (item.isFocus) {
                 item1.number++;
               } else {
@@ -373,7 +373,7 @@ const general = {
         this.$bus.$emit(
           'generalRouting',
           toPage,
-          '设备模型',
+          this.$t('YtModel.macModel'),//'设备模型',
           'icon-shijingsanwei-'
         )
       })

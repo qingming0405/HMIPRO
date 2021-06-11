@@ -458,23 +458,23 @@ export default {
     getAlarmStatus(obj, alarm_status) {
       switch (alarm_status) {
         case 0:
-          obj.status = '离线'
+          obj.status = this.$t('GjModel.offlineText')//'离线'
           obj.type = 4
           break
         case 1:
-          obj.status = '正常'
+          obj.status = this.$t('GjModel.normalText')//'正常'
           obj.type = 1
           break
         case 2:
-          obj.status = '预警'
+          obj.status = this.$t('GjModel.warnText')//'预警'
           obj.type = 2
           break
         case 3:
-          obj.status = 'Ⅰ级报警'
+          obj.status = this.$t('GjModel.alarm1Text')//'Ⅰ级报警'
           obj.type = 3
           break
         case 4:
-          obj.status = 'Ⅱ级报警'
+          obj.status = this.$t('GjModel.alarm2Text')//'Ⅱ级报警'
           obj.type = 5
           break
       }
@@ -491,7 +491,7 @@ export default {
           if (res) {
             if (params.isDataRight) {
               if (res.data.length == 0 && type == 1) {
-                this.$pop('筛选无数据')
+                this.$pop(this.$t('YtFocus.filterNoData'))//筛选无数据
               }
               res.data.forEach((item) => {
                 let obj = {}
@@ -553,7 +553,7 @@ export default {
       if (machine.pumps && machine.pumps.length) {
         machine.pump_id = machine.pumps[0].pump_id
       } else {
-        this.$pop('该机组无总貌图')
+        this.$pop(this.$t('Common.noOverviewTips'))//'该机组无总貌图')
         return
       }
       let pump_id = machine.pump_id
@@ -582,7 +582,7 @@ export default {
           this.$bus.$emit(
             'generalRouting',
             'gjModel',
-            '设备模型',
+             this.$t('YtModel.macModel'),//'设备模型',
             'icon-shijingsanwei-'
           )
           return
@@ -614,7 +614,7 @@ export default {
       this.$bus.$emit(
         'generalRouting',
         'gjModel',
-        '设备模型',
+        this.$t('YtModel.macModel'),//'设备模型',
         'icon-shijingsanwei-'
       )
     },

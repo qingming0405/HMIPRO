@@ -59,7 +59,7 @@ const snFocus = {
             mac: [], //机泵信息存放
             noData: {
               isShow: true,
-              text: '无重点关注机组',
+              text: this.$t('SnFocus.noFocusMacTips'),//'无重点关注机组',
             },
             tree,//组织信息
             timer: '', //定时器
@@ -105,7 +105,7 @@ const snFocus = {
           this.$bus.$emit(
             'generalRouting',
             'snModel',
-            '设备模型',
+            this.$t('YtModel.macModel'),//'设备模型',
             'icon-shijingsanwei-'
           )
           return
@@ -141,7 +141,7 @@ const snFocus = {
       this.$bus.$emit(
         'generalRouting',
         'snModel',
-        '设备模型',
+        this.$t('YtModel.macModel'),//'设备模型',
         'icon-shijingsanwei-'
       )
     },
@@ -179,7 +179,7 @@ const snFocus = {
           /* 收藏成功 */
         } else {
           item.isCheck = !item.isCheck
-          this.$pop('取消收藏失败')
+          this.$pop(this.$t('Common.quitCollectTips'))//取消收藏失败
         }
         if (!params.isRequstDown) {
           params.isDataRight = false

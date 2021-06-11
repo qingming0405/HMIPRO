@@ -331,6 +331,14 @@ export default {
     }
   },
   created() {
+    this.itemize[0].name = this.$t('Common.allText');//全部
+    this.itemize[1].name = this.$t('Common.normalText');//正常
+    this.itemize[3].name = this.$t('Common.alarmText');//报警
+    this.itemize[4].name = this.$t('GjModel.warnText');//预警
+    this.itemize[5].name = this.$t('Common.abnormalText');//自检异常
+    this.itemize[6].name = this.$t('GjModel.offlineText');//离线
+    this.itemize[7].name = this.$t('Common.focausText');//关注
+
     window.innerWidth < 1380 ? (this.eachRowNum = 5) : (this.eachRowNum = 6)
     this.$store.commit('set_keepAlive', {
       method: 'add',

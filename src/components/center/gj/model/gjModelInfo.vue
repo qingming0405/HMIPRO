@@ -107,7 +107,9 @@ import { cloneObj } from 'utils/utils.js'
 export default {
   name: 'gjModelInfo',
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       gjModelInfo: {},
       currentKey: '',
     }
@@ -174,11 +176,11 @@ export default {
             //   '维修建议',
             // ],
             head: [
-              this.$t('GjModelInfo.headChname'),
-              this.$t('GjModelInfo.headLoc'),
-              this.$t('GjModelInfo.headVibAlarm'),
-              this.$t('GjModelInfo.headTempAlarm'),
-              this.$t('GjModelInfo.headAdvice'),
+              vm.$t('GjModelInfo.headChname'),
+              vm.$t('GjModelInfo.headLoc'),
+              vm.$t('GjModelInfo.headVibAlarm'),
+              vm.$t('GjModelInfo.headTempAlarm'),
+              vm.$t('GjModelInfo.headAdvice'),
             ],
             body: [],
             canvasLeft: null, //底部图片dom
@@ -314,46 +316,46 @@ export default {
               switch (ch.alarm_status) {
                 case 0: //'离线'
                   ch.color = '#ccc'
-                  ch.alarm_text = this.$t('GjModelInfo.offlineText')
-                  ch.fix_text = this.$t('GjModelInfo.offlineAdvice')
+                  ch.alarm_text = vm.$t('GjModelInfo.offlineText')
+                  ch.fix_text = vm.$t('GjModelInfo.offlineAdvice')
                   break
                 case 1: //'正常'
                   ch.color = '#009944'
-                  ch.alarm_text = this.$t('GjModelInfo.normalText')
-                  ch.fix_text = this.$t('GjModelInfo.normalAdvice')
+                  ch.alarm_text = vm.$t('GjModelInfo.normalText')
+                  ch.fix_text = vm.$t('GjModelInfo.normalAdvice')
                   break
                 case 2: //'预警'
                   ch.color = '#BFAF00FF'
-                  ch.alarm_text = this.$t('GjModelInfo.warnText')
-                  ch.fix_text = this.$t('GjModelInfo.warnAdvice')
+                  ch.alarm_text = vm.$t('GjModelInfo.warnText')
+                  ch.fix_text = vm.$t('GjModelInfo.warnAdvice')
                   break
                 case 3: //'Ⅰ级报警'
                   ch.color = '#FF9B21FF'
-                  ch.alarm_text = this.$t('GjModelInfo.alarm1Text')
-                  ch.fix_text = this.$t('GjModelInfo.alarm1Advice')
+                  ch.alarm_text = vm.$t('GjModelInfo.alarm1Text')
+                  ch.fix_text = vm.$t('GjModelInfo.alarm1Advice')
                   break
                 case 4: //'Ⅱ级报警'
                   ch.color = '#F70000FF'
-                  ch.alarm_text = this.$t('GjModelInfo.alarm2Text')
-                  ch.fix_text = this.$t('GjModelInfo.alarm2Advice')
+                  ch.alarm_text = vm.$t('GjModelInfo.alarm2Text')
+                  ch.fix_text = vm.$t('GjModelInfo.alarm2Advice')
                   break
               }
               // 温度报警
               switch (ch.temp_status) {
                 case 0: //'离线'
-                  ch.temp_text = this.$t('GjModelInfo.offlineText')
+                  ch.temp_text = vm.$t('GjModelInfo.offlineText')
                   break
                 case 1: //'正常'
-                  ch.temp_text = this.$t('GjModelInfo.normalText')
+                  ch.temp_text = vm.$t('GjModelInfo.normalText')
                   break
                 case 2: //'预警'
-                  ch.temp_text = this.$t('GjModelInfo.warnText')
+                  ch.temp_text = vm.$t('GjModelInfo.warnText')
                   break
                 case 3: //'Ⅰ级报警'
-                  ch.temp_text = this.$t('GjModelInfo.alarm1Text')
+                  ch.temp_text = vm.$t('GjModelInfo.alarm1Text')
                   break
                 case 4: //'Ⅱ级报警'
-                  ch.temp_text = this.$t('GjModelInfo.alarm2Text')
+                  ch.temp_text = vm.$t('GjModelInfo.alarm2Text')
                   break
               }
               // 总貌图配置
@@ -363,19 +365,19 @@ export default {
               // 整栋报警
               switch (ch.vib_status) {
                 case 0: //'离线'
-                  ch.vib_text = this.$t('GjModelInfo.offlineText')
+                  ch.vib_text = vm.$t('GjModelInfo.offlineText')
                   break
                 case 1: //'正常'
-                  ch.vib_text = this.$t('GjModelInfo.normalText')
+                  ch.vib_text = vm.$t('GjModelInfo.normalText')
                   break
                 case 2: //'预警'
-                  ch.vib_text = this.$t('GjModelInfo.warnText')
+                  ch.vib_text = vm.$t('GjModelInfo.warnText')
                   break
                 case 3: //'Ⅰ级报警'
-                  ch.vib_text = this.$t('GjModelInfo.alarm1Text')
+                  ch.vib_text = vm.$t('GjModelInfo.alarm1Text')
                   break
                 case 4: //'Ⅱ级报警'
-                  ch.vib_text = this.$t('GjModelInfo.alarm2Text')
+                  ch.vib_text = vm.$t('GjModelInfo.alarm2Text')
                   break
               }
               if (ch.pos_class == 1 || ch.pos_class == 2) {
@@ -435,11 +437,11 @@ export default {
     toAlarm(item) {
       if (item.dgm_type != 3) {
         if (item.ch_type == 2) {
-          this.$pop('转速通道无报警！')
+          this.$pop(vm.$t('Common.noAlarmTips'))//转速通道无报警！
           return
         }
         let key = `alarm_enter_${item.pump_id}_${item.dgmInfo.dgm_id}_${item.ch_type}_${item.ch_id}`
-        let name = '报警日志'
+        let name = vm.$t('Common.AlarmLog')//'报警日志'
         this.$bus.$emit('choiceChartType', key, name)
         this.$store.commit('setChName', item.ch_name)
       } else {
@@ -545,13 +547,15 @@ export default {
             // 设置垂直对齐方式
             params.cxtLeft.textBaseline = 'middle'
             // 绘制文字（参数：要写的字，x坐标，y坐标）
+            let axis1 = vm.$t('GjModelInfo.axis1'),
+                axis2 = vm.$t('GjModelInfo.axis2');
             params.cxtLeft.fillText(
-              '1轴',
+              axis1,//'1轴',
               startPicX - 40,
               startPicY + newPH * 0.5
             )
             params.cxtLeft.fillText(
-              '2轴',
+              axis2,//'2轴',
               startPicX + newPW + 40,
               startPicY + newPH * 0.5
             )
@@ -660,13 +664,15 @@ export default {
             // 设置垂直对齐方式
             params.cxtRight.textBaseline = 'middle'
             // 绘制文字（参数：要写的字，x坐标，y坐标）
+            let axis3 = vm.$t('GjModelInfo.axis3'),
+                axis4 = vm.$t('GjModelInfo.axis4');
             params.cxtRight.fillText(
-              '3轴',
+              axis3,//'3轴',
               startPicX - 40,
               startPicY + newPH * 0.5
             )
             params.cxtRight.fillText(
-              '4轴',
+              axis4,//'4轴',
               startPicX + newPW + 40,
               startPicY + newPH * 0.5
             )
@@ -778,8 +784,8 @@ export default {
           //绘制ToolTip文字
           params.titleLeft.fillStyle = '#000'
           // this.titleLeft.fillText(item.chInfo, x+35, y + 70)
-          params.titleLeft.fillText(`通道名称:${chNames}`, x + 10, y + 70)
-          params.titleLeft.fillText(`安装位置:${chInfo}`, x + 10, y + 100)
+          params.titleLeft.fillText(`${vm.$t('GjModelInfo.headChname')}:${chNames}`, x + 10, y + 70)//通道名称
+          params.titleLeft.fillText(`${vm.$t('GjModelInfo.headLoc')}:${chInfo}`, x + 10, y + 100)//安装位置
           params.titleLeft.restore()
         }
       } else {
@@ -838,12 +844,12 @@ export default {
             params.titleRight.fillStyle = '#000'
             // 安装位置：${item.chInfo}
             params.titleRight.fillText(
-              `通道名称:${item.ch_name}`,
+              `${vm.$t('GjModelInfo.headChname')}:${item.ch_name}`,//通道名称
               x + 10,
               y + 910
             )
             params.titleRight.fillText(
-              `安装位置:${item.chInfo}`,
+              `${vm.$t('GjModelInfo.headLoc')}:${item.chInfo}`,//安装位置
               x + 10,
               y + 940
             )
@@ -906,16 +912,16 @@ export default {
       var str = ''
       switch (level) {
         case 0:
-          str = '正常'
+          str = vm.$t('GjModelInfo.advice1');//'正常'
           break
         case 2:
-          str = '需要注意'
+          str = vm.$t('GjModelInfo.advice2');//'需要注意'
           break
         case 3:
-          str = '需要维修'
+          str = vm.$t('GjModelInfo.advice3');//'需要维修'
           break
         default:
-          str = '已离线'
+          str = vm.$t('GjModelInfo.advice4');//'已离线'
       }
       return str
     },
@@ -935,7 +941,7 @@ export default {
       /* 设置当前的机组 */
       let params = {
         key: this.currentKey,
-        val: '设备模型',
+        val: vm.$t('YtModel.macModel'),//'设备模型',
         name: 'gjModel',
         icon: 'icon-shijingsanwei-',
       }

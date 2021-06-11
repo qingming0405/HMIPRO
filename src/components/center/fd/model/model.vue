@@ -122,14 +122,14 @@ export default {
           }
         }
         this.modelItem[key].monitorePos.forEach((el) => {
-          if (el.name == '设备模型') {
+          if (el.name == this.$t('HeaderEdge.secondLevel1_3')) {//'设备模型'
             flag = true
           }
         })
         if (!flag) {
           this.modelItem[key].monitorePos.push({
             isChoose: false,
-            name: '设备模型',
+            name: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
             router: 'fdModel',
           })
         }
@@ -143,7 +143,7 @@ export default {
             // 设备模型跳转设备模型使用同一个key值调用getPath方法
             let params = {
               key: this.currentKey,
-              val: '设备模型',
+              val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
               name: element.router,
               icon: 'icon-shijingsanwei-',
             }
@@ -170,7 +170,7 @@ export default {
           // 设备模型跳转设备模型使用同一个key值调用getPath方法
           let params = {
             key: this.currentKey,
-            val: '设备模型',
+            val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
             name: param.monitorePos[i].router,
             icon: 'icon-shijingsanwei-',
           }

@@ -33,12 +33,13 @@
                   ></div>
                   <div>{{item.pos_name}}</div>
                 </td>
-                <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+                <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
+                <!-- 详情 -->
                 <td
                   class="model-td3"
                   @click="toReal(item)"
-                >详情</td>
+                >{{$t('Common.moreText')}}</td>
               </tr>
             </tbody>
           </table>
@@ -70,12 +71,13 @@
                   ></div>
                   <div>{{item.pos_name}}</div>
                 </td>
-                <td v-if="item.eigenvalue.value !== '无数据'">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
+                <td v-if="item.eigenvalue.value !== noDataText">{{item.eigenvalue.name}}:{{item.eigenvalue.value}}{{item.eigenvalue.unit}}</td>
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
+                <!-- 详情 -->
                 <td
                   class="model-td3"
                   @click="toReal(item)"
-                >详情</td>
+                >{{$t('Common.moreText')}}</td>
               </tr>
             </tbody>
           </table>
@@ -100,6 +102,14 @@ import towerdrum from 'common/general/sn/model/towerdrum.js'
 export default {
   name: 'snTowerdrum',
   mixins: [towerdrum],
+  data() {
+    return {
+      noDataText:'无数据',
+    }
+  },
+  created () {
+    this.noDataText = this.$t('Common.noDataText')
+  }
 }
 </script>
 

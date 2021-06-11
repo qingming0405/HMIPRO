@@ -13,6 +13,7 @@ export const cn = {
     normalText: '正常',//报警状态正常
     warnText: '预警',//报警状态预警
     alarmText: '报警',//报警状态报警
+    abnormalText:'自检异常',//自检异常
     focausText: '关注',//关注
     allText: '全部',//全部
     searchHolder: '请输入搜索文字',//搜索的提示语
@@ -120,6 +121,12 @@ export const cn = {
     selectPos:'选择测点',//选择测点
     clearSet:'清空设置',//清空设置
     effectiveTime:'有效时间',//有效时间
+    loadingUnfinished:'模型未加载完成',//模型未加载完成
+    engineroom:'机舱',//机舱
+    towertop:'塔顶',//塔顶
+    tower:'塔筒',//塔筒
+    noOverviewTips:'该机组无总貌图',//该机组无总貌图
+    noAlarmTips:'转速通道无报警',//转速通道无报警
   },
   Common8000: {
     TimedHisData: '定时历史数据',//定时历史数据
@@ -269,6 +276,9 @@ export const cn = {
   Impeller: {
     public: '公共',//公共
     moreText: '详情',//详情
+    impeller1:'叶轮1',//叶轮1
+    impeller2:'叶轮2',//叶轮2
+    impeller3:'叶轮3',//叶轮3
   },
   //风电模型-油液
   Oil: {
@@ -322,6 +332,14 @@ export const cn = {
     warnAdvice: '若故障无法消除，建议结束当日运营后回库处理',//设备预警的建议文字
     alarm1Advice: '若故障无法消除，建议运营到终点后退出运营',//设备Ⅰ级报警的建议文字
     alarm2Advice: '若故障无法消除，建议下一站清客后退出运营',//设备Ⅱ级报警的建议文字
+    axis1:'1轴',//1轴
+    axis2:'2轴',//2轴
+    axis3:'3轴',//3轴
+    axis4:'4轴',//4轴
+    advice1:'正常',//正常
+    advice2:'需要注意',//需要注意
+    advice3:'需要维修',//需要维修
+    advice4:'已离线',//已离线
   },
   //油田总貌图
   YtGeneral: {

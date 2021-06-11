@@ -489,7 +489,7 @@ export default {
         /* 存在单位 */
         let key = `${units.mac_id}_${units.pos_id}_${units.pos_type}`
         key = 'trend_pos_' + key
-        this.$bus.$emit('choiceChartType', key, '趋势图')
+        this.$bus.$emit('choiceChartType', key, this.$t('HeaderEdge.secondLevel2_3'))//趋势图
       }
     },
     adaptation() {
