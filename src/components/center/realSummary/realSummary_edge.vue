@@ -223,37 +223,85 @@ export default {
         //油井
         if (this.t_root == 3) {
           this.head = [
-            { name: '组织', isShow: true, index: 0 },
-            { name: '设备', isShow: true, index: 1 },
-            { name: '诊断结果', isShow: false, index: 2 },
-            { name: '测点', isShow: true, index: 3 },
-            { name: '趋势增长平均值', isShow: false, index: 11 },
-            { name: '趋势报警推送状态', isShow: true, index: 4 },
-            { name: '预警推送状态', isShow: false, index: 12 },
-            { name: '报警推送状态', isShow: false, index: 13 },
-            { name: '特征值类型', isShow: true, index: 5 },
-            { name: '特征值', isShow: true, index: 6 },
-            { name: '预警值(高)', isShow: true, index: 7 },
-            { name: '报警值(高)', isShow: true, index: 8 },
-            { name: '预警值(低)', isShow: true, index: 9 },
-            { name: '报警值(低)', isShow: true, index: 10 },
+            { name: this.$t('Common.tree'), isShow: true, index: 0 }, //组织
+            { name: this.$t('realSummary.equipment'), isShow: true, index: 1 }, //设备
+            {
+              name: this.$t('realSummary.diagnosticResult'),
+              isShow: false,
+              index: 2,
+            }, //诊断结果
+            { name: this.$t('Common.pos'), isShow: true, index: 3 }, //测点
+            {
+              name: this.$t('realSummary.TrendAverage'),
+              isShow: false,
+              index: 11,
+            }, //趋势增长平均值
+            {
+              name: this.$t('realSummary.TrendAlarmPushStatus'),
+              isShow: true,
+              index: 4,
+            }, //趋势报警推送状态
+            {
+              name: this.$t('realSummary.warnPushStatus'),
+              isShow: false,
+              index: 12,
+            }, //预警推送状态
+            {
+              name: this.$t('realSummary.AlarmPushStatus'),
+              isShow: false,
+              index: 13,
+            }, //报警推送状态
+            {
+              name: this.$t('realSummary.EigenvalueType'),
+              isShow: true,
+              index: 5,
+            }, //特征值类型
+            { name: this.$t('realSummary.Eigen'), isShow: true, index: 6 }, //特征值
+            { name: this.$t('realSummary.WarnH'), isShow: true, index: 7 }, //预警值(高)
+            { name: this.$t('realSummary.AlarmH'), isShow: true, index: 8 }, //报警值(高)
+            { name: this.$t('realSummary.WarnL'), isShow: true, index: 9 }, //预警值(低)
+            { name: this.$t('realSummary.AlarmL'), isShow: true, index: 10 }, //报警值(低)
           ]
         } else {
           this.head = [
-            { name: '组织', isShow: true, index: 0 },
-            { name: '设备', isShow: true, index: 1 },
-            { name: '诊断结果', isShow: true, index: 2 },
-            { name: '测点', isShow: true, index: 3 },
-            { name: '趋势增长平均值', isShow: true, index: 11 },
-            { name: '趋势报警推送状态', isShow: true, index: 4 },
-            { name: '预警推送状态', isShow: true, index: 12 },
-            { name: '报警推送状态', isShow: true, index: 13 },
-            { name: '特征值类型', isShow: true, index: 5 },
-            { name: '特征值', isShow: true, index: 6 },
-            { name: '预警值(高)', isShow: true, index: 7 },
-            { name: '报警值(高)', isShow: true, index: 8 },
-            { name: '预警值(低)', isShow: false, index: 9 },
-            { name: '报警值(低)', isShow: false, index: 10 },
+            { name: this.$t('Common.tree'), isShow: true, index: 0 }, //'组织'
+            { name: this.$t('realSummary.equipment'), isShow: true, index: 1 }, //设备
+            {
+              name: this.$t('realSummary.diagnosticResult'),
+              isShow: true,
+              index: 2,
+            }, //诊断结果
+            { name: this.$t('Common.pos'), isShow: true, index: 3 }, //测点
+            {
+              name: this.$t('realSummary.TrendAverage'),
+              isShow: true,
+              index: 11,
+            }, //趋势增长平均值
+            {
+              name: this.$t('realSummary.TrendAlarmPushStatus'),
+              isShow: true,
+              index: 4,
+            }, //趋势报警推送状态
+            {
+              name: this.$t('realSummary.warnPushStatus'),
+              isShow: true,
+              index: 12,
+            }, //预警推送状态
+            {
+              name: this.$t('realSummary.AlarmPushStatus'),
+              isShow: true,
+              index: 13,
+            }, //报警推送状态
+            {
+              name: this.$t('realSummary.EigenvalueType'),
+              isShow: true,
+              index: 5,
+            }, //特征值类型
+            { name: this.$t('realSummary.Eigen'), isShow: true, index: 6 }, //特征值
+            { name: this.$t('realSummary.WarnH'), isShow: true, index: 7 }, //预警值(高)
+            { name: this.$t('realSummary.AlarmH'), isShow: true, index: 8 }, //报警值(高)
+            { name: this.$t('realSummary.WarnL'), isShow: false, index: 9 }, //预警值(低)
+            { name: this.$t('realSummary.AlarmL'), isShow: false, index: 10 }, //报警值(低)
           ]
         }
       },
@@ -284,7 +332,7 @@ export default {
             scrollLeft: 0, //滚动距离
             empty: {
               isShow: false,
-              text: '无数据',
+              text: this.$t('Common.noDataText'), //无数据
             },
           })
           /* 设置定时器 */
@@ -368,13 +416,15 @@ export default {
                     posObj.avg =
                       temp2.trend.avg === undefined ? '—' : temp2.trend.avg
                     let time = getTime(temp2.trend.time)
-                    let text = `; 上涨${temp2.trend.percent}%; `
+                    let text = `; ${this.$t('realSummary.rise')}${
+                      temp2.trend.percent
+                    }%; ` //上涨
                     let obj = {
-                      0: '未确认',
-                      1: '已确认',
-                      2: '已重置',
-                      3: '维护中',
-                      4: '已拒绝',
+                      0: this.$t('realSummary.unconfirmed'), //未确认
+                      1: this.$t('realSummary.confirmed'), //已确认
+                      2: this.$t('realSummary.Reset'), //已重置
+                      3: this.$t('realSummary.maintenance'), //维护中
+                      4: this.$t('realSummary.rejected'), //已拒绝
                     }
                     let text1 = obj[temp2.trend.status]
                     posObj.status = time + text + text1
@@ -387,11 +437,11 @@ export default {
                     posObj.hId = temp2.h.id
                     let time = getTime(temp2.h.time)
                     let obj = {
-                      0: '未确认',
-                      1: '已确认',
-                      2: '已重置',
-                      3: '维护中',
-                      4: '已拒绝',
+                      0: this.$t('realSummary.unconfirmed'), //未确认
+                      1: this.$t('realSummary.confirmed'), //已确认
+                      2: this.$t('realSummary.Reset'), //已重置
+                      3: this.$t('realSummary.maintenance'), //维护中
+                      4: this.$t('realSummary.rejected'), //已拒绝
                     }
                     let text = obj[temp2.h.status]
                     posObj.h = time + ';' + text
@@ -403,11 +453,11 @@ export default {
                     posObj.hhId = temp2.hh.id
                     let time = getTime(temp2.hh.time)
                     let obj = {
-                      0: '未确认',
-                      1: '已确认',
-                      2: '已重置',
-                      3: '维护中',
-                      4: '已拒绝',
+                      0: this.$t('realSummary.unconfirmed'), //未确认
+                      1: this.$t('realSummary.confirmed'), //已确认
+                      2: this.$t('realSummary.Reset'), //已重置
+                      3: this.$t('realSummary.maintenance'), //维护中
+                      4: this.$t('realSummary.rejected'), //已拒绝
                     }
                     let text = obj[temp2.hh.status]
                     posObj.hh = time + ';' + text
@@ -601,34 +651,36 @@ export default {
       //未确认
       if (status === 0) {
         btnContent = [
-          { name: '确认', index: 1 },
-          { name: '维护', index: 3 },
-          { name: '拒绝', index: 4 },
+          { name: this.$t('Common.sureBtn'), index: 1 }, //确认
+          { name: this.$t('realSummary.maintain'), index: 3 }, //维护
+          { name: this.$t('realSummary.Refuse'), index: 4 }, //拒绝
         ]
         //已确认
       } else if (status === 1) {
         btnContent = [
-          { name: '重置', index: 2 },
-          { name: '维护', index: 3 },
+          { name: this.$t('Common.resetBtn'), index: 2 }, //重置
+          { name: this.$t('realSummary.maintain'), index: 3 },
         ]
         //已重置
       } else if (status === 2) {
         btnContent = [
-          { name: '确认', index: 1 },
-          { name: '维护', index: 3 },
-          { name: '拒绝', index: 4 },
+          { name: this.$t('Common.sureBtn'), index: 1 }, //确认
+          { name: this.$t('realSummary.maintain'), index: 3 }, //维护
+          { name: this.$t('realSummary.Refuse'), index: 4 }, //拒绝
         ]
         //维护中
       } else if (status === 3) {
-        btnContent = [{ name: '重置', index: 2 }]
+        btnContent = [{ name: this.$t('Common.resetBtn'), index: 2 }] //重置
         //已拒绝
       } else if (status === 4) {
         btnContent = [
-          { name: '重置', index: 2 },
-          { name: '维护', index: 3 },
+          { name: this.$t('Common.resetBtn'), index: 2 }, //重置
+          { name: this.$t('realSummary.maintain'), index: 3 }, //维护
         ]
       } else {
-        btnContent = [{ name: '维护', index: 3 }]
+        btnContent = [
+          { name: this.$t('realSummary.maintain'), index: 3 }, //维护
+        ]
       }
       // btnContent = [
       //   { name: "确认", index: 1 },
@@ -639,8 +691,8 @@ export default {
       if (btnContent) {
         this.$pop({
           btnNum: 3,
-          title: '操作',
-          content: '修改报警状态',
+          title: this.$t('realSummary.operating'), //操作
+          content: this.$t('realSummary.ModifyAlarmStatus'), //修改报警状态
           btnContent: btnContent,
         }).then((res) => {
           if (res) {
@@ -688,13 +740,13 @@ export default {
               })
               let key = `${pos.mac_id}_${pos.pos_id}_${pos.pos_type}`
               key = 'trend_pos_' + key
-              this.$bus.$emit('choiceChartType', key, '趋势图')
+              this.$bus.$emit('choiceChartType', key, this.$t('Common.trend')) //趋势图
             }
           })
       } else {
         let key = `${pos.mac_id}_${pos.pos_id}_${pos.pos_type}`
         key = 'trend_pos_' + key
-        this.$bus.$emit('choiceChartType', key, '趋势图')
+        this.$bus.$emit('choiceChartType', key, this.$t('Common.trend')) //趋势图
       }
     },
   },
@@ -810,10 +862,10 @@ export default {
       flex: 0 0 180px;
     }
     .my-summary-item-col-12 {
-      flex: 0 0 200px;
+      flex: 0 0 240px;
     }
     .my-summary-item-col-13 {
-      flex: 0 0 200px;
+      flex: 0 0 240px;
     }
     .my-summary-head-item {
       padding: 8px 0px;

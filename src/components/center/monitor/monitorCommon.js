@@ -89,33 +89,33 @@ export default {
             { val: "平均值", isShow: true }
           ], */
           head: [
-            { val: "设备名称", isShow: true },
-            { val: "序号", isShow: true },
-            { val: "测点名称", isShow: true },
-            { val: "特征值类型", isShow: true },
-            { val: "预警值", isShow: false },
-            { val: "报警值", isShow: false },
-            { val: "实时值", isShow: true },
-            { val: "最大值", isShow: true },
-            { val: "最小值", isShow: true },
-            { val: "平均值", isShow: true }
+            { val: this.$t('monitor.EquipName'), isShow: true },//设备名称
+            { val: this.$t('Common.order'), isShow: true },//序号
+            { val: this.$t('Common.posName'), isShow: true },//测点名称
+            { val: this.$t('monitor.EigenvalueType'), isShow: true },//特征值类型
+            { val: this.$t('monitor.warnValue'), isShow: false },//预警值
+            { val: this.$t('monitor.alarmValue'), isShow: false },//报警值
+            { val: this.$t('MonitorRetrieval.realTimeValue'), isShow: true },//实时值
+            { val: this.$t('monitor.Max'), isShow: true },//最大值
+            { val: this.$t('monitor.Min'), isShow: true },//最小值
+            { val: this.$t('eigenvalue.rock_avg'), isShow: true }//平均值
           ],
           head1: [
-            { val: "设备名称", isShow: true },
-            { val: "序号", isShow: true },
-            { val: "测点名称", isShow: true },
-            { val: "特征值类型", isShow: true },
-            { val: "预警值", isShow: false },
-            { val: "报警值", isShow: false },
-            { val: "实时值", isShow: true },
-            { val: "最大值", isShow: true },
-            { val: "最小值", isShow: true },
-            { val: "平均值", isShow: true }
+            { val: this.$t('monitor.EquipName'), isShow: true },//设备名称
+            { val: this.$t('Common.order'), isShow: true },//序号
+            { val: this.$t('Common.posName'), isShow: true },//测点名称
+            { val: this.$t('monitor.EigenvalueType'), isShow: true },//特征值类型
+            { val: this.$t('monitor.warnValue'), isShow: false },//预警值
+            { val: this.$t('monitor.alarmValue'), isShow: false },//报警值
+            { val: this.$t('MonitorRetrieval.realTimeValue'), isShow: true },//实时值
+            { val: this.$t('monitor.Max'), isShow: true },//最大值
+            { val: this.$t('monitor.Min'), isShow: true },//最小值
+            { val: this.$t('eigenvalue.rock_avg'), isShow: true }//平均值
           ],
           body: [],
           empty: {
             isShow: false,
-            text: "无数据"
+            text: this.$t('Common.noDataText')//无数据
           },
           mac: cloneObj(this.$store.state.checkMsg.mac),
           scrollLeft: 0
@@ -250,10 +250,10 @@ export default {
             for (let k = 0, l = currentData.head1.length; k < l; k++) {
               let headItem = currentData.head1[k]
               if (headItem && headItem.timeStamp) {
-                dataTime[headItem.timeStamp] = !item.data[headItem.timeStamp] ? '无数据' : item.data[headItem.timeStamp][filed] === null ||
+                dataTime[headItem.timeStamp] = !item.data[headItem.timeStamp] ? this.$t('Common.noDataText') : item.data[headItem.timeStamp][filed] === null ||
                   item.data[headItem.timeStamp][filed] >= 100000000 ||
                   item.data[headItem.timeStamp][filed] === undefined
-                  ? "无数据"
+                  ? this.$t('Common.noDataText')
                   : flag == true ? round(unitTransformation(item.data[headItem.timeStamp][filed]), unitNum) : round(item.data[headItem.timeStamp][filed], unitNum)
               }
             }
@@ -278,32 +278,32 @@ export default {
               filed: eigenvalue[i].filed,
               real:
                 real === null
-                  ? "无数据"
+                  ? this.$t('Common.noDataText')
                   : real[filed] === null ||
                     real[filed] >= 100000000 ||
                     real[filed] === undefined
-                    ? "无数据"
+                    ? this.$t('Common.noDataText')
                     : flag == true ? round(unitTransformation(real[filed]), unitNum) : round(real[filed], unitNum),
               max:
                 save === null || save === undefined ||
                   save[max] === null ||
                   save[max] === undefined ||
                   save[max] >= 100000000
-                  ? "无数据"
+                  ? this.$t('Common.noDataText')
                   : flag == true ? round(unitTransformation(save[max]), unitNum) : round(save[max], unitNum),
               min:
                 save === null || save === undefined ||
                   save[min] === null ||
                   save[min] === undefined ||
                   save[min] >= 100000000
-                  ? "无数据"
+                  ? this.$t('Common.noDataText')
                   : flag == true ? round(unitTransformation(save[min]), unitNum) : round(save[min], unitNum),
               avg:
                 save === null || save === undefined ||
                   save[avg] === null ||
                   save[avg] === undefined ||
                   save[avg] >= 100000000
-                  ? "无数据"
+                  ? this.$t('Common.noDataText')
                   : flag == true ? round(unitTransformation(save[avg]), unitNum) : round(save[avg], unitNum),
               dataTime,//时间
               h,
@@ -677,19 +677,37 @@ export default {
       body.forEach(item => {
         item.pos.forEach((pos, i) => {
           pos.d.forEach(d => {
-            let data = {
-              设备名称: '' + item.name,
-              序号: i + 1,
-              测点名称: '' + pos.name,
-              特征值类型: d.e,
-              实时值: d.real,
-              最大值: d.max,
-              最小值: d.min,
-              平均值: d.avg
-            }
-            if (fields.indexOf('报警值') !== -1) {
-              data.报警值 = d.hh
-              data.预警值 = d.h
+            let data
+            if (this.$t('monitor.EquipName') == '设备名称') {
+              data = {
+                设备名称: '' + item.name,
+                序号: i + 1,
+                测点名称: '' + pos.name,
+                特征值类型: d.e,
+                实时值: d.real,
+                最大值: d.max,
+                最小值: d.min,
+                平均值: d.avg
+              }
+              if (fields.indexOf('报警值') !== -1) {
+                data.报警值 = d.hh
+                data.预警值 = d.h
+              }
+            } else {
+              data = {
+                'Equipment name': '' + item.name,
+                'Serial Number': i + 1,
+                'Name Of Measuring Point': '' + pos.name,
+                'Eigenvalue type': d.e,
+                'Real-time Value': d.real,
+                'Max': d.max,
+                'Min': d.min,
+                'average value': d.avg
+              }
+              if (fields.indexOf('alarm value') !== -1) {
+                data['alarm value'] = d.hh
+                data['warning value'] = d.h//预警值
+              }
             }
             for (let k = 0, l = showHead.length; k < l; k++) {
               data[showHead[k].val] = d.dataTime[showHead[k].timeStamp]
@@ -705,7 +723,7 @@ export default {
       csv = "\ufeff" + csv;
       var aTag = document.createElement("a");
       var blob = new Blob([csv]);
-      aTag.download = `监测报表-${macName}.csv`;
+      aTag.download = `${this.$t('HeaderEdge.secondLevel4_4')}-${macName}.csv`;//监测报表
       aTag.href = URL.createObjectURL(blob);
       aTag.click();
       URL.revokeObjectURL(blob);

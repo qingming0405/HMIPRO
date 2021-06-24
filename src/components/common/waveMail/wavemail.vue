@@ -8,7 +8,7 @@
         @mouseup="moveDivUp"
       >
       <!-- 波磨数据 -->
-        <span>{{$t('Common.waveData')}}</span>
+        <span>{{vm.$t('Common.waveData')}}</span>
         <div class="close-retrieval" @click="closeRetrieval(0)">
           <i class="iconfont icon-cuohao"></i>
         </div>
@@ -16,7 +16,7 @@
       <!-- 显示机组（列车） -->
       <div class="select-box">
         <!-- 列车 -->
-        <div class="select-title msg-title">{{$t('Common.train')}}</div>
+        <div class="select-title msg-title">{{vm.$t('Common.train')}}</div>
         <div
           class="select-value viewMsg-name radius text-overflow select-none outside-border edge-outside-border"
         >
@@ -25,7 +25,7 @@
       </div>
       <!-- 测点选择 -->
       <div class="select-box">
-        <div class="select-title msg-title">{{$t('Common.pos')}}</div>
+        <div class="select-title msg-title">{{vm.$t('Common.pos')}}</div>
         <div
           class="select-value viewMsg-name radius text-overflow select-none outside-border edge-outside-border"
         >
@@ -35,7 +35,7 @@
       <!-- 组织、机组、测点选择 -->
       <div class="select-box">
         <!-- 波磨数据 -->
-        <div class="select-title msg-title">{{$t('Common.waveData')}}</div>
+        <div class="select-title msg-title">{{vm.$t('Common.waveData')}}</div>
 
         <div
           class="select-value viewMsg-name radius text-overflow select-none outside-border edge-outside-border"
@@ -47,9 +47,9 @@
       </div>
       <div class="data-retrieval-btn">
         <!-- 确定 -->
-        <button @click="closeRetrieval(1)">{{$t('Common.sureBtn')}}</button>
+        <button @click="closeRetrieval(1)">{{vm.$t('Common.sureBtn')}}</button>
         <!-- 取消 -->
-        <button class="disable-btn" @click="closeRetrieval(0)">{{$t('Common.cancelBtn')}}</button>
+        <button class="disable-btn" @click="closeRetrieval(0)">{{vm.$t('Common.cancelBtn')}}</button>
       </div>
     </div>
   </div>
@@ -70,7 +70,9 @@ export default {
     },
   },
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       moveDivMsg: {
         /* 移动的表头信息 */ x: null,
         y: null,

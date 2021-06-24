@@ -140,601 +140,601 @@ export default {
             head2.push(
               {
                 filed: "part_name0",
-                val: "部件1",
+                val: this.$t('history.part')+"1",//部件
                 code: -1,
                 isShow: false
               } /* 部件1 */,
               {
                 filed: "sv0",
-                val: "1-保持架对外环",
+                val: "1-" + this.$t('history.CageOuterRing'),//保持架对外环
                 code: 52001,
                 isShow: false
               } /* 保持架对外环频率 */,
               {
                 filed: "sv1",
-                val: "1-保持架对内环",
+                val: "1-" + this.$t('history.CageOuterRing'),//保持架对内环
                 code: 52002,
                 isShow: false
               } /* 保持架对内环频率 */,
               {
                 filed: "sv2",
-                val: "1-外环内滚道",
+                val: "1-" + this.$t('history.OuterRingInnerRaceway'),//外环内滚道
                 code: 52003,
                 isShow: false
               } /* 外环内滚道频率 */,
               {
                 filed: "sv3",
-                val: "1-内环外滚道",
+                val: "1-" + this.$t('history.InnerRingOuterRaceway'),//内环外滚道
                 code: 52004,
                 isShow: false
               } /* 内环外滚道频率 */,
               {
                 filed: "sv4",
-                val: "1-滚单",
+                val: "1-" + this.$t('history.RollRder'),//滚单
                 code: 52005,
                 isShow: false
               } /* 滚单频率 */,
               {
                 filed: "sv5",
-                val: "1-滚双",
+                val: "1-" + this.$t('history.RollDouble'),//滚双
                 code: 52006,
                 isShow: false
               } /* 滚双频率 */,
               {
                 filed: "sv6",
-                val: "1-踏面",
+                val: "1-" + this.$t('history.Tread'),//踏面
                 code: 52007,
                 isShow: false
               } /* 踏面频率 */,
               {
                 filed: "sv7",
-                val: "1-邻轴齿轮",
+                val: "1-" + this.$t('history.AdjacentShaftGear'),//邻轴齿轮
                 code: 52008,
                 isShow: false
               } /* 邻轴齿轮频率 */,
               {
                 filed: "sv8",
-                val: "1-本轴齿轮",
+                val: "1-" + this.$t('history.MainShaftGear'),//本轴齿轮
                 code: 52009,
                 isShow: false
               } /* 本轴齿轮频率 */,
               {
                 filed: "part_name1",
-                val: "部件2",
+                val: this.$t('history.part')+"2",
                 code: -1,
                 isShow: false
               } /* 部件2 */,
               {
                 filed: "sv10",
-                val: "2-保持架对外环",
+                val: "2-" + this.$t('history.CageOuterRing'),
                 code: 52001,
                 isShow: false
               } /* 保持架对外环频率 */,
               {
                 filed: "sv11",
-                val: "2-保持架对内环",
+                val: "2-" + this.$t('history.CageOuterRing'),//保持架对内环
                 code: 52002,
                 isShow: false
               } /* 保持架对内环频率 */,
               {
                 filed: "sv12",
-                val: "2-外环内滚道",
+                val: "2-" + this.$t('history.OuterRingInnerRaceway'),//外环内滚道
                 code: 52003,
                 isShow: false
               } /* 外环内滚道频率 */,
               {
                 filed: "sv13",
-                val: "2-内环外滚道",
+                val: "2-" + this.$t('history.InnerRingOuterRaceway'),//内环外滚道
                 code: 52004,
                 isShow: false
               } /* 内环外滚道频率 */,
               {
                 filed: "sv14",
-                val: "2-滚单",
+                val: "2-" + this.$t('history.RollRder'),//滚单
                 code: 52005,
                 isShow: false
               } /* 滚单频率 */,
               {
                 filed: "sv15",
-                val: "2-滚双",
+                val: "2-" + this.$t('history.RollDouble'),//滚双
                 code: 52006,
                 isShow: false
               } /* 滚双频率 */,
               {
                 filed: "sv16",
-                val: "2-踏面",
+                val: "2-" + this.$t('history.Tread'),//踏面
                 code: 52007,
                 isShow: false
               } /* 踏面频率 */,
               {
                 filed: "sv17",
-                val: "2-邻轴齿轮",
+                val: "2-" + this.$t('history.AdjacentShaftGear'),//邻轴齿轮
                 code: 52008,
                 isShow: false
               } /* 邻轴齿轮频率 */,
               {
                 filed: "sv18",
-                val: "2-本轴齿轮",
+                val: "2-" + this.$t('history.MainShaftGear'),//本轴齿轮
                 code: 52009,
                 isShow: false
               } /* 本轴齿轮频率 */,
               {
                 filed: "part_name2",
-                val: "部件3",
+                val: this.$t('history.part') +"3",
                 code: -1,
                 isShow: false
               } /* 部件3 */,
               {
                 filed: "sv20",
-                val: "3-保持架对外环",
+                val: "3-" + this.$t('history.CageOuterRing'),
                 code: 52001,
                 isShow: false
               } /* 保持架对外环频率 */,
               {
                 filed: "sv21",
-                val: "3-保持架对内环",
+                val: "3-" + this.$t('history.CageOuterRing'),//保持架对内环
                 code: 52002,
                 isShow: false
               } /* 保持架对内环频率 */,
               {
                 filed: "sv22",
-                val: "3-外环内滚道",
+                val: "3-" + this.$t('history.OuterRingInnerRaceway'),//外环内滚道
                 code: 52003,
                 isShow: false
               } /* 外环内滚道频率 */,
               {
                 filed: "sv23",
-                val: "3-内环外滚道",
+                val: "3-" + this.$t('history.InnerRingOuterRaceway'),//内环外滚道
                 code: 52004,
                 isShow: false
               } /* 内环外滚道频率 */,
               {
                 filed: "sv24",
-                val: "3-滚单",
+                val: "3-" + this.$t('history.RollRder'),//滚单
                 code: 52005,
                 isShow: false
               } /* 滚单频率 */,
               {
                 filed: "sv25",
-                val: "3-滚双",
+                val: "3-" + this.$t('history.RollDouble'),//滚双
                 code: 52006,
                 isShow: false
               } /* 滚双频率 */,
               {
                 filed: "sv26",
-                val: "3-踏面",
+                val: "3-" + this.$t('history.Tread'),//踏面
                 code: 52007,
                 isShow: false
               } /* 踏面频率 */,
               {
                 filed: "sv27",
-                val: "3-邻轴齿轮",
+                val: "3-" + this.$t('history.AdjacentShaftGear'),//邻轴齿轮
                 code: 52008,
                 isShow: false
               } /* 邻轴齿轮频率 */,
               {
                 filed: "sv28",
-                val: "3-本轴齿轮",
+                val: "3-" + this.$t('history.MainShaftGear'),//本轴齿轮
                 code: 52009,
                 isShow: false
               } /* 本轴齿轮频率 */,
               {
                 filed: "part_name3",
-                val: "部件4",
+                val: this.$t('history.part') +"4",
                 code: -1,
                 isShow: false
               } /* 部件4 */,
               {
                 filed: "sv30",
-                val: "4-保持架对外环",
+                val: "4-" + this.$t('history.CageOuterRing'),
                 code: 52001,
                 isShow: false
               } /* 保持架对外环频率 */,
               {
                 filed: "sv31",
-                val: "4-保持架对内环",
+                val: "4-" + this.$t('history.CageOuterRing'),//保持架对内环
                 code: 52002,
                 isShow: false
               } /* 保持架对内环频率 */,
               {
                 filed: "sv32",
-                val: "4-外环内滚道",
+                val: "4-" + this.$t('history.OuterRingInnerRaceway'),//外环内滚道
                 code: 52003,
                 isShow: false
               } /* 外环内滚道频率 */,
               {
                 filed: "sv33",
-                val: "4-内环外滚道",
+                val: "4-" + this.$t('history.InnerRingOuterRaceway'),//内环外滚道
                 code: 52004,
                 isShow: false
               } /* 内环外滚道频率 */,
               {
                 filed: "sv34",
-                val: "4-滚单",
+                val: "4-" + this.$t('history.RollRder'),//滚单
                 code: 52005,
                 isShow: false
               } /* 滚单频率 */,
               {
                 filed: "sv35",
-                val: "4-滚双",
+                val: "4-" + this.$t('history.RollDouble'),//滚双
                 code: 52006,
                 isShow: false
               } /* 滚双频率 */,
               {
                 filed: "sv36",
-                val: "4-踏面",
+                val: "4-" + this.$t('history.Tread'),//踏面
                 code: 52007,
                 isShow: false
               } /* 踏面频率 */,
               {
                 filed: "sv37",
-                val: "4-邻轴齿轮",
+                val: "4-" + this.$t('history.AdjacentShaftGear'),//邻轴齿轮
                 code: 52008,
                 isShow: false
               } /* 邻轴齿轮频率 */,
               {
                 filed: "sv38",
-                val: "4-本轴齿轮",
+                val: "4-" + this.$t('history.MainShaftGear'),//本轴齿轮
                 code: 52009,
                 isShow: false
               } /* 本轴齿轮频率 */,
               {
                 filed: "part_name4",
-                val: "部件5",
+                val: this.$t('history.part') +"5",
                 code: -1,
                 isShow: false
               } /* 部件5 */,
               {
                 filed: "sv40",
-                val: "5-保持架对外环",
+                val: "5-" + this.$t('history.CageOuterRing'),
                 code: 52001,
                 isShow: false
               } /* 保持架对外环频率 */,
               {
                 filed: "sv41",
-                val: "5-保持架对内环",
+                val: "5-" + this.$t('history.CageOuterRing'),//保持架对内环
                 code: 52002,
                 isShow: false
               } /* 保持架对内环频率 */,
               {
                 filed: "sv42",
-                val: "5-外环内滚道",
+                val: "5-" + this.$t('history.OuterRingInnerRaceway'),//外环内滚道
                 code: 52003,
                 isShow: false
               } /* 外环内滚道频率 */,
               {
                 filed: "sv43",
-                val: "5-内环外滚道",
+                val: "5-" + this.$t('history.InnerRingOuterRaceway'),//内环外滚道
                 code: 52004,
                 isShow: false
               } /* 内环外滚道频率 */,
               {
                 filed: "sv44",
-                val: "5-滚单",
+                val: "5-" + this.$t('history.RollRder'),//滚单
                 code: 52005,
                 isShow: false
               } /* 滚单频率 */,
               {
                 filed: "sv45",
-                val: "5-滚双",
+                val: "5-" + this.$t('history.RollDouble'),//滚双
                 code: 52006,
                 isShow: false
               } /* 滚双频率 */,
               {
                 filed: "sv46",
-                val: "5-踏面",
+                val: "5-" + this.$t('history.Tread'),//踏面
                 code: 52007,
                 isShow: false
               } /* 踏面频率 */,
               {
                 filed: "sv47",
-                val: "5-邻轴齿轮",
+                val: "5-" + this.$t('history.AdjacentShaftGear'),//邻轴齿轮
                 code: 52008,
                 isShow: false
               } /* 邻轴齿轮频率 */,
               {
                 filed: "sv48",
-                val: "5-本轴齿轮",
+                val: "5-" + this.$t('history.MainShaftGear'),//本轴齿轮
                 code: 52009,
                 isShow: false
               } /* 本轴齿轮频率 */,
               {
                 filed: "part_name5",
-                val: "部件6",
+                val: this.$t('history.part') +"6",
                 code: -1,
                 isShow: false
               } /* 部件6 */,
               {
                 filed: "sv50",
-                val: "6-保持架对外环",
+                val: "6-" + this.$t('history.CageOuterRing'),
                 code: 52001,
                 isShow: false
               } /* 保持架对外环频率 */,
               {
                 filed: "sv51",
-                val: "6-保持架对内环",
+                val: "6-" + this.$t('history.CageOuterRing'),//保持架对内环
                 code: 52002,
                 isShow: false
               } /* 保持架对内环频率 */,
               {
                 filed: "sv52",
-                val: "6-外环内滚道",
+                val: "6-" + this.$t('history.OuterRingInnerRaceway'),//外环内滚道
                 code: 52003,
                 isShow: false
               } /* 外环内滚道频率 */,
               {
                 filed: "sv53",
-                val: "6-内环外滚道",
+                val: "6-" + this.$t('history.InnerRingOuterRaceway'),//内环外滚道
                 code: 52004,
                 isShow: false
               } /* 内环外滚道频率 */,
               {
                 filed: "sv54",
-                val: "6-滚单",
+                val: "6-" + this.$t('history.RollRder'),//滚单
                 code: 52005,
                 isShow: false
               } /* 滚单频率 */,
               {
                 filed: "sv55",
-                val: "6-滚双",
+                val: "6-" + this.$t('history.RollDouble'),//滚双
                 code: 52006,
                 isShow: false
               } /* 滚双频率 */,
               {
                 filed: "sv56",
-                val: "6-踏面",
+                val: "6-" + this.$t('history.Tread'),//踏面
                 code: 52007,
                 isShow: false
               } /* 踏面频率 */,
               {
                 filed: "sv57",
-                val: "6-邻轴齿轮",
+                val: "6-" + this.$t('history.AdjacentShaftGear'),//邻轴齿轮
                 code: 52008,
                 isShow: false
               } /* 邻轴齿轮频率 */,
               {
                 filed: "sv58",
-                val: "6-本轴齿轮",
+                val: "6-" + this.$t('history.MainShaftGear'),//本轴齿轮
                 code: 52009,
                 isShow: false
               } /* 本轴齿轮频率 */,
               {
                 filed: "part_name6",
-                val: "部件7",
+                val: this.$t('history.part') +"7",
                 code: -1,
                 isShow: false
               } /* 部件7 */,
               {
                 filed: "sv60",
-                val: "7-保持架对外环",
+                val: "7-" + this.$t('history.CageOuterRing'),
                 code: 52001,
                 isShow: false
               } /* 保持架对外环频率 */,
               {
                 filed: "sv61",
-                val: "7-保持架对内环",
+                val: "7-" + this.$t('history.CageOuterRing'),//保持架对内环
                 code: 52002,
                 isShow: false
               } /* 保持架对内环频率 */,
               {
                 filed: "sv62",
-                val: "7-外环内滚道",
+                val: "7-" + this.$t('history.OuterRingInnerRaceway'),//外环内滚道
                 code: 52003,
                 isShow: false
               } /* 外环内滚道频率 */,
               {
                 filed: "sv63",
-                val: "7-内环外滚道",
+                val: "7-" + this.$t('history.InnerRingOuterRaceway'),//内环外滚道
                 code: 52004,
                 isShow: false
               } /* 内环外滚道频率 */,
               {
                 filed: "sv64",
-                val: "7-滚单",
+                val: "7-" + this.$t('history.RollRder'),//滚单
                 code: 52005,
                 isShow: false
               } /* 滚单频率 */,
               {
                 filed: "sv65",
-                val: "7-滚双",
+                val: "7-" + this.$t('history.RollDouble'),//滚双
                 code: 52006,
                 isShow: false
               } /* 滚双频率 */,
               {
                 filed: "sv66",
-                val: "7-踏面",
+                val: "7-" + this.$t('history.Tread'),//踏面
                 code: 52007,
                 isShow: false
               } /* 踏面频率 */,
               {
                 filed: "sv67",
-                val: "7-邻轴齿轮",
+                val: "7-" + this.$t('history.AdjacentShaftGear'),//邻轴齿轮
                 code: 52008,
                 isShow: false
               } /* 邻轴齿轮频率 */,
               {
                 filed: "sv68",
-                val: "7-本轴齿轮",
+                val: "7-" + this.$t('history.MainShaftGear'),//本轴齿轮
                 code: 52009,
                 isShow: false
               } /* 本轴齿轮频率 */,
               {
                 filed: "part_name7",
-                val: "部件8",
+                val: this.$t('history.part') +"8",
                 code: -1,
                 isShow: false
               } /* 部件8 */,
               {
                 filed: "sv70",
-                val: "8-保持架对外环",
+                val: "8-"+ this.$t('history.CageOuterRing'),
                 code: 52001,
                 isShow: false
               } /* 保持架对外环频率 */,
               {
                 filed: "sv71",
-                val: "8-保持架对内环",
+                val: "8-" + this.$t('history.CageOuterRing'),//保持架对内环
                 code: 52002,
                 isShow: false
               } /* 保持架对内环频率 */,
               {
                 filed: "sv72",
-                val: "8-外环内滚道",
+                val: "8-" + this.$t('history.OuterRingInnerRaceway'),//外环内滚道
                 code: 52003,
                 isShow: false
               } /* 外环内滚道频率 */,
               {
                 filed: "sv73",
-                val: "8-内环外滚道",
+                val: "8-" + this.$t('history.InnerRingOuterRaceway'),//内环外滚道
                 code: 52004,
                 isShow: false
               } /* 内环外滚道频率 */,
               {
                 filed: "sv74",
-                val: "8-滚单",
+                val: "8-" + this.$t('history.RollRder'),//滚单
                 code: 52005,
                 isShow: false
               } /* 滚单频率 */,
               {
                 filed: "sv75",
-                val: "8-滚双",
+                val: "8-" + this.$t('history.RollDouble'),//滚双
                 code: 52006,
                 isShow: false
               } /* 滚双频率 */,
               {
                 filed: "sv76",
-                val: "8-踏面",
+                val: "8-" + this.$t('history.Tread'),//踏面
                 code: 52007,
                 isShow: false
               } /* 踏面频率 */,
               {
                 filed: "sv77",
-                val: "8-邻轴齿轮",
+                val: "8-" + this.$t('history.AdjacentShaftGear'),//邻轴齿轮
                 code: 52008,
                 isShow: false
               } /* 邻轴齿轮频率 */,
               {
                 filed: "sv78",
-                val: "8-本轴齿轮",
+                val: "8-" + this.$t('history.MainShaftGear'),//本轴齿轮
                 code: 52009,
                 isShow: false
               } /* 本轴齿轮频率 */,
               {
                 filed: "part_name8",
-                val: "部件9",
+                val: this.$t('history.part') +"9",
                 code: -1,
                 isShow: false
               } /* 部件9 */,
               {
                 filed: "sv80",
-                val: "9-保持架对外环",
+                val: "9-" + this.$t('history.CageOuterRing'),
                 code: 52001,
                 isShow: false
               } /* 保持架对外环频率 */,
               {
                 filed: "sv81",
-                val: "9-保持架对内环",
+                val: "9-" + this.$t('history.CageOuterRing'),//保持架对内环
                 code: 52002,
                 isShow: false
               } /* 保持架对内环频率 */,
               {
                 filed: "sv82",
-                val: "9-外环内滚道",
+                val: "9-" + this.$t('history.OuterRingInnerRaceway'),//外环内滚道
                 code: 52003,
                 isShow: false
               } /* 外环内滚道频率 */,
               {
                 filed: "sv83",
-                val: "9-内环外滚道",
+                val: "9-" + this.$t('history.InnerRingOuterRaceway'),//内环外滚道
                 code: 52004,
                 isShow: false
               } /* 内环外滚道频率 */,
               {
                 filed: "sv84",
-                val: "9-滚单",
+                val: "9-" + this.$t('history.RollRder'),//滚单
                 code: 52005,
                 isShow: false
               } /* 滚单频率 */,
               {
                 filed: "sv85",
-                val: "9-滚双",
+                val: "9-" + this.$t('history.RollDouble'),//滚双
                 code: 52006,
                 isShow: false
               } /* 滚双频率 */,
               {
                 filed: "sv86",
-                val: "9-踏面",
+                val: "9-" + this.$t('history.Tread'),//踏面
                 code: 52007,
                 isShow: false
               } /* 踏面频率 */,
               {
                 filed: "sv87",
-                val: "9-邻轴齿轮",
+                val: "9-" + this.$t('history.AdjacentShaftGear'),//邻轴齿轮
                 code: 52008,
                 isShow: false
               } /* 邻轴齿轮频率 */,
               {
                 filed: "sv88",
-                val: "9-本轴齿轮",
+                val: "9-" + this.$t('history.MainShaftGear'),//本轴齿轮
                 code: 52009,
                 isShow: false
               } /* 本轴齿轮频率 */,
               {
                 filed: "part_name9",
-                val: "部件10",
+                val: this.$t('history.part') +"10",
                 code: -1,
                 isShow: false
               } /* 部件10 */,
               {
                 filed: "sv90",
-                val: "10保持架对外环",
+                val: "10" + this.$t('history.CageOuterRing'),
                 code: 52001,
                 isShow: false
               } /* 保持架对外环频率 */,
               {
                 filed: "sv91",
-                val: "10保持架对内环",
+                val: "10" + this.$t('history.CageOuterRing'),//保持架对内环
                 code: 52002,
                 isShow: false
               } /* 保持架对内环频率 */,
               {
                 filed: "sv92",
-                val: "10外环内滚道",
+                val: "10" + this.$t('history.OuterRingInnerRaceway'),//外环内滚道
                 code: 52003,
                 isShow: false
               } /* 外环内滚道频率 */,
               {
                 filed: "sv93",
-                val: "10内环外滚道",
+                val: "10" + this.$t('history.InnerRingOuterRaceway'),//内环外滚道
                 code: 52004,
                 isShow: false
               } /* 内环外滚道频率 */,
               {
                 filed: "sv94",
-                val: "10滚单",
+                val: "10" + this.$t('history.RollRder'),//滚单
                 code: 52005,
                 isShow: false
               } /* 滚单频率 */,
               {
                 filed: "sv95",
-                val: "10滚双",
+                val: "10" + this.$t('history.RollDouble'),//滚双
                 code: 52006,
                 isShow: false
               } /* 滚双频率 */,
               {
                 filed: "sv96",
-                val: "10踏面",
+                val: "10" + this.$t('history.Tread'),//踏面
                 code: 52007,
                 isShow: false
               } /* 踏面频率 */,
               {
                 filed: "sv97",
-                val: "10邻轴齿轮",
+                val: "10" + this.$t('history.AdjacentShaftGear'),//邻轴齿轮
                 code: 52008,
                 isShow: false
               } /* 邻轴齿轮频率 */,
               {
                 filed: "sv98",
-                val: "10本轴齿轮",
+                val: "10" + this.$t('history.MainShaftGear'),//本轴齿轮
                 code: 52009,
                 isShow: false
               } /* 本轴齿轮频率 */
@@ -743,7 +743,7 @@ export default {
           const head = [
             {
               isShow: true,
-              val: "测点",
+              val: this.$t('Common.pos'),//测点
               filed: false
             }
           ].concat(head2);
@@ -758,7 +758,7 @@ export default {
             empty: {
               /* 无报警数据 */
               isShow: true,
-              text: `无数据`
+              text: this.$t('Common.noDataText')//无数据
             },
             scrollTop: 0 /* 滚动条距离表头距离 */,
             page: {
@@ -768,9 +768,9 @@ export default {
             },
             isMMS2: isMMS2 /* 趋势图单位是否要处理为mm/s2 */,
             dataType: [
-              { val: "定时历史数据", isChecked: true, type: 1 },
+              { val: this.$t('Common8000.TimedHisData'), isChecked: true, type: 1 },//定时历史数据
               // { val: '启停机数据列表', isChecked: true, type: 2, },
-              { val: "报警存储数据", isChecked: true, type: 3 }
+              { val: this.$t('Common8000.AlarmStorageData'), isChecked: true, type: 3 }//报警存储数据
             ]
           });
           this.getData(-2);
@@ -873,7 +873,7 @@ export default {
             } else {
               body[i].push({
                 isShow: value.isShow,
-                val: "无数据"
+                val: ""//无数据
               });
             }
           } else if (value.filed == 'from_sta' || value.filed == 'to_sta') {
@@ -896,7 +896,7 @@ export default {
                 break;
               }
             }
-            val = '无绑定站点信息'
+            val = this.$t('history.BindSiteInfo')//无绑定站点信息
             for (let m = 0; m < stations.length; m++) {
               if (stations[m].trackList && stations[m].trackList.length > 0) {
                 for (let n = 0, l = stations[m].trackList.length; n < l; n++) {
@@ -921,7 +921,7 @@ export default {
           } else if (v || v === 0) {
             let val;
             if (v >= 100000000) {
-              val = "无数据";
+              val = this.$t('Common.noDataText');//无数据
             } else {
               // let oneDecimal = ["speed_value", "speed", "gap", "sv"]; // 保留一位小数 需求 --- 转速、偏置电压、冲击均保留1位小数即可
               let oneDecimal = [16000, 1000, 14000, 46000]; // 保留一位小数 需求 --- 转速、偏置电压、冲击均保留1位小数即可
@@ -965,7 +965,7 @@ export default {
           } else {
             body[i].push({
               isShow: value.isShow,
-              val: "无数据"
+              val: this.$t('Common.noDataText')//无数据
             });
           }
         }
@@ -1093,13 +1093,13 @@ export default {
                   } else if (item[k] || item[k] === 0) {
                     let val;
                     if (item[k] >= 100000000) {
-                      val = "无数据";
+                      val = this.$t('Common.noDataText');//无数据
                     } else {
                       val = round(item[k], 4);
                     }
                     value[headIndex[k]] = val
                   } else {
-                    value[headIndex[k]] = '无数据'
+                    value[headIndex[k]] = this.$t('Common.noDataText');//无数据
                   }
                 }
                 myData.push(value)
@@ -1111,7 +1111,7 @@ export default {
             csv = "\ufeff" + csv;
             var aTag = document.createElement("a");
             var blob = new Blob([csv]);
-            aTag.download = `历史数据-${pos.position_name}-${pos.mac_name}-${new Date().getTime()}.csv`;
+            aTag.download = `历史数据-${pos.position_name}-${pos.mac_name}-${new Date().getTime()}.csv`;//历史数据
             aTag.href = URL.createObjectURL(blob);
             aTag.click();
             URL.revokeObjectURL(blob);
@@ -1134,7 +1134,7 @@ export default {
           if (res) {
             this.$refs.exportData.href = this.filePath + res.filePath;
             this.$refs.exportData.download = res.filePath.slice(
-              res.filePath.indexOf("历史数据")
+              res.filePath.indexOf('历史数据')//历史数据 this.$t('history.history')
             );
             this.$refs.exportData.click();
             setTimeout(() => {

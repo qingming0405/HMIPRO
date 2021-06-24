@@ -54,7 +54,9 @@
       </div>
     </div>
     <div class="search-data">
-      <button @click="dataRetrieval">数据检索</button>
+      <button @click="dataRetrieval">
+        <!-- 数据检索 -->{{$t('Common.retrieval')}}
+      </button>
       <a
         href=""
         ref="exportData"
@@ -128,17 +130,34 @@ export default {
             isShow: true,
             pos,
             posName: pos.position_name,
-            head: ['序号', '征兆类型', '置信度', '维护建议'],
+            head: [
+              this.$t('Common.order'),
+              this.$t('expertSystem.SymptomType'),
+              this.$t('expertSystem.Confidence'),
+              this.$t('expertSystem.MaintenanceRecommend'),
+            ], //'序号', '征兆类型', '置信度', '维护建议'
             body: [],
             empty: {
               /* 无报警数据 */
               isShow: true,
-              text: `无数据`,
+              text: this.$t('Common.noDataText'), //无数据
             },
             dataType: [
-              { val: '定时历史数据', isChecked: true, type: 1 },
-              { val: '启停机数据', isChecked: false, type: 2 },
-              { val: '报警存储数据', isChecked: false, type: 3 },
+              {
+                val: this.$t('Common8000.TimedHisData'),
+                isChecked: true,
+                type: 1,
+              }, //定时历史数据
+              {
+                val: this.$t('Common8000.StartStopData'),
+                isChecked: false,
+                type: 2,
+              }, //启停机数据
+              {
+                val: this.$t('Common8000.AlarmStorageData'),
+                isChecked: false,
+                type: 3,
+              }, //报警存储数据
             ], //8000数据类型选择
           })
           this.getData()
@@ -172,7 +191,7 @@ export default {
             }
             params.empty.isShow = false
           } else {
-            this.$pop('专家系统无数据！')
+            this.$pop(this.$t('expertSystem.noData'))//专家系统无数据！
             params.empty.isShow = true
           }
         }
@@ -189,19 +208,19 @@ export default {
       var str
       switch (code) {
         case 1:
-          str = '动平衡不良'
+          str = this.$t('expertSystem.PoorDynamicBalance')//动平衡不良
           break
         case 2:
-          str = '对中不良'
+          str = this.$t('expertSystem.PoorAlignment')//对中不良
           break
         case 3:
-          str = '有摩擦'
+          str = this.$t('expertSystem.Friction')//有摩擦
           break
         case 4:
-          str = '油膜涡动'
+          str = this.$t('expertSystem.OilVortex')//油膜涡动
           break
         case 5:
-          str = '油膜震荡'
+          str = this.$t('expertSystem.OilFilmShock')//油膜震荡
           break
       }
       return str
@@ -210,38 +229,38 @@ export default {
       var str
       switch (code) {
         case 1:
-          str = '1）降负荷（或降速）运行；'
+          str = '1）'+this.$t('expertSystem.adviceStr1_1')//降负荷（或降速）运行；
           str +=
             '<br/>' +
-            '2）如转子不平衡故障由转子结垢不均匀造成，转子动平衡时须彻底清理转子上的结垢；'
-          str += '<br/>' + '3）择机停车处理，按技术要求对转子进行动平衡。'
+            '2）'+this.$t('expertSystem.adviceStr1_2')//如转子不平衡故障由转子结垢不均匀造成，转子动平衡时须彻底清理转子上的结垢；
+          str += '<br/>' + '3）'+this.$t('expertSystem.adviceStr1_3')//择机停车处理，按技术要求对转子进行动平衡。
           break
         case 2:
-          str = '1）按技术要求调整轴系转子对中量，重新对中；'
-          str += '<br/>' + '2）转子冷态对中时，应考虑到热态不对中变化量。'
+          str = '1）'+this.$t('expertSystem.adviceStr2_1')//按技术要求调整轴系转子对中量，重新对中；
+          str += '<br/>' + '2）'+this.$t('expertSystem.adviceStr2_2')//转子冷态对中时，应考虑到热态不对中变化量。
           break
         case 3:
           str =
-            '1）调整转子与静止件的相对位置（均匀）和间隙（技术要求指标上线）；'
-          str += '<br/>' + '2）提高轴系对中精度；'
+            '1）'+this.$t('expertSystem.adviceStr3_1')//调整转子与静止件的相对位置（均匀）和间隙（技术要求指标上线）；
+          str += '<br/>' + '2）'+this.$t('expertSystem.adviceStr3_2')//提高轴系对中精度；
           str +=
             '<br/>' +
-            '3）减小转轴振动、径向跳动和外界扰动（如提高转子动平衡精度，降低不平衡力）；'
+            '3）'+this.$t('expertSystem.adviceStr3_3')//减小转轴振动、径向跳动和外界扰动（如提高转子动平衡精度，降低不平衡力）；
           str +=
             '<br/>' +
-            '4）如发生局部摩擦故障，可采用摩擦方法扩大动静间隙（临时措施）。'
+            '4）'+this.$t('expertSystem.adviceStr3_4')//如发生局部摩擦故障，可采用摩擦方法扩大动静间隙（临时措施）。
           break
         case 4:
-          str = '1）按技术要求安装轴承，轴承间隙须符合要求，调整好轴承座紧力；'
+          str = '1）'+this.$t('expertSystem.adviceStr4_1')//按技术要求安装轴承，轴承间隙须符合要求，调整好轴承座紧力；
           str +=
             '<br/>' +
-            '2）改进轴承工作状况，润滑油须定期检验，如有问题及时处理（如过滤、脱水、补油、添加高性能抗磨剂等）；'
-          str += '<br/>' + '3）调整润滑油温、油压（适当提高供油压力和油温）；'
-          str += '<br/>' + '4）更换符合技术要求的轴承。'
+            '2）'+this.$t('expertSystem.adviceStr4_2')//改进轴承工作状况，润滑油须定期检验，如有问题及时处理（如过滤、脱水、补油、添加高性能抗磨剂等）；
+          str += '<br/>' + '3）'+this.$t('expertSystem.adviceStr4_3')//调整润滑油温、油压（适当提高供油压力和油温）；
+          str += '<br/>' + '4）'+this.$t('expertSystem.adviceStr4_4')//更换符合技术要求的轴承。
           break
         case 5:
-          str =
-            '调整轴瓦，提高轴径在轴系内的偏心率，提高轴承一阶临界转速，提高失稳转速。'
+          str = this.$t('expertSystem.adviceStr5_1')
+            //'调整轴瓦，提高轴径在轴系内的偏心率，提高轴承一阶临界转速，提高失稳转速。'
           break
       }
       return str
@@ -295,7 +314,7 @@ export default {
             user-select: none;
             text-align: center;
             &:nth-child(1) {
-              width: 5%;
+              width: 8%;
             }
             &:nth-child(4) {
               width: 25%;
@@ -314,7 +333,7 @@ export default {
             user-select: none;
             padding: 10px;
             &:nth-child(1) {
-              width: 5%;
+              width: 8%;
             }
             &:nth-child(4) {
               width: 25%;

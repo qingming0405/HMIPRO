@@ -93,7 +93,7 @@
         >
           <!-- 筛选显示机组 -->
           <div
-            v-for="(searchGroup, groupName) in param.groupSelmacList"
+            v-for="(searchGroup, groupName,i) in param.groupSelmacList"
             v-show="param.ischeck && param.selmacList.length > 0"
           >
             <div class="general-view-content-title">{{ groupName }}</div>
@@ -104,7 +104,8 @@
               <div
                 v-for="(item, index) in searchGroup"
                 class="view-content"
-                @click="choosemac(index,item,'view-content')"
+                :ref="'view_contentyt' +i+index"
+                @click="choosemac(index,searchGroup,`view_contentyt${i}`)"
                 :class="{
                 active: item.chooseflag,
                 'general-view-citem': item.type === 1,
@@ -166,7 +167,7 @@
           ></div>
           <!-- 收藏显示机组 -->
           <div>
-            <div v-for="(group, name) in param.groupMacList">
+            <div v-for="(group, name,i) in param.groupMacList">
               <div class="general-view-content-title">{{ name }}</div>
               <div
                 class="general-view-content"
@@ -175,7 +176,8 @@
                 <div
                   v-for="(item, index) in group"
                   class="view-content"
-                  @click="choosemac(index,group,'view_contentt')"
+                  :ref="'view_contenttyt'+ i + index"
+                  @click="choosemac(index,group,`view_contenttyt${i}`)"
                   :class="{
                   active: item.chooseflag,
                   'general-view-citem': item.type === 1,
@@ -331,13 +333,13 @@ export default {
     }
   },
   created() {
-    this.itemize[0].name = this.$t('Common.allText');//全部
-    this.itemize[1].name = this.$t('Common.normalText');//正常
-    this.itemize[3].name = this.$t('Common.alarmText');//报警
-    this.itemize[4].name = this.$t('GjModel.warnText');//预警
-    this.itemize[5].name = this.$t('Common.abnormalText');//自检异常
-    this.itemize[6].name = this.$t('GjModel.offlineText');//离线
-    this.itemize[7].name = this.$t('Common.focausText');//关注
+    this.itemize[0].name = this.$t('Common.allText') //全部
+    this.itemize[1].name = this.$t('Common.normalText') //正常
+    this.itemize[2].name = this.$t('Common.alarmText') //报警
+    this.itemize[3].name = this.$t('GjModel.warnText') //预警
+    this.itemize[4].name = this.$t('Common.abnormalText') //自检异常
+    this.itemize[5].name = this.$t('GjModel.offlineText') //离线
+    this.itemize[6].name = this.$t('Common.focausText') //关注
 
     window.innerWidth < 1380 ? (this.eachRowNum = 5) : (this.eachRowNum = 6)
     this.$store.commit('set_keepAlive', {
@@ -468,6 +470,38 @@ export default {
           break
       }
       return val
+    },
+    //点击机组修改border
+    choosemac(index, arr, field) {
+      this.$nextTick(() => {
+        if (this.focus[this.currentKey].groupSelmacList) {
+          let i = 0
+          for (let k in this.focus[this.currentKey].groupSelmacList) {
+            let SelmacList = this.focus[this.currentKey].groupSelmacList[k]
+            for (let j = 0; j < SelmacList.length; j++) {
+              this.$refs['view_contentyt'+ i + j][0].style.border = ''
+            }
+            i++
+          }
+        }
+        if (this.focus[this.currentKey].groupMacList) {
+          let i = 0
+          for (let k in this.focus[this.currentKey].groupMacList) {
+            let macList = this.focus[this.currentKey].groupMacList[k]
+            for (let j = 0; j < macList.length; j++) {
+              this.$refs['view_contenttyt'+ i + j][0].style.border = ''
+            }
+            i++
+          }
+        }
+        for (let j = 0; j < arr.length; j++) {
+          if (j === index) {
+            this.$refs[field + j][0].style.border = '1px solid #00fcf9'
+          } else {
+            this.$refs[field + j][0].style.border = ''
+          }
+        }
+      })
     },
   },
   watch: {

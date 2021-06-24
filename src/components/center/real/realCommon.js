@@ -95,7 +95,7 @@ export default {
             empty: {
               /* 无报警数据 */
               isShow: true,
-              text: `无数据`
+              text: this.$t('Common.noDataText')//无数据
             },
             getReal: true,
             timer: null,
@@ -267,7 +267,7 @@ export default {
               } else {
                 body[i].push({
                   isShow: value.isShow,
-                  val: "无数据"
+                  val: this.$t('Common.noDataText')//无数据
                 });
               }
             } else if (
@@ -299,16 +299,16 @@ export default {
               } else {
                 body[i].push({
                   isShow: value.isShow,
-                  val: "无数据"
+                  val: this.$t('Common.noDataText')//无数据
                 });
               }
             } else if (value.code == 27000 && list.pos_type == 10 && realData.pos.t_root == 3) {
               value.unit = null;
               let val;
               if (v >= 100000000) {
-                val = "无数据";
+                val = this.$t('Common.noDataText')//无数据
               } else if (v === undefined || v === null) {
-                val = "无数据";
+                val = this.$t('Common.noDataText')//无数据
               } else {
                 let unitNum = parseInt(list.unitNum);
                 if (!isNaN(unitNum)) {
@@ -327,7 +327,7 @@ export default {
             } else if (v || v === 0) {
               let val;
               if (v >= 100000000) {
-                val = "无数据";
+                val = this.$t('Common.noDataText')//无数据
               } else {
                 // let oneDecimal = ["speed_value", "speed", "gap", "sv"]; // 保留一位小数 需求 --- 转速、偏置电压、冲击均保留1位小数即可
                 let oneDecimal = [16000, 1000, 14000, 46000]// 保留一位小数 需求 --- 转速、偏置电压、冲击均保留1位小数即可
@@ -362,7 +362,7 @@ export default {
             } else {
               body[i].push({
                 isShow: value.isShow,
-                val: "无数据"
+                val: this.$t('Common.noDataText')//无数据
               });
             }
           } else {
@@ -382,7 +382,7 @@ export default {
                 } else {
                   body[i].push({
                     isShow: value.isShow,
-                    val: "无数据"
+                    val: this.$t('Common.noDataText')//无数据
                   });
                 }
               } else if (
@@ -414,7 +414,7 @@ export default {
                 } else {
                   body[i].push({
                     isShow: value.isShow,
-                    val: "无数据"
+                    val: this.$t('Common.noDataText')//无数据
                   });
                 }
               } else if (value.code == 27000 && list.pos_type == 10 && realData.pos.t_root == 3) {
@@ -429,9 +429,9 @@ export default {
                 value.unit = null;
                 let val;
                 if (v >= 100000000) {
-                  val = "无数据";
+                  val = this.$t('Common.noDataText')//无数据
                 } else if (v === undefined || v === null) {
-                  val = "无数据";
+                  val = this.$t('Common.noDataText')//无数据
                 } else {
                   let unitNum = parseInt(list.unitNum);
                   if (!isNaN(unitNum)) {
@@ -450,7 +450,7 @@ export default {
               } else if (v || v === 0) {
                 let val;
                 if (v >= 100000000) {
-                  val = "无数据";
+                  val = this.$t('Common.noDataText')//无数据
                 } else {
                   // 转速无需做处理
                   if (vFiled != 'speed') {
@@ -493,7 +493,7 @@ export default {
               } else {
                 body[i].push({
                   isShow: value.isShow,
-                  val: "无数据"
+                  val: this.$t('Common.noDataText')//无数据
                 });
               }
             } else {
@@ -509,7 +509,7 @@ export default {
                 } else {
                   body[i].push({
                     isShow: value.isShow,
-                    val: "无数据"
+                    val: this.$t('Common.noDataText')//无数据
                   });
                 }
               } else if (
@@ -541,16 +541,16 @@ export default {
                 } else {
                   body[i].push({
                     isShow: value.isShow,
-                    val: "无数据"
+                    val: this.$t('Common.noDataText')//无数据
                   });
                 }
               } else if (value.code == 27000 && list.pos_type == 10 && realData.pos.t_root == 3) {
                 value.unit = null;
                 let val;
                 if (v >= 100000000) {
-                  val = "无数据";
+                  val = this.$t('Common.noDataText')//无数据
                 } else if (v === undefined || v === null) {
-                  val = "无数据";
+                  val = this.$t('Common.noDataText')//无数据
                 } else {
                   let unitNum = parseInt(list.unitNum);
                   if (!isNaN(unitNum)) {
@@ -569,7 +569,7 @@ export default {
               } else if (v || v === 0) {
                 let val;
                 if (v >= 100000000) {
-                  val = "无数据";
+                  val = this.$t('Common.noDataText')//无数据
                 } else {
                   // let oneDecimal = ["speed_value", "speed", "gap", "sv"]; // 保留一位小数 需求 --- 转速、偏置电压、冲击均保留1位小数即可
                   let oneDecimal = [16000, 1000, 14000, 46000]// 保留一位小数 需求 --- 转速、偏置电压、冲击均保留1位小数即可
@@ -604,7 +604,7 @@ export default {
               } else {
                 body[i].push({
                   isShow: value.isShow,
-                  val: "无数据"
+                  val: this.$t('Common.noDataText')//无数据
                 });
               }
             }
@@ -717,8 +717,8 @@ export default {
     },
     // 右键菜单
     showContextmenu (e, item, posInfo) {
-      let time = item[1].val === '无数据' ? new Date().getTime() : new Date(item[1].val).getTime()
-      let pos = this.$store.getters.getPos(posInfo.mac_id, posInfo.pos_type, posInfo.pos_id)
+      let time = item[1].val === this.$t('Common.noDataText') ? new Date().getTime() : new Date(item[1].val).getTime()
+      let pos = this.$store.getters.getPos(posInfo.mac_id, posInfo.pos_type, posInfo.pos_id) //无数据
       let text = getMenus(['trend', 'wave', 'history', 'alarm'])
       let info = {
         type: 'pos',
@@ -734,7 +734,7 @@ export default {
       if (posInfo) {
         let key = `${posInfo.mac_id}_${posInfo.pos_id}_${posInfo.pos_type}`;
         key = "trend_pos_" + key;
-        this.$bus.$emit("choiceChartType", key, "趋势图");
+        this.$bus.$emit("choiceChartType", key, this.$t('Common.trend'));//趋势图
       }
     }
   },

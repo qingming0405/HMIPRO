@@ -141,7 +141,6 @@
           class="alarm-number"
           v-show="alarmData.length > 0"
         ><span>{{alarmData.length}}</span></div>
-
       </div>
       <!-- 全屏按钮-->
       <div
@@ -216,35 +215,35 @@ export default {
       /* --------------------------------------导航栏迁移--------------------------------------- */
       firstLevel: [
         {
-          val: this.$t('HeaderEdge.firstLevel1'),//总貌图
+          val: this.$t('HeaderEdge.firstLevel1'), //总貌图
           icon: 'icon-shouye1',
           isAll: false,
           exceptTRoot: [],
           isShow: true,
         },
         {
-          val: this.$t('HeaderEdge.firstLevel2'),//图谱分析
+          val: this.$t('HeaderEdge.firstLevel2'), //图谱分析
           icon: 'icon-zhongzi-chakanjiemian-boxing-',
           isAll: false,
           exceptTRoot: [],
           isShow: true,
         },
         {
-          val: this.$t('HeaderEdge.firstLevel3'),//启停机分析
+          val: this.$t('HeaderEdge.firstLevel3'), //启停机分析
           icon: 'icon-guanji',
           isAll: false,
           includeTRoot: [4],
           isShow: true,
         },
         {
-          val: this.$t('HeaderEdge.firstLevel4'),//数据分析
+          val: this.$t('HeaderEdge.firstLevel4'), //数据分析
           icon: 'icon-zhongzi-chakanjiemian-shuju-',
           isAll: false,
           exceptTRoot: [],
           isShow: true,
         },
         {
-          val: this.$t('HeaderEdge.firstLevel5'),//日志列表
+          val: this.$t('HeaderEdge.firstLevel5'), //日志列表
           icon: 'icon-rizhiliebiao',
           isAll: false,
           exceptTRoot: [],
@@ -256,21 +255,21 @@ export default {
         [
           /* 风电总貌图 */
           {
-            val: this.$t('HeaderEdge.secondLevel1_1'),//总貌图
+            val: this.$t('HeaderEdge.secondLevel1_1'), //总貌图
             icon: 'icon-shouye1',
             name: 'fdGeneral',
             general: true,
             t_root: 0,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_2'),//重点关注
+            val: this.$t('HeaderEdge.secondLevel1_2'), //重点关注
             icon: 'icon-shoucang',
             name: 'fdFocus',
             general: true,
             t_root: 0,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_3'),//设备模型
+            val: this.$t('HeaderEdge.secondLevel1_3'), //设备模型
             icon: 'icon-shijingsanwei-',
             name: 'windModel',
             general: true,
@@ -278,21 +277,21 @@ export default {
           },
           /* 水泥总貌图 */
           {
-            val: this.$t('HeaderEdge.secondLevel1_1'),//总貌图
+            val: this.$t('HeaderEdge.secondLevel1_1'), //总貌图
             icon: 'icon-shouye1',
             name: 'snGeneral',
             general: true,
             t_root: 1,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_2'),//重点关注
+            val: this.$t('HeaderEdge.secondLevel1_2'), //重点关注
             icon: 'icon-shoucang',
             name: 'snFocus',
             general: true,
             t_root: 1,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_3'),//设备模型
+            val: this.$t('HeaderEdge.secondLevel1_3'), //设备模型
             icon: 'icon-shijingsanwei-',
             name: 'snModel',
             general: true,
@@ -300,21 +299,21 @@ export default {
           },
           /* 轨交总貌图 */
           {
-            val: this.$t('HeaderEdge.secondLevel1_1'),//总貌图
+            val: this.$t('HeaderEdge.secondLevel1_1'), //总貌图
             icon: 'icon-shouye1',
             name: 'gjGeneral',
             general: true,
             t_root: 2,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_2'),//重点关注
+            val: this.$t('HeaderEdge.secondLevel1_2'), //重点关注
             icon: 'icon-shoucang',
             name: 'gjFocus',
             general: true,
             t_root: 2,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_3'),//设备模型
+            val: this.$t('HeaderEdge.secondLevel1_3'), //设备模型
             icon: 'icon-shijingsanwei-',
             name: 'gjModel',
             general: true,
@@ -322,21 +321,21 @@ export default {
           },
           /* 油田总貌图 */
           {
-            val: this.$t('HeaderEdge.secondLevel1_1'),//总貌图
+            val: this.$t('HeaderEdge.secondLevel1_1'), //总貌图
             icon: 'icon-shouye1',
             name: 'ytGeneral',
             general: true,
             t_root: 3,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_2'),//重点关注
+            val: this.$t('HeaderEdge.secondLevel1_2'), //重点关注
             icon: 'icon-shoucang',
             name: 'ytFocus',
             general: true,
             t_root: 3,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_3'),//油田设备模型
+            val: this.$t('HeaderEdge.secondLevel1_3'), //油田设备模型
             icon: 'icon-shijingsanwei-',
             name: 'ytModel',
             general: true,
@@ -344,21 +343,21 @@ export default {
           },
           // 化工
           {
-            val: this.$t('HeaderEdge.secondLevel1_1'),//总貌图
+            val: this.$t('HeaderEdge.secondLevel1_1'), //总貌图
             icon: 'icon-shouye1',
             name: 'hgGeneral',
             general: true,
             t_root: 5,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_2'),//重点关注
+            val: this.$t('HeaderEdge.secondLevel1_2'), //重点关注
             icon: 'icon-shoucang',
             name: 'hgFocus',
             general: true,
             t_root: 5,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_3'),//设备模型
+            val: this.$t('HeaderEdge.secondLevel1_3'), //设备模型
             icon: 'icon-shijingsanwei-',
             name: 'hgModel',
             general: true,
@@ -366,21 +365,21 @@ export default {
           },
           /* 通用总貌图 */
           {
-            val: this.$t('HeaderEdge.secondLevel1_1'),//总貌图
+            val: this.$t('HeaderEdge.secondLevel1_1'), //总貌图
             icon: 'icon-shouye1',
             name: 'tyGeneral',
             general: true,
             t_root: -1,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_2'),//重点关注
+            val: this.$t('HeaderEdge.secondLevel1_2'), //重点关注
             icon: 'icon-shoucang',
             name: 'tyFocus',
             general: true,
             t_root: -1,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel1_3'),//设备模型
+            val: this.$t('HeaderEdge.secondLevel1_3'), //设备模型
             icon: 'icon-shijingsanwei-',
             name: 'tyModel',
             general: true,
@@ -389,7 +388,7 @@ export default {
         ],
         [
           {
-            val: this.$t('HeaderEdge.secondLevel2_1'),//智能诊断趋势
+            val: this.$t('HeaderEdge.secondLevel2_1'), //智能诊断趋势
             icon: 'icon-boxing_huaban',
             name: 'diagnosisTrend',
             controlShow: true, //后来配置这样表是否显示
@@ -397,7 +396,7 @@ export default {
             includeTRoot: [0] /* 当t_root在exceptTRoot中时标题不显示 */,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_2'),//波形频谱图
+            val: this.$t('HeaderEdge.secondLevel2_2'), //波形频谱图
             icon: 'icon-boxing_huaban',
             name: 'wave',
             controlShow: true, //后来配置这样表是否显示
@@ -405,7 +404,7 @@ export default {
             exceptTRoot: [3] /* 当t_root在exceptTRoot中时标题不显示 */,
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_3'),//趋势图
+            val: this.$t('HeaderEdge.secondLevel2_3'), //趋势图
             icon: 'icon-qushitu_huaban1',
             name: 'trend',
             controlShow: true, //后来配置这样表是否显示
@@ -413,7 +412,7 @@ export default {
             exceptTRoot: [],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_4'),//三维频谱图
+            val: this.$t('HeaderEdge.secondLevel2_4'), //三维频谱图
             icon: 'icon-sanweipinputu_huaban',
             name: 'wave3d',
             controlShow: true, //后来配置这样表是否显示
@@ -421,7 +420,7 @@ export default {
             exceptTRoot: [3],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_5'),//轨道波磨图
+            val: this.$t('HeaderEdge.secondLevel2_5'), //轨道波磨图
             icon: 'icon-guidao',
             name: 'tmstrend',
             controlShow: true, //后来配置这样表是否显示
@@ -429,7 +428,7 @@ export default {
             includeTRoot: [2],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_6'),//轨道波磨频谱瀑布
+            val: this.$t('HeaderEdge.secondLevel2_6'), //轨道波磨频谱瀑布
             icon: 'icon-sanweipinputu_huaban',
             name: 'tmswave3d',
             controlShow: true, //后来配置这样表是否显示
@@ -444,7 +443,7 @@ export default {
           //   isShow: true
           // },
           {
-            val: this.$t('HeaderEdge.secondLevel2_7'),//倾角分布图
+            val: this.$t('HeaderEdge.secondLevel2_7'), //倾角分布图
             icon: 'icon-qingjiaofenbutu_huaban_huaban',
             name: 'dip',
             controlShow: true, //后来配置这样表是否显示
@@ -452,7 +451,7 @@ export default {
             exceptTRoot: [1, 2, 3, 4, 5],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_8'),//机舱轨迹图
+            val: this.$t('HeaderEdge.secondLevel2_8'), //机舱轨迹图
             icon: 'icon-jicangguijitu',
             name: 'overturn',
             controlShow: true, //后来配置这样表是否显示
@@ -460,7 +459,7 @@ export default {
             exceptTRoot: [1, 2, 3, 4, 5],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_9'),//散点图
+            val: this.$t('HeaderEdge.secondLevel2_9'), //散点图
             icon: 'icon-sandiantu_huaban',
             name: 'scatter',
             controlShow: true, //后来配置这样表是否显示
@@ -468,7 +467,7 @@ export default {
             exceptTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_10'),//危险转速区间监测
+            val: this.$t('HeaderEdge.secondLevel2_10'), //危险转速区间监测
             icon: 'icon-yibiaopan',
             name: 'dashboard',
             controlShow: true, //后来配置这样表是否显示
@@ -476,7 +475,7 @@ export default {
             includeTRoot: [0],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_11'),//轨道波磨地图
+            val: this.$t('HeaderEdge.secondLevel2_11'), //轨道波磨地图
             icon: 'icon-iconditietu',
             name: 'railCorrugation',
             controlShow: true, //后来配置这样表是否显示
@@ -484,7 +483,7 @@ export default {
             includeTRoot: [2],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_12'),//单值棒图
+            val: this.$t('HeaderEdge.secondLevel2_12'), //单值棒图
             icon: 'icon-danzhibangtu_huaban1',
             name: 'singleBar',
             controlShow: true, //后来配置这样表是否显示
@@ -492,7 +491,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_13'),//多值棒图
+            val: this.$t('HeaderEdge.secondLevel2_13'), //多值棒图
             icon: 'icon-duozhibangtu_huaban1',
             name: 'multiBar',
             controlShow: true, //后来配置这样表是否显示
@@ -501,7 +500,7 @@ export default {
           },
 
           {
-            val: this.$t('HeaderEdge.secondLevel2_14'),//全频谱图
+            val: this.$t('HeaderEdge.secondLevel2_14'), //全频谱图
             icon: 'icon-quanpinputu_huaban1',
             name: 'fullSpectrum',
             controlShow: true, //后来配置这样表是否显示
@@ -518,7 +517,7 @@ export default {
           // },
 
           {
-            val: this.$t('HeaderEdge.secondLevel2_15'),//多频谱图
+            val: this.$t('HeaderEdge.secondLevel2_15'), //多频谱图
             icon: 'icon-duopinputu_huaban1',
             name: 'multiSpectrum',
             controlShow: true, //后来配置这样表是否显示
@@ -526,7 +525,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_16'),//单面动平衡
+            val: this.$t('HeaderEdge.secondLevel2_16'), //单面动平衡
             icon: 'icon-9danmiandongpingheng_huaban1',
             name: 'singledynamicBalance',
             controlShow: true, //后来配置这样表是否显示
@@ -534,7 +533,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_17'),//双面动平衡
+            val: this.$t('HeaderEdge.secondLevel2_17'), //双面动平衡
             icon: 'icon-10shuangmiandongpingheng_huaban1',
             name: 'doubledynamicBalance',
             controlShow: true, //后来配置这样表是否显示
@@ -542,7 +541,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_18'),//极坐标图
+            val: this.$t('HeaderEdge.secondLevel2_18'), //极坐标图
             icon: 'icon-14jizuobiao_huaban1',
             name: 'polarDiagram',
             controlShow: true, //后来配置这样表是否显示
@@ -550,7 +549,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_19'),//轴心轨迹图
+            val: this.$t('HeaderEdge.secondLevel2_19'), //轴心轨迹图
             icon: 'icon-22zhouxinguijitu_huaban1',
             name: 'axisLocus',
             controlShow: true, //后来配置这样表是否显示
@@ -558,7 +557,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel2_20'),//轴心位置图
+            val: this.$t('HeaderEdge.secondLevel2_20'), //轴心位置图
             icon: 'icon-21zhouxinweizhitu_huaban1',
             name: 'axisPosition',
             controlShow: true, //后来配置这样表是否显示
@@ -577,7 +576,7 @@ export default {
         [
           // 启停机分析
           {
-            val: this.$t('HeaderEdge.secondLevel3_1'),//转速时间图
+            val: this.$t('HeaderEdge.secondLevel3_1'), //转速时间图
             icon: 'icon-12zhuansushijiantu_huaban1',
             name: 'speedTime',
             controlShow: true, //后来配置这样表是否显示
@@ -585,7 +584,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel3_2'),//奈奎斯特图
+            val: this.$t('HeaderEdge.secondLevel3_2'), //奈奎斯特图
             icon: 'icon-25naikuisitetu_huaban1',
             name: 'nyquist',
             controlShow: true, //后来配置这样表是否显示
@@ -593,7 +592,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel3_3'),//伯德图
+            val: this.$t('HeaderEdge.secondLevel3_3'), //伯德图
             icon: 'icon-13bodetu_huaban1',
             name: 'bode',
             controlShow: true, //后来配置这样表是否显示
@@ -601,7 +600,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel3_4'),//启停机频谱瀑布图
+            val: this.$t('HeaderEdge.secondLevel3_4'), //启停机频谱瀑布图
             icon: 'icon-19pinpupubutuqitingji_huaban1',
             name: 'ssSpectrumWaterfall',
             controlShow: true, //后来配置这样表是否显示
@@ -609,7 +608,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel3_5'),//级联图
+            val: this.$t('HeaderEdge.secondLevel3_5'), //级联图
             icon: 'icon-20jiliantu_huaban1',
             name: 'cascade',
             controlShow: true, //后来配置这样表是否显示
@@ -617,7 +616,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel3_6'),//启停机数据列表
+            val: this.$t('HeaderEdge.secondLevel3_6'), //启停机数据列表
             icon: 'icon-qitingjishujuliebiao_huaban1',
             name: 'startStop',
             controlShow: true, //后来配置这样表是否显示
@@ -627,7 +626,7 @@ export default {
         ],
         [
           {
-            val: this.$t('HeaderEdge.secondLevel4_1'),//实时数据汇总列表
+            val: this.$t('HeaderEdge.secondLevel4_1'), //实时数据汇总列表
             icon: 'icon-huizong',
             name: 'realSummary',
             controlShow: true, //后来配置这样表是否显示
@@ -635,7 +634,7 @@ export default {
             includeTRoot: [1, 3],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel4_2'),//实时数据列表
+            val: this.$t('HeaderEdge.secondLevel4_2'), //实时数据列表
             icon: 'icon-shishishuju_huaban',
             name: 'real',
             controlShow: true, //后来配置这样表是否显示
@@ -643,7 +642,7 @@ export default {
             exceptTRoot: [],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel4_3'),//历史数据列表
+            val: this.$t('HeaderEdge.secondLevel4_3'), //历史数据列表
             icon: 'icon-lishishujuliebiao_huaban',
             name: 'history',
             controlShow: true, //后来配置这样表是否显示
@@ -651,7 +650,7 @@ export default {
             exceptTRoot: [],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel4_4'),//监测报表
+            val: this.$t('HeaderEdge.secondLevel4_4'), //监测报表
             icon: 'icon-jiancebaobiao_huaban_huaban',
             name: 'monitor',
             controlShow: true, //后来配置这样表是否显示
@@ -659,7 +658,7 @@ export default {
             exceptTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel4_5'),//设备参数
+            val: this.$t('HeaderEdge.secondLevel4_5'), //设备参数
             icon: 'icon-00-shujujilu-05',
             name: 'equipmentParameters',
             controlShow: true, //后来配置这样表是否显示
@@ -668,7 +667,7 @@ export default {
           },
           {
             // 机组
-            val: this.$t('HeaderEdge.secondLevel4_6'),//设备维护记录
+            val: this.$t('HeaderEdge.secondLevel4_6'), //设备维护记录
             icon: 'icon-shebei',
             name: 'maintain',
             controlShow: true, //后来配置这样表是否显示
@@ -676,7 +675,7 @@ export default {
             exceptTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel4_7'),//统计列表
+            val: this.$t('HeaderEdge.secondLevel4_7'), //统计列表
             icon: 'icon-tongjiliebiao_huaban',
             name: 'census',
             controlShow: true, //后来配置这样表是否显示
@@ -684,7 +683,7 @@ export default {
             exceptTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel4_8'),//专家系统
+            val: this.$t('HeaderEdge.secondLevel4_8'), //专家系统
             icon: 'icon-17zhuanjiaxitong_huaban11',
             name: 'expertSystem',
             controlShow: true, //后来配置这样表是否显示
@@ -700,7 +699,7 @@ export default {
             includeTRoot: [],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel4_10'),//踏面测量数据
+            val: this.$t('HeaderEdge.secondLevel4_10'), //踏面测量数据
             icon: 'icon-tamianceliangshuju',
             name: 'treadData',
             controlShow: true,
@@ -708,7 +707,7 @@ export default {
             includeTRoot: [2],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel4_11'),//踏面磨损趋势
+            val: this.$t('HeaderEdge.secondLevel4_11'), //踏面磨损趋势
             icon: 'icon-tamianmosunqushi',
             name: 'wearTrend',
             controlShow: true,
@@ -716,7 +715,7 @@ export default {
             includeTRoot: [2],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel4_12'),//踏面寿命预估
+            val: this.$t('HeaderEdge.secondLevel4_12'), //踏面寿命预估
             icon: 'icon-tamianshoumingyugu',
             name: 'lifePredict',
             controlShow: true,
@@ -726,7 +725,7 @@ export default {
         ],
         [
           {
-            val: this.$t('HeaderEdge.secondLevel5_1'),//报警日志
+            val: this.$t('HeaderEdge.secondLevel5_1'), //报警日志
             icon: 'icon-baojing_huaban',
             name: 'alarm',
             controlShow: true, //后来配置这样表是否显示
@@ -735,7 +734,7 @@ export default {
           },
           // 8000报警日志
           {
-            val: this.$t('HeaderEdge.secondLevel5_1'),//报警日志
+            val: this.$t('HeaderEdge.secondLevel5_1'), //报警日志
             icon: 'icon-baojing_huaban',
             name: 'alarm1',
             controlShow: true, //后来配置这样表是否显示
@@ -743,7 +742,7 @@ export default {
             includeTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel5_2'),//服务器信息
+            val: this.$t('HeaderEdge.secondLevel5_2'), //服务器信息
             icon: 'icon-fuwuqi',
             name: 'server',
             controlShow: true, //后来配置这样表是否显示
@@ -751,17 +750,17 @@ export default {
             exceptTRoot: [4],
           },
           {
-            val: this.$t('HeaderEdge.secondLevel5_3'),//系统日志
+            val: this.$t('HeaderEdge.secondLevel5_3'), //系统日志
             icon: 'icon-xitongrizhi_',
             name: 'system',
             controlShow: true, //后来配置这样表是否显示
             isShow: true,
           },
-          { 
-            val: this.$t('HeaderEdge.secondLevel5_4'),// 使用手册
-            icon: 'icon-icon-test', 
-            name: 'userManual' 
-            },
+          {
+            val: this.$t('HeaderEdge.secondLevel5_4'), // 使用手册
+            icon: 'icon-icon-test',
+            name: 'userManual',
+          },
         ],
         // [{ val: "使用手册", icon: "icon-icon-test", name: "" }]
       ],
@@ -865,20 +864,8 @@ export default {
         val: '',
         msg: null, // 测点的全部信息
       },
-      channel: {
-        val: '',
-        msg: {},
-      },
-      channelSel: false /* 通道筛选是否显示 */,
-      tArray: [], //存放所有组织
-      macArray: [], // 存放所有机组
-      posArray: [], //存放所有测点
-      chArray: [], //存放所有通道
-      ischeck: true,
-      isSelect: false, //是否显示重点关注筛选
       isShowTitleText: false,
       titleText: '',
-      selectList: false, //用来标志组织机组下拉框存在，防止多开
       audioAlarm: false, //是否需要声光报警
       alarmData: {
         length: 0, //报警个数
@@ -980,20 +967,6 @@ export default {
         }
       })
     },
-    /* 选择测点 */
-    choosePos(pos) {
-      this.posArray.forEach((item) => {
-        if (
-          item.machine_id == pos.machine_id &&
-          item.position_type == pos.position_type &&
-          item.position_id == pos.position_id
-        ) {
-          item.isChoose = true
-        } else {
-          item.isChoose = false
-        }
-      })
-    },
     // 标题显隐控制
     titleControl(item, tRoot) {
       if (item.exceptTRoot) {
@@ -1025,7 +998,7 @@ export default {
       if (this.generalOnlyTree.includes(name)) {
         if (!tree) {
           /* 没有组织 */
-          this.$pop(this.$t('Common.popTreeTips'))//请选择组织
+          this.$pop(this.$t('Common.popTreeTips')) //请选择组织
           return
         } else {
           key = `${name}_tree_${tree.t_id}`
@@ -1035,7 +1008,7 @@ export default {
       } else if (this.generalOnlyMac.includes(name)) {
         if (!mac) {
           /* 没有机组*/
-          this.$pop(this.$t('Common.popMacTips'))//请选择机组
+          this.$pop(this.$t('Common.popMacTips')) //请选择机组
           return
         } else {
           key = `${name}_mac_${mac.mac_id}_${mac.ch_class}`
@@ -1115,14 +1088,14 @@ export default {
       } else if (this.requiredPos.includes(name)) {
         if (!pos) {
           // 如果不存在测点的选择
-          this.$pop(this.$t('Common.popPosTips'))//请选择测点
+          this.$pop(this.$t('Common.popPosTips')) //请选择测点
           return
         } else {
           if (
             !matchRule(pos.position_type, name, pos.dgm_type, pos.t_root, pos)
           ) {
             //未能匹配
-            this.$pop(this.$t('Common.noChartTips'))//该测点没有此图谱
+            this.$pop(this.$t('Common.noChartTips')) //该测点没有此图谱
             return
           }
         }
@@ -1145,7 +1118,7 @@ export default {
         key = `${name}_pos_${mac.mac_id}_${pos.position_id}_${pos.position_type}`
       } else if (this.requiredMac.includes(name)) {
         if (!mac) {
-          this.$pop(this.$t('Common.popMacTips'))//请选择机组
+          this.$pop(this.$t('Common.popMacTips')) //请选择机组
           return
         }
         // 存在机泵
@@ -1156,7 +1129,7 @@ export default {
         }
       } else if (this.requiredTree.includes(name)) {
         if (!tree) {
-          this.$pop(this.$t('Common.popTreeTips'))//请选择组织
+          this.$pop(this.$t('Common.popTreeTips')) //请选择组织
           return
         }
         key = `${name}_tree_${tree.t_id}_${tree.t_root}`
@@ -1165,7 +1138,7 @@ export default {
           if (type === 'pos') {
             if (pos && pos.position_type == 1) {
               //转速测点无报警
-              this.$pop(this.$t('Common.noChartTips'))//该类型测点没有此图谱
+              this.$pop(this.$t('Common.noChartTips')) //该类型测点没有此图谱
               return
             }
             key = `${name}_pos_${mac.mac_id}_${pos.position_id}_${pos.position_type}`
@@ -1177,7 +1150,7 @@ export default {
             /* 实时数据列表汇总需要用到t_root */
             key = `${name}_tree_${tree.t_id}_${tree.t_root}`
           } else {
-            this.$pop(this.$t('Common.popTreeTips'))//请选择组织
+            this.$pop(this.$t('Common.popTreeTips')) //请选择组织
             return
           }
         } else {
@@ -1189,7 +1162,7 @@ export default {
             /* 实时数据列表汇总需要用到t_root */
             key = `${name}_tree_${tree.t_id}_${tree.t_root}`
           } else {
-            this.$pop(this.$t('Common.popTreeTips'))//请选择组织
+            this.$pop(this.$t('Common.popTreeTips')) //请选择组织
             return
           }
         }
@@ -1207,62 +1180,20 @@ export default {
       // this.$bus.$emit('scrollLabel', 1)
     },
     /* ----------------------------------------------------------------------------------------------------------- */
-    // 通道下拉
-    changeChannelType(e) {
-      const size = e.currentTarget.getBoundingClientRect()
-      let myStyle = {
-        maxHeight: '300px',
-        width: `${size.width}px`,
-        left: `${size.left}px`,
-        top: `${size.top + size.height + 3}px`,
-      }
-      let data = this.chArray
-      if (!this.selectList) {
-        this.selectList = true
-        this.$multi({
-          data,
-          myStyle,
-        }).then((res) => {
-          this.selectList = false
-          if (res) {
-            this.channel.msg = res
-            this.channel.val = res.name
-            this.posArray.forEach((pos) => {
-              pos.isChannel = false
-              pos.isShow = false
-            })
-            this.posArray.forEach((pos) => {
-              if (res.flag == `${pos.channel_type}_${pos.channel_id}`) {
-                pos.isChannel = true
-                pos.isShow = true
-              }
-            })
-            // 通过清空val值清空选中测点
-            this.pos.val = ''
-          }
-        })
-      }
-    },
-    /* 双击显示所有通道 */
-    changeAllChannelType(e) {
-      for (let i = 0; i < this.chArray.length; i++) {
-        this.chArray[i].isShow = true
-      }
-      this.changeChannelType(e)
-    },
     /* 退出登录 */
     logout() {
-      this.$pop({ content: this.$t('HeaderEdge.loginOutTips'), btnNum: 2 }).then(
-        (res) => {
-          if (res) {
-            this.$getApi.logout()
-            sessionStorage.clear()
-            this.$router.push({ path: '/login' })
-            // 刷新页面清空数据
-            this.$router.go(0)
-          }
+      this.$pop({
+        content: this.$t('HeaderEdge.loginOutTips'),
+        btnNum: 2,
+      }).then((res) => {
+        if (res) {
+          this.$getApi.logout()
+          sessionStorage.clear()
+          this.$router.push({ path: '/login' })
+          // 刷新页面清空数据
+          this.$router.go(0)
         }
-      )
+      })
     },
     /* 改变标题,总貌图的时候显示 */
     changeTitleText(route, key) {
@@ -1315,18 +1246,23 @@ export default {
         /* 显示组织+图谱名称 */
         switch (routeName) {
           case 'fdGeneral':
-            titleText = this.$t('HeaderEdge.secondLevel1_1')//'总貌图'
+            titleText = this.$t('HeaderEdge.secondLevel1_1') //'总貌图'
             break
           case 'fdFocus':
-            titleText = treeValue + '-' + this.$t('HeaderEdge.secondLevel1_2')//'重点关注'
+            titleText = treeValue + '-' + this.$t('HeaderEdge.secondLevel1_2') //'重点关注'
             break
           case 'fdModel':
-            titleText = treeValue + '-' + macValue + '-' + this.$t('HeaderEdge.secondLevel1_3')//'设备模型'
+            titleText =
+              treeValue +
+              '-' +
+              macValue +
+              '-' +
+              this.$t('HeaderEdge.secondLevel1_3') //'设备模型'
             break
           case 'windModel':
             //如果跳转到风机模型，头部样式改成黑色
             this.$nextTick(() => {
-              this.$refs.title.style.background = '#000'
+              this.$refs.title && (this.$refs.title.style.background = '#000')
               this.$parent.$el.getElementsByClassName(
                 'my-center-content'
               )[0].style.background = '#000'
@@ -1334,13 +1270,19 @@ export default {
                 this.$store.state.GeneralModel[key] &&
                 this.$store.state.GeneralModel[key] != 'windModel'
               ) {
-                this.$refs.title.style.background = '#092e55'
+                this.$refs.title &&
+                  (this.$refs.title.style.background = '#092e55')
                 this.$parent.$el.getElementsByClassName(
                   'my-center-content'
                 )[0].style.background = '#092e55'
               }
             })
-            titleText = treeValue + '-' + macValue + '-' + this.$t('HeaderEdge.secondLevel1_3')//'设备模型'
+            titleText =
+              treeValue +
+              '-' +
+              macValue +
+              '-' +
+              this.$t('HeaderEdge.secondLevel1_3') //'设备模型'
             break
           case 'fdanchorbolt':
           case 'fdbasics':
@@ -1350,46 +1292,79 @@ export default {
           case 'fdoil':
           case 'fdtowerdrum':
           case 'fdModelitem':
-            titleText = treeValue + '-' + macValue + '-' + this.$t('HeaderEdge.secondLevel1_3')//'设备模型'
+            titleText =
+              treeValue +
+              '-' +
+              macValue +
+              '-' +
+              this.$t('HeaderEdge.secondLevel1_3') //'设备模型'
             break
           case 'snGeneral':
-            titleText = this.$t('HeaderEdge.secondLevel1_1')//'总貌图'
+            titleText = this.$t('HeaderEdge.secondLevel1_1') //'总貌图'
             break
           case 'snFocus':
-            titleText = treeValue + '-' + this.$t('HeaderEdge.secondLevel1_2')//'重点关注'
+            titleText = treeValue + '-' + this.$t('HeaderEdge.secondLevel1_2') //'重点关注'
             break
           case 'snModel':
-            titleText = treeValue + '-' + macValue + '-' + this.$t('HeaderEdge.secondLevel1_3')//'设备模型'
+            titleText =
+              treeValue +
+              '-' +
+              macValue +
+              '-' +
+              this.$t('HeaderEdge.secondLevel1_3') //'设备模型'
             break
           case 'gjGeneral':
-            titleText = this.$t('HeaderEdge.secondLevel1_1')//'总貌图'
+            titleText = this.$t('HeaderEdge.secondLevel1_1') //'总貌图'
             break
           case 'gjFocus':
-            titleText = treeValue + '-' + this.$t('HeaderEdge.secondLevel1_2')//'重点关注'
+            titleText = treeValue + '-' + this.$t('HeaderEdge.secondLevel1_2') //'重点关注'
             break
           case 'gjModel':
-            titleText = treeValue + '-' + gjMacName + '-' + this.$t('HeaderEdge.secondLevel1_3')//'设备模型'
+            titleText =
+              treeValue +
+              '-' +
+              gjMacName +
+              '-' +
+              this.$t('HeaderEdge.secondLevel1_3') //'设备模型'
             break
           case 'gjModelInfo':
-            titleText = treeValue + '-' + macValue + '-' + this.$t('HeaderEdge.secondLevel1_3')//'设备模型' //pumpname
+            titleText =
+              treeValue +
+              '-' +
+              macValue +
+              '-' +
+              this.$t('HeaderEdge.secondLevel1_3') //'设备模型' //pumpname
             break
           case 'ytGeneral':
-            titleText = this.$t('HeaderEdge.secondLevel1_1')//'总貌图'
+            titleText = this.$t('HeaderEdge.secondLevel1_1') //'总貌图'
             break
           case 'ytFocus':
-            titleText = treeValue + '-' + this.$t('HeaderEdge.secondLevel1_2')//'重点关注'
+            titleText = treeValue + '-' + this.$t('HeaderEdge.secondLevel1_2') //'重点关注'
             break
           case 'ytModel':
-            titleText = treeValue + '-' + macValue + '-' + this.$t('HeaderEdge.secondLevel1_3')//'设备模型'
+          case 'ytMechineModel':
+          case 'ytAnalyse':
+          case 'ytPunchCard':
+            titleText =
+              treeValue +
+              '-' +
+              macValue +
+              '-' +
+              this.$t('HeaderEdge.secondLevel1_3') //'设备模型'
             break
           case 'tyGeneral':
-            titleText = this.$t('HeaderEdge.secondLevel1_1')//'总貌图'
+            titleText = this.$t('HeaderEdge.secondLevel1_1') //'总貌图'
             break
           case 'tyFocus':
-            titleText = treeValue + '-' + this.$t('HeaderEdge.secondLevel1_2')//'重点关注'
+            titleText = treeValue + '-' + this.$t('HeaderEdge.secondLevel1_2') //'重点关注'
             break
           case 'tyModel':
-            titleText = treeValue + '-' + macValue + '-' + this.$t('HeaderEdge.secondLevel1_3')//'设备模型'
+            titleText =
+              treeValue +
+              '-' +
+              macValue +
+              '-' +
+              this.$t('HeaderEdge.secondLevel1_3') //'设备模型'
             break
         }
       } else {
@@ -1520,6 +1495,12 @@ export default {
                 'ytAnalyse' /* 油田沉没度分析 */,
                 'ytPunchCard' /* 油田沉没度分析 */,
               ]
+              let snModelItem = [
+                'snMechineModel' /* 水泥、煤炭设备模型 */,
+                'snVib' /* 水泥、煤炭测点列表 */,
+                'snOil' /* 水泥、煤炭模型油液参数 */,
+                'snTowerdrum' /* 水泥、煤炭模型倾角 */,
+              ]
               // 若进入风电部件模型页都首先进入fdModelitem，防止风电model的切换小标题错乱
               if (
                 fdModelItem.indexOf(this.$store.state.GeneralModel[key]) !== -1
@@ -1529,8 +1510,16 @@ export default {
                 ytModelItem.indexOf(this.$store.state.GeneralModel[key]) !== -1
               ) {
                 routerName = 'ytModel'
+              } else if (
+                snModelItem.indexOf(this.$store.state.GeneralModel[key]) !== -1
+              ) {
+                routerName = 'snModel'
               }
-              if (routerName != 'fdModelitem' && routerName != 'ytModel') {
+              if (
+                routerName != 'fdModelitem' &&
+                routerName != 'ytModel' &&
+                routerName != 'snModel'
+              ) {
                 routerName = this.$store.state.GeneralModel[key]
               }
               flag = 0
@@ -1541,6 +1530,7 @@ export default {
             this.generalOnlyTree.indexOf(routerName) !== -1
           ) {
             item.generalTitle = generalTitle
+            chooseTitle.generalTitle = generalTitle
           }
           chooseTitle.name = routerName
           //当前选中标签存入全局store
@@ -1606,9 +1596,8 @@ export default {
             moveX - liArr.clientWidth / 2 + event.target.clientWidth / 2
         } else {
           var liArr = document.getElementsByClassName('head-List')[0]
-          liArr.scrollLeft = document.getElementsByClassName(
-            'head_list_ul'
-          )[0].clientWidth
+          liArr.scrollLeft =
+            document.getElementsByClassName('head_list_ul')[0].clientWidth
         }
       })
     },
@@ -1619,6 +1608,10 @@ export default {
       /* 关闭的是当前标签需要跳转 */
       /* 关闭当前标签 */
       this.sendRouteToStore(item.key, item.name, 2)
+      //当删除页面时，删除存储的跳转页面
+      if (this.$store.state.GeneralModel[item.key]) {
+        this.$store.commit('delGeneralModel', item.key)
+      }
       if (item.isActivity) {
         /* 2、页面跳转 */
         /* 跳到后一个标签 */
@@ -1641,7 +1634,7 @@ export default {
       }
     },
     rightClick(e) {
-      let text = [{ type: 'delAll', val: this.$t('HeaderEdge.closeTabsTips') }]//'关闭所有标签'
+      let text = [{ type: 'delAll', val: this.$t('HeaderEdge.closeTabsTips') }] //'关闭所有标签'
       const size = e.currentTarget.getBoundingClientRect()
       this.$list({
         text,
@@ -1678,591 +1671,6 @@ export default {
         this.closeTab(index, item)
       }
     },
-    /* 递归成tree 的方法 */
-    recursion(res) {
-      let pid = res.pids
-      let dataArray = res.trees
-      /* 机组的排序 */
-      let compare = function (obj1, obj2) {
-        let val1 = obj1.t_name
-        let val2 = obj2.t_name
-        if (val1 < val2) {
-          return -1
-        } else if (val1 > val2) {
-          return 1
-        } else {
-          return 0
-        }
-      }
-      dataArray.sort(compare)
-      dataArray.forEach((item, index) => {
-        item.name = item.t_name
-        item.isShow = true //拼音搜索的时候要用
-        item.isChecked = false // 多选框的时候使用
-        item.id = index //多选框的时候使用
-      })
-      let parents = dataArray.filter((item) => {
-        return item.t_pid === null || item.t_pid == 0
-      })
-      let children = dataArray.filter(
-        (item) => !(item.t_pid === null || item.t_pid == 0)
-      )
-      let fn = (parent, children) => {
-        children.forEach((child, index) => {
-          if (child == null) return
-          if (child.t_pid === parent.t_id) {
-            /* 有子元素存在 */
-            parent.isOpen = false //加上展开标记
-            parent.children === undefined
-              ? (parent.children = [child])
-              : parent.children.push(child)
-            // let temp = JSON.parse(JSON.stringify(children))
-            children.splice(index, 1, null)
-            fn(child, children)
-          }
-        })
-      }
-      parents.forEach((parent) => {
-        fn(parent, children)
-      })
-      // 地图跳转只存在子组织与子组织的子组织
-      if (parents.length == 0) {
-        for (let k in pid) {
-          children.forEach((item) => {
-            if (item.t_id == k) {
-              parents.push(item)
-            }
-          })
-        }
-        parents.forEach((parent) => {
-          fn(parent, children)
-        })
-      }
-      return parents
-    },
-    /* 匹配拼音,匹配到返回true,否则返回flase */
-    matchPinyin(matchVal, val) {
-      return this.pinyin.match(matchVal, val)
-    },
-    /* 组织的选择 */
-    changeTreeType(e) {
-      let size = {}
-      if (e.currentTarget) {
-        size = e.currentTarget.getBoundingClientRect()
-      } else {
-        size = e.getBoundingClientRect()
-      }
-
-      let myStyle = {
-        maxHeight: '300px',
-        width: `${size.width}px`,
-        left: `${size.left}px`,
-        top: `${size.top + size.height + 3}px`,
-      }
-      let data = this.tArray
-      /* 获取 */
-      if (!this.selectList) {
-        this.selectList = true
-        this.$multi({
-          dateType: 'tree',
-          data,
-          myStyle,
-        }).then((res) => {
-          this.selectList = false
-          if (res) {
-            /* 将选中的组织存储到store中 */
-            this.$store.commit('getCheckMsg', {
-              msg: cloneObj(res),
-              type: 'tree',
-            })
-            /* 改变标题 */
-            let [, val] = this.titleText.split('-')
-            this.titleText = val ? this.tree.val + '-' + val : this.$t('HeaderEdge.secondLevel1_1')//'总貌图'
-            /* 显示所有的组织 */
-            this.showAllList(this.tArray)
-            /* 组织改动就将机组清空 */
-            this.mac.val = ''
-            /* 删除了名字之后选同一个机组，watch监听不到 */
-            this.tree.val = res.t_name
-            this.posArray = []
-            // this.$nextTick(() => {
-            //   /* 选择之后将所有组织的isShow改为true */
-            // });
-            /* 获取机组信息 */
-          }
-        })
-      }
-    },
-    /* 去选择第一机组作为默认机组 */
-    setFirstMac(macList) {
-      /* 如果当前的vuex中有mac，获取mac */
-      let currentMac = this.$store.state.checkMsg.mac
-      // 获取第一个机组
-      let firstMac = macList[0]
-      if (currentMac) {
-        if (currentMac.t_id == firstMac.t_id) {
-          //如果当前机组下就存在这个组织下的机组 那么不继续处理
-          return
-        }
-      }
-      if (!firstMac) return
-      this.$store.commit('getCheckMsg', {
-        msg: cloneObj(firstMac),
-        type: 'mac',
-      })
-    },
-    /* 去选择第一个测点 */
-    setFirstPos(posList) {
-      let firstPos = posList[0]
-      if (!firstPos) return
-      firstPos.isChoose = true
-      this.$store.commit('getCheckMsg', {
-        msg: cloneObj(firstPos),
-        type: 'pos',
-      })
-    },
-    /* 修改组织之后 由watch 跳转的方法 */
-    getMacInfo_watch(res) {
-      /* 先将原先机组数组清空 */
-      this.macArray = []
-      new Promise((resolve, reject) => {
-        this.getMacByApi(res, resolve)
-      }).then((arr) => {
-        this.macArray = arr
-        this.setFirstMac(arr)
-      })
-    },
-    getMacByApi(t_data, resolve) {
-      let macArray
-      /* 先从缓存中读取机组的信息 */
-      macArray = this.$store.state.mac[t_data.t_id]
-      /* 不存在就去网络获取 */
-      if (macArray === undefined) {
-        this.$getApi
-          .queryAllMachineByTid({
-            t_id: t_data.t_id,
-            t_root: t_data.t_root,
-          })
-          .then((res) => {
-            if (res) {
-              macArray = this.saveMacInfo(res.machines, t_data.t_id)
-              if (resolve) {
-                resolve(macArray)
-              }
-            }
-          })
-      } else {
-        if (resolve) {
-          resolve(macArray)
-        }
-      }
-      /* 获取这个组织下面 所有子组织下面的机组 */
-      this.macInfoIterator(t_data, false)
-    },
-    /* 根据组织的信息 循环获取下面所有子组织的机组信息，并保存到vuex中 */
-    macInfoIterator(t_info, getCurrent = true) {
-      /* 不存在子组织 */
-      if (t_info.children === undefined) {
-        /* 是否需要获取当前组织的信息 */
-        if (getCurrent) {
-          let t_id = t_info.t_id
-          let t_root = t_info.t_root
-          let macArray
-          macArray = this.$store.state.mac[t_id]
-          /* 缓存中不存在这个机组才去获取 */
-          if (macArray === undefined) {
-            this.$getApi
-              .queryAllMachineByTid({
-                t_id: t_id,
-                t_root: t_root,
-              })
-              .then((res) => {
-                if (res) {
-                  this.saveMacInfo(res.machines, t_id)
-                }
-              })
-          }
-        }
-      } else {
-        t_info.children.forEach((item) => {
-          this.getMacByApi(item)
-        })
-      }
-    },
-    /* 机组数据的获取和存储 */
-    saveMacInfo(macArray, t_id) {
-      let arr = []
-      /* 需要处理有机泵的情况 */
-      macArray.forEach((mac, index) => {
-        if (mac.pumps !== undefined) {
-          mac.pumps.forEach((pump, index1) => {
-            pump.isShow = true //选择展示的属性
-            pump.name = pump.pump_name //选择组件需要
-            pump.m_me = pump.pump_name
-            pump.isChecked = false //选择组件需要
-            pump.t_root = mac.t_root
-            pump.m_type = mac.m_type
-            pump.id = `${index}_${index1}` // 选择组件需要
-            pump.t_id = t_id
-            pump.machine_id = mac.mac_id
-            pump.mac_name = mac.mac_me
-            // TMS波磨站点信息
-            if (mac.line) {
-              pump.line = mac.line
-            }
-            arr.push(pump)
-          })
-        } else {
-          mac.isChecked = false
-          mac.isShow = true
-          mac.id = index
-          mac.name = mac.mac_me
-          mac.m_me = mac.mac_me
-          mac.t_id = t_id
-          mac.machine_id = mac.mac_id
-          arr.push(mac)
-        }
-      })
-      /* 机组的排序 */
-      let compare = function (obj1, obj2) {
-        let val1 = obj1.key
-        let val2 = obj2.key
-        if (val1 < val2) {
-          return -1
-        } else if (val1 > val2) {
-          return 1
-        } else {
-          return 0
-        }
-      }
-      arr.sort(compare)
-      /* 缓存到vuex中 */
-      this.$store.commit('getMsg', {
-        key: 'mac',
-        msg: arr,
-        keys: t_id,
-      })
-      return arr
-    },
-    /* 机组的选择 */
-    changeMacType(e) {
-      let size = {}
-      if (e.currentTarget) {
-        size = e.currentTarget.getBoundingClientRect()
-      } else {
-        size = e.getBoundingClientRect()
-      }
-      let myStyle = {
-        maxHeight: '300px',
-        width: `${size.width}px`,
-        left: `${size.left}px`,
-        top: `${size.top + size.height + 3}px`,
-      }
-      let data = this.macArray
-      if (!this.selectList) {
-        this.selectList = true
-        this.$multi({
-          dateType: 'mac',
-          data,
-          myStyle,
-        }).then((res) => {
-          this.selectList = false
-          if (res) {
-            // 把机组信息存储到store中
-            this.$store.commit('getCheckMsg', {
-              msg: cloneObj(res),
-              type: 'mac',
-            })
-            /* 显示所有的机组 */
-            this.showAllList(this.macArray)
-            /* 机组改动就将测点清空 */
-            this.pos.val = ''
-            this.mac.val = res.m_me
-          }
-        })
-      }
-    },
-    //获取测点信息
-    getPosInfo(res) {
-      // 将测点信息清空
-      this.posArray = []
-      /* 读取缓存的数据 */
-      let key
-      // 判断机泵还是机组
-      res.ch_class
-        ? (key = `${res.mac_id}_${res.ch_class}`)
-        : (key = res.mac_id)
-      let arr = this.$store.state.pos[key]
-      // 获取到机组的信息，去获取测点
-      // if (arr) {
-      //   this.posArray = arr
-      // } else {
-      this.$getApi
-        .queryAllPositionsByMacId({
-          mac_id: res.mac_id,
-          m_type: res.m_type,
-          t_root: res.t_root,
-          ch_class: res.ch_class,
-        })
-        .then((res1) => {
-          if (res1) {
-            this.setfdModelTitile(res1)
-            this.savePosInfo(res1, key, res.mac_id, res.m_type)
-          }
-        })
-      // }
-    },
-    //选中机组后获取该机组下存在的风机设备
-    setfdModelTitile(res) {
-      let modelTitleArr = []
-      // let modelTitle = {}
-      let titile = [
-        {
-          name: this.$t('FdModel.locName1'),//'传动链',
-          router: 'fddrivechain',
-          isChoose: false,
-        },
-        {
-          name: this.$t('FdModel.locName2'),//'塔筒',
-          router: 'fdtowerdrum',
-          isChoose: false,
-        },
-        {
-          name: this.$t('FdModel.locName3'),//'螺栓',
-          router: 'fdbolt',
-          isChoose: false,
-        },
-        {
-          name: this.$t('FdModel.locName4'),//'叶轮',
-          router: 'fdimpeller',
-          isChoose: false,
-        },
-        {
-          name: this.$t('FdModel.locName5'),//'油液',
-          router: 'fdoil',
-          isChoose: false,
-        },
-        {
-          name: this.$t('FdModel.locName6'),//'锚栓',
-          router: 'fdanchorbolt',
-          isChoose: false,
-        },
-        {
-          name: this.$t('FdModel.locName7'),//'基础',
-          router: 'fdbasics',
-          isChoose: false,
-        },
-      ]
-      let routerpath = this.$route.name
-      // 存在的风机部件
-      for (let i = 0; i < 7; i++) {
-        let key = i + 1
-        let titleitem = titile[i]
-        if (res[`positions${key}`] === 1) {
-          modelTitleArr.push(titleitem)
-        }
-      }
-      // 判断当前页面是否存在 ，存在：。。。 不存在跳转到第一个部件
-      if (modelTitleArr.length) {
-        let flag = false
-        modelTitleArr.forEach((item) => {
-          // 当前页面 存在部件
-          if (item.router === routerpath) {
-            item.isChoose = true
-            flag = true
-          }
-        })
-        // 不存在该部件
-        if (!flag) {
-          modelTitleArr[0].isChoose = true
-        }
-      }
-      // let data = {
-      //   arr:modelTitleArr,
-      //   m_id:this.$store.state.checkMsg.mac.mac_id
-      // }
-      this.$store.commit('setWindmodelTitle', modelTitleArr)
-    },
-    savePosInfo(res, key, mac_id, m_type) {
-      let positions = res.positions
-      if (positions && positions.length > 0) {
-        /*增加窑结圈和滚皮脱落测点start==================== */
-        if (positions[0].machine_id == '19071214082895667') {
-          let obj = {
-            name: this.$t('HeaderEdge.yaojiequanPos'),//'窑结圈指数',
-            position_name: this.$t('HeaderEdge.yaojiequanPos'),//'窑结圈指数',
-            isShow: true,
-            position_id: 0,
-            position_type: 99,
-            dgm_type: positions[0].dgm_type,
-            machine_id: positions[0].machine_id,
-            posFlag: `${positions[0].machine_id}_${0}_${99}`,
-          }
-          positions.push(obj)
-        }
-        if (
-          positions[0].machine_id == '19070513381857008' ||
-          positions[0].machine_id == '19070513402674168'
-        ) {
-          let obj = {
-            name: this.$t('HeaderEdge.gunpituoluoPos'),//'辊皮脱落指数',
-            position_name: this.$t('HeaderEdge.gunpituoluoPos'),//'辊皮脱落指数',
-            isShow: true,
-            position_id: 0,
-            position_type: 99,
-            dgm_type: positions[0].dgm_type,
-            machine_id: positions[0].machine_id,
-            posFlag: `${positions[0].machine_id}_${0}_${99}`,
-          }
-          positions.push(obj)
-        }
-        /*end=====================================================================*/
-        positions.forEach((item) => {
-          item.name = item.position_name
-          item.isChoose = false
-          item.isShow = true
-          item.posFlag = `${item.machine_id}_${item.position_id}_${item.position_type}`
-          if (item.tt_ch_type == null && item.tt_ch_type == undefined) {
-            item.ch_type = item.tt_ch_type
-          }
-          if (item.tt_ch_id == null && item.tt_ch_id == undefined) {
-            item.ch_id = item.tt_ch_id
-          }
-        })
-        this.$store.commit('getMsg', {
-          key: 'pos',
-          msg: positions,
-          keys: key,
-        })
-        let chs = []
-        let chArray = []
-        // 通过遍历测点获取通道
-        positions.forEach((pos) => {
-          if (chs.indexOf(`${pos.channel_type}_${pos.channel_id}`) == -1) {
-            chs.push(`${pos.channel_type}_${pos.channel_id}`)
-            chArray.push({
-              type: pos.channel_type,
-              ch_id: pos.channel_id,
-              name: pos.channel_name,
-              flag: `${pos.channel_type}_${pos.channel_id}`,
-              isChecked: true,
-              isShow: true,
-              id: chs.length - 1,
-              isChannel: true,
-            })
-          }
-        })
-        this.chArray = chArray
-        this.channel.val = this.$t('HeaderEdge.all'),//'全部'
-        /* 如果是机泵，也需要以机组为key在系统里保留一份测点 */
-        this.posArray = positions
-        this.setFirstPos(positions)
-        if (key.includes('_')) {
-          // 如果是机泵，需要再存一份以macid 为key的数据
-          if (!this.$store.state.pos[mac_id]) {
-            let requestData = {
-              mac_id,
-              m_type,
-              t_root: 0,
-            }
-            this.$getApi.queryAllPositionsByMacId(requestData).then((res) => {
-              if (res && res.positions) {
-                /*增加窑结圈和滚皮脱落测点start==================== */
-                if (res.positions[0].machine_id == '19071214082895667') {
-                  let obj = {
-                    name: this.$t('HeaderEdge.yaojiequanPos'),//'窑结圈指数',
-                    position_name: this.$t('HeaderEdge.yaojiequanPos'),//'窑结圈指数',
-                    isShow: true,
-                    position_id: 0,
-                    position_type: 99,
-                    dgm_type: res.positions[0].dgm_type,
-                    machine_id: res.positions[0].machine_id,
-                    posFlag: `${res.positions[0].machine_id}_${0}_${99}`,
-                  }
-                  res.positions.push(obj)
-                }
-                if (
-                  res.positions[0].machine_id == '19070513381857008' ||
-                  res.positions[0].machine_id == '19070513402674168'
-                ) {
-                  let obj = {
-                    name: this.$t('HeaderEdge.gunpituoluoPos'),//'辊皮脱落指数',
-                    position_name: this.$t('HeaderEdge.gunpituoluoPos'),//'辊皮脱落指数',
-                    isShow: true,
-                    position_id: 0,
-                    position_type: 99,
-                    dgm_type: res.positions[0].dgm_type,
-                    machine_id: res.positions[0].machine_id,
-                    posFlag: `${res.positions[0].machine_id}_${0}_${99}`,
-                  }
-                  res.positions.push(obj)
-                }
-                /*增加窑结圈和滚皮脱落测点end==================== */
-                res.positions.forEach((item) => {
-                  item.posFlag = `${item.machine_id}_${item.position_id}_${item.position_type}`
-                  item.name = item.position_name
-                  if (item.tt_ch_type == null && item.tt_ch_type == undefined) {
-                    item.ch_type = item.tt_ch_type
-                  }
-                  if (item.tt_ch_id == null && item.tt_ch_id == undefined) {
-                    item.ch_id = item.tt_ch_id
-                  }
-                })
-                this.$store.commit('getMsg', {
-                  key: 'pos',
-                  msg: res.positions,
-                  keys: mac_id,
-                })
-              }
-            })
-          }
-        }
-      }
-    },
-    /* 单个测点的选择 */
-    changePosType(e) {
-      let size = {}
-      // 点击下拉事件触发
-      if (e.currentTarget) {
-        size = e.currentTarget.getBoundingClientRect()
-      } else {
-        //搜索测点触发
-        size = e.getBoundingClientRect()
-      }
-      let myStyle = {
-        maxHeight: '300px',
-        width: `${size.width}px`,
-        left: `${size.left}px`,
-        top: `${size.top + size.height + 3}px`,
-      }
-      let data = this.posArray
-      if (!this.selectList) {
-        this.selectList = true
-        this.$multi({
-          dateType: 'pos',
-          data,
-          myStyle,
-        }).then((res) => {
-          this.selectList = false
-          if (res) {
-            /* 选择到测点 */
-            this.posArray.forEach((item) => {
-              item.isChoose = false
-            })
-            res.isChoose = true
-            this.pos.val = res.position_name
-            this.pos.msg = res //测点的全部信息
-            //把测点信息存储到store中
-            this.$store.commit('getCheckMsg', {
-              msg: cloneObj(res),
-              type: 'pos',
-            })
-            /* 显示所有的测点 */
-            this.showAllList(this.posArray)
-          }
-        })
-      }
-    },
     /* 把所有的isShow改为true */
     showAllList(args) {
       let fn = (arr) => {
@@ -2276,59 +1684,6 @@ export default {
         })
       }
       fn(args)
-    },
-    // 设置是否勾选现实收藏
-    setClass(bool) {
-      const iName = 'iconfont'
-      const check = [
-        'icon-duoxuankuangbugouxuan_huaban1_huaban1',
-        'icon-duoxuankuanggouxuanbaidilangou-01',
-      ]
-      return `${iName} ${check[Number(bool)]}`
-    },
-    // 点击是否显示收藏
-    isShowCollect() {
-      this.ischeck = !this.ischeck
-    },
-    /*  递归查找组织*/
-    recursionSearchTree(treeArr, newVal) {
-      let fn = (arr) => {
-        let matchFlag = false //定义一个标签来表示是否有被选中
-        arr.forEach((item) => {
-          /* 匹配到了 */
-          if (this.matchPinyin(item.name, newVal)) {
-            item.isShow = true
-            matchFlag = true
-            /* 匹配到父级别，默认子集全部显示 */
-            if (item.children) {
-              /* 打开父级 */
-              item.isOpen = true
-              this.showAllList(item.children)
-            }
-            /* 有子集 */
-          } else if (item.children) {
-            /* 如果有子集的先打开 */
-            /* 递归 */
-            let result = fn(item.children)
-            item.isShow = result
-            item.isOpen = result
-            /* 有一个自组织匹配到了 父组织就显示 */
-            if (result) {
-              matchFlag = true
-            }
-          } else {
-            /* 没匹配到也没子集 */
-            item.isShow = false
-          }
-        })
-        return matchFlag
-      }
-      /* 搜索为空的时候，所有的组织都显示 */
-      if (newVal === '') {
-        this.showAllList(treeArr)
-      } else {
-        fn(treeArr)
-      }
     },
     // 获取所有组织报警
     getAllAlarm(treeMsg) {
@@ -2415,7 +1770,7 @@ export default {
         let params = {
           key: 'realAlarm',
           name: 'realAlarm',
-          val: this.$t('HeaderEdge.goRealAlarmTitle'),//'实时报警日志',
+          val: this.$t('HeaderEdge.goRealAlarmTitle'), //'实时报警日志',
           icon: 'icon-shishibaojingtubiao_huaban1',
         }
         this.$bus.$emit('getPath', params)
@@ -2448,7 +1803,7 @@ export default {
           wscript.SendKeys('{F11}')
         }
       } else {
-        alert(this.$t('HeaderEdge.browserTips'))//'浏览器不支持全屏API或已被禁用'
+        alert(this.$t('HeaderEdge.browserTips')) //'浏览器不支持全屏API或已被禁用'
       }
     },
     //打开全屏
@@ -2490,7 +1845,7 @@ export default {
       let params = {
         key: 'userManual',
         name: 'userManual',
-        val: this.$t('HeaderEdge.secondLevel5_4'),//'使用手册',
+        val: this.$t('HeaderEdge.secondLevel5_4'), //'使用手册',
         icon: 'icon-icon-test',
         toPart: item.value /* 跳转手册的item.valu部分 */,
         t_root: item.t_root,
@@ -2636,7 +1991,6 @@ export default {
           this.mac.msg = cloneObj(newValue, true)
           this.mac.gjMacName = this.mac.msg.mac_name
           /* 重复选择机组的时候，不直接return */
-          this.getPosInfo(newValue)
         } else {
           this.mac.val = ''
           this.mac.msg = null
@@ -2652,7 +2006,7 @@ export default {
     '$store.state.checkMsg.pos': {
       handler(value) {
         if (value != null) {
-          this.choosePos(value)
+          // this.choosePos(value)
           this.pos.val = value.name
           this.pos.msg = value
           // this.changeTitleText()
@@ -2715,7 +2069,7 @@ export default {
     .iconList {
       position: absolute;
       top: -2px;
-      right: 110px;
+      right: 130px;
       color: #90bff0;
       text-align: center;
       line-height: 21px;
@@ -2905,7 +2259,7 @@ export default {
       }
     }
     .seconde-ul {
-      z-index: 100;
+      z-index: 999;
       position: absolute;
       top: 50px;
       right: 20px;

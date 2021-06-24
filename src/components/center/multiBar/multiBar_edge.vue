@@ -28,11 +28,11 @@
         </div>
       </div>
       <div class='search-data'>
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
         <button
           :class="item.isReal ? '' : 'disable-btn'"
           @click="setrealData"
-        >实时数据</button>
+        ><!-- 实时数据 -->{{$t('Common.realData')}}</button>
       </div>
     </div>
   </div>

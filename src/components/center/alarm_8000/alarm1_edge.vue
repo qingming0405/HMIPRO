@@ -3,12 +3,13 @@
     <div
       class="alarm-content"
       v-for="(item,idx) in paramsData"
+      v-show="item.isShow"
     >
       <div class="my-alarm">
         <table class='my-alarm-table'>
           <thead class='alarm-thead my-table-thead'>
             <tr>
-              <th v-for="headitem in item.head">{{headitem}}</th>
+              <th v-for="headitem in item.head" :title="headitem">{{headitem}}</th>
             </tr>
           </thead>
           <tbody
@@ -30,8 +31,13 @@
         </table>
       </div>
       <div class='search-data'>
-        <button @click="dataRetrieval">数据检索</button>
-        <button>导出数据</button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{$t('Common.retrieval')}}
+        </button>
+         <!-- 导出数据 -->
+        <!-- <button>
+         {{$t('Common.derivedData')}}
+        </button> -->
       </div>
     </div>
   </div>
@@ -82,6 +88,9 @@ export default {
         this.currentKey = key
         for (let k in this.paramsData) {
           this.paramsData[k].isShow = false
+          if (k == key) {
+            this.paramsData[k].isShow = true
+          }
         }
         const params = this.$store.state.srcParams
         const time = params.time
@@ -107,19 +116,19 @@ export default {
             empty: {
               /* 无报警数据 */
               isShow: true,
-              text: `无数据`,
+              text: this.$t('Common.noDataText'), //无数据
             },
             head: [
-              '测点名称',
-              '时间',
-              '高高报',
-              '高报',
-              '通频值偏差',
-              '1X偏差',
-              '2X偏差',
-              '5X偏差',
-              '可选X偏差',
-              '残余量偏差',
+              this.$t('Common.posName'), //测点名称
+              this.$t('Common.time'), //时间
+              this.$t('alarm_8000.HigherReport'), //高高报
+              this.$t('alarm_8000.HighReport'), //高报
+              this.$t('alarm_8000.FrequencyDeviation'), //通频值偏差
+              this.$t('alarm_8000.onexdeviation'), //1X偏差
+              this.$t('alarm_8000.twoxdeviation'), //2X偏差
+              this.$t('alarm_8000.fivexdeviation'), //5X偏差
+              this.$t('alarm_8000.Optionalxdeviation'), //可选X偏差
+              this.$t('alarm_8000.ResidualDeviation'), //残余量偏差
             ],
             body: [],
             page: {
@@ -234,6 +243,12 @@ export default {
         height: 40px;
         tr {
           height: 40px;
+          th {
+            white-space: nowrap;
+            text-overflow: ellipsis;
+            overflow: hidden;
+            word-break: break-all;
+          }
         }
       }
       .my-table-tbody {

@@ -356,6 +356,7 @@ export default {
       let xData = []
       let histoData = []
       let index = 1
+      const that = this
       for (let key in obj) {
         let val = obj[key][freq] || 0
         let colorIndex = (index - 1) % this.colorList.length
@@ -388,11 +389,11 @@ export default {
             if (params.length > 0 && params[0].data != null) {
               let dataIndex = params[0].dataIndex
               tip =
-                this.$t('wave3d.time') +
+                that.$t('wave3d.time') +
                 '：' + //时间
                 histoData[dataIndex].time +
                 '<br>' +
-                this.$t('Common.amplitude') +
+                that.$t('Common.amplitude') +
                 '：' + //幅值
                 histoData[dataIndex].val
             }

@@ -1,4 +1,5 @@
 <template>
+  <!-- 踏面磨损趋势 -->
   <div class="my-trend-chart box-shadow">
     <div
       class="select-none my-trend"
@@ -65,8 +66,12 @@
         <button
           class="addPosTrend"
           @click="addTrend(fileds[0],'new')"
-        >新增图谱</button>
-        <button @click="dataRetrieval">数据检索</button>
+        >
+          <!-- 新增图谱 -->{{$t('wearTrend.addMap')}}
+        </button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{$t('Common.retrieval')}}
+        </button>
       </div>
     </div>
   </div>
@@ -86,7 +91,9 @@ import {
 export default {
   name: 'wearTrend',
   data() {
+    const vm = window.vm
     return {
+      vm: vm,
       colorList: [
         '#F1B232',
         '#FF623B',
@@ -133,10 +140,10 @@ export default {
       allPosData: {} /*所有踏面数据 macid_pid_ptype{时间戳：数据}} */,
       charts: {} /* myCharts */,
       fileds: [
-        { value: 'diameter', name: '车轮直径' },
-        { value: 'thickness', name: '轮缘厚度' },
-        { value: 'height', name: '轮缘高度' },
-        { value: 'mileage', name: '里程' },
+        { value: 'diameter', name: vm.$t('trendData.WheelDiameter') }, //车轮直径
+        { value: 'thickness', name: vm.$t('trendData.RimThickness') }, //轮缘厚度
+        { value: 'height', name: vm.$t('trendData.RimHeight') }, //轮缘高度
+        { value: 'mileage', name: vm.$t('trendData.mileage') }, //里程
       ],
       mileageList: {} /* 所有里程数据 macid_chclass{时间戳：里程} */,
     }
@@ -267,7 +274,7 @@ export default {
         posType = checkMsg.pos.position_type
         let flag = matchRule(posType, 'wearTrend')
         if (!flag) {
-          this.$pop('不支持此类测点')
+          this.$pop(this.$t('wearTrend.dropPosLimit')) //不支持此类测点
           return
         }
       } else {
@@ -593,10 +600,10 @@ export default {
       const chart = this.trendData[this.currentKey].chart[index]
       const type = posMsg.position_type
       if (!matchRule(type, 'wearTrend')) {
-        this.$pop('不支持此类测点')
+        this.$pop(this.$t('wearTrend.dropPosLimit')) //不支持此类测点
         return
       } else if (chart.data[key]) {
-        this.$pop('当前图谱已存在该测点')
+        this.$pop(this.$t('wearTrend.existPosTip')) //当前图谱已存在该测点
         return
       } else if (chart.value == 'mileage') {
         let flag = true
@@ -610,7 +617,7 @@ export default {
           }
         }
         if (!flag) {
-          this.$pop('当前图谱已存在当前车厢')
+          this.$pop(this.$t('wearTrend.existCarTip')) //当前图谱已存在当前车厢
           return
         }
       } else {
@@ -626,7 +633,7 @@ export default {
     },
     //右键删除测点
     contextmenu(e, data, key) {
-      let text = [{ type: 'del', val: '删除' }]
+      let text = [{ type: 'del', val: this.$t('wearTrend.del') }] //删除
       const size = e.currentTarget.getBoundingClientRect()
       this.$list({
         text,

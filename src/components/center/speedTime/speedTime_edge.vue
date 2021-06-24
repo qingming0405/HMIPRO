@@ -24,7 +24,7 @@
           :class="data.isReal ? '' : 'disable-btn'"
           @click="setrealData"
         >实时数据</button> -->
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
       </div>
     </div>
   </div>
@@ -116,7 +116,7 @@ export default {
             empty: {
               /* 无报警数据 */
               isShow: true,
-              text: `无数据`,
+              text: this.$t('Common.noDataText'),//无数据
             },
             timeData: [],
             isReal: false, //实时数据是否开启
@@ -158,7 +158,7 @@ export default {
           trigger: 'axis',
           formatter: function (params) {
             params = params[0]
-            return '时间：' + params.name + '</br>' + '转速：' + params.value[1]
+            return this.$t('Common.time')+'：' + params.name + '</br>' + this.$t('eigenvalue.speed')+'：' + params.value[1]
           },
           axisPointer: {
             animation: false,
@@ -248,7 +248,7 @@ export default {
 
         series: [
           {
-            name: '模拟数据',
+            name: this.$t('Common8000.SimulationData'),//模拟数据
             type: 'line',
             showSymbol: false,
             hoverAnimation: false,
@@ -348,7 +348,7 @@ export default {
             this.setData(res)
             this.paramsData[this.currentKey].empty.isShow = false
           } else {
-            this.$pop('无启停数据！')
+            this.$pop(this.$t('Common8000.NoStartStopData'))//无启停数据！
           }
         }
       })
@@ -391,7 +391,7 @@ export default {
             this.paramsData[this.currentKey].empty.isShow = false
             this.ssSelect(params.timeData[0])
           } else {
-            this.$pop('无启停机数据')
+            this.$pop(this.$t('Common8000.noStartStopTimeData'))//无启停机数据
           }
           this.$nextTick(() => {
             if (params.chartData.chartObj) {

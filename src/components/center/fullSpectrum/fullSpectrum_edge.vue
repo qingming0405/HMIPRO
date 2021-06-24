@@ -31,11 +31,11 @@
         ></div>
       </div>
       <div class="search-data">
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
         <button
           :class="item.isReal ? '' : 'disable-btn'"
           @click="setrealData"
-        >实时数据</button>
+        ><!-- 实时数据 -->{{$t('Common.realData')}}</button>
       </div>
     </div>
   </div>
@@ -183,9 +183,9 @@ export default {
             isShow: true,
             isTrend: false, // 是否显示趋势图
             dataType: [
-              { val: '定时历史数据', isChecked: true, type: 1 },
-              { val: '启停机数据', isChecked: false, type: 2 },
-              { val: '报警存储数据', isChecked: false, type: 3 },
+              { val: this.$t('Common8000.TimedHisData'), isChecked: true, type: 1 },//定时历史数据
+              { val: this.$t('Common8000.StartStopData'), isChecked: false, type: 2 },//启停机数据
+              { val: this.$t('Common8000.AlarmStorageData'), isChecked: false, type: 3 },//报警存储数据
             ], //8000数据类型选择
             isReal: Boolean(isReal),
           })
@@ -259,7 +259,7 @@ export default {
             this.setTrend(res)
           } else {
             params.chartData.trend.data = []
-            this.$pop('无趋势数据')
+            this.$pop(this.$t('Common8000.noTrendData'))//无趋势数据
           }
         }
       })
@@ -577,8 +577,8 @@ export default {
             },
           },
           name: wave.pos
-            ? wave.pos.pos_name + '波形图 (' + wave.unit + ')'
-            : '波形图 (' + wave.unit + ')',
+            ? wave.pos.pos_name + this.$t('Common8000.wave')+' (' + wave.unit + ')'
+            : this.$t('Common8000.wave')+' (' + wave.unit + ')',
         },
         series: [
           {
@@ -647,10 +647,10 @@ export default {
                   this.getChartData()
                 }
                 return (
-                  '时间：' +
+                  this.$t('Common.time')+'：' +//时间
                   params[0].name +
                   '</br>' +
-                  '转速：' +
+                  this.$t('eigenvalue.speed')+'：' +//转速
                   params[0].data.value[1]
                 )
               },
@@ -672,7 +672,7 @@ export default {
             },
             xAxis: {
               type: 'time',
-              name: '时间',
+              name: this.$t('Common.time'),//'时间'
               nameTextStyle: {
                 fontSize: this.chartsFontSize,
                 align: 'left',
@@ -720,7 +720,7 @@ export default {
             yAxis: {
               type: 'value',
               boundaryGap: [0, '100%'],
-              name: paramsData.pos.pos_name + '趋势图 (' + data.unit + ')',
+              name: paramsData.pos.pos_name + this.$t('HeaderEdge.secondLevel2_3')+' (' + data.unit + ')',//趋势图
               nameTextStyle: {
                 fontSize: 14,
                 align: 'left',
@@ -743,7 +743,7 @@ export default {
             },
             series: [
               {
-                name: '频率',
+                name: this.$t('Common.freq'),//频率
                 type: 'line',
                 showSymbol: true,
                 hoverAnimation: false,
@@ -812,10 +812,10 @@ export default {
             },
             formatter: (params) => {
               return (
-                '频率：' +
+                this.$t('Common.freq')+'：' +//频率
                 params[0].value[1] +
                 '</br>' +
-                '幅值：' +
+                this.$t('Common.amplitude')+'：' +//幅值
                 params[0].value[0]
               )
             },
@@ -879,7 +879,7 @@ export default {
             },
             type: 'value',
             boundaryGap: [0, '100%'],
-            name: '频谱图 (' + data.unit + ')',
+            name: this.$t('Common8000.Spectrogram')+' (' + data.unit + ')',//频谱图
             nameTextStyle: {
               fontSize: this.chartsFontSize,
               align: 'left',

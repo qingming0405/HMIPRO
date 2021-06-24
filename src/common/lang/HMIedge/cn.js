@@ -13,7 +13,7 @@ export const cn = {
     normalText: '正常',//报警状态正常
     warnText: '预警',//报警状态预警
     alarmText: '报警',//报警状态报警
-    abnormalText:'自检异常',//自检异常
+    abnormalText: '自检异常',//自检异常
     focausText: '关注',//关注
     allText: '全部',//全部
     searchHolder: '请输入搜索文字',//搜索的提示语
@@ -112,26 +112,34 @@ export const cn = {
     amplitude: '幅值',//幅值
     wave3d: '三维频谱图',//三维频谱图
     turnBack: '返回',//返回
-    deadLine:'截止时间',//截止时间
-    filterLowerLimit:'滤波下限',//滤波下限
-    filterUpLimit:'滤波上限',//滤波上限
-    startFreq:'开始频率',//开始频率
-    endFreq:'截止频率',//截止频率
-    points:'点数',//点数
-    selectPos:'选择测点',//选择测点
-    clearSet:'清空设置',//清空设置
-    effectiveTime:'有效时间',//有效时间
-    loadingUnfinished:'模型未加载完成',//模型未加载完成
-    engineroom:'机舱',//机舱
-    towertop:'塔顶',//塔顶
-    tower:'塔筒',//塔筒
-    noOverviewTips:'该机组无总貌图',//该机组无总貌图
-    noAlarmTips:'转速通道无报警',//转速通道无报警
+    deadLine: '截止时间',//截止时间
+    filterLowerLimit: '滤波下限',//滤波下限
+    filterUpLimit: '滤波上限',//滤波上限
+    startFreq: '开始频率',//开始频率
+    endFreq: '截止频率',//截止频率
+    points: '点数',//点数
+    selectPos: '选择测点',//选择测点
+    clearSet: '清空设置',//清空设置
+    effectiveTime: '有效时间',//有效时间
+    loadingUnfinished: '模型未加载完成',//模型未加载完成
+    engineroom: '机舱',//机舱
+    towertop: '塔顶',//塔顶
+    tower: '塔筒',//塔筒
+    noOverviewTips: '该机组无总貌图',//该机组无总貌图
+    noAlarmTips: '转速通道无报警',//转速通道无报警
+    color: '颜色',//颜色
+    del: '删除',//删除
   },
   Common8000: {
     TimedHisData: '定时历史数据',//定时历史数据
     StartStopData: '启停机数据',//启停机数据
     AlarmStorageData: '报警存储数据',//报警存储数据
+    wave: '波形图',//波形图
+    Spectrogram: '频谱图',//频谱图
+    noTrendData: '无趋势数据',//无趋势数据
+    NoStartStopData: '无启停数据！',//无启停数据！
+    noStartStopTimeData: '无启停机数据',//无启停机数据
+    SimulationData: '模拟数据',//模拟数据
   },
   icon: {
     FreqDifference: '对称频率差',//对称频率差
@@ -158,7 +166,7 @@ export const cn = {
     LogarithmicCoordinates: '对数坐标',//对数坐标
     SpeedPulse: '转速脉冲',//转速脉冲
     TimeWaveformFilter: '时域波形过滤',//时域波形过滤
-    resetIcon:'重置',//重置
+    resetIcon: '重置',//重置
   },
   // 特征值
   eigenvalue: {
@@ -170,6 +178,29 @@ export const cn = {
     temperature: '温度',//温度
     electricity: '电量',//电量
     PreloadValue: '预紧力值',//预紧力值
+    speed: '转速',//转速
+    Overturn: '倾覆值',//倾覆值
+    overturn_p: '峰值',//峰值
+    rock_avg: '平均值',//平均值
+    overturn_s: '位移',//位移
+    rock_rms: '平均值方位',//平均值方位
+    rock_p: '峰值方位', //峰值方位
+    rock_pp: '沉降量',//沉降量
+    SettlementAngle: '沉降角度',//沉降角度
+    halfxamplitude: '0.5x幅值',//0.5x幅值
+    onexamplitude: '1x幅值',//1x幅值
+    twoxamplitude: '2x幅值',//2x幅值
+    direc: '通频值',//通频值
+    rv: '残余量',//残余量
+    opt_freq_hi_1: '可选频段高1',//可选频段高1
+    opt_freq_hi_2: '可选频段高2',//可选频段高2
+    onexphase: '1x相位',//1x相位
+    twoxphase: '2x相位',//2x相位
+  },
+  //单位
+  unit: {
+    angle: '角度',//角度
+    position: '方位',//方位
   },
   //登录页
   Login: {
@@ -230,10 +261,10 @@ export const cn = {
     locName7: '基础',//部位名称基础
     diagnosisText: '智能诊断',//诊断结果标签
     diagnosisTitle: '传动链',//诊断结果传动链名称
-    bearingDefect:'轴承缺陷',//轴承缺陷
-    gearDefect:'齿轮缺陷',//齿轮缺陷
-    motorDefect:'电机不平衡或松动',//电机不平衡或松动
-    gearBoxDefect:'齿轮箱载荷过重',//齿轮箱载荷过重
+    bearingDefect: '轴承缺陷',//轴承缺陷
+    gearDefect: '齿轮缺陷',//齿轮缺陷
+    motorDefect: '电机不平衡或松动',//电机不平衡或松动
+    gearBoxDefect: '齿轮箱载荷过重',//齿轮箱载荷过重
   },
   //风电模型3d
   WindModel: {
@@ -276,17 +307,13 @@ export const cn = {
   Impeller: {
     public: '公共',//公共
     moreText: '详情',//详情
-    impeller1:'叶轮1',//叶轮1
-    impeller2:'叶轮2',//叶轮2
-    impeller3:'叶轮3',//叶轮3
+    impeller1: '叶轮1',//叶轮1
+    impeller2: '叶轮2',//叶轮2
+    impeller3: '叶轮3',//叶轮3
   },
   //风电模型-油液
   Oil: {
     public: '公共',//公共
-    moreText: '详情',//详情
-  },
-  //风电模型-塔筒
-  Towerdrum: {
     moreText: '详情',//详情
   },
   //轨交总貌图
@@ -332,14 +359,14 @@ export const cn = {
     warnAdvice: '若故障无法消除，建议结束当日运营后回库处理',//设备预警的建议文字
     alarm1Advice: '若故障无法消除，建议运营到终点后退出运营',//设备Ⅰ级报警的建议文字
     alarm2Advice: '若故障无法消除，建议下一站清客后退出运营',//设备Ⅱ级报警的建议文字
-    axis1:'1轴',//1轴
-    axis2:'2轴',//2轴
-    axis3:'3轴',//3轴
-    axis4:'4轴',//4轴
-    advice1:'正常',//正常
-    advice2:'需要注意',//需要注意
-    advice3:'需要维修',//需要维修
-    advice4:'已离线',//已离线
+    axis1: '1轴',//1轴
+    axis2: '2轴',//2轴
+    axis3: '3轴',//3轴
+    axis4: '4轴',//4轴
+    advice1: '正常',//正常
+    advice2: '需要注意',//需要注意
+    advice3: '需要维修',//需要维修
+    advice4: '已离线',//已离线
   },
   //油田总貌图
   YtGeneral: {
@@ -551,18 +578,18 @@ export const cn = {
     onOffingBtn: '启停中',//启停中
   },
   // 组件-波形
-  WaveChart:{
-    effectiveTimeSetting:'有效时间设置',//有效时间设置
-    minimumTimeFiltering:'最小时间过滤',//最小时间过滤
-    EffectiveFrequBandSetting:'有效频段设置',//有效频段设置
+  WaveChart: {
+    effectiveTimeSetting: '有效时间设置',//有效时间设置
+    minimumTimeFiltering: '最小时间过滤',//最小时间过滤
+    EffectiveFrequBandSetting: '有效频段设置',//有效频段设置
   },
   // 组件-波形弹窗
-  WaveAlert:{
-    filterFrequency:'过滤频率',//过滤频率
-    filterOrder:'过滤阶次',//过滤阶次
-    lowerLimit:'下限',//下限
-    upLimit:'上限',//上限
-    filterTime:'时间过滤',//时间过滤
+  WaveAlert: {
+    filterFrequency: '过滤频率',//过滤频率
+    filterOrder: '过滤阶次',//过滤阶次
+    lowerLimit: '下限',//下限
+    upLimit: '上限',//上限
+    filterTime: '时间过滤',//时间过滤
   },
   //报警日志
   Alarm: {
@@ -741,6 +768,7 @@ export const cn = {
     AnalogSpeed: '是否启用模拟转速',//是否启用模拟转速
     referenceSpeed: '基准转速',//基准转速
     AddFrequency: '添加频率',//添加频率
+    LabelingFrequency: '标注频率',//标注频率
     unnmark: '清除标注',//清除标注
     shutDown: '关闭',//关闭
     spectrumDiagram: '开启频谱图',//开启频谱图
@@ -808,6 +836,529 @@ export const cn = {
   // 轨道波磨图
   tmsTrend: {
     DataList: '数据列表',//数据列表
+    TipAddSamepType: '请添加同类型的测点',//请添加同类型的测点
+    TipNoData: '存在无数据时间点',//存在无数据时间点
+    Line1: '线路1',//线路1
+    effectFreq: '有效频率',//有效频率
+  },
+  // 轨道波磨频谱瀑布
+  tmsTrend3d: {
+    effectFreq: '有效频率',//有效频率
+    DataList: '数据列表',//数据列表
+    Line1: '线路1',//线路1
+    distance: '距离',//距离
+    minFreqlimit: '有效频段需要大于0',//有效频段需要大于0
+  },
+  // 踏面测量数据
+  trendData: {
+    DesignParam: '设计参数',// 设计参数
+    DesignLife: '设计寿命',//设计寿命
+    WheelLimitDiameter: '车轮到限直径',//车轮到限直径
+    carNum: '车号',//车号
+    MeasurementParam: '测量参数',//测量参数
+    spinRoller: '镟轮',//镟轮
+    ChangeWheel: '换轮',//换轮
+    unspinWheelOChangeWheel: '未镟轮或换轮',//未镟轮或换轮
+    Firstwheel: '首次镟轮',//首次镟轮
+    Addrow: '新增列',//新增列
+    Save: '保存',//保存
+    RetrainModel: '重新训练模型',//重新训练模型
+    trainModelLimit: '训练模型至少需要两组数据',//训练模型至少需要两组数据
+    WheelDiameter: '车轮直径',//车轮直径
+    RimThickness: '轮缘厚度',//轮缘厚度
+    RimHeight: '轮缘高度',//轮缘高度
+    SpinWheelOrChangeWheel: '鏇轮或换轮',//鏇轮或换轮
+    mileage: '里程',//里程
+    InputLimit: '请输入设计寿命或车轮到限直径！',//请输入设计寿命或车轮到限直径！
+    saveSuccess: '保存成功',//保存成功
+    trainModelSuccess: '训练模型成功！',//训练模型成功！
+  },
+  // 踏面磨损趋势
+  wearTrend: {
+    addMap: '新增图谱',//新增图谱
+    dropPosLimit: '不支持此类测点',//不支持此类测点
+    existPosTip: '当前图谱已存在该测点',//当前图谱已存在该测点
+    existCarTip: '当前图谱已存在当前车厢',//当前图谱已存在当前车厢
+    del: '删除',//删除
+  },
+  //踏面寿命预估
+  lifePredict: {
+    carNum: '车号',//车号
+    wheel: '车轮',//车轮
+    EstimateRemainLife: '预估剩余寿命',//预估剩余寿命
+  },
+  // 散点图
+  scatter: {
+    xAxis: 'x轴',//x轴
+    yAxis: 'y轴',//y轴
+    eigenNoData: '此特征值无对应数据',//此特征值无对应数据
+  },
+  // 危险转速区间
+  dashboard: {
+    curTime: '当前时间',//当前时间
+  },
+  //倾角分布图
+  dip: {
+    operating: '操作',//操作
+    AlarmLine: '报警线',//报警线
+    DataDisplay: '数据显示',//数据显示
+    posList: '测点列表',//测点列表
+    isCheck: '是否勾选',//是否勾选
+    posChoose: '测点选择',//测点选择
+    AddComparison: '加入对比',//加入对比
+  },
+  //机舱轨迹图
+  overturn: {},
+  //实时数据汇总列表
+  realSummary: {
+    equipment: '设备',//设备
+    diagnosticResult: '诊断结果',// 诊断结果
+    TrendAverage: '趋势增长平均值',//趋势增长平均值
+    TrendAlarmPushStatus: '趋势报警推送状态',//趋势报警推送状态
+    warnPushStatus: '预警推送状态',//预警推送状态
+    AlarmPushStatus: '报警推送状态',//报警推送状态
+    EigenvalueType: '特征值类型',//特征值类型
+    Eigen: '特征值',//特征值
+    WarnH: '预警值(高)',//预警值(高)
+    AlarmH: '报警值(高)',//报警值(高)
+    WarnL: '预警值(低)',//预警值(低)
+    AlarmL: '报警值(低)',//报警值(低)
+    rise: '上涨',//上涨
+    unconfirmed: '未确认',//未确认
+    confirmed: '已确认',//已确认
+    Reset: '已重置',//已重置
+    maintenance: '维护中',//维护中
+    rejected: '已拒绝',//已拒绝
+    maintain: '维护',//维护
+    Refuse: '拒绝',//拒绝
+    operating: '操作',//操作
+    ModifyAlarmStatus: '修改报警状态',//修改报警状态
+  },
+  //实时数据列表
+  real: {},
+  // 监测报表
+  monitor: {
+    EquipName: '设备名称',//设备名称
+    EigenvalueType: '特征值类型',//特征值类型
+    warnValue: '预警值',//预警值
+    alarmValue: '报警值',//报警值
+    Max: '最大值',//最大值
+    Min: '最小值',//最小值
+  },
+  //历史数据列表
+  history: {
+    part: '部件',//部件
+    CageOuterRing: '保持架对外环',//保持架对外环
+    CageToInnerRing: '保持架对内环',//保持架对内环
+    OuterRingInnerRaceway: '外环内滚道',//外环内滚道
+    InnerRingOuterRaceway: '内环外滚道',//内环外滚道
+    RollRder: '滚单',//滚单
+    RollDouble: '滚双',//滚双
+    Tread: '踏面',//踏面
+    AdjacentShaftGear: '邻轴齿轮',//邻轴齿轮
+    MainShaftGear: '本轴齿轮',//本轴齿轮
+    BindSiteInfo: '无绑定站点信息',//无绑定站点信息
+    history: '历史数据',//历史数据
+  },
+  // 设备参数
+  equipmentParameters: {
+    AddParam: '添加参数',//添加参数
+    DelParam: '删除参数',//删除参数
+    equipType: '设备类型',//设备类型
+    paramName: '参数名称',//参数名称
+    value: '数值',//数值
+    isSureDel: '是否删除此条记录',//是否删除此条记录
+    SelDelRecord: '请选择需要删除的记录',//请选择需要删除的记录
+  },
+  // 设备维护记录
+  maintain: {
+    addRecord: '添加纪录',//添加纪录
+    delRecord: '删除记录',//删除记录
+    RecordName: '记录名称',//记录名称
+    recorder: '记录人',//记录人
+    Remarks: '备注',//备注
+    annex: '附件',//附件
+    UploadAttachment: '上传附件',//上传附件
+    CompleteTime: '完成时间',//完成时间
+    isSureDel: '是否删除此条维护记录',//是否删除此条维护记录
+    SelDelRecord: '请选择需要删除的记录',//请选择需要删除的记录
+  },
+  //实时报警汇总列表
+  realAlarm: {
+    EquipName: '设备名称',//设备名称
+    Alarm: '报警',//报警
+    warn: '预警', //预警
+  },
+  //服务器信息
+  server: {
+    systemMessage: '系统信息',//系统信息
+    loading: '数据加载中',//数据加载中
+    MemoryInfo: '内存信息',//内存信息
+    DiskInfo: '磁盘信息',//磁盘信息
+    InternetInfo: '网络信息',//网络信息
+    HostName: '主机名称',//主机名称
+    JVMMemory: 'JVM总内存',//JVM总内存
+    JVMRemainMemory: 'JVM剩余内存',//JVM剩余内存
+    JAVAVersion: 'JAVA版本',//JAVA版本
+    JAVAPath: 'JAVA路径',//JAVA路径
+    operateSystem: '操作系统',//操作系统
+    CPUNumber: 'CPU核心个数',//CPU核心个数
+    CPUBrand: 'CPU品牌',//CPU品牌
+    CPUModel: 'CPU型号',//CPU型号
+    UserUtilization: '用户使用率',//用户使用率
+    SystemUtilization: '系统使用率',//系统使用率
+    TotalUsage: '总使用率',//总使用率
+    TotalMemory: '内存总量',//内存总量
+    MemoryUsage: '内存使用量',//内存使用量
+    RemainMemory: '内存剩余量',//内存剩余量
+    MemoryUsage: '内存使用率',//内存使用率
+    DiskName: '磁盘名称',//磁盘名称
+    DiskType: '磁盘类型',//磁盘类型
+    DiskCapacity: '磁盘容量',//磁盘容量
+    AvailableSpace: '可用空间',//可用空间
+    UsedSpace: '已用空间',//已用空间
+    EquipName: '设备名称',//设备名称
+    IPAddress: 'IP地址',//IP地址
+    SubnetMask: '子网掩码',//子网掩码
+    MACAddress: 'MAC地址',//MAC地址
+    NetworkInfo: '网卡信息',//网卡信息
+    recevePacket: '接收总包数',//接收总包数
+    sentPacket: '发送总包数',//发送总包数
+    receveByte: '接收总字节数',//接收总字节数
+    sentByte: '发送总字节数',//发送总字节数
+    receveErrorPacket: '接收错误包数',//接收错误包数
+    sentErrorPacket: '发送错误包数',//发送错误包数
+    discardPacket: '接收丢弃包数',//接收丢弃包数
+  },
+  //系统日志
+  system: {
+    event500: '采集器要设置等待超时',//采集器要设置等待超时
+    event501: '采集器发送空闲等待超时',//采集器发送空闲等待超时
+    event502: '采集器倾角要数据超时',//采集器倾角要数据超时
+    CollectorVib: '采集器振动通道',//采集器振动通道
+    CollectorTime: '采集器温度通道',//采集器温度通道
+    SelfCheckAbnormal: '自检异常',//自检异常
+    SelfCheckNormal: '自检正常',//自检正常
+    event2012: '与远程服务器网络通讯异常',//与远程服务器网络通讯异常
+    event2017: '服务器硬盘空间不足',//服务器硬盘空间不足
+    CollectorSerialPort: '采集器串口',//采集器串口
+    InitializationError: '初始化错误',//初始化错误
+    event0: '未描述',//未描述
+    InitializationToNormal: '初始化恢复正常',//初始化恢复正常
+    event2103: '倾覆设备已拔出',//倾覆设备已拔出
+    event_2103: '倾覆设备已接入',//倾覆设备已接入
+    event2104: '倾覆设备运行不正常',//倾覆设备运行不正常
+    event_2104: '倾覆设备运行恢复正常',//倾覆设备运行恢复正常
+    CollectorKeyPhase: '采集器键相',//采集器键相
+    speedWrong: '采集的转速错误',//采集的转速错误
+    speedToNormal: '采集的转速恢复正常',//采集的转速恢复正常
+    event_2102: '采集器硬件程序设置成功',//采集器硬件程序设置成功
+    event2102: '采集器硬件程序设置失败',//采集器硬件程序设置失败
+    CollectorSpeed: '采集器转速通道',//采集器转速通道
+    LowFreqError: '采集低频信号错误',//采集低频信号错误
+    LowFreqToNormal: '采集低频信号恢复正常',//采集低频信号恢复正常
+    HighFreqError: '采集高频信号错误',//采集高频信号错误
+    HighFreqToNormal: '采集高频信号恢复正常',//采集高频信号恢复正常
+    speed1_5max: '转速超过最高转速的1.5倍',//转速超过最高转速的1.5倍
+    speedMaxToNormal: '转速超过最高转速1.5倍恢复正常',//转速超过最高转速1.5倍恢复正常
+    event3000: '采集器FPGA自检失败',//采集器FPGA自检失败
+    event_3000: '采集器FPGA自检正常',//采集器FPGA自检正常
+    event3001: '采集器SRAM自检失败',//采集器SRAM自检失败
+    event_3001: '采集器SRAM自检正常',//采集器SRAM自检正常
+    GAPNotNormal: '的GAP电压不在正常范围',//的GAP电压不在正常范围
+    GAPToNormal: '的GAP电压恢复到正常范围',//的GAP电压恢复到正常范围
+    SensorCableFault: '传感器电缆故障',//传感器电缆故障
+    SensorCableToNormal: '传感器电缆故障恢复',//传感器电缆故障恢复
+    CollectorProcessQuantity: '采集器过程量通道', //采集器过程量通道
+    ValueNotNormal: '的值不在正常范围',//的值不在正常范围
+    ValueToNormal: '的值恢复到正常范围',//的值恢复到正常范围
+    noSignal: '没有信号',//没有信号
+    BackToSignal: '恢复到有信号',//恢复到有信号
+    SelfTestfailed: '自检失败',//自检失败
+    SelfTestnormal: '自检正常',//自检正常
+    FreqSelfTestfailed: '频率自检失败',//频率自检失败
+    FreqSelfTestnormal: '频率自检正常',//频率自检正常
+    CircuitBreak: '线路断路',//线路断路
+    LineNormal: '线路正常',//线路正常
+    SensorSelfTestFailed: '传感器自检失败',//传感器自检失败
+    SensorSelfTestNormal: '传感器自检正常',//传感器自检正常
+    BiasSelfTestFailed: '偏置自检失败',//偏置自检失败
+    BiasSelfTestNormal: '偏置自检正常',//偏置自检正常
+    ShortCircuit: '线路短路',//线路短路
+    event4100: '采集器TCP/IP通讯错误',//采集器TCP/IP通讯错误
+    event_4100: '采集器TCP/IP通讯恢复正常',//采集器TCP/IP通讯恢复正常
+    CRCError: '通讯CRC效验错',//通讯CRC效验错
+    CRCToNormal: '通讯CRC效验恢复正常',//通讯CRC效验恢复正常
+    CommunicateTimeout: '通讯超时',//通讯超时
+    CommunicateToNormal: '通讯从超时恢复',//通讯从超时恢复
+    event4400: '采集器TCP/IP通讯超时',//采集器TCP/IP通讯超时
+    event_4400: '采集器TCP/IP通讯从超时恢复',//采集器TCP/IP通讯从超时恢复
+    event5000: '采集器重新启动',//采集器重新启动
+    event5001: '采集器设置已经被修改',//采集器设置已经被修改
+    event5002: '采集器设置错误',//采集器设置错误
+    event5003: '采集器硬件接触异常',//采集器硬件接触异常
+    event5006: '采集器软启动',//采集器软启动
+    event5007: '采集器rtclient软启动',//采集器rtclient软启动
+    event5010: '采集器main软启动',//采集器main软启动
+    event5011: '采集器main子进程软启动',//采集器main子进程软启动
+    event5018: '采集器serial软启动',//采集器serial软启动
+    event5019: '采集器串口二的serial软启动',//采集器串口二的serial软启动
+    event5020: '采集器client软启动',//采集器client软启动
+    event5022: '采集器hd软启动',//采集器hd软启动
+    collectorSelfTestCheck: '采集器自检开始',//采集器自检开始
+    collectorSelfTestEnd: '采集器自检结束',//采集器自检结束
+    subLearning: '，进行了灵敏监测子学习',//，进行了灵敏监测子学习
+    event5260: '采集器接入',//采集器接入
+    event5261: '采集器断开',//采集器断开
+    event5262: '采集器请求超时',//采集器请求超时
+    Collector: '采集器',//采集器
+    switchBoard: '号切换板心跳包',//号切换板心跳包
+    switchBoardFail: '切换板心跳包失败',//切换板心跳包失败
+    CollectorVibSignal: '采集器振动信号',//采集器振动信号
+    event5900: '采集器的软件修正版本号',//采集器的软件修正版本号
+    event6000: '采集器的软件版本更新',//采集器的软件版本更新
+    event6001: '采集器的硬件程序升级成功',//采集器的硬件程序升级成功
+    event6002: '采集器的硬件程序升级失败',//采集器的硬件程序升级失败
+    event6100: '采集器的软件版本号',//采集器的软件版本号
+    event7100: '采集器的硬件程序版本号',//采集器的硬件程序版本号
+    event7500: '采集器的硬件AB版本号',//采集器的硬件AB版本号
+    event8000: '采集器手工采集某个通道的',//采集器手工采集某个通道
+    Waveform: '的波形',//的波形
+    event8016: '采集器手工采集某个振动通道',//采集器手工采集某个振动通道
+    event8032: '采集器手工采集某个键相',//采集器手工采集某个键相
+    TriggerBlackBox: '触发黑盒子存储',//触发黑盒子存储
+    RemoveBurrs: '剔除毛刺',//剔除毛刺
+    event9000: '采集器同步时间',//采集器同步时间
+    event9001: '采集器继电器1处于断开报警状态',//采集器继电器1处于断开报警状态
+    event_9001: '采集器继电器1处于正常闭合状态',//采集器继电器1处于正常闭合状态
+    event9002: '采集器继电器2处于断开报警状态',//采集器继电器2处于断开报警状态
+    event_9002: '采集器继电器2处于正常闭合状态',//采集器继电器2处于正常闭合状态
+    event9003: '采集器振动通道报警灯处于红色报警状态',//采集器振动通道报警灯处于红色报警状态
+    event_9003: '采集器振动通道报警灯处于关闭状态',//采集器振动通道报警灯处于关闭状态
+    event9004: '采集器状态运行灯处于灰色正常状态',//采集器状态运行灯处于灰色正常状态
+    event9005: '采集器状态运行灯处于红色报警状态',//采集器状态运行灯处于红色报警状态
+    event9006: '采集器状态运行灯处于黄色报警状态',//采集器状态运行灯处于黄色报警状态
+    event9007: '采集器按键清除报警',//采集器按键清除报警
+    CollectorChannel: '采集器通道',//采集器通道
+    sensorOrCableAbnormal: '传感器或线缆出现异常',//传感器或线缆出现异常
+    sensorOrCableNormal: '传感器或线缆正常',//传感器或线缆正常
+    event10000: '采集器手工连续采集某个通道',//采集器手工连续采集某个通道
+    minute: '分钟',//分钟
+    event11600: '采集器手工连续采集某个振动通道',//采集器手工连续采集某个振动通道
+    event12100: '采集器塔顶单方向峰值角度超过0.5度',//采集器塔顶单方向峰值角度超过0.5度
+    event13200: '采集器手工连续采集某个键相',//采集器手工连续采集某个键相
+    Range: '量程',//量程
+    CollectorBolt: '采集器螺栓通道',//采集器螺栓通道
+    RequestTimedOut: '请求超时',//请求超时
+    chemicalEvent2100: 'RS232初始化错误',//RS232初始化错误
+    SerialPort: '串口',//串口
+    chemicalEvent_2100: 'RS232初始化正常',//RS232初始化正常
+    chemicalEvent2200: '采集的转速错误',//采集的转速错误
+    BondPhase: '键相',//键相
+    chemicalEvent_2200: '采集的转速正常',//采集的转速正常
+    chemicalEvent2300: '采集慢变信号错误',//采集慢变信号错误
+    chemicalEvent_2300: '采集慢变信号正常',//采集慢变信号正常
+    chemicalEvent2400: '采集快变信号错误',//采集快变信号错误
+    chemicalEvent_2400: '采集快变信号正常',//采集快变信号正常
+    NormalSpeed: '转速正常',//转速正常
+    GAPkeyPhaseNotNormal: '键相信号的GAP电压不在正常范围',//键相信号的GAP电压不在正常范围
+    invalid: '无效',//无效
+    GAPkeyPhaseNormal: '键相信号的GAP电压正常范围',//键相信号的GAP电压正常范围
+    effective: '有效',//有效
+    GAPvibNotNormal: '振动信号的GAP电压不在正常范围',//振动信号的GAP电压不在正常范围
+    DAURestarts: 'DAU重新启动',//DAU重新启动
+    DAUChangeSet: 'DAU设置已经被修改',//DAU设置已经被修改
+    DAUsynchronousVersion: 'DAU程序的同步版本号为',//DAU程序的同步版本号为
+    DAUrevisedVersion: 'DAU程序的修正版本号',//DAU程序的修正版本号
+    chemicalEvent6002: 'DAU硬件版本号3.0',//DAU硬件版本号3.0
+    chemicalEvent6100: 'DAU软件版本号',//DAU软件版本号
+    chemicalEvent7100: '硬件程序大版本号',//硬件程序大版本号
+    UnknownLog: '未知日志',//未知日志
+    NotDescribed: '未描述',//未描述
+    train: '列车',//列车
+    front: '下的前置',//下的前置
+    Reboot: '重启',//重启
+    Host: '主机',//下的主机
+    SelfCheckPassed: '自检通过',//自检通过
+    PreSelfTestFailed: '前置自检失败',//前置自检失败
+    SelfTestFailed: '自检失败',//自检失败
+    VibChannel: '振动通道',//振动通道
+    SensorcableSelfTestFailed: '传感器线缆自检失败',//传感器线缆自检失败
+    VoltageValue: '电压值',//电压值
+    SensorSelfTestFailed: '传感器自检失败',//传感器自检失败
+    VibSignalSelfTestFailed: '振动信号自检失败',//振动信号自检失败
+    updatesuccessed: '升级成功',//升级成功
+    TempSelfTestPassed: '温度通道自检通过',//温度通道自检通过
+    TempChannel: '温度通道',//温度通道
+    VibSelfTestPassed: '振动通道自检通过',//振动通道自检通过
+    SDSelfTestFailed: 'SD卡自检失败',//SD卡自检失败
+    tmsEvent2017: '服务器硬盘空间不足',//服务器硬盘空间不足
+    channel: '通道',//通道
+  },
+  //趋势图
+  trend: {
+    addMap: '新增图谱',//新增图谱
+    wave: '波形',//波形
+    del: '删除',//删除
+    dropPosLimit: '不支持此类测点',//不支持此类测点
+    InsufficientSample: '样本数量不足',//样本数量不足
+    addPosMatch: '加入不同类型测点，是否要替换',//加入不同类型测点，是否要替换
+    existPosTip: '当前图谱已存在该测点',//当前图谱已存在该测点
+    xAxis: 'x轴',//x轴
+    yAxis: 'y轴',//y轴
+    TrendData: '趋势图数据',//趋势图数据
+  },
+  /* 8000 */
+  //单值棒图
+  singleBar: {},
+  //多值棒图
+  multiBar: {},
+  //全频谱图
+  fullSpectrum: {
 
+  },
+  //多频谱图
+  multiSpectrum: {
+    addPosLimit: '最多拖入六个测点',//最多拖入六个测点
+    existsSpectrogram: '已存在该测点频谱图',//已存在该测点频谱图
+    posTypeLimit: '该图谱只能拖入振动测点',//该图谱只能拖入振动测点
+  },
+  //单面动平衡
+  singledynamicBalance: {
+    CorrectionSurface: '校正面',//校正面
+    enterCorrectionSurface: '请输入校正面',//请输入校正面
+    BalanceSpeed: '平衡转速',//平衡转速
+    enterBalanceSpeed: '请输入平衡转速',//请输入平衡转速
+    CoordinateExtremum: '坐标极值',//坐标极值
+    enterCoordinateExtremum: '请输入坐标极值',//请输入坐标极值
+    turnAround: '旋转方向',//旋转方向
+    enterturnAround: '请选择旋转方向',//请选择旋转方向
+    OriginVib: '原始振动',//原始振动
+    TryToVib: '试重振动',//试重振动
+    ResidualVib: '残余振动',//残余振动
+    Retry: '试重',//试重
+    Counterweight: '配重',//配重
+    Remarks: '备注',//备注
+    BalanceweightCalc: '平衡配重计算',//平衡配重计算
+    ResidualVibvectordisplay: '残振矢量显示',//残振矢量显示
+    Clockwise: '顺时针',//顺时针
+    Counterclockwise: '逆时针',//逆时针
+    TestFreq: '测试次数',//测试次数
+    UnbalancedAmplitude: '不平衡响应幅值',//不平衡响应幅值
+    UnbalancedPhase: '不平衡响应相位',//不平衡响应相位
+    AggravatedQuality: '加重质量',//加重质量
+    AccentAngle: '加重角度',//加重角度
+    calibrationSurfaceNull: '校正面不能为空',//校正面不能为空
+    BalanceSpeedNull: '平衡转速不能为空',//平衡转速不能为空
+    BalanceSpeedWrong: '平衡转速必须为非负实数',//平衡转速必须为非负实数
+    errorInput: '请输入正确的原始振动幅值（正实数）和相位（0~360）',//请输入正确的原始振动幅值（正实数）和相位（0~360）
+    errorInput1: '请输入正确的增加试重质量（正实数）和角度（0~360）',//请输入正确的增加试重质量（正实数）和角度（0~360）
+    errorInput2: '请输入正确的试重振动幅值（正实数）和相位（0~360）',//请输入正确的试重振动幅值（正实数）和相位（0~360）
+    errorInput3: '请输入正确的残余振动幅值（正实数）和相位（0~360）',//请输入正确的残余振动幅值（正实数）和相位（0~360）
+    errorInput4: '请检验增加配重质量（非负实数）和角度（0~360）',//请检验增加配重质量（非负实数）和角度（0~360）
+    errorInput5: '残余幅值和相位不能为空！',//残余幅值和相位不能为空！
+    certainCoordinate: '某个坐标',//某个坐标
+  },
+  //双面动平衡
+  doubledynamicBalance: {
+    amplitude: '振幅',//振幅
+    Phase: '相位',//相位
+    Correction1_accentuated: '校正面1加重',//校正面1加重
+    Correction2_accentuated: '校正面2加重',//校正面2加重
+    Correction1_accentAngle: '校正面1加重角',//校正面1加重角
+    Correction2_accentAngle: '校正面2加重角',//校正面1加重角
+    errorInput: '平衡配重计算溢出，请检查输入数据',//平衡配重计算溢出，请检查输入数据
+    errorInput1: '校正面1不能为空',//校正面1不能为空
+    errorInput2: '校正面2不能为空',//校正面2不能为空
+    errorInput3: '请输入正确的增加试重1质量（正实数）和角度（0~360）',//请输入正确的增加试重1质量（正实数）和角度（0~360）
+    errorInput4: '请输入正确的试重1振动幅值（正实数）和相位（0~360）',//请输入正确的试重1振动幅值（正实数）和相位（0~360）
+    errorInput5: '请输入正确的增加试重2质量（正实数）和角度（0~360）',//请输入正确的增加试重2质量（正实数）和角度（0~360）
+    errorInput6: '请输入正确的试重2振动幅值（正实数）和相位（0~360）',//请输入正确的试重2振动幅值（正实数）和相位（0~360）
+  },
+  // 极坐标图
+  polarDiagram: {
+    value: '值',//值
+    existsPosTip: '已经存在该测点',//已经存在该测点
+    addPosMaxTip: '最多添加6个测点',//最多添加6个测点
+  },
+  //轴心轨迹图
+  axisLocus: {
+    OriginalTrajectory: '原始轨迹',//原始轨迹
+    halfTrajectory: '0.5x轨迹',//0.5x轨迹
+    oneTrajectory: '1x轨迹',//1x轨迹
+    twoTrajectory: '2x轨迹',//2x轨迹
+    fourTrajectory: '4x轨迹',//4x轨迹
+    eightTrajectory: '8x轨迹',//8x轨迹
+    sixteenTrajectory: '16x轨迹',//16x轨迹
+  },
+  //轴心位置图
+  axisPosition: {
+    baseInfo: '基本信息',//基本信息
+    installationAngle: '安装角度',//安装角度
+    referenceGap: '参考点间隙电压',//参考点间隙电压
+    GapX: '间隙电压门限X',//间隙电压门限X
+    GapY: '间隙电压门限Y',//间隙电压门限Y
+    GaprRangeX: '间隙电压量程X',//间隙电压量程X
+    GaprRangeY: '间隙电压量程Y',//间隙电压量程Y
+    RefreshMap: '刷新图谱',//刷新图谱
+    Tao: '道',//道
+    PointOrder: '点序',//点序
+    GapVoltage: '间隙电压',//间隙电压
+    cursor: '光标',//光标
+  },
+  //转速时间图
+  speedTime: {
+
+  },
+  //奈奎斯特图
+  nyquist: {
+    value: '值',//值
+  },
+  //bode图
+  bode: {
+
+  },
+  //级联图
+  cascade: {
+    SwitchDisplayMode: '切换显示模式',//切换显示模式
+  },
+  //启停机数据列表
+  startStop:{},
+  //专家系统
+  expertSystem:{
+    SymptomType:'征兆类型',//征兆类型
+    Confidence: '置信度',//置信度
+    MaintenanceRecommend:'维护建议',//维护建议
+    noData: '专家系统无数据！',//专家系统无数据！
+    PoorDynamicBalance:'动平衡不良',//动平衡不良
+    PoorAlignment:'对中不良',//对中不良
+    Friction: '有摩擦',//有摩擦
+    OilVortex:'油膜涡动',//油膜涡动
+    OilFilmShock: '油膜震荡',//油膜震荡
+    adviceStr1_1: '降负荷（或降速）运行；',//降负荷（或降速）运行；
+    adviceStr1_2: '如转子不平衡故障由转子结垢不均匀造成，转子动平衡时须彻底清理转子上的结垢；',//如转子不平衡故障由转子结垢不均匀造成，转子动平衡时须彻底清理转子上的结垢；
+    adviceStr1_3:'择机停车处理，按技术要求对转子进行动平衡。',//择机停车处理，按技术要求对转子进行动平衡。
+    adviceStr2_1:'按技术要求调整轴系转子对中量，重新对中；',//按技术要求调整轴系转子对中量，重新对中；
+    adviceStr2_2:'转子冷态对中时，应考虑到热态不对中变化量。',//转子冷态对中时，应考虑到热态不对中变化量。
+    adviceStr3_1:'调整转子与静止件的相对位置（均匀）和间隙（技术要求指标上线）；',//调整转子与静止件的相对位置（均匀）和间隙（技术要求指标上线）；
+    adviceStr3_2:'提高轴系对中精度；',//提高轴系对中精度；
+    adviceStr3_3:'减小转轴振动、径向跳动和外界扰动（如提高转子动平衡精度，降低不平衡力）；',//减小转轴振动、径向跳动和外界扰动（如提高转子动平衡精度，降低不平衡力）；
+    adviceStr3_4:'如发生局部摩擦故障，可采用摩擦方法扩大动静间隙（临时措施）。',//如发生局部摩擦故障，可采用摩擦方法扩大动静间隙（临时措施）。
+    adviceStr4_1:'按技术要求安装轴承，轴承间隙须符合要求，调整好轴承座紧力；',//按技术要求安装轴承，轴承间隙须符合要求，调整好轴承座紧力；
+    adviceStr4_2:'改进轴承工作状况，润滑油须定期检验，如有问题及时处理（如过滤、脱水、补油、添加高性能抗磨剂等）；',//改进轴承工作状况，润滑油须定期检验，如有问题及时处理（如过滤、脱水、补油、添加高性能抗磨剂等）；
+    adviceStr4_3: '调整润滑油温、油压（适当提高供油压力和油温）；',//调整润滑油温、油压（适当提高供油压力和油温）；
+    adviceStr4_4: '更换符合技术要求的轴承。',//更换符合技术要求的轴承。
+    adviceStr5_1: '调整轴瓦，提高轴径在轴系内的偏心率，提高轴承一阶临界转速，提高失稳转速。',//调整轴瓦，提高轴径在轴系内的偏心率，提高轴承一阶临界转速，提高失稳转速。
+  },
+  //8000报警
+  alarm_8000: {
+    HigherReport:'高高报',//高高报
+    HighReport: '高报',//高报
+    FrequencyDeviation: '通频值偏差',//通频值偏差
+    onexdeviation: '1X偏差',//1X偏差
+    twoxdeviation: '2X偏差',//2X偏差
+    fivexdeviation: '5X偏差',//5X偏差
+    Optionalxdeviation:'可选X偏差',//可选X偏差
+    ResidualDeviation: '残余量偏差',//残余量偏差
   }
 }

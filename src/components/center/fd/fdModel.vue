@@ -432,8 +432,8 @@ export default {
       currentKey: '',
     }
   },
-  beforeDestroy() {
-    clearInterval(this.timer)
+  deactivated() {
+    clearInterval(this.fdModel[this.currentKey].timer)
   },
   created() {
     this.$store.commit('set_keepAlive', {
@@ -447,6 +447,7 @@ export default {
       let mac, title
       for (let i in this.fdModel) {
         this.fdModel[i].isShow = false
+        clearInterval(this.fdModel[i].timer)
       }
       /*  总貌图设备模型多开增加了一个type强行变为0的设计，在这边重新判断type */
       const keyArr = Object.keys(this.fdModel)
@@ -491,7 +492,6 @@ export default {
           break
       }
       if (type === 0 || type === 1 || type === 4) {
-        clearInterval(this.fdModel[key].timer)
         let fn = () => {
           this.getModelItem(mac)
           return fn
@@ -501,19 +501,69 @@ export default {
     },
     //跳转至3D界面
     changeToLink() {
-      // this.$router.push('windModel')
-      this.$store.commit('setGeneralModel', {
-        key: this.currentKey,
-        router: 'windModel',
+      const mac = this.fdModel[this.currentKey].mac
+      // this.$router.push('fdModel')
+      let macArray = this.$store.state.mac[mac.t_id]
+      let choosemac = this.$store.state.checkMsg.mac
+      let choosetree = cloneObj(this.$store.state.checkMsg.tree)
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        if (choosemac !== null && choosemac.machine_id == mac.mac_id) {
+          if (choosemac.t_id != choosetree.t_id) {
+            let treeArray = this.$store.state.tree
+            treeArray.forEach((tree) => {
+              if (choosemac.t_id == tree.t_id) {
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(tree),
+                  type: 'tree',
+                })
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(choosemac),
+                  type: 'mac',
+                })
+                resolve('成功')
+              }
+            })
+          }
+          resolve('成功')
+        } else {
+          for (let i = 0; i < macArray.length; i++) {
+            if (macArray[i].mac_id == mac.mac_id) {
+              /* 设置当前的机组 */
+              if (macArray[i].t_id != choosetree.t_id) {
+                let treeArray = this.$store.state.tree
+                treeArray.forEach((tree) => {
+                  if (macArray[i].t_id == tree.t_id) {
+                    this.$store.commit('getCheckMsg', {
+                      msg: cloneObj(tree),
+                      type: 'tree',
+                    })
+                  }
+                })
+              }
+              this.$store.commit('getCheckMsg', {
+                msg: macArray[i],
+                type: 'mac',
+              })
+              resolve('成功')
+              break
+            }
+          }
+        }
+      }).then(() => {
+        this.$store.commit('setGeneralModel', {
+          key: this.currentKey,
+          router: 'windModel',
+        })
+        // 设备模型跳转设备模型使用同一个key值调用getPath方法
+        let params = {
+          key: this.currentKey,
+          val: this.$t('HeaderEdge.secondLevel1_3'), //'设备模型',
+          name: 'windModel',
+          icon: 'icon-shijingsanwei-',
+        }
+        this.$bus.$emit('getPath', params)
       })
-      // 设备模型跳转设备模型使用同一个key值调用getPath方法
-      let params = {
-        key: this.currentKey,
-        val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
-        name: 'windModel',
-        icon: 'icon-shijingsanwei-',
-      }
-      this.$bus.$emit('getPath', params)
     },
     //跳转modelitem（传动链、塔筒等）
     toModelIitem(index) {
@@ -521,49 +571,49 @@ export default {
       switch (index) {
         case 0:
           data = {
-            name: this.$t('FdModel.locName1'),//'传动链',
+            name: this.$t('FdModel.locName1'), //'传动链',
             router: 'fddrivechain',
             index: 0,
           }
           break
         case 1:
           data = {
-            name: this.$t('FdModel.locName2'),//'塔筒',
+            name: this.$t('FdModel.locName2'), //'塔筒',
             router: 'fdtowerdrum',
             index: 1,
           }
           break
         case 2:
           data = {
-            name: this.$t('FdModel.locName3'),//'螺栓',
+            name: this.$t('FdModel.locName3'), //'螺栓',
             router: 'fdbolt',
             index: 2,
           }
           break
         case 3:
           data = {
-            name: this.$t('FdModel.locName4'),//'叶轮',
+            name: this.$t('FdModel.locName4'), //'叶轮',
             router: 'fdimpeller',
             index: 3,
           }
           break
         case 4:
           data = {
-            name: this.$t('FdModel.locName5'),//'油液',
+            name: this.$t('FdModel.locName5'), //'油液',
             router: 'fdoil',
             index: 4,
           }
           break
         case 5:
           data = {
-            name: this.$t('FdModel.locName6'),//'锚栓',
+            name: this.$t('FdModel.locName6'), //'锚栓',
             router: 'fdanchorbolt',
             index: 5,
           }
           break
         case 6:
           data = {
-            name: this.$t('FdModel.locName7'),//'基础',
+            name: this.$t('FdModel.locName7'), //'基础',
             router: 'fdbasics',
             index: 6,
           }
@@ -579,19 +629,73 @@ export default {
           element.isChoose = false
         }
       })
-      // this.$router.push({ name: data.router })
-      this.$store.commit('setGeneralModel', {
-        key: this.currentKey,
-        router: data.router,
+      const mac = param.mac
+      // this.$router.push('fdModel')
+      let macArray = store.state.mac[mac.t_id]
+      let choosemac = store.state.checkMsg.mac
+      let choosetree = cloneObj(store.state.checkMsg.tree)
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        if (choosemac !== null && choosemac.machine_id == mac.mac_id) {
+          if (choosemac.t_id != choosetree.t_id) {
+            let treeArray = store.state.tree
+            treeArray.forEach((tree) => {
+              if (choosemac.t_id == tree.t_id) {
+                store.commit('getCheckMsg', {
+                  msg: cloneObj(tree),
+                  type: 'tree',
+                })
+                store.commit('getCheckMsg', {
+                  msg: cloneObj(choosemac),
+                  type: 'mac',
+                })
+                resolve('成功')
+              }
+            })
+          }
+          resolve('成功')
+        } else {
+          for (let i = 0; i < macArray.length; i++) {
+            if (macArray[i].mac_id == mac.mac_id) {
+              /* 设置当前的机组 */
+              if (macArray[i].t_id != choosetree.t_id) {
+                let treeArray = store.state.tree
+                treeArray.forEach((tree) => {
+                  if (macArray[i].t_id == tree.t_id) {
+                    store.commit('getCheckMsg', {
+                      msg: cloneObj(tree),
+                      type: 'tree',
+                    })
+                  }
+                })
+              }
+              store.commit('getCheckMsg', {
+                msg: macArray[i],
+                type: 'mac',
+              })
+              resolve('成功')
+              break
+            }
+          }
+        }
+      }).then(() => {
+        store.commit('setGeneralModel', {
+          key: this.currentKey,
+          router: data.router,
+        })
+        // 设备模型跳转设备模型使用同一个key值调用getPath方法
+        let params = {
+          key: this.currentKey,
+          val: this.$t('HeaderEdge.secondLevel1_3'), //'设备模型',
+          name: 'fdModelitem',
+          icon: 'icon-shijingsanwei-',
+        }
+        this.$bus.$emit('getPath', params)
+        store.commit('setWindmodelTitle', {
+          key: `${param.mac.mac_id}_${param.mac.ch_class}`,
+          data: param.modelTitle,
+        })
       })
-      // 设备模型跳转设备模型使用同一个key值调用getPath方法
-      let params = {
-        key: this.currentKey,
-        val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
-        name: 'fdModelitem',
-        icon: 'icon-shijingsanwei-',
-      }
-      this.$bus.$emit('getPath', params)
     },
     getModelItem(mac) {
       const param = this.fdModel[this.currentKey]
@@ -620,13 +724,13 @@ export default {
                     param.modelItems[k].alarm_status == 0 ||
                     param.modelItems[k].alarm_status == null
                   ) {
-                    param.modelItems[k].status = this.$t('Common.offlineText')//'离线'
+                    param.modelItems[k].status = this.$t('Common.offlineText') //'离线'
                   } else if (param.modelItems[k].alarm_status == 1) {
-                    param.modelItems[k].status = this.$t('Common.normalText')//'正常'
+                    param.modelItems[k].status = this.$t('Common.normalText') //'正常'
                   } else if (param.modelItems[k].alarm_status == 2) {
-                    param.modelItems[k].status = this.$t('Common.warnText')//'预警'
+                    param.modelItems[k].status = this.$t('Common.warnText') //'预警'
                   } else if (param.modelItems[k].alarm_status == 3) {
-                    param.modelItems[k].status = this.$t('Common.alarmText')//'报警'
+                    param.modelItems[k].status = this.$t('Common.alarmText') //'报警'
                   }
                 }
               }
@@ -640,22 +744,22 @@ export default {
                   diagnosis_str = driveChainDia.toString(2)
                   if (diagnosis_str.length > 0) {
                     if (Number(diagnosis_str[0]) > 0) {
-                      diagnosis.push(this.$t('FdModel.bearingDefect'))//'轴承缺陷'
+                      diagnosis.push(this.$t('FdModel.bearingDefect')) //'轴承缺陷'
                     }
                   }
                   if (diagnosis_str.length > 1) {
                     if (Number(diagnosis_str[1]) > 0) {
-                      diagnosis.push(this.$t('FdModel.gearDefect'))//'齿轮缺陷')
+                      diagnosis.push(this.$t('FdModel.gearDefect')) //'齿轮缺陷')
                     }
                   }
                   if (diagnosis_str.length > 2) {
                     if (Number(diagnosis_str[2]) > 0) {
-                      diagnosis.push(this.$t('FdModel.motorDefect'))//'电机不平衡或松动')
+                      diagnosis.push(this.$t('FdModel.motorDefect')) //'电机不平衡或松动')
                     }
                   }
                   if (diagnosis_str.length > 3) {
                     if (Number(diagnosis_str[3]) > 0) {
-                      diagnosis.push(this.$t('FdModel.gearBoxDefect'))//'齿轮箱载荷过重')
+                      diagnosis.push(this.$t('FdModel.gearBoxDefect')) //'齿轮箱载荷过重')
                     }
                   }
                   param.diagnosis.driveChain = {
@@ -674,116 +778,116 @@ export default {
                       el.fault_type = el.fault_type.replace(/\s+/g, '') //去除所有空格
                       let fault = [
                         {
-                          '[5]': this.$t('diagnosisTrend.fault01'),//'主轴前轴承外圈故障',
-                          '[6]': this.$t('diagnosisTrend.fault02'),//'主轴前轴承内圈故障',
-                          '[7]': this.$t('diagnosisTrend.fault03'),//'主轴前轴承滚动体故障',
-                          '[8]': this.$t('diagnosisTrend.fault04'),//'主轴前轴承保持架故障',
-                          '[1,2,3,4]': this.$t('diagnosisTrend.fault05'),//'主轴前轴承跑圈',
-                          '[0,9]': this.$t('diagnosisTrend.fault06'),//'主轴前轴承松动',
-                          '[10]': this.$t('diagnosisTrend.fault07'),//'电气故障',
-                          '[0]': this.$t('diagnosisTrend.fault08'),//'气动不平衡',
+                          '[5]': this.$t('diagnosisTrend.fault01'), //'主轴前轴承外圈故障',
+                          '[6]': this.$t('diagnosisTrend.fault02'), //'主轴前轴承内圈故障',
+                          '[7]': this.$t('diagnosisTrend.fault03'), //'主轴前轴承滚动体故障',
+                          '[8]': this.$t('diagnosisTrend.fault04'), //'主轴前轴承保持架故障',
+                          '[1,2,3,4]': this.$t('diagnosisTrend.fault05'), //'主轴前轴承跑圈',
+                          '[0,9]': this.$t('diagnosisTrend.fault06'), //'主轴前轴承松动',
+                          '[10]': this.$t('diagnosisTrend.fault07'), //'电气故障',
+                          '[0]': this.$t('diagnosisTrend.fault08'), //'气动不平衡',
                         },
                         {
-                          '[5]': this.$t('diagnosisTrend.fault11'),//'主轴后轴承外圈故障',
-                          '[6]': this.$t('diagnosisTrend.fault12'),//'主轴后轴承内圈故障',
-                          '[7]': this.$t('diagnosisTrend.fault13'),//'主轴后轴承滚动体故障',
-                          '[8]': this.$t('diagnosisTrend.fault14'),//'主轴后轴承保持架故障',
-                          '[1,2,3,4]': this.$t('diagnosisTrend.fault15'),//'主轴后轴承跑圈',
-                          '[0,9]': this.$t('diagnosisTrend.fault16'),//'主轴后轴承松动',
-                          '[10]': this.$t('diagnosisTrend.fault07'),//'电气故障',
-                          '[0]': this.$t('diagnosisTrend.fault08'),//'气动不平衡',
+                          '[5]': this.$t('diagnosisTrend.fault11'), //'主轴后轴承外圈故障',
+                          '[6]': this.$t('diagnosisTrend.fault12'), //'主轴后轴承内圈故障',
+                          '[7]': this.$t('diagnosisTrend.fault13'), //'主轴后轴承滚动体故障',
+                          '[8]': this.$t('diagnosisTrend.fault14'), //'主轴后轴承保持架故障',
+                          '[1,2,3,4]': this.$t('diagnosisTrend.fault15'), //'主轴后轴承跑圈',
+                          '[0,9]': this.$t('diagnosisTrend.fault16'), //'主轴后轴承松动',
+                          '[10]': this.$t('diagnosisTrend.fault07'), //'电气故障',
+                          '[0]': this.$t('diagnosisTrend.fault08'), //'气动不平衡',
                         },
                         {
-                          '[5]': this.$t('diagnosisTrend.fault21'),//'行星架叶轮侧轴承外圈故障',
-                          '[6]': this.$t('diagnosisTrend.fault22'),//'行星架叶轮侧轴承内圈故障',
-                          '[7]': this.$t('diagnosisTrend.fault23'),//'行星架叶轮侧轴承滚动体故障',
-                          '[8]': this.$t('diagnosisTrend.fault24'),//'行星架叶轮侧轴承保持架故障',
-                          '[9]': this.$t('diagnosisTrend.fault25'),//'行星架电机侧轴承内圈故障',
-                          '[10]': this.$t('diagnosisTrend.fault26'),//'行星架电机侧轴承滚动体故障',
-                          '[11]': this.$t('diagnosisTrend.fault27'),//'行星架电机侧轴承滚动体故障',
-                          '[12]': this.$t('diagnosisTrend.fault28'),//'行星架电机侧轴承保持架故障',
-                          '[1,2,3,4]': this.$t('diagnosisTrend.fault29'),//'齿轮箱输入轴轴承跑圈',
-                          '[0,13]': this.$t('diagnosisTrend.fault210'),//'齿轮箱输入轴轴承松动',
-                          '[14]': this.$t('diagnosisTrend.fault07'),//'电气故障',
+                          '[5]': this.$t('diagnosisTrend.fault21'), //'行星架叶轮侧轴承外圈故障',
+                          '[6]': this.$t('diagnosisTrend.fault22'), //'行星架叶轮侧轴承内圈故障',
+                          '[7]': this.$t('diagnosisTrend.fault23'), //'行星架叶轮侧轴承滚动体故障',
+                          '[8]': this.$t('diagnosisTrend.fault24'), //'行星架叶轮侧轴承保持架故障',
+                          '[9]': this.$t('diagnosisTrend.fault25'), //'行星架电机侧轴承内圈故障',
+                          '[10]': this.$t('diagnosisTrend.fault26'), //'行星架电机侧轴承滚动体故障',
+                          '[11]': this.$t('diagnosisTrend.fault27'), //'行星架电机侧轴承滚动体故障',
+                          '[12]': this.$t('diagnosisTrend.fault28'), //'行星架电机侧轴承保持架故障',
+                          '[1,2,3,4]': this.$t('diagnosisTrend.fault29'), //'齿轮箱输入轴轴承跑圈',
+                          '[0,13]': this.$t('diagnosisTrend.fault210'), //'齿轮箱输入轴轴承松动',
+                          '[14]': this.$t('diagnosisTrend.fault07'), //'电气故障',
                         },
                         {
-                          '[10]': this.$t('diagnosisTrend.fault31'),//'低速轴叶轮侧轴承外圈故障',
-                          '[11]': this.$t('diagnosisTrend.fault32'),//'低速轴叶轮侧轴承内圈故障',
-                          '[12]': this.$t('diagnosisTrend.fault33'),//'低速轴叶轮侧轴承滚动体故障',
-                          '[13]': this.$t('diagnosisTrend.fault34'),//'低速轴叶轮侧轴承保持架故障',
-                          '[14]': this.$t('diagnosisTrend.fault35'),//'低速轴电机侧轴承外圈故障',
-                          '[15]': this.$t('diagnosisTrend.fault36'),//'低速轴电机侧轴承内圈故障',
-                          '[16]': this.$t('diagnosisTrend.fault37'),//'低速轴电机侧轴承滚动体故障',
-                          '[17]': this.$t('diagnosisTrend.fault38'),//'低速轴电机侧轴承保持架故障',
-                          '[18]': this.$t('diagnosisTrend.fault39'),//'滑环轴承外圈故障',
-                          '[19]': this.$t('diagnosisTrend.fault310'),//'滑环轴承内圈故障',
-                          '[20]': this.$t('diagnosisTrend.fault311'),//'滑环轴承滚动体故障',
-                          '[21]': this.$t('diagnosisTrend.fault312'),//'滑环轴承保持架故障',
-                          '[5,24]': this.$t('diagnosisTrend.fault313'),//'太阳轮故障',
-                          '[7,26]': this.$t('diagnosisTrend.fault314'),//'行星轮故障',
-                          '[6,25]': this.$t('diagnosisTrend.fault315'),//'内齿圈故障',
-                          '[8,9]': this.$t('diagnosisTrend.fault316'),//'行星级齿轮啮合不良',
-                          '[1,2,3,4]': this.$t('diagnosisTrend.fault317'),//'齿轮箱低速轴轴承跑圈',
-                          '[0,22]': this.$t('diagnosisTrend.fault318'),//'齿轮箱低速轴轴承松动',
-                          '[27]': this.$t('diagnosisTrend.fault07'),//'电气故障',
+                          '[10]': this.$t('diagnosisTrend.fault31'), //'低速轴叶轮侧轴承外圈故障',
+                          '[11]': this.$t('diagnosisTrend.fault32'), //'低速轴叶轮侧轴承内圈故障',
+                          '[12]': this.$t('diagnosisTrend.fault33'), //'低速轴叶轮侧轴承滚动体故障',
+                          '[13]': this.$t('diagnosisTrend.fault34'), //'低速轴叶轮侧轴承保持架故障',
+                          '[14]': this.$t('diagnosisTrend.fault35'), //'低速轴电机侧轴承外圈故障',
+                          '[15]': this.$t('diagnosisTrend.fault36'), //'低速轴电机侧轴承内圈故障',
+                          '[16]': this.$t('diagnosisTrend.fault37'), //'低速轴电机侧轴承滚动体故障',
+                          '[17]': this.$t('diagnosisTrend.fault38'), //'低速轴电机侧轴承保持架故障',
+                          '[18]': this.$t('diagnosisTrend.fault39'), //'滑环轴承外圈故障',
+                          '[19]': this.$t('diagnosisTrend.fault310'), //'滑环轴承内圈故障',
+                          '[20]': this.$t('diagnosisTrend.fault311'), //'滑环轴承滚动体故障',
+                          '[21]': this.$t('diagnosisTrend.fault312'), //'滑环轴承保持架故障',
+                          '[5,24]': this.$t('diagnosisTrend.fault313'), //'太阳轮故障',
+                          '[7,26]': this.$t('diagnosisTrend.fault314'), //'行星轮故障',
+                          '[6,25]': this.$t('diagnosisTrend.fault315'), //'内齿圈故障',
+                          '[8,9]': this.$t('diagnosisTrend.fault316'), //'行星级齿轮啮合不良',
+                          '[1,2,3,4]': this.$t('diagnosisTrend.fault317'), //'齿轮箱低速轴轴承跑圈',
+                          '[0,22]': this.$t('diagnosisTrend.fault318'), //'齿轮箱低速轴轴承松动',
+                          '[27]': this.$t('diagnosisTrend.fault07'), //'电气故障',
                         },
                         {
-                          '[7]': this.$t('diagnosisTrend.fault41'),//'中间轴叶轮侧轴承外圈故障',
-                          '[8]': this.$t('diagnosisTrend.fault42'),//'中间轴叶轮侧轴承内圈故障',
-                          '[9]': this.$t('diagnosisTrend.fault43'),//'中间轴叶轮侧轴承滚动体故障',
-                          '[10]': this.$t('diagnosisTrend.fault44'),//'中间轴叶轮侧轴承保持架故障',
-                          '[11]': this.$t('diagnosisTrend.fault45'),//'中间轴电机侧轴承1外圈故障',
-                          '[12]': this.$t('diagnosisTrend.fault46'),//'中间轴电机侧轴承1内圈故障',
-                          '[13]': this.$t('diagnosisTrend.fault47'),//'中间轴电机侧轴承1滚动体故障',
-                          '[14]': this.$t('diagnosisTrend.fault48'),//'中间轴电机侧轴承1保持架故障',
-                          '[15]': this.$t('diagnosisTrend.fault49'),//'中间轴电机侧轴承2外圈故障',
-                          '[16]': this.$t('diagnosisTrend.fault410'),//'中间轴电机侧轴承2内圈故障',
-                          '[17]': this.$t('diagnosisTrend.fault411'),//'中间轴电机侧轴承2滚动体故障',
-                          '[18]': this.$t('diagnosisTrend.fault412'),//'中间轴电机侧轴承2保持架故障',
-                          '[19]': this.$t('diagnosisTrend.fault413'),//'中间轴小齿轮啮合不良或大齿轮断齿',
-                          '[5,6]': this.$t('diagnosisTrend.fault414'),//'中间级齿轮不对中（偏载）',
-                          '[20]': this.$t('diagnosisTrend.fault415'),//'小齿轮断齿',
-                          '[8,9]': this.$t('diagnosisTrend.fault316'),//'行星级齿轮啮合不良',
-                          '[1,2,3,4]': this.$t('diagnosisTrend.fault416'),//'齿轮箱中间轴轴承跑圈',
-                          '[0]': this.$t('diagnosisTrend.fault417'),//'齿轮箱中间轴轴承松动',
-                          '[21]': this.$t('diagnosisTrend.fault07'),//'电气故障',
+                          '[7]': this.$t('diagnosisTrend.fault41'), //'中间轴叶轮侧轴承外圈故障',
+                          '[8]': this.$t('diagnosisTrend.fault42'), //'中间轴叶轮侧轴承内圈故障',
+                          '[9]': this.$t('diagnosisTrend.fault43'), //'中间轴叶轮侧轴承滚动体故障',
+                          '[10]': this.$t('diagnosisTrend.fault44'), //'中间轴叶轮侧轴承保持架故障',
+                          '[11]': this.$t('diagnosisTrend.fault45'), //'中间轴电机侧轴承1外圈故障',
+                          '[12]': this.$t('diagnosisTrend.fault46'), //'中间轴电机侧轴承1内圈故障',
+                          '[13]': this.$t('diagnosisTrend.fault47'), //'中间轴电机侧轴承1滚动体故障',
+                          '[14]': this.$t('diagnosisTrend.fault48'), //'中间轴电机侧轴承1保持架故障',
+                          '[15]': this.$t('diagnosisTrend.fault49'), //'中间轴电机侧轴承2外圈故障',
+                          '[16]': this.$t('diagnosisTrend.fault410'), //'中间轴电机侧轴承2内圈故障',
+                          '[17]': this.$t('diagnosisTrend.fault411'), //'中间轴电机侧轴承2滚动体故障',
+                          '[18]': this.$t('diagnosisTrend.fault412'), //'中间轴电机侧轴承2保持架故障',
+                          '[19]': this.$t('diagnosisTrend.fault413'), //'中间轴小齿轮啮合不良或大齿轮断齿',
+                          '[5,6]': this.$t('diagnosisTrend.fault414'), //'中间级齿轮不对中（偏载）',
+                          '[20]': this.$t('diagnosisTrend.fault415'), //'小齿轮断齿',
+                          '[8,9]': this.$t('diagnosisTrend.fault316'), //'行星级齿轮啮合不良',
+                          '[1,2,3,4]': this.$t('diagnosisTrend.fault416'), //'齿轮箱中间轴轴承跑圈',
+                          '[0]': this.$t('diagnosisTrend.fault417'), //'齿轮箱中间轴轴承松动',
+                          '[21]': this.$t('diagnosisTrend.fault07'), //'电气故障',
                         },
                         {
-                          '[9]': this.$t('diagnosisTrend.fault51'),//'高速轴叶轮侧轴承外圈故障',
-                          '[10]': this.$t('diagnosisTrend.fault52'),//'高速轴叶轮侧轴承内圈故障',
-                          '[11]': this.$t('diagnosisTrend.fault53'),//'高速轴叶轮侧轴承滚动体故障',
-                          '[12]': this.$t('diagnosisTrend.fault54'),//'高速轴叶轮侧轴承保持架故障',
-                          '[13]': this.$t('diagnosisTrend.fault55'),//'高速轴电机侧轴承外圈故障',
-                          '[14]': this.$t('diagnosisTrend.fault56'),//'高速轴电机侧轴承内圈故障',
-                          '[15]': this.$t('diagnosisTrend.fault57'),//'高速轴电机侧轴承滚动体故障',
-                          '[16]': this.$t('diagnosisTrend.fault58'),//'高速轴电机侧轴承保持架故障',
-                          '[17,18]': this.$t('diagnosisTrend.fault59'),//'高速级大小齿轮啮合不良',
-                          '[17]': this.$t('diagnosisTrend.fault510'),//'中间级小齿轮啮合不良',
-                          '[5,6]': this.$t('diagnosisTrend.fault511'),//'高速级齿轮不对中（偏载）',
-                          '[7,8,17]': this.$t('diagnosisTrend.fault414'),//'中间级齿轮不对中（偏载）',
-                          '[0,1,2]': this.$t('diagnosisTrend.fault512'),//'联轴器不对中',
-                          '[1,2,3,4]': this.$t('diagnosisTrend.fault513'),//'齿轮箱输出轴轴承跑圈',
-                          '[0]': this.$t('diagnosisTrend.fault514'),//'齿轮箱输出轴轴承松动',
-                          '[19]': this.$t('diagnosisTrend.fault07'),//'电气故障',
+                          '[9]': this.$t('diagnosisTrend.fault51'), //'高速轴叶轮侧轴承外圈故障',
+                          '[10]': this.$t('diagnosisTrend.fault52'), //'高速轴叶轮侧轴承内圈故障',
+                          '[11]': this.$t('diagnosisTrend.fault53'), //'高速轴叶轮侧轴承滚动体故障',
+                          '[12]': this.$t('diagnosisTrend.fault54'), //'高速轴叶轮侧轴承保持架故障',
+                          '[13]': this.$t('diagnosisTrend.fault55'), //'高速轴电机侧轴承外圈故障',
+                          '[14]': this.$t('diagnosisTrend.fault56'), //'高速轴电机侧轴承内圈故障',
+                          '[15]': this.$t('diagnosisTrend.fault57'), //'高速轴电机侧轴承滚动体故障',
+                          '[16]': this.$t('diagnosisTrend.fault58'), //'高速轴电机侧轴承保持架故障',
+                          '[17,18]': this.$t('diagnosisTrend.fault59'), //'高速级大小齿轮啮合不良',
+                          '[17]': this.$t('diagnosisTrend.fault510'), //'中间级小齿轮啮合不良',
+                          '[5,6]': this.$t('diagnosisTrend.fault511'), //'高速级齿轮不对中（偏载）',
+                          '[7,8,17]': this.$t('diagnosisTrend.fault414'), //'中间级齿轮不对中（偏载）',
+                          '[0,1,2]': this.$t('diagnosisTrend.fault512'), //'联轴器不对中',
+                          '[1,2,3,4]': this.$t('diagnosisTrend.fault513'), //'齿轮箱输出轴轴承跑圈',
+                          '[0]': this.$t('diagnosisTrend.fault514'), //'齿轮箱输出轴轴承松动',
+                          '[19]': this.$t('diagnosisTrend.fault07'), //'电气故障',
                         },
                         {
-                          '[5]': this.$t('diagnosisTrend.fault61'),//'发电机前轴承外圈故',
-                          '[6]': this.$t('diagnosisTrend.fault62'),//'发电机前轴承内圈故障',
-                          '[7]': this.$t('diagnosisTrend.fault63'),//'发电机前轴承滚动体故障',
-                          '[8]': this.$t('diagnosisTrend.fault64'),//'发电机前轴承保持架故障',
-                          '[1,2,3,4]': this.$t('diagnosisTrend.fault65'),//'发电机前轴承跑圈',
-                          '[0,9]': this.$t('diagnosisTrend.fault66'),//'发电机前轴承松动',
-                          '[10]': this.$t('diagnosisTrend.fault07'),//'电气故障',
-                          '[0]': this.$t('diagnosisTrend.fault512'),//'联轴器不对中',
+                          '[5]': this.$t('diagnosisTrend.fault61'), //'发电机前轴承外圈故',
+                          '[6]': this.$t('diagnosisTrend.fault62'), //'发电机前轴承内圈故障',
+                          '[7]': this.$t('diagnosisTrend.fault63'), //'发电机前轴承滚动体故障',
+                          '[8]': this.$t('diagnosisTrend.fault64'), //'发电机前轴承保持架故障',
+                          '[1,2,3,4]': this.$t('diagnosisTrend.fault65'), //'发电机前轴承跑圈',
+                          '[0,9]': this.$t('diagnosisTrend.fault66'), //'发电机前轴承松动',
+                          '[10]': this.$t('diagnosisTrend.fault07'), //'电气故障',
+                          '[0]': this.$t('diagnosisTrend.fault512'), //'联轴器不对中',
                         },
                         {
-                          '[5]': this.$t('diagnosisTrend.fault71'),//'发电机后轴承外圈故障',
-                          '[6]': this.$t('diagnosisTrend.fault72'),//'发电机后轴承内圈故障',
-                          '[7]': this.$t('diagnosisTrend.fault73'),//'发电机后轴承滚动体故障',
-                          '[8]': this.$t('diagnosisTrend.fault74'),//'发电机后轴承保持架故障',
-                          '[1,2,3,4]': this.$t('diagnosisTrend.fault75'),//'发电机后轴承跑圈',
-                          '[0,9]': this.$t('diagnosisTrend.fault76'),//'发电机后轴承松动',
-                          '[10]': this.$t('diagnosisTrend.fault07'),//'电气故障',
+                          '[5]': this.$t('diagnosisTrend.fault71'), //'发电机后轴承外圈故障',
+                          '[6]': this.$t('diagnosisTrend.fault72'), //'发电机后轴承内圈故障',
+                          '[7]': this.$t('diagnosisTrend.fault73'), //'发电机后轴承滚动体故障',
+                          '[8]': this.$t('diagnosisTrend.fault74'), //'发电机后轴承保持架故障',
+                          '[1,2,3,4]': this.$t('diagnosisTrend.fault75'), //'发电机后轴承跑圈',
+                          '[0,9]': this.$t('diagnosisTrend.fault76'), //'发电机后轴承松动',
+                          '[10]': this.$t('diagnosisTrend.fault07'), //'电气故障',
                         },
                       ]
                       if (el.id && fault[Number(el.id)]) {
@@ -806,8 +910,9 @@ export default {
                 if (param.modelItems.driveChain.health !== null) {
                   angle = (param.modelItems.driveChain.health / 100) * 360
                   if (angle > 180) {
-                    this.$refs[`right_content1${this.currentKey}`].style =
-                      'transform:rotate(180deg)'
+                    this.$refs[
+                      `right_content1${this.currentKey}`
+                    ][0].style.transform = 'rotate(180deg)'
                     this.$refs[
                       `left_content1${this.currentKey}`
                     ][0].style.transform = `rotate(${angle - 180}deg)`
@@ -820,7 +925,7 @@ export default {
                     ][0].style.transform = `rotate(0deg)`
                   }
                   modelTitle.push({
-                    name: this.$t('FdModel.locName1'),//'传动链',
+                    name: this.$t('FdModel.locName1'), //'传动链',
                     router: 'fddrivechain',
                     isChoose: true,
                   })
@@ -993,7 +1098,10 @@ export default {
     //获取当前机组存在的设备部件
     getmodelTitle() {
       const param = this.fdModel[this.currentKey]
-      param.modelTitle = this.$store.state.windmodelTitle
+      param.modelTitle =
+        this.$store.state.windmodelTitle[
+          `${param.mac.mac_id}_${param.mac.ch_class}`
+        ]
       let modelTitleName = []
       if (param.modelTitle.length > 0) {
         param.modelTitle.forEach((element) => {
@@ -1006,8 +1114,8 @@ export default {
       const param = this.fdModel[this.currentKey]
       const mac = param.mac
       let key = `diagnosisTrend_mac_${mac.mac_id}`
-      let name = this.$t('HeaderEdge.secondLevel2_1');//'智能诊断趋势'
-      let titleName = mac.mac_me + '-' + this.$t('HeaderEdge.secondLevel2_1');//'智能诊断趋势'
+      let name = this.$t('HeaderEdge.secondLevel2_1') //'智能诊断趋势'
+      let titleName = mac.mac_me + '-' + this.$t('HeaderEdge.secondLevel2_1') //'智能诊断趋势'
       this.$bus.$emit('choiceChartType', key, name, titleName, true)
     },
   },

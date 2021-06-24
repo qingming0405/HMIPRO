@@ -1,4 +1,5 @@
 <template>
+<!-- 踏面寿命预估 -->
   <div>
     <div class="my-lifePredict-table">
       <table class="lifePredict-table scroll-style-edge">
@@ -65,8 +66,10 @@
 export default {
   name: 'lifePredict',
   data() {
+    const vm = window.vm
     return {
-      head: ['车号', '车轮', '预估剩余寿命(km)'],
+      vm: vm,
+      head: [vm.$t('lifePredict.carNum'), vm.$t('lifePredict.wheel'), vm.$t('lifePredict.EstimateRemainLife')+'(km)'],//'车号', '车轮', '预估剩余寿命(km)'
       empty: {
         text: '无预测数据',
         isShow: false,

@@ -540,20 +540,20 @@ export default {
       waveIcon: [
         /* 0 */ { class: 'icon-selectunit_huaban', title: '单位选择' },
         /* 1 */ {
-          class: 'icon-MAX_huaban icon-MAX_huaban-compare_wave',
+          class: 'icon-MAX_huaban icon-MAX_huaban-Maccompare_wave',
           title: '选框放大',
-        } /* {class: 'icon-exporemusic_huaban icon-exporemusic_huaban-compare_wave', title: '音频导出'}, */ /* {class: 'icon-exportdata_huaban icon-exportdata_huaban-compare_wave', title: '数据导出'}, */,
+        } /* {class: 'icon-exporemusic_huaban icon-exporemusic_huaban-Maccompare_wave', title: '音频导出'}, */ /* {class: 'icon-exportdata_huaban icon-exportdata_huaban-Maccompare_wave', title: '数据导出'}, */,
         /* 2 */ /* 3 */ /* 4 */ {
-          class: 'icon-restore_huaban icon-restore_huaban-compare_wave',
+          class: 'icon-restore_huaban icon-restore_huaban-Maccompare_wave',
           title: '重置',
         },
         /* 5 */ {
-          class: 'icon-enlarge_huaban icon-enlarge_huaban-compare_wave',
+          class: 'icon-enlarge_huaban icon-enlarge_huaban-Maccompare_wave',
           title: '选框放大',
         },
-        /* {class: 'icon-savemage_huaban icon-savemage_huaban-compare_wave', title: '保存为图片'}, */
+        /* {class: 'icon-savemage_huaban icon-savemage_huaban-Maccompare_wave', title: '保存为图片'}, */
         /* 8 */ {
-          class: 'icon-subtime_huaban icon-subtime_huaban-compare_wave',
+          class: 'icon-subtime_huaban icon-subtime_huaban-Maccompare_wave',
           title: '时间差',
         },
         /* 7 */
@@ -566,25 +566,26 @@ export default {
           parentClass: '',
         },
         /* 1 */ {
-          class: 'icon-MAX_huaban icon-MAX_huaban-compare_spectrum',
+          class: 'icon-MAX_huaban icon-MAX_huaban-Maccompare_spectrum',
           title: '选框放大',
           isCheck: false,
           parentClass: '',
-        } /* {class: 'icon-exportdata_huaban icon-exportdata_huaban-compare_spectrum', title: '数据导出'}, */,
+        } /* {class: 'icon-exportdata_huaban icon-exportdata_huaban-Maccompare_spectrum', title: '数据导出'}, */,
         /* 2 */ /* 3 */ {
-          class: 'icon-restore_huaban icon-restore_huaban-compare_spectrum',
+          class: 'icon-restore_huaban icon-restore_huaban-Maccompare_spectrum',
           title: '重置',
           isCheck: false,
           parentClass: '',
         },
         /* 4 */ {
-          class: 'icon-enlarge_huaban icon-enlarge_huaban-compare_spectrum',
+          class: 'icon-enlarge_huaban icon-enlarge_huaban-Maccompare_spectrum',
           title: '选框放大',
           isCheck: false,
           parentClass: '',
         },
         /* 5 */ {
-          class: 'icon-savemage_huaban icon-savemage_huaban-compare_spectrum',
+          class:
+            'icon-savemage_huaban icon-savemage_huaban-Maccompare_spectrum',
           title: '保存为图片',
           isCheck: false,
           parentClass: '',
@@ -594,16 +595,16 @@ export default {
           title: '对数坐标',
           isCheck: false,
           parentClass: '',
-        } /* {class: 'chart-btn-active icon-xiaozhunbeipin_huaban icon-xiaozhunbeipin_huaban-compare_spectrum', title: '校准倍频'}, */ /* {class: 'icon-xunhuanxunfeng_huaban_huaban icon-xunhuanxunfeng_huaban_huaban-compare_spectrum', title: '循环寻峰'}, */ /* 8 */ /* 9 */,
+        } /* {class: 'chart-btn-active icon-xiaozhunbeipin_huaban icon-xiaozhunbeipin_huaban-Maccompare_spectrum', title: '校准倍频'}, */ /* {class: 'icon-xunhuanxunfeng_huaban_huaban icon-xunhuanxunfeng_huaban_huaban-Maccompare_spectrum', title: '循环寻峰'}, */ /* 8 */ /* 9 */,
         /* 7 */ {
           class:
-            'icon-quxiaobiaozhu_huaban icon-quxiaobiaozhu_huaban-compare_spectrum',
+            'icon-quxiaobiaozhu_huaban icon-quxiaobiaozhu_huaban-Maccompare_spectrum',
           title: '取消标注',
           isCheck: false,
           parentClass: '',
         },
         /* 10 */ {
-          class: 'icon-biaozhu_huaban icon-biaozhu_huaban-compare_spectrum',
+          class: 'icon-biaozhu_huaban icon-biaozhu_huaban-Maccompare_spectrum',
           title: '添加标注',
           isCheck: false,
           parentClass: '',
@@ -611,7 +612,7 @@ export default {
         /* 11 */
         {
           class:
-            'icon-biaozhubeipin_huaban icon-biaozhubeipin_huaban-compare_spectrum',
+            'icon-biaozhubeipin_huaban icon-biaozhubeipin_huaban-Maccompare_spectrum',
           title: '标注倍频',
           isCheck: false,
           parentClass: '',
@@ -627,7 +628,7 @@ export default {
           title: '低频过滤',
           isCheck: false,
           parentClass: '',
-        } /* {class: 'icon-dingweidaobeipin_huaban icon-dingweidaobeipin_huaban-compare_spectrum', title: '定位到1倍频'}, */ /* {class: 'icon-qiehuanXzhoujiebi_huaban', title: '切换阶比'}, */,
+        } /* {class: 'icon-dingweidaobeipin_huaban icon-dingweidaobeipin_huaban-Maccompare_spectrum', title: '定位到1倍频'}, */ /* {class: 'icon-qiehuanXzhoujiebi_huaban', title: '切换阶比'}, */,
         /* 14 */ /* 15 */ /* 16 */ {
           class: 'chart-btn-active icon-hanningchuang_huaban',
           title: '汉宁窗',
@@ -636,7 +637,7 @@ export default {
         },
         /* 17 */ {
           class:
-            'icon-duichengpinshuaicha_huaban icon-duichengpinshuaicha_huaban-compare_spectrum',
+            'icon-duichengpinshuaicha_huaban icon-duichengpinshuaicha_huaban-Maccompare_spectrum',
           title: '对称频率差',
           isCheck: false,
           parentClass: '',
@@ -2619,47 +2620,69 @@ export default {
           enlarge: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-enlarge_huaban-compare_wave'
+              'icon-enlarge_huaban-Maccompare_wave'
             )[currentIndex],
           },
           // 最大化 / 还原
           maxOrMin: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-MAX_huaban-compare_wave'
+              'icon-MAX_huaban-Maccompare_wave'
             )[currentIndex],
           },
           // 重置
           restore: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-restore_huaban-compare_wave'
+              'icon-restore_huaban-Maccompare_wave'
             )[currentIndex],
           },
           // 时间差
           timeDifferent: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-subtime_huaban-compare_wave'
+              'icon-subtime_huaban-Maccompare_wave'
             )[currentIndex],
+            formatter(isTimeDifferent) {
+              let className = document
+                .getElementsByClassName('icon-subtime_huaban-Maccompare_wave')
+                [currentIndex].className.split(' ')
+              if (isTimeDifferent) {
+                if (className.indexOf('chart-btn-active') == -1) {
+                  addClass(
+                    document.getElementsByClassName(
+                      'icon-subtime_huaban-Maccompare_wave'
+                    )[currentIndex],
+                    'chart-btn-active'
+                  )
+                }
+              } else {
+                removeClass(
+                  document.getElementsByClassName(
+                    'icon-subtime_huaban-Maccompare_wave'
+                  )[currentIndex],
+                  'chart-btn-active'
+                )
+              }
+            },
           },
           // 导出图片
           /* exportImage: {
                   show: true,
-                  dom: document.getElementsByClassName('icon-savemage_huaban-compare_wave')[currentIndex],
+                  dom: document.getElementsByClassName('icon-savemage_huaban-Maccompare_wave')[currentIndex],
                   imageName: `${posName}_波形图`,
                }, */
           // 导出数据
           /* exportData: {
                   fileName: posName,
                   show: true,
-                  dom: document.getElementsByClassName('icon-exportdata_huaban-compare_wave')[currentIndex],
+                  dom: document.getElementsByClassName('icon-exportdata_huaban-Maccompare_wave')[currentIndex],
                }, */
           // 导出音频
           /* exportAudio: {
                   fileName: `${posName}_音频`,
                   show: true,
-                  dom: document.getElementsByClassName('icon-exporemusic_huaban-compare_wave')[currentIndex],
+                  dom: document.getElementsByClassName('icon-exporemusic_huaban-Maccompare_wave')[currentIndex],
                   maxFreq: this.freq,
                } */
         },
@@ -2785,27 +2808,27 @@ export default {
           enlarge: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-enlarge_huaban-compare_spectrum'
+              'icon-enlarge_huaban-Maccompare_spectrum'
             )[currentIndex],
           },
           // 最大化 / 还原
           maxOrMin: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-MAX_huaban-compare_spectrum'
+              'icon-MAX_huaban-Maccompare_spectrum'
             )[currentIndex],
           },
           // 重置
           restore: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-restore_huaban-compare_spectrum'
+              'icon-restore_huaban-Maccompare_spectrum'
             )[currentIndex],
             formatter() {
               params.isSubFreq = false
               removeClass(
                 document.getElementsByClassName(
-                  'icon-duichengpinshuaicha_huaban-compare_spectrum'
+                  'icon-duichengpinshuaicha_huaban-Maccompare_spectrum'
                 )[currentIndex],
                 'chart-btn-active'
               )
@@ -2815,21 +2838,21 @@ export default {
           subFreq: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-duichengpinshuaicha_huaban-compare_spectrum'
+              'icon-duichengpinshuaicha_huaban-Maccompare_spectrum'
             )[currentIndex],
             formatter() {
               params.isSubFreq = !params.isSubFreq
               params.isSubFreq &&
                 addClass(
                   document.getElementsByClassName(
-                    'icon-duichengpinshuaicha_huaban-compare_spectrum'
+                    'icon-duichengpinshuaicha_huaban-Maccompare_spectrum'
                   )[currentIndex],
                   'chart-btn-active'
                 )
               !params.isSubFreq &&
                 removeClass(
                   document.getElementsByClassName(
-                    'icon-duichengpinshuaicha_huaban-compare_spectrum'
+                    'icon-duichengpinshuaicha_huaban-Maccompare_spectrum'
                   )[currentIndex],
                   'chart-btn-active'
                 )
@@ -2839,7 +2862,7 @@ export default {
           labelFreq: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-biaozhubeipin_huaban-compare_spectrum'
+              'icon-biaozhubeipin_huaban-Maccompare_spectrum'
             )[currentIndex],
             icon: {
               isCheck: params.isLabelFreq,
@@ -2849,21 +2872,21 @@ export default {
           addLabel: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-biaozhu_huaban-compare_spectrum'
+              'icon-biaozhu_huaban-Maccompare_spectrum'
             )[currentIndex],
           },
           // 取消标注
           cancelLabel: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-quxiaobiaozhu_huaban-compare_spectrum'
+              'icon-quxiaobiaozhu_huaban-Maccompare_spectrum'
             )[currentIndex],
           },
           // 导出图片
           exportImage: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-savemage_huaban-compare_spectrum'
+              'icon-savemage_huaban-Maccompare_spectrum'
             )[currentIndex],
             imageName: posName + '_频谱图',
           },
@@ -3016,28 +3039,28 @@ export default {
           enlarge: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-enlarge_huaban-compare_wave'
+              'icon-enlarge_huaban-Maccompare_wave'
             )[currentIndex],
           },
           // 最大化 / 还原
           maxOrMin: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-MAX_huaban-compare_wave'
+              'icon-MAX_huaban-Maccompare_wave'
             )[currentIndex],
           },
           // 重置
           restore: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-restore_huaban-compare_wave'
+              'icon-restore_huaban-Maccompare_wave'
             )[currentIndex],
           },
           // 时间差
           timeDifferent: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-subtime_huaban-compare_wave'
+              'icon-subtime_huaban-Maccompare_wave'
             )[currentIndex],
           },
         },
@@ -3217,27 +3240,27 @@ export default {
           enlarge: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-enlarge_huaban-compare_spectrum'
+              'icon-enlarge_huaban-Maccompare_spectrum'
             )[currentIndex],
           },
           // 最大化 / 还原
           maxOrMin: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-MAX_huaban-compare_spectrum'
+              'icon-MAX_huaban-Maccompare_spectrum'
             )[currentIndex],
           },
           // 重置
           restore: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-restore_huaban-compare_spectrum'
+              'icon-restore_huaban-Maccompare_spectrum'
             )[currentIndex],
             formatter() {
               params.isSubFreq = false
               removeClass(
                 document.getElementsByClassName(
-                  'icon-duichengpinshuaicha_huaban-compare_spectrum'
+                  'icon-duichengpinshuaicha_huaban-Maccompare_spectrum'
                 )[currentIndex],
                 'chart-btn-active'
               )
@@ -3247,21 +3270,21 @@ export default {
           subFreq: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-duichengpinshuaicha_huaban-compare_spectrum'
+              'icon-duichengpinshuaicha_huaban-Maccompare_spectrum'
             )[currentIndex],
             formatter() {
               params.isSubFreq = !params.isSubFreq
               params.isSubFreq &&
                 addClass(
                   document.getElementsByClassName(
-                    'icon-duichengpinshuaicha_huaban-compare_spectrum'
+                    'icon-duichengpinshuaicha_huaban-Maccompare_spectrum'
                   )[currentIndex],
                   'chart-btn-active'
                 )
               !params.isSubFreq &&
                 removeClass(
                   document.getElementsByClassName(
-                    'icon-duichengpinshuaicha_huaban-compare_spectrum'
+                    'icon-duichengpinshuaicha_huaban-Maccompare_spectrum'
                   )[currentIndex],
                   'chart-btn-active'
                 )
@@ -3271,7 +3294,7 @@ export default {
           labelFreq: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-biaozhubeipin_huaban-compare_spectrum'
+              'icon-biaozhubeipin_huaban-Maccompare_spectrum'
             )[currentIndex],
             icon: {
               isCheck: params.isLabelFreq,
@@ -3281,14 +3304,14 @@ export default {
           cancelLabel: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-quxiaobiaozhu_huaban-compare_spectrum'
+              'icon-quxiaobiaozhu_huaban-Maccompare_spectrum'
             )[currentIndex],
           },
           // 导出图片
           exportImage: {
             show: true,
             dom: document.getElementsByClassName(
-              'icon-savemage_huaban-compare_spectrum'
+              'icon-savemage_huaban-Maccompare_spectrum'
             )[currentIndex],
             imageName: posName + '_频谱图',
           },
@@ -3322,6 +3345,7 @@ export default {
         document.getElementsByClassName('develop-macCompare')[currentIndex]
       params[`${type}Max`] = !params[`${type}Max`]
       const isMax = params[`${type}Max`]
+      const compareChart = this.$refs.macCompareChart[currentIndex]
       if (index === 1) {
         const compareBox = this.$refs.macCompareChart[currentIndex]
         isMax ? (compareBox.style.display = 'block') : (compareBox.style = null)
@@ -3361,6 +3385,7 @@ export default {
             break
           case 1 /* 最大化、还原 */:
             if (isMax) {
+              addClass(compareChart, 'macCompare-chart-maxwave')
               waveComapreEl.style = 'height:100%;border:none;'
               spectrumComapreEl.style.display = 'none'
               trendEl.style.display = 'none'
@@ -3376,6 +3401,7 @@ export default {
 
               changeClass(tag, 'icon-back_huaban', 'icon-MAX_huaban')
             } else {
+              removeClass(compareChart, 'macCompare-chart-maxwave')
               waveComapreEl.style = null
               spectrumComapreEl.style = null
               trendEl.style = null
@@ -3390,6 +3416,8 @@ export default {
               })
               changeClass(tag, 'icon-MAX_huaban', 'icon-back_huaban')
             }
+            break
+          case 4 /* 时间差 */:
             break
         }
       } else if (type === 'spectrum') {
@@ -3420,9 +3448,8 @@ export default {
             break
           case 1 /* 最大化、还原 */:
             if (isMax) {
-              spectrumComapreEl.style = 'height:100%;boder:none;'
-              // waveComapreEl.style.display = 'none'
-              // trendEl.style.display = 'none'
+              addClass(compareChart, 'macCompare-chart-maxspectrum')
+              spectrumComapreEl.style = 'height:100%;border:none;'
               developIcon.style.display = 'none'
               waveComapreEl.getElementsByClassName(
                 'my-chart'
@@ -3439,9 +3466,10 @@ export default {
               })
               changeClass(tag, 'icon-back_huaban', 'icon-MAX_huaban')
             } else {
+              removeClass(compareChart, 'macCompare-chart-maxspectrum')
               spectrumComapreEl.style = null
-              waveComapreEl.style = null
-              trendEl.style = null
+              waveComapreEl.getElementsByClassName('my-chart')[0].style = null
+              trendEl.getElementsByClassName('my-chart')[0].style = null
               developIcon.style = null
               document.getElementsByClassName('macCompare-chart-base-title')[
                 currentIndex
@@ -3562,7 +3590,6 @@ export default {
       const compareChart = this.$refs.macCompareChart[currentIndex]
       const waveComapreEl = this.$refs.waveCompare[currentIndex]
       const spectrumCompareEl = this.$refs.spectrumCompare[currentIndex]
-
       if (params.developChart.chart == 'wave') {
         if (hasClass(compareChart, 'macCompare-chart-wave')) {
           removeClass(compareChart, 'macCompare-chart-wave')
@@ -4228,6 +4255,12 @@ export default {
   }
   .macCompare-chart-spectrum {
     grid-template-rows: 30px 0 15px 70% calc(30% - 50px);
+  }
+  .macCompare-chart-maxwave {
+    grid-template-rows: 100%;
+  }
+  .macCompare-chart-maxspectrum {
+    grid-template-rows: 0px 0px 100%;
   }
   .search-data {
     height: 49px;

@@ -106,6 +106,7 @@ const i18n = new VueI18n({
     }
   }
 })
+// import i18n from './common/i18n'
 
 /* eslint-disable no-new */
 window.vm = new Vue({

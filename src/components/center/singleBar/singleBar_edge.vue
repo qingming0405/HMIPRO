@@ -21,11 +21,11 @@
         </div>
       </div>
       <div class='search-data'>
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
         <button
           :class="item.isReal ? '' : 'disable-btn'"
           @click="setrealData"
-        >实时数据</button>
+        ><!-- 实时数据 -->{{$t('Common.realData')}}</button>
       </div>
     </div>
   </div>
@@ -125,7 +125,7 @@ export default {
             empty: {
               /* 无数据 */
               isShow: true,
-              text: `无数据`,
+              text: this.$t('Common.noDataText'),//无数据
             },
             max: 0, //图标y轴最大值
             isShow: true,
@@ -219,7 +219,7 @@ export default {
 
       const option = {
         xAxis: {
-          name: '测点',
+          name: this.$t('Common.pos'),//测点
           nameLocation: 'end',
           nameGap: -30,
           // nameRotate: 30,

@@ -74,8 +74,10 @@ const general = {
               data = tree.children
             }
             this.general[key].isShowTree = isShowTree
-            this.general[key].tree = data
+            this.general[key].treeArray = data
             this.general[key].treeData = []
+          } else if (tree.t_root == 3) {
+            this.general[key].mac_group = {}
           }
           this.$nextTick(() => {
             if (this.$refs[`general_scroll${this.currentKey}`][0]) {

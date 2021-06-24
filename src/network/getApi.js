@@ -32,7 +32,7 @@ function getApi (router) {
     //(历史，实时，预测)趋势图
     getTendency (config) {
       let args = {
-        key: [], //机组id+测点id+测点type
+        key: {}, //机组id+测点id+测点type:时间
         startTime: "", //开始时间
         endTime: "", //结束时间
         fromSpeed: null, //	转速下限，null：无下限

@@ -154,7 +154,9 @@ var scene,
 export default {
   name: 'windModel',
   data() {
+    const vm = window.vm
     return {
+      vm: vm,
       windModel: {},
       currentKey: '',
     }
@@ -177,8 +179,17 @@ export default {
     })
     //声明raycaster和mouse变量
   },
-  activated(){
+  activated() {
     this.$parent.$el.style.background = '#000'
+  },
+  deactivated() {
+    this.windModel[this.currentKey] &&
+      clearInterval(this.windModel[this.currentKey].timer)
+  },
+  computed: {
+    windmodelTitle() {
+      return this.$store.state.windmodelTitle
+    },
   },
   mounted() {
     window.addEventListener('resize', this.onWindowResize, false)
@@ -202,6 +213,7 @@ export default {
       let mac, title
       for (let i in this.windModel) {
         this.windModel[i].isShow = false
+        clearInterval(this.windModel[i].timer)
       }
       /*  总貌图设备模型多开增加了一个type强行变为0的设计，在这边重新判断type */
       const keyArr = Object.keys(this.windModel)
@@ -234,7 +246,7 @@ export default {
             chainHeight: '',
             selectedObjects: [],
             windType: true, //风机模式：true白色，false网格
-            windTypeText: this.$t('WindModel.btnPerspective'),//'透视效果',
+            windTypeText: this.$t('WindModel.btnPerspective'), //'透视效果',
             model: {
               //弹窗部件信息
               name: '', //弹窗部件名
@@ -284,7 +296,6 @@ export default {
           break
       }
       if (type === 0 || type === 1 || type === 4) {
-        clearInterval(this.windModel[key].timer)
         let fn = () => {
           this.getModelItem(mac)
           return fn
@@ -423,35 +434,37 @@ export default {
     },
     animate() {
       const param = this.windModel[this.currentKey]
-      if (!param.removeBloom) {
-        bloomPass.strength -= 0.01
-        if (bloomPass.strength < 0) {
-          bloomPass.strength = 2.5
+      if (param) {
+        if (!param.removeBloom) {
+          bloomPass.strength -= 0.01
+          if (bloomPass.strength < 0) {
+            bloomPass.strength = 2.5
+          }
         }
-      }
-      camera.lookAt(scene.position)
-      let fov = camera.fov
-      fov -= fov > 10 ? 0.5 : 0
-      groupFly.position.x = 0
-      camera.fov = fov
-      if (camera.fov === 10) {
-        groupFly.rotation.y -= groupFly.rotation.y > -1 ? 0.02 : 0
-        //旋转停止再褪去白色模型
-        if (groupFly.rotation.y < -1 || groupFly.rotation.y === -1) {
-          param.finishRotate = true
+        camera.lookAt(scene.position)
+        let fov = camera.fov
+        fov -= fov > 10 ? 0.5 : 0
+        groupFly.position.x = 0
+        camera.fov = fov
+        if (camera.fov === 10) {
+          groupFly.rotation.y -= groupFly.rotation.y > -1 ? 0.02 : 0
+          //旋转停止再褪去白色模型
+          if (groupFly.rotation.y < -1 || groupFly.rotation.y === -1) {
+            param.finishRotate = true
+          }
         }
+        groupHead.rotateZ(param.rotateVal)
+        camera.updateProjectionMatrix()
+        renderer.autoClear = false
+        renderer.clear()
+        renderer.render(backgroundscene, backgroundCamera)
+        camera.layers.set(1)
+        composer.render()
+        renderer.clearDepth() // 清除深度缓存
+        camera.layers.set(0)
+        myReq = requestAnimationFrame(this.animate) //请求再次执行渲染函数render，渲染下一帧
+        renderer.render(scene, camera)
       }
-      groupHead.rotateZ(param.rotateVal)
-      camera.updateProjectionMatrix()
-      renderer.autoClear = false
-      renderer.clear()
-      renderer.render(backgroundscene, backgroundCamera)
-      camera.layers.set(1)
-      composer.render()
-      renderer.clearDepth() // 清除深度缓存
-      camera.layers.set(0)
-      myReq = requestAnimationFrame(this.animate) //请求再次执行渲染函数render，渲染下一帧
-      renderer.render(scene, camera)
     },
     //暂停旋转动画
     stopRotate() {
@@ -746,10 +759,10 @@ export default {
       scene.traverse(function (obj) {
         if (obj.type === 'Mesh' && obj.name.indexOf('baiseshiti') != -1) {
           if (param.windType) {
-            param.windTypeText = that.$t('btnPerspective.btnPerspective') //透视效果
+            param.windTypeText = that.$t('WindModel.btnPerspective') //透视效果
             obj.visible = true
           } else {
-            param.windTypeText = that.$t('btnPerspective.btnPhysical') //'风机外观'
+            param.windTypeText = that.$t('WindModel.btnPhysical') //'风机外观'
             obj.visible = false
           }
         }
@@ -767,19 +780,69 @@ export default {
         this.initParams()
         this.clearRenderer()
       }
+      const mac = this.windModel[this.currentKey].mac
       // this.$router.push('fdModel')
-      this.$store.commit('setGeneralModel', {
-        key: this.currentKey,
-        router: 'fdModel',
+      let macArray = this.$store.state.mac[mac.t_id]
+      let choosemac = this.$store.state.checkMsg.mac
+      let choosetree = cloneObj(this.$store.state.checkMsg.tree)
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        if (choosemac !== null && choosemac.machine_id == mac.mac_id) {
+          if (choosemac.t_id != choosetree.t_id) {
+            let treeArray = this.$store.state.tree
+            treeArray.forEach((tree) => {
+              if (choosemac.t_id == tree.t_id) {
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(tree),
+                  type: 'tree',
+                })
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(choosemac),
+                  type: 'mac',
+                })
+                resolve('成功')
+              }
+            })
+          }
+          resolve('成功')
+        } else {
+          for (let i = 0; i < macArray.length; i++) {
+            if (macArray[i].mac_id == mac.mac_id) {
+              /* 设置当前的机组 */
+              if (macArray[i].t_id != choosetree.t_id) {
+                let treeArray = this.$store.state.tree
+                treeArray.forEach((tree) => {
+                  if (macArray[i].t_id == tree.t_id) {
+                    this.$store.commit('getCheckMsg', {
+                      msg: cloneObj(tree),
+                      type: 'tree',
+                    })
+                  }
+                })
+              }
+              this.$store.commit('getCheckMsg', {
+                msg: macArray[i],
+                type: 'mac',
+              })
+              resolve('成功')
+              break
+            }
+          }
+        }
+      }).then(() => {
+        this.$store.commit('setGeneralModel', {
+          key: this.currentKey,
+          router: 'fdModel',
+        })
+        // 设备模型跳转设备模型使用同一个key值调用getPath方法
+        let params = {
+          key: this.currentKey,
+          val: this.$t('HeaderEdge.secondLevel1_3'), //'设备模型',
+          name: 'fdModel',
+          icon: 'icon-shijingsanwei-',
+        }
+        this.$bus.$emit('getPath', params)
       })
-      // 设备模型跳转设备模型使用同一个key值调用getPath方法
-      let params = {
-        key: this.currentKey,
-        val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
-        name: 'fdModel',
-        icon: 'icon-shijingsanwei-',
-      }
-      this.$bus.$emit('getPath', params)
     },
     /**
      * 鼠标滑过报警部件，风机模型该部件高亮
@@ -974,49 +1037,49 @@ export default {
       switch (name) {
         case '传动链':
           data = {
-            name: this.$t('FdModel.locName1'),//'传动链',
+            name: this.$t('FdModel.locName1'), //'传动链',
             router: 'fddrivechain',
             index: 0,
           }
           break
         case '塔筒':
           data = {
-            name: this.$t('FdModel.locName2'),//'塔筒',
+            name: this.$t('FdModel.locName2'), //'塔筒',
             router: 'fdtowerdrum',
             index: 1,
           }
           break
         case '螺栓':
           data = {
-            name: this.$t('FdModel.locName3'),//'螺栓',
+            name: this.$t('FdModel.locName3'), //'螺栓',
             router: 'fdbolt',
             index: 2,
           }
           break
         case '叶轮':
           data = {
-            name: this.$t('FdModel.locName4'),//'叶轮',
+            name: this.$t('FdModel.locName4'), //'叶轮',
             router: 'fdimpeller',
             index: 3,
           }
           break
         case '油液':
           data = {
-            name: this.$t('FdModel.locName5'),//'油液',
+            name: this.$t('FdModel.locName5'), //'油液',
             router: 'fdoil',
             index: 4,
           }
           break
         case '锚栓':
           data = {
-            name: this.$t('FdModel.locName6'),//'锚栓',
+            name: this.$t('FdModel.locName6'), //'锚栓',
             router: 'fdanchorbolt',
             index: 5,
           }
           break
         case '基础':
           data = {
-            name: this.$t('FdModel.locName7'),//'基础',
+            name: this.$t('FdModel.locName7'), //'基础',
             router: 'fdbasics',
             index: 6,
           }
@@ -1040,19 +1103,74 @@ export default {
         this.initParams()
         this.clearRenderer()
       }
-      this.$store.commit('setGeneralModel', {
-        key: this.currentKey,
-        router: data.router,
+
+      const mac = this.windModel[this.currentKey].mac
+      // this.$router.push('fdModel')
+      let macArray = store.state.mac[mac.t_id]
+      let choosemac = store.state.checkMsg.mac
+      let choosetree = cloneObj(store.state.checkMsg.tree)
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        if (choosemac !== null && choosemac.machine_id == mac.mac_id) {
+          if (choosemac.t_id != choosetree.t_id) {
+            let treeArray = store.state.tree
+            treeArray.forEach((tree) => {
+              if (choosemac.t_id == tree.t_id) {
+                store.commit('getCheckMsg', {
+                  msg: cloneObj(tree),
+                  type: 'tree',
+                })
+                store.commit('getCheckMsg', {
+                  msg: cloneObj(choosemac),
+                  type: 'mac',
+                })
+                resolve('成功')
+              }
+            })
+          }
+          resolve('成功')
+        } else {
+          for (let i = 0; i < macArray.length; i++) {
+            if (macArray[i].mac_id == mac.mac_id) {
+              /* 设置当前的机组 */
+              if (macArray[i].t_id != choosetree.t_id) {
+                let treeArray = store.state.tree
+                treeArray.forEach((tree) => {
+                  if (macArray[i].t_id == tree.t_id) {
+                    store.commit('getCheckMsg', {
+                      msg: cloneObj(tree),
+                      type: 'tree',
+                    })
+                  }
+                })
+              }
+              store.commit('getCheckMsg', {
+                msg: macArray[i],
+                type: 'mac',
+              })
+              resolve('成功')
+              break
+            }
+          }
+        }
+      }).then(() => {
+        store.commit('setGeneralModel', {
+          key: this.currentKey,
+          router: data.router,
+        })
+        // 设备模型跳转设备模型使用同一个key值调用getPath方法
+        let params = {
+          key: this.currentKey,
+          val: this.$t('HeaderEdge.secondLevel1_3'), //'设备模型',
+          name: 'fdModelitem',
+          icon: 'icon-shijingsanwei-',
+        }
+        this.$bus.$emit('getPath', params)
+        store.commit('setWindmodelTitle', {
+          key: `${param.mac.mac_id}_${param.mac.ch_class}`,
+          data: param.modelTitle,
+        })
       })
-      // 设备模型跳转设备模型使用同一个key值调用getPath方法
-      let params = {
-        key: this.currentKey,
-        val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
-        name: 'fdModelitem',
-        icon: 'icon-shijingsanwei-',
-      }
-      this.$bus.$emit('getPath', params)
-      store.commit('setWindmodelTitle', param.modelTitle)
     },
     getModelItem(mac) {
       const param = this.windModel[this.currentKey]
@@ -1128,22 +1246,22 @@ export default {
                 diagnosis_str = driveChainDia.toString(2)
                 if (diagnosis_str.length > 0) {
                   if (Number(diagnosis_str[0]) > 0) {
-                    diagnosis.push(this.$t('FdModel.bearingDefect'))//'轴承缺陷'
+                    diagnosis.push(this.$t('FdModel.bearingDefect')) //'轴承缺陷'
                   }
                 }
                 if (diagnosis_str.length > 1) {
                   if (Number(diagnosis_str[1]) > 0) {
-                    diagnosis.push(this.$t('FdModel.gearDefect'))//'齿轮缺陷')
+                    diagnosis.push(this.$t('FdModel.gearDefect')) //'齿轮缺陷')
                   }
                 }
                 if (diagnosis_str.length > 2) {
                   if (Number(diagnosis_str[2]) > 0) {
-                    diagnosis.push(this.$t('FdModel.motorDefect'))//'电机不平衡或松动')
+                    diagnosis.push(this.$t('FdModel.motorDefect')) //'电机不平衡或松动')
                   }
                 }
                 if (diagnosis_str.length > 3) {
                   if (Number(diagnosis_str[3]) > 0) {
-                    diagnosis.push(this.$t('FdModel.gearBoxDefect'))//'齿轮箱载荷过重')
+                    diagnosis.push(this.$t('FdModel.gearBoxDefect')) //'齿轮箱载荷过重')
                   }
                 }
                 param.diagnosis.driveChain = {
@@ -1162,20 +1280,20 @@ export default {
     },
     //报警状态对应的文字
     getAlarmText(status) {
-      let text = this.$t('Common.normalText')//'正常'
+      let text = this.$t('Common.normalText') //'正常'
       switch (status) {
         case 0:
         case null:
-          text = this.$t('Common.offlineText')//'离线'
+          text = this.$t('Common.offlineText') //'离线'
           break
         case 1:
-          text = this.$t('Common.normalText')//'正常'
+          text = this.$t('Common.normalText') //'正常'
           break
         case 2:
-          text = this.$t('Common.warnText')//'预警'
+          text = this.$t('Common.warnText') //'预警'
           break
         case 3:
-          text = this.$t('Common.alarmText')//'报警'
+          text = this.$t('Common.alarmText') //'报警'
           break
       }
       return text
@@ -1210,12 +1328,15 @@ export default {
       return className
     },
     //获取当前机组存在的设备部件
-    getmodelTitle(mac) {
+    getmodelTitle() {
       const param = this.windModel[this.currentKey]
       // let macid = this.$store.state.checkMsg.mac.mac_id;
-      param.modelTitle = this.$store.state.windmodelTitle
+      param.modelTitle =
+        this.$store.state.windmodelTitle[
+          `${param.mac.mac_id}_${param.mac.ch_class}`
+        ]
       let modelTitleName = []
-      if (param.modelTitle.length > 0) {
+      if (param.modelTitle && param.modelTitle.length > 0) {
         param.modelTitle.forEach((element) => {
           modelTitleName.push(element.name)
         })
@@ -1292,6 +1413,31 @@ export default {
           }
         })
       }
+    },
+    windmodelTitle: {
+      handler(value) {
+        const param = this.windModel[this.currentKey]
+        if (param && param.mac) {
+          if (value[`${param.mac.mac_id}_${param.mac.ch_class}`]) {
+            let flag = true
+            if (value[`${param.mac.mac_id}_${param.mac.ch_class}`].length > 0) {
+              value[`${param.mac.mac_id}_${param.mac.ch_class}`].forEach(
+                (item) => {
+                  if (param.modelTitleName.indexOf(item.name) == -1) {
+                    flag = false
+                  }
+                }
+              )
+              if (!flag|| param.modelTitleName.length != value[`${param.mac.mac_id}_${param.mac.ch_class}`].length) {
+                this.getmodelTitle()
+              }
+            } else {
+              param.modelTitleName = []
+            }
+          }
+        }
+      },
+      deep: true,
     },
   },
 }

@@ -1,4 +1,4 @@
-<template>
+ <template>
   <div>
     <div
       v-for="(param,key) in focus"

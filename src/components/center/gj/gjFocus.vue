@@ -1,6 +1,9 @@
 <template>
   <div>
-    <div v-for="(params,key) in focus">
+    <div
+      v-for="(params,key) in focus"
+      v-show="params.isShow"
+    >
       <div class="general-view">
         <div class="general-view-screen">
           <div class="view-screen-collect">
@@ -137,7 +140,7 @@
             </div>
           </div>
           <div v-show="params.isShowTree && params.ischeck && params.selmacList.length > 0">
-            <div v-for="(group, name) in params.groupSelmacList">
+            <div v-for="(group, name,i) in params.groupSelmacList">
               <div class="general-view-content-title">{{ name }}</div>
               <div
                 class="general-view-content"
@@ -146,8 +149,8 @@
                 <div
                   v-for="(item, index) in group"
                   class="view-content "
-                  :ref='"view_content"+index'
-                  @click="choosemac(index, params.macList, 'view_content')"
+                  :ref='"view_contentgj"+i+index'
+                  @click="choosemacArray(index, group, `view_contentgj${i}`)"
                   @dblclick="toMacModel(item)"
                   :style="item.style"
                   :class="{
@@ -249,7 +252,7 @@
           </div>
           <!-- 收藏显示机组 -->
           <div v-show="params.isShowTree">
-            <div v-for="(group, name) in params.groupMacList">
+            <div v-for="(group, name,i) in params.groupMacList">
               <div class="general-view-content-title">{{ name }}</div>
               <div
                 class="general-view-content"
@@ -258,8 +261,8 @@
                 <div
                   v-for="(item, index) in group"
                   class="view-content "
-                  :ref='"view_content"+index'
-                  @click="choosemac(index, macList, 'view_content')"
+                  :ref='"view_contenttgj"+i+index'
+                  @click="choosemacArray(index, group, `view_contenttgj${i}`)"
                   @dblclick="toMacModel(item)"
                   :style="item.style"
                   :class="{
@@ -399,82 +402,45 @@ export default {
       }
     })
   },
+  computed: {
+    GJselmacList() {
+      if (this.focus[this.currentKey]) {
+        return this.focus[this.currentKey].selmacList
+      }
+    },
+    GJmacList() {
+      if (this.focus[this.currentKey]) {
+        return this.focus[this.currentKey].macList
+      }
+    },
+  },
   created() {
     this.$store.commit('set_keepAlive', {
       method: 'add',
       keepAlive: 'gjFocus',
     })
-    this.$watch(
-      function () {
-        // 第一个函数就是处理你要监听的属性，只要将其return出去就行
-        return this.focus[this.currentKey].searchmac
-      },
-      function (val) {
-        const param = this.focus[this.currentKey]
-        param.mac_group = {}
-        val.forEach((item) => {
-          if (param.mac_group[item.fullTName] === undefined) {
-            param.mac_group[item.fullTName] = []
-          }
-          /* 匹配下拼音 */
-          // if (this.searchKey != "") {
-          if (this.pinyin.match(item.name, this.searchKey)) {
-            item.isShow = true
-          } else {
-            item.isShow = false
-          }
-          // }
-          param.mac_group[item.fullTName].push(item)
-        })
-      }
-    )
-    this.$watch(
-      function () {
-        // 第一个函数就是处理你要监听的属性，只要将其return出去就行
-        return this.focus[this.currentKey].macList
-      },
-      function (val) {
-        const param = this.focus[this.currentKey]
-        let groupMacList = {}
-        val.forEach((item) => {
-          if (groupMacList[item.fullTName] === undefined) {
-            groupMacList[item.fullTName] = []
-          }
-          /* 匹配下拼音 */
-          // if (this.searchKey != "") {
-          if (this.pinyin.match(item.name, this.searchKey)) {
-            item.isShow = true
-          } else {
-            item.isShow = false
-          }
-          // }
-          groupMacList[item.fullTName].push(item)
-        })
-        param.groupMacList = groupMacList
-      }
-    )
   },
   methods: {
     getAlarmStatus(obj, alarm_status) {
       switch (alarm_status) {
         case 0:
-          obj.status = this.$t('GjModel.offlineText')//'离线'
+          obj.status = this.$t('GjModel.offlineText') //'离线'
           obj.type = 4
           break
         case 1:
-          obj.status = this.$t('GjModel.normalText')//'正常'
+          obj.status = this.$t('GjModel.normalText') //'正常'
           obj.type = 1
           break
         case 2:
-          obj.status = this.$t('GjModel.warnText')//'预警'
+          obj.status = this.$t('GjModel.warnText') //'预警'
           obj.type = 2
           break
         case 3:
-          obj.status = this.$t('GjModel.alarm1Text')//'Ⅰ级报警'
+          obj.status = this.$t('GjModel.alarm1Text') //'Ⅰ级报警'
           obj.type = 3
           break
         case 4:
-          obj.status = this.$t('GjModel.alarm2Text')//'Ⅱ级报警'
+          obj.status = this.$t('GjModel.alarm2Text') //'Ⅱ级报警'
           obj.type = 5
           break
       }
@@ -491,7 +457,7 @@ export default {
           if (res) {
             if (params.isDataRight) {
               if (res.data.length == 0 && type == 1) {
-                this.$pop(this.$t('YtFocus.filterNoData'))//筛选无数据
+                this.$pop(this.$t('YtFocus.filterNoData')) //筛选无数据
               }
               res.data.forEach((item) => {
                 let obj = {}
@@ -510,6 +476,7 @@ export default {
                 obj.mac_id = item.mac_id
                 obj.isFocus = item.isFocus ? true : false
                 obj.name = item.mac_me
+                item.fullTName && (obj.fullTName = item.fullTName)
                 if (item.dgm_type == 3 && item.t_root == 2) {
                   obj.name = `${item.t_name}-${item.mac_me}`
                 }
@@ -553,17 +520,15 @@ export default {
       if (machine.pumps && machine.pumps.length) {
         machine.pump_id = machine.pumps[0].pump_id
       } else {
-        this.$pop(this.$t('Common.noOverviewTips'))//'该机组无总貌图')
+        this.$pop(this.$t('Common.noOverviewTips')) //'该机组无总貌图')
         return
       }
-      let pump_id = machine.pump_id
-      let t_id = machine.t_id
-      let macList = this.$store.state.mac[t_id]
-      let mac
-      let choosetree = cloneObj(this.$store.state.checkMsg.tree)
+      let macArray = this.$store.state.mac[machine.t_id]
       let choosemac = this.$store.state.checkMsg.mac
-      if (choosemac !== null) {
-        if (choosemac.pump_id == pump_id) {
+      let choosetree = cloneObj(this.$store.state.checkMsg.tree)
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        if (choosemac !== null && choosemac.pump_id == machine.pump_id) {
           if (choosemac.t_id != choosetree.t_id) {
             let treeArray = this.$store.state.tree
             treeArray.forEach((tree) => {
@@ -576,47 +541,74 @@ export default {
                   msg: cloneObj(choosemac),
                   type: 'mac',
                 })
+                resolve('成功')
               }
             })
           }
-          this.$bus.$emit(
-            'generalRouting',
-            'gjModel',
-             this.$t('YtModel.macModel'),//'设备模型',
-            'icon-shijingsanwei-'
-          )
-          return
-        }
-      }
-      macList.forEach((item) => {
-        if (item.pump_id === pump_id) {
-          mac = item
-          return
-        }
-      })
-      /* 设置当前的机组 */
-      if (mac.t_id != choosetree.t_id) {
-        let treeArray = this.$store.state.tree
-        treeArray.forEach((tree) => {
-          if (mac.t_id == tree.t_id) {
-            this.$store.commit('getCheckMsg', {
-              msg: cloneObj(tree),
-              type: 'tree',
-            })
+          resolve('成功')
+        } else {
+          for (let i = 0; i < macArray.length; i++) {
+            if (macArray[i].pump_id == machine.pump_id) {
+              /* 设置当前的机组 */
+              if (macArray[i].t_id != choosetree.t_id) {
+                let treeArray = this.$store.state.tree
+                treeArray.forEach((tree) => {
+                  if (macArray[i].t_id == tree.t_id) {
+                    this.$store.commit('getCheckMsg', {
+                      msg: cloneObj(tree),
+                      type: 'tree',
+                    })
+                  }
+                })
+              }
+              this.$store.commit('getCheckMsg', {
+                msg: macArray[i],
+                type: 'mac',
+              })
+              resolve('成功')
+              break
+            }
           }
-        })
-      }
-      this.$store.commit('getCheckMsg', {
-        msg: cloneObj(mac),
-        type: 'mac',
+        }
+      }).then(() => {
+        this.$bus.$emit(
+          'generalRouting',
+          'gjModel',
+          this.$t('YtModel.macModel'), //'设备模型',
+          'icon-shijingsanwei-'
+        )
       })
-      /* 设置当前的机组 */
-      this.$bus.$emit(
-        'generalRouting',
-        'gjModel',
-        this.$t('YtModel.macModel'),//'设备模型',
-        'icon-shijingsanwei-'
-      )
+    },
+    choosemacArray(index, arr, field) {
+      this.$nextTick(() => {
+        if (this.focus[this.currentKey].groupSelmacList) {
+          let i = 0
+          for (let k in this.focus[this.currentKey].groupSelmacList) {
+            let SelmacList = this.focus[this.currentKey].groupSelmacList[k]
+            for (let j = 0; j < SelmacList.length; j++) {
+              this.$refs['view_contentgj' + i + j][0].style.border = ''
+            }
+            i++
+          }
+        }
+        if (this.focus[this.currentKey].groupMacList) {
+          let i = 0
+          for (let k in this.focus[this.currentKey].groupMacList) {
+            let macList = this.focus[this.currentKey].groupMacList[k]
+            for (let j = 0; j < macList.length; j++) {
+              this.$refs['view_contenttgj' + i + j][0].style.border = ''
+            }
+            i++
+          }
+        }
+        for (let j = 0; j < arr.length; j++) {
+          if (j === index) {
+            this.$refs[field + j][0].style.border = '1px solid #00fcf9'
+          } else {
+            this.$refs[field + j][0].style.border = ''
+          }
+        }
+      })
     },
   },
   watch: {
@@ -627,6 +619,54 @@ export default {
             let item = value.shift()
             this.openChartList(item.key, item.state)
           }
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    GJselmacList: {
+      handler(val) {
+        const param = this.focus[this.currentKey]
+        if (param && val != undefined) {
+          let mac_group = {}
+          val.forEach((item) => {
+            if (mac_group[item.fullTName] === undefined) {
+              mac_group[item.fullTName] = []
+            }
+            /* 匹配下拼音 */
+            if (this.pinyin.match(item.name, param.searchKey)) {
+              item.isShow = true
+            } else {
+              item.isShow = false
+            }
+            mac_group[item.fullTName].push(item)
+          })
+          this.$set(param, 'groupSelmacList', mac_group)
+          this.$forceUpdate()
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    GJmacList: {
+      handler(val) {
+        const param = this.focus[this.currentKey]
+        if (param) {
+          let mac_group = {}
+          val.forEach((item) => {
+            if (mac_group[item.fullTName] === undefined) {
+              mac_group[item.fullTName] = []
+            }
+            /* 匹配下拼音 */
+            if (this.pinyin.match(item.name, param.searchKey)) {
+              item.isShow = true
+            } else {
+              item.isShow = false
+            }
+            mac_group[item.fullTName].push(item)
+          })
+          this.$set(param, 'groupMacList', mac_group)
+          this.$forceUpdate()
         }
       },
       deep: true,

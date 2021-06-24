@@ -8,9 +8,11 @@ export default {
   name: 'maintain',
   props: ["data", "srcParams", "mac"],
   data () {
+    const vm = window.vm;
     return {
+      vm: vm,
       maintainData: {} /* 系统日志信息 */,
-      head: ["记录名称", "开始时间", "完成时间", "记录人", "附件", "备注"],
+      head: [vm.$t('maintain.RecordName'), vm.$t('Common.startTime'), vm.$t('maintain.CompleteTime'), vm.$t('maintain.recorder'), vm.$t('maintain.annex'), vm.$t('maintain.Remarks'),],//"记录名称", "开始时间", "完成时间", "记录人", "附件", "备注"
       checkHead: false /*表头全选*/,
       addIsShow: false /*添加纪录弹窗是否出现*/,
       addStartTime: "" /*添加纪录弹窗开始时间*/,
@@ -84,7 +86,7 @@ export default {
         //添加数据
         this.$set(this.maintainData, key, {
           isShow: true,
-          name: "机组名",
+          name: this.$t('Common.macName'),//机组名称
           body: [],
           checkHead: false,
           rd: {
@@ -96,7 +98,7 @@ export default {
           mac,
           empty: {
             isShow: false,
-            text: "无数据"
+            text: this.$t('Common.noDataText')//"无数据"
           },
 
         });
@@ -212,7 +214,7 @@ export default {
       }
       if (deleteList.length > 0) {
         this.$pop({
-          content: "是否删除此条维护记录",
+          content: this.$t('maintain.isSureDel'),//"是否删除此条维护记录",
           btnNum: 2
         }).then(res => {
           if (res) {
@@ -225,7 +227,7 @@ export default {
         });
       } else {
         this.$pop({
-          content: "请选择需要删除的记录",
+          content: this.$t('maintain.SelDelRecord'),//"请选择需要删除的记录"
           btnNum: 1
         });
       }

@@ -14,8 +14,8 @@ const snFocus = {
       currentKey: '',
     }
   },
-  beforeDestroy () {
-    clearTimeout(this.timer)
+  deactivated () {
+    clearInterval(this.focus[this.currentKey].timer)
   },
   created () {
     this.$store.commit('set_keepAlive', {
@@ -213,7 +213,7 @@ const snFocus = {
                   isCollect 是否被收藏
                   msg: 机泵所有的信息
                   */
-                  let time = this.$t('Common.noDataText')
+                  let time = this.$t('Common.noDataText')//无数据
                   let desc = this.$t('Common.noDiagText')//'暂无诊断结果'
                   /* 诊断报告 */
                   if (item.result) {

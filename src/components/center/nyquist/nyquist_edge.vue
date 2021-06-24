@@ -13,7 +13,7 @@
         <s-s-index class="index-list" :dataList="item.ssDataList" @ss-select="ssSelect"/>
       </div>
       <div class="search-data">
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
       </div>
     </div>
   </div>
@@ -119,6 +119,7 @@ export default {
     },
     createChart() {
       const dom = this.$refs[`chart_${this.currentKey}`][0]
+      const that =this
       let option = {
         title: {
           text: '',
@@ -139,8 +140,8 @@ export default {
             },
           },
           formatter: function (params) {
-            return `值：${params[0].data[0]}<br/>
-                   ∠：${params[0].data[1]}<br/> `
+            return `${that.$t('nyquist.value')}：${params[0].data[0]}<br/>
+                   ∠：${params[0].data[1]}<br/> `//值
           },
         },
         angleAxis: {
@@ -267,7 +268,7 @@ export default {
             params.curDataList = res.list
             this.setData()
           } else {
-            this.$pop('无启停数据！')
+            this.$pop(this.$t('Common8000.NoStartStopData'))//无启停数据！
           }
         }
       })
@@ -275,8 +276,8 @@ export default {
     //右键菜单
     contextmenu(e, key) {
       let text = [
-        { type: '1x', val: '1x幅值' },
-        { type: '2x', val: '2x幅值' },
+        { type: '1x', val: this.$t('eigenvalue.onexamplitude') },//1x幅值
+        { type: '2x', val: this.$t('eigenvalue.twoxamplitude') },//2x幅值
       ]
       this.$list({
         text,

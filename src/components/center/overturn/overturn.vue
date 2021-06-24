@@ -63,7 +63,7 @@
 import com from "./overturnCommon";
 export default {
   // import引入的组件需要注入到对象中才能使用
-  mixins: [com]
+  mixins: [com],
 };
 </script>
 <style scoped lang="scss">

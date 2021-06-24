@@ -14,11 +14,17 @@
         ></div>
         <div class="axis-position-control box-shadow">
           <ul>
-            <li class="ul-head">基本信息</li>
-            <li>{{item.posA.name}}安装角度（°）：{{item.posA.angle}}</li>
-            <li>{{item.posB.name}}安装角度（°）：{{item.posB.angle}}</li>
+            <li class="ul-head">
+              <!-- 基本信息 -->{{$t('axisPosition.baseInfo')}}
+            </li>
+            <li>{{item.posA.name}}
+              <!-- 安装角度 -->{{$t('axisPosition.installationAngle')}}（°）：{{item.posA.angle}}
+            </li>
+            <li>{{item.posB.name}}
+              <!-- 安装角度 -->{{$t('axisPosition.installationAngle')}}（°）：{{item.posB.angle}}
+            </li>
             <li>
-              参考点间隙电压（V）：
+              <!-- 参考点间隙电压 -->{{$t('axisPosition.referenceGap')}}（V）：
               <input
                 class="ipt-two"
                 type="text"
@@ -32,7 +38,7 @@
               >
             </li>
             <li>
-              间隙电压门限X（V）：
+              <!-- 间隙电压门限X -->{{$t('axisPosition.GapX')}}（V）：
               <input
                 class="ipt-two"
                 type="text"
@@ -46,7 +52,7 @@
               >
             </li>
             <li>
-              间隙电压门限Y（V）：
+              <!-- 间隙电压门限Y -->{{$t('axisPosition.GapY')}}（V）：
               <input
                 class="ipt-two"
                 type="text"
@@ -60,7 +66,7 @@
               >
             </li>
             <li>
-              间隙电压量程X（V）：
+              <!-- 间隙电压量程X -->{{$t('axisPosition.GaprRangeX')}}（V）：
               <input
                 class="ipt-two"
                 type="text"
@@ -74,7 +80,7 @@
               >
             </li>
             <li>
-              间隙电压量程Y（V）：
+              <!-- 间隙电压量程Y -->{{$t('axisPosition.GaprRangeY')}}（V）：
               <input
                 class="ipt-two"
                 type="text"
@@ -91,8 +97,12 @@
         </div>
       </div>
       <div class='search-data'>
-        <button @click="dataRetrieval">数据检索</button>
-        <button @click="refreshChart">刷新图谱</button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{$t('Common.retrieval')}}
+        </button>
+        <button @click="refreshChart">
+          <!-- 刷新图谱 -->{{$t('axisPosition.RefreshMap')}}
+        </button>
       </div>
     </div>
   </div>
@@ -141,9 +151,13 @@ export default {
       const keyArr = Object.keys(this.axisPositionData)
       const state = this.$store.state
       const dataType = [
-        { val: '定时历史数据', isChecked: true, type: 1 },
-        { val: '启停机数据', isChecked: false, type: 2 },
-        { val: '报警存储数据', isChecked: false, type: 3 },
+        { val: this.$t('Common8000.TimedHisData'), isChecked: true, type: 1 }, //定时历史数据
+        { val: this.$t('Common8000.StartStopData'), isChecked: false, type: 2 }, //启停机数据
+        {
+          val: this.$t('Common8000.AlarmStorageData'),
+          isChecked: false,
+          type: 3,
+        }, //报警存储数据
       ] //定时历史数据默认选中
       const posA = {
         id: -1,
@@ -300,7 +314,7 @@ export default {
             },
             onZero: false,
           },
-          name: '道',
+          name: this.$t('axisPosition.Tao'),//道
           nameTextStyle: {
             fontSize: 16,
             align: 'left',
@@ -332,7 +346,7 @@ export default {
             align: 'left',
             color: '#ffffff',
           },
-          name: '道',
+          name: this.$t('axisPosition.Tao'),//道
         },
         series: [
           {
@@ -422,13 +436,13 @@ export default {
     getToolTip(data, dataIndex) {
       const dataA = this.curAxisPosition.dataListA[dataIndex]
       const dataB = this.curAxisPosition.dataListB[dataIndex]
-      return `点序：${dataIndex + 1}<br>
-              时间：${getTime(dataA.time)}<br>
-              转速（rpm）：${dataA.speed}<br>
-              间隙电压（V）：(${dataA.gap.toFixed(1)}, ${dataB.gap.toFixed(
+      return `${this.$t('axisPosition.PointOrder')}：${dataIndex + 1}<br>
+             ${this.$t('Common.time')} ：${getTime(dataA.time)}<br>
+              ${this.$t('eigenvalue.speed')}（rpm）：${dataA.speed}<br>
+              ${this.$t('axisPosition.GapVoltage')}（V）：(${dataA.gap.toFixed(1)}, ${dataB.gap.toFixed(
         1
       )})<br>
-              光标（道）：(${data[0].toFixed(2)}, ${data[1].toFixed(2)})<br>`
+              ${this.$t('axisPosition.cursor')}(${this.$t('axisPosition.Tao')})：(${data[0].toFixed(2)}, ${data[1].toFixed(2)})<br>`//点序  时间  转速  间隙电压  光标（道）
     },
     // 事件
     dataRetrieval() {
@@ -525,7 +539,7 @@ export default {
     text-align: center;
     button {
       height: 30px;
-      width: 100px;
+      min-width: 100px;
     }
   }
 }

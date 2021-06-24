@@ -1,8 +1,10 @@
+import {$t} from '../common/i18n'
+
 const codeObj = {
   /* 测点类型对应特征值 */
   1: [
     /* 转速 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
+    { filed: "saveTime_Com", name: "时间", code: 0 },//时间
     {
       filed: "speed_value",
       name: "测点转速值",
@@ -1001,7 +1003,8 @@ const defaultCode1 = {
   13: "overturn_rms",
   14: "speed_value",
   17: "vib_rms",
-  200: "vib_rms"
+  200: "vib_rms",
+  201: "value",
 };
 
 const posTypeName = {
@@ -1031,9 +1034,9 @@ const matchingRules = {
   dashboard: { includePosType: [11] }, //危险转速区间图
   trend: { excludingPosType: [200, 19] }, //趋势图
   scatter: { excludingPosType: [200] }, //散点图
-  wave: { excludingPosType: [1, 2, 5, 7, 10, 11, 13, 19,201] }, //波形频谱图 8000键相(postype === 19)
-  wave3d: { excludingPosType: [1, 2, 5, 7, 10, 11, 13, 14, 17, 19,201] }, //波形频谱图 只有2000V2(dgm_type == 2)的转速(pos_type==1)存在波形图
-  realSummary: { excludingPosType: [201]},//实时数据汇总列表
+  wave: { excludingPosType: [1, 2, 5, 7, 10, 11, 13, 19, 201] }, //波形频谱图 8000键相(postype === 19)
+  wave3d: { excludingPosType: [1, 2, 5, 7, 10, 11, 13, 14, 17, 19, 201] }, //波形频谱图 只有2000V2(dgm_type == 2)的转速(pos_type==1)存在波形图
+  realSummary: { excludingPosType: [201] },//实时数据汇总列表
   real: { excludingPosType: [200] }, //实时数据列表
   history: { excludingPosType: [200] }, //历史数据列表
   railCorrugation: { includePosType: [17] } /* 轨道波磨地图 */,
@@ -1507,6 +1510,9 @@ function getUnit (code, pos) {
     case 57025:
       unit = "Hz";
       break;
+    case 58000://智子测点单位为空
+      unit = "";
+      return unit;
     default:
       if (code >= 12000 && code < 14000) {
         unit = "g";

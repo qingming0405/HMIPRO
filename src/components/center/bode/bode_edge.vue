@@ -27,7 +27,9 @@
         />
       </div>
       <div class="search-data">
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{$t('Common.retrieval')}}
+        </button>
       </div>
     </div>
   </div>
@@ -44,7 +46,7 @@ export default {
       // 图表字体大小 默认14
       chartsFontSize: 14,
       paramsData: {},
-      chartSpacingArray: [40, 20, 40, 80],
+      chartSpacingArray: [40, 20, 40, 95],
       requestData: {
         time: {},
         data: {},
@@ -111,13 +113,33 @@ export default {
       switch (type) {
         case 0 /* 打开图表 */:
           let eigenvalueData = [
-            { filed: 'direc', name: '通频值', code: 57014 },
-            { filed: 'v1x', name: '1x幅值', code: 57017 },
-            { filed: 'v2x', name: '2x幅值', code: 57018 },
-            { filed: 'v3x', name: '0.5x幅值', code: 57019 },
-            { filed: 'rv', name: '残余量', code: 57012 },
-            { filed: 'opt_freq_hi_1', name: '可选频段高1', code: 57022 },
-            { filed: 'opt_freq_hi_2', name: '可选频段高2', code: 57023 },
+            { filed: 'direc', name: this.$t('eigenvalue.direc'), code: 57014 }, //通频值
+            {
+              filed: 'v1x',
+              name: this.$t('eigenvalue.onexamplitude'),
+              code: 57017,
+            }, //1x幅值
+            {
+              filed: 'v2x',
+              name: this.$t('eigenvalue.twoxamplitude'),
+              code: 57018,
+            }, //2x幅值
+            {
+              filed: 'v3x',
+              name: this.$t('eigenvalue.halfxamplitude'),
+              code: 57019,
+            }, //0.5x幅值
+            { filed: 'rv', name: this.$t('eigenvalue.rv'), code: 57012 }, //残余量
+            {
+              filed: 'opt_freq_hi_1',
+              name: this.$t('eigenvalue.opt_freq_hi_1'),
+              code: 57022,
+            }, //可选频段高1
+            {
+              filed: 'opt_freq_hi_2',
+              name: this.$t('eigenvalue.opt_freq_hi_2'),
+              code: 57023,
+            }, //可选频段高2
           ]
           eigenvalueData.forEach((element) => {
             element.val = element.name
@@ -129,7 +151,7 @@ export default {
             empty: {
               /* 无报警数据 */
               isShow: true,
-              text: `无数据`,
+              text: this.$t('Common.noDataText'), //无数据
             },
             timeData: [],
             eigenvalueData,
@@ -137,7 +159,11 @@ export default {
             chartData: {
               chartObj1: null,
               chartObj2: null,
-              code1: { filed: 'direc', name: '通频值', code: 57014 },
+              code1: {
+                filed: 'direc',
+                name: this.$t('eigenvalue.direc'),
+                code: 57014,
+              }, //通频值
               code2: { filed: '', name: '', code: -1 },
               data1: [],
               data2: [],
@@ -183,19 +209,23 @@ export default {
                 // if(value == null )
                 value =
                   value +
-                  '转速：' +
+                  this.$t('eigenvalue.speed') +
+                  '：' + //转速
                   el.value[0] +
                   '</br>' +
-                  '幅值：' +
+                  this.$t('Common.amplitude') +
+                  '：' + //幅值
                   el.value[1] +
                   '</br>'
               })
             } else {
               value =
-                '转速：' +
+                this.$t('eigenvalue.speed') +
+                '：' + //转速
                 params.value[0] +
                 '</br>' +
-                '幅值：' +
+                this.$t('Common.amplitude') +
+                '：' + //幅值
                 params.value[1]
             }
             return value
@@ -203,7 +233,7 @@ export default {
           triggerOn: 'click',
         },
         xAxis: {
-          name: '转速(rpm)',
+          name: this.$t('eigenvalue.speed') + '(rpm)', //转速
           nameTextStyle: {
             fontSize: this.chartsFontSize,
             align: 'left',
@@ -297,7 +327,7 @@ export default {
         },
         series: [
           {
-            name: '模拟数据',
+            name: this.$t('Common8000.SimulationData'), //模拟数据
             type: 'line',
             showSymbol: false,
             hoverAnimation: false,
@@ -354,19 +384,23 @@ export default {
               params.forEach((el) => {
                 value =
                   value +
-                  '转速：' +
+                  this.$t('eigenvalue.speed') +
+                  '：' + //转速
                   el.value[0] +
                   '</br>' +
-                  '幅值：' +
+                  this.$t('Common.amplitude') +
+                  '：' + //幅值
                   el.value[1] +
                   '</br>'
               })
             } else {
               value =
-                '转速：' +
+                this.$t('eigenvalue.speed') +
+                '：' + //转速
                 params.value[0] +
                 '</br>' +
-                '幅值：' +
+                this.$t('Common.amplitude') +
+                '：' + //幅值
                 params.value[1]
             }
             return value
@@ -377,7 +411,7 @@ export default {
           triggerOn: 'click',
         },
         xAxis: {
-          name: '转速(rpm)',
+          name: this.$t('eigenvalue.speed') + '(rpm)', //转速
           nameTextStyle: {
             fontSize: this.chartsFontSize,
             align: 'left',
@@ -472,7 +506,7 @@ export default {
         },
         series: [
           {
-            name: '模拟数据',
+            name: this.$t('Common8000.SimulationData'), //模拟数据
             type: 'line',
             showSymbol: false,
             hoverAnimation: false,
@@ -546,9 +580,17 @@ export default {
     getCode(type) {
       switch (type.filed) {
         case 'v1x':
-          return { filed: 'p1x', name: '1x相位', code: 57015 }
+          return {
+            filed: 'p1x',
+            name: this.$t('eigenvalue.onexphase'),
+            code: 57015,
+          } //1x相位
         case 'v2x':
-          return { filed: 'p2x', name: '2x相位', code: 57016 }
+          return {
+            filed: 'p2x',
+            name: this.$t('eigenvalue.twoxphase'),
+            code: 57016,
+          } //2x相位
         default:
           return { filed: '', name: '', code: -1 }
       }
@@ -622,7 +664,7 @@ export default {
             params.timeData = res.list
             this.ssSelect(params.timeData[0])
           } else {
-            this.$pop('无启停数据！')
+            this.$pop(this.$t('Common8000.NoStartStopData')) //无启停数据！
           }
         }
       })

@@ -56,6 +56,9 @@ export default {
       immediate: true
     }
   },
+  deactivated () {
+    clearInterval(this.overturnData[this.currentKey].timer)
+  },
   methods: {
     // 打开图谱
     openChartList (key, state, delKey) {
@@ -291,7 +294,7 @@ export default {
             // 第一次请求
             od.noneData = {
               isShow: true,
-              text: `无实时数据`
+              text: this.$t('Common.noRealData')//无实时数据
             };
           }
         } else {
@@ -302,7 +305,7 @@ export default {
           if (Number(od.pos.dgm_type) === 1) {
             od.alarmData = [
               {
-                title: "其它工况",
+                title: this.$t('Common.OtherCond'),//其它工况
                 warning: data[37000].h_limit_5,
                 alarm: data[37000].hh_limit_5,
                 isCheck: false
@@ -312,7 +315,7 @@ export default {
             for (let i = 0; i < 5; i++) {
               if (i === 4) {
                 od.alarmData.push({
-                  title: "其它工况",
+                  title: this.$t('Common.OtherCond'),//其它工况
                   warning: data[37000].h_limit_5,
                   alarm: data[37000].hh_limit_5,
                   isCheck: false
@@ -320,7 +323,7 @@ export default {
               } else {
                 const count = i + 1;
                 od.alarmData.push({
-                  title: `工况${count}`,
+                  title: this.$t(`Common.Case${count}`),//工况${count}
                   warning: data[37000][`h_limit_${count}`],
                   alarm: data[37000][`hh_limit_${count}`],
                   isCheck: false
@@ -699,7 +702,7 @@ export default {
       const trend = od.trend;
       const trendOption = {
         title: {
-          name: "趋势图"
+          name: this.$t('HeaderEdge.secondLevel2_3')//趋势图
         },
         grid: {
           top: 40, // 离容器上边距离，默认 60

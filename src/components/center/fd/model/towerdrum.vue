@@ -42,7 +42,7 @@
                 <td
                   class="model-td3"
                   @click="toReal(item)"
-                >{{$t('Towerdrum.moreText')}}</td>
+                >{{$t('Common.moreText')}}</td>
               </tr>
             </tbody>
           </table>
@@ -82,7 +82,7 @@
                 <td
                   class="model-td3"
                   @click="toReal(item)"
-                >{{$t('Towerdrum.moreText')}}</td>
+                >{{$t('Common.moreText')}}</td>
               </tr>
             </tbody>
           </table>
@@ -122,7 +122,7 @@
                 <td
                   class="model-td3"
                   @click="toReal(item)"
-                >{{$t('Towerdrum.moreText')}}</td>
+                >{{$t('Common.moreText')}}</td>
               </tr>
             </tbody>
           </table>

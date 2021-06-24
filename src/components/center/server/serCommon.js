@@ -54,32 +54,32 @@ export default {
           let memory = res.memory;
           let diskInfo = res.diskInfo;
           let networkInfo = res.networkInfo;
-          let systemInfoList = ['主机名称', 'JVM总内存', 'JVM剩余内存', 'JAVA版本', 'JAVA路径', '操作系统', 'CPUEndian'];
-          let cpuInfoList = ['CPU核心个数', 'CPU品牌', 'CPU型号', '用户使用率', '系统使用率', '总使用率'];
-          let memoryInfoList = ['内存总量', '内存使用量', '内存剩余量', '内存使用率'];
+          let systemInfoList = [this.$t('server.HostName'), this.$t('server.JVMMemory'), this.$t('server.JVMRemainMemory'), this.$t('server.JAVAVersion'), this.$t('server.JAVAPath'), this.$t('server.operateSystem'), 'CPUEndian'];//'主机名称', 'JVM总内存', 'JVM剩余内存', 'JAVA版本', 'JAVA路径', '操作系统', 'CPUEndian'
+          let cpuInfoList = [this.$t('server.CPUNumber'), this.$t('server.CPUBrand'), this.$t('server.CPUModel'), this.$t('server.UserUtilization'), this.$t('server.SystemUtilization'), this.$t('server.TotalUsage')];//'CPU核心个数', 'CPU品牌', 'CPU型号', '用户使用率', '系统使用率', '总使用率'
+          let memoryInfoList = [this.$t('server.TotalMemory'), this.$t('server.MemoryUsage'), this.$t('server.RemainMemory'), this.$t('server.MemoryUsage')];//'内存总量', '内存使用量', '内存剩余量', '内存使用率'
           that.diskInfo = [
             {
-              name: "磁盘名称",
-              type: "磁盘类型",
-              total: "磁盘容量",
-              free: "可用空间",
-              used: "已用空间",
+              name: this.$t('server.DiskName'),//"磁盘名称"
+              type: this.$t('server.DiskType'),//"磁盘类型",
+              total: this.$t('server.DiskCapacity'),//"磁盘容量",
+              free: this.$t('server.AvailableSpace'),//"可用空间",
+              used: this.$t('server.UsedSpace'),//"已用空间",
             }
           ];
           that.networkInfo = [
             {
-              deviceName: "设备名称",
-              ip: "IP地址",
-              netMask: "子网掩码",
-              macaddr: "MAC地址",
-              info: "网卡信息",
-              receivePackage: "接收总包数",
-              sendPackage: "发送总包数",
-              receiveByte: "接收总字节数",
-              sendByte: "发送总字节数",
-              receiveErrorPackage: "接收错误包数",
-              sendErrorPackage: "发送错误包数",
-              receiveDropPackage: "接收丢弃包数",
+              deviceName: this.$t('server.EquipName'),//"设备名称",
+              ip: this.$t('server.IPAddress'),//"IP地址",
+              netMask: this.$t('server.SubnetMask'),//"子网掩码",
+              macaddr: this.$t('server.MACAddress'),//"MAC地址",
+              info: this.$t('server.NetworkInfo'),//"网卡信息",
+              receivePackage: this.$t('server.recevePacket'),//"接收总包数",
+              sendPackage: this.$t('server.sentPacket'),//"发送总包数",
+              receiveByte: this.$t('server.receveByte'),// "接收总字节数",
+              sendByte: this.$t('server.sentByte'),//"发送总字节数",
+              receiveErrorPackage: this.$t('server.receveErrorPacket'),//"接收错误包数",
+              sendErrorPackage: this.$t('server.sentErrorPacket'),//"发送错误包数",
+              receiveDropPackage: this.$t('server.discardPacket'),//"接收丢弃包数",
             }
           ];
           if (systemInfo != undefined) {
@@ -87,22 +87,22 @@ export default {
               let obj = {};
               obj.title = systemInfoList[i];
               switch (systemInfoList[i]) {
-                case '主机名称':
+                case this.$t('server.HostName')://'主机名称'
                   obj.info = systemInfo.hostName;
                   break;
-                case 'JVM总内存':
+                case this.$t('server.JVMMemory')://'JVM总内存'
                   obj.info = systemInfo.jvmTotal;
                   break;
-                case 'JVM剩余内存':
+                case this.$t('server.JVMRemainMemory')://'JVM剩余内存'
                   obj.info = systemInfo.jvmFree;
                   break;
-                case 'JAVA版本':
+                case this.$t('server.JAVAVersion')://'JAVA版本'
                   obj.info = systemInfo.jdkVersion;
                   break;
-                case 'JAVA路径':
+                case this.$t('server.JAVAPath')://'JAVA路径'
                   obj.info = systemInfo.jdkPath;
                   break;
-                case '操作系统':
+                case this.$t('server.operateSystem')://'操作系统'
                   obj.info = systemInfo.operatingSystem;
                   break;
                 case 'CPUEndian':
@@ -117,22 +117,22 @@ export default {
               let obj = {};
               obj.title = cpuInfoList[i];
               switch (cpuInfoList[i]) {
-                case 'CPU核心个数':
+                case this.$t('server.CPUNumber'): //'CPU核心个数'
                   obj.info = cpu.processorCount;
                   break;
-                case 'CPU品牌':
+                case this.$t('server.CPUBrand'): //'CPU品牌':
                   obj.info = cpu.cpuBrand;
                   break;
-                case 'CPU型号':
+                case this.$t('server.CPUModel'): //'CPU型号':
                   obj.info = cpu.cpuType;
                   break;
-                case '用户使用率':
+                case this.$t('server.UserUtilization'): //'用户使用率':
                   obj.info = cpu.cpuUserUsed;
                   break;
-                case '系统使用率':
+                case this.$t('server.SystemUtilization'): //'系统使用率':
                   obj.info = cpu.cpuSystemUsed;
                   break;
-                case '总使用率':
+                case this.$t('server.TotalUsage'): //'总使用率':
                   obj.info = cpu.cpuTotalUsed;
                   break;
               }
@@ -144,16 +144,16 @@ export default {
               let obj = {};
               obj.title = memoryInfoList[i];
               switch (memoryInfoList[i]) {
-                case '内存总量':
+                case this.$t('server.TotalMemory'): //'内存总量':
                   obj.info = memory.totalMemory;
                   break;
-                case '内存使用量':
+                case this.$t('server.MemoryUsage'): //'内存使用量'
                   obj.info = memory.usedMemory;
                   break;
-                case '内存剩余量':
+                case this.$t('server.RemainMemory'): //'内存剩余量'
                   obj.info = memory.freeMemory;
                   break;
-                case '内存使用率':
+                case this.$t('server.MemoryUsage'): //'内存使用率'
                   obj.info = memory.usedRate;
                   break;
               }

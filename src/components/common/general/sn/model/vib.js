@@ -393,6 +393,9 @@ const vib = {
       immediate: true,
     },
   },
+  deactivated () {
+    clearInterval(this.snVib[this.currentKey].timer)
+  },
   created () {
     this.$store.commit('set_keepAlive', {
       method: 'add',

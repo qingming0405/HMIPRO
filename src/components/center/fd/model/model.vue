@@ -82,7 +82,9 @@ export default {
       }
       switch (type) {
         case 0 /* 打开图表 */:
-          let monitorePos = cloneObj(this.$store.state.windmodelTitle)
+          let monitorePos = cloneObj(
+            this.$store.state.windmodelTitle[`${mac.mac_id}_${mac.ch_class}`]
+          )
           let route = this.$store.state.GeneralModel[key]
           for (let i = 0, l = monitorePos.length; i < l; i++) {
             monitorePos[i].isChoose = false
@@ -122,14 +124,15 @@ export default {
           }
         }
         this.modelItem[key].monitorePos.forEach((el) => {
-          if (el.name == this.$t('HeaderEdge.secondLevel1_3')) {//'设备模型'
+          if (el.name == this.$t('HeaderEdge.secondLevel1_3')) {
+            //'设备模型'
             flag = true
           }
         })
         if (!flag) {
           this.modelItem[key].monitorePos.push({
             isChoose: false,
-            name: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
+            name: this.$t('HeaderEdge.secondLevel1_3'), //'设备模型',
             router: 'fdModel',
           })
         }
@@ -143,7 +146,7 @@ export default {
             // 设备模型跳转设备模型使用同一个key值调用getPath方法
             let params = {
               key: this.currentKey,
-              val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
+              val: this.$t('HeaderEdge.secondLevel1_3'), //'设备模型',
               name: element.router,
               icon: 'icon-shijingsanwei-',
             }
@@ -160,54 +163,75 @@ export default {
       for (let i = 0; i < param.monitorePos.length; i++) {
         if (index === i) {
           param.monitorePos[i].isChoose = true
-          // this.$router.push({
-          //   name: this.monitorePos[i].router,
-          // })
-          this.$store.commit('setGeneralModel', {
-            key: this.currentKey,
-            router: param.monitorePos[i].router,
+          const mac = param.mac
+          const store = this.$store
+          // this.$router.push('fdModel')
+          let macArray = store.state.mac[mac.t_id]
+          let choosemac = store.state.checkMsg.mac
+          let choosetree = cloneObj(store.state.checkMsg.tree)
+          // 使用线程防止组织测点为重选就进行了跳转
+          new Promise((resolve, reject) => {
+            if (choosemac !== null && choosemac.machine_id == mac.mac_id) {
+              if (choosemac.t_id != choosetree.t_id) {
+                let treeArray = store.state.tree
+                treeArray.forEach((tree) => {
+                  if (choosemac.t_id == tree.t_id) {
+                    store.commit('getCheckMsg', {
+                      msg: cloneObj(tree),
+                      type: 'tree',
+                    })
+                    store.commit('getCheckMsg', {
+                      msg: cloneObj(choosemac),
+                      type: 'mac',
+                    })
+                    resolve('成功')
+                  }
+                })
+              }
+              resolve('成功')
+            } else {
+              for (let i = 0; i < macArray.length; i++) {
+                if (macArray[i].mac_id == mac.mac_id) {
+                  /* 设置当前的机组 */
+                  if (macArray[i].t_id != choosetree.t_id) {
+                    let treeArray = store.state.tree
+                    treeArray.forEach((tree) => {
+                      if (macArray[i].t_id == tree.t_id) {
+                        store.commit('getCheckMsg', {
+                          msg: cloneObj(tree),
+                          type: 'tree',
+                        })
+                      }
+                    })
+                  }
+                  store.commit('getCheckMsg', {
+                    msg: macArray[i],
+                    type: 'mac',
+                  })
+                  resolve('成功')
+                  break
+                }
+              }
+            }
+          }).then(() => {
+            this.$store.commit('setGeneralModel', {
+              key: this.currentKey,
+              router: param.monitorePos[i].router,
+            })
+            // 设备模型跳转设备模型使用同一个key值调用getPath方法
+            let params = {
+              key: this.currentKey,
+              val: this.$t('HeaderEdge.secondLevel1_3'), //'设备模型',
+              name: param.monitorePos[i].router,
+              icon: 'icon-shijingsanwei-',
+            }
+            this.$bus.$emit('getPath', params)
           })
-          // 设备模型跳转设备模型使用同一个key值调用getPath方法
-          let params = {
-            key: this.currentKey,
-            val: this.$t('HeaderEdge.secondLevel1_3'),//'设备模型',
-            name: param.monitorePos[i].router,
-            icon: 'icon-shijingsanwei-',
-          }
-          this.$bus.$emit('getPath', params)
         }
       }
-      // this.$store.commit('setWindmodelTitle', param.monitorePos)
     },
   },
   watch: {
-    // '$store.state.windmodelTitle': {
-    //   handler(value) {
-    //     this.monitorePos = value
-    //     let flag = false
-    //     this.monitorePos.forEach((el) => {
-    //       if (el.name == '设备模型') {
-    //         flag = true
-    //       }
-    //     })
-    //     if (!flag) {
-    //       this.monitorePos.push({
-    //         isChoose: false,
-    //         name: '设备模型',
-    //         router: 'fdModel',
-    //       })
-    //     }
-    //     let routerpath = this.$route.name
-    //     this.monitorePos.forEach((element) => {
-    //       if (element.isChoose === true) {
-    //         this.$router.push({ name: element.router })
-    //       }
-    //     })
-    //   },
-    //   deep: true,
-    //   immediate: true,
-    // },
-
     '$store.state.fdModelitemMsg': {
       handler(value) {
         if (value.length !== 0) {

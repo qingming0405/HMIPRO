@@ -88,7 +88,7 @@ export default {
             isShow: true,
             empty: {
               isShow: true,
-              text: '无实时数据',
+              text: this.$t('Common.noRealData')//'无实时数据',
             },
             pos: cloneObj(pos, true),
           })
@@ -275,7 +275,7 @@ export default {
           },
         },
         yAxis: {
-          name: '转速(rpm)',
+          name: this.$t('eigenvalue.speed')+'(rpm)',//转速
           type: 'value',
           /* 坐标线 */
           axisLine: {
@@ -315,7 +315,7 @@ export default {
         tooltip: {
           trigger: 'axis', //坐标轴触发竖向指示线
           formatter: (params) => {
-            return `时间：${params[0].name}</br>转速：${params[0].value}`
+            return `${this.$t('Common.time')}：${params[0].name}</br>${this.$t('eigenvalue.speed')}：${params[0].value}`//时间 转速
           },
         },
         /* 标题 */
@@ -381,7 +381,7 @@ export default {
           },
         },
         yAxis: {
-          name: '倾覆值(g)',
+          name: this.$t('eigenvalue.Overturn')+'(g)',//倾覆值
           type: 'value',
           /* 坐标线 */
           axisLine: {
@@ -421,7 +421,7 @@ export default {
         tooltip: {
           trigger: 'axis', //坐标轴触发竖向指示线
           formatter: (params) => {
-            return `时间：${params[0].name}</br>倾覆值：${params[0].value}`
+            return `${this.$t('Common.time')}：${params[0].name}</br>${this.$t('eigenvalue.Overturn')}：${params[0].value}`//时间 倾覆值
           },
         },
         /* 标题 */
@@ -492,7 +492,7 @@ export default {
           show: true,
           top: 10,
           left: 10,
-          text: `当前时间： ${time}`,
+          text: `${this.$t('dashboard.curTime')}： ${time}`,//当前时间
           textStyle: {
             // 其余属性默认使用全局文本样式，详见TEXTSTYLE
             fontWeight: 'normal',
@@ -505,7 +505,7 @@ export default {
 
         series: [
           {
-            name: '转速',
+            name: this.$t('eigenvalue.speed'),//转速
             type: 'gauge',
             min: 0,
             max: max,

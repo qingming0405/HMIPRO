@@ -40,7 +40,7 @@
             v-resize="resize"
             v-show="!param.isShowTree"
           >
-          <!-- itemize[1].name 正常； itemize[4].name 预警； itemize[3].name Ⅰ级报警； itemize[2].name 'Ⅱ级报警'； itemize[5].name '离线'-->
+            <!-- itemize[1].name 正常； itemize[4].name 预警； itemize[3].name Ⅰ级报警； itemize[2].name 'Ⅱ级报警'； itemize[5].name '离线'-->
             <div
               v-for="(item,index) in param.searchmac"
               class="view-content "
@@ -83,7 +83,7 @@
             v-resize="resize"
             v-show="param.isShowTree"
           >
-          <!-- itemize[1].name 正常； itemize[4].name 预警； itemize[3].name Ⅰ级报警； itemize[2].name 'Ⅱ级报警'； itemize[5].name '离线'-->
+            <!-- itemize[1].name 正常； itemize[4].name 预警； itemize[3].name Ⅰ级报警； itemize[2].name 'Ⅱ级报警'； itemize[5].name '离线'-->
             <div
               v-for="(item,index) in param.treeData"
               class="view-content "
@@ -162,13 +162,17 @@ export default {
     }
   },
   created() {
-    this.itemize[0].name = this.$t('Common.allText');//全部
-    this.itemize[1].name = this.$t('Common.normalText');//正常
-    this.itemize[2].name = this.$t('GjModel.alarm2Text');//Ⅱ级报警
-    this.itemize[3].name = this.$t('GjModel.alarm1Text');//Ⅰ级报警
-    this.itemize[4].name = this.$t('GjModel.warnText');//预警
-    this.itemize[5].name = this.$t('GjModel.offlineText');//离线
-    this.itemize[6].name = this.$t('Common.focausText');//关注
+    this.$store.commit('set_keepAlive', {
+      method: 'add',
+      keepAlive: 'gjGeneral',
+    })
+    this.itemize[0].name = this.$t('Common.allText') //全部
+    this.itemize[1].name = this.$t('GjModel.normalText') //正常
+    this.itemize[2].name = this.$t('GjModel.alarm2Text') //Ⅱ级报警
+    this.itemize[3].name = this.$t('GjModel.alarm1Text') //Ⅰ级报警
+    this.itemize[4].name = this.$t('GjModel.warnText') //预警
+    this.itemize[5].name = this.$t('GjModel.offlineText') //离线
+    this.itemize[6].name = this.$t('Common.focausText') //关注
   },
   mounted() {
     let gjModelflag = config.gjModel
@@ -189,12 +193,6 @@ export default {
       deep: true,
       immediate: true,
     },
-  },
-  created() {
-    this.$store.commit('set_keepAlive', {
-      method: 'add',
-      keepAlive: 'gjGeneral',
-    })
   },
   methods: {
     // 获取当前组织下的机组
@@ -273,23 +271,23 @@ export default {
           }
           switch (item.alarmStatus) {
             case 0:
-              item.status = this.$t('GjModel.offlineText')//'离线'
+              item.status = this.$t('GjModel.offlineText') //'离线'
               param.itemize[5].number++
               break
             case 1:
-              item.status = this.$t('GjModel.normalText')//'正常'
+              item.status = this.$t('GjModel.normalText') //'正常'
               if (stutas) {
                 param.itemize[1].number++
               }
               break
             case 2:
-              item.status = this.$t('GjModel.warnText')//'预警'
+              item.status = this.$t('GjModel.warnText') //'预警'
               break
             case 3:
-              item.status = this.$t('GjModel.alarm1Text')//'Ⅰ级报警'
+              item.status = this.$t('GjModel.alarm1Text') //'Ⅰ级报警'
               break
             case 4:
-              item.status = this.$t('GjModel.alarm2Text')//'Ⅱ级报警'
+              item.status = this.$t('GjModel.alarm2Text') //'Ⅱ级报警'
               break
           }
           item.name = item.mac_me
@@ -321,13 +319,13 @@ export default {
             param.treeStatus[item.t_id] = item.alarmStatus
           }
         })
-        param.itemize[0].number = param.tree.length //全部
+        param.itemize[0].number = param.treeArray.length //全部
         param.itemize[1].number = 0 //正常
         param.itemize[2].number = 0 //Ⅱ级报警
         param.itemize[3].number = 0 //Ⅰ级报警
         param.itemize[4].number = 0 //预警
         param.itemize[5].number = 0 //离线
-        let tree = param.tree
+        let tree = param.treeArray
         tree.forEach((item) => {
           item.isShow = true //控制是否显示
           item.isShow = true //是否选中
@@ -338,23 +336,23 @@ export default {
           }
           switch (item.alarmStatus) {
             case 0:
-              item.status = this.$t('GjModel.offlineText')//'离线'
+              item.status = this.$t('GjModel.offlineText') //'离线'
               param.itemize[5].number++
               break
             case 1:
-              item.status = this.$t('GjModel.normalText')//'正常'
+              item.status = this.$t('GjModel.normalText') //'正常'
               param.itemize[1].number++
               break
             case 2:
-              item.status = this.$t('GjModel.warnText')//'预警'
+              item.status = this.$t('GjModel.warnText') //'预警'
               param.itemize[4].number++
               break
             case 3:
-              item.status = this.$t('GjModel.alarm1Text')//'Ⅰ级报警'
+              item.status = this.$t('GjModel.alarm1Text') //'Ⅰ级报警'
               param.itemize[3].number++
               break
             case 4:
-              item.status = this.$t('GjModel.alarm2Text')//'Ⅱ级报警'
+              item.status = this.$t('GjModel.alarm2Text') //'Ⅱ级报警'
               param.itemize[2].number++
               break
           }
@@ -375,7 +373,7 @@ export default {
     getTreeStatus(status) {
       const param = this.general[this.currentKey]
       let filterTreeList = []
-      param.tree.forEach((item) => {
+      param.treeArray.forEach((item) => {
         switch (status) {
           case 0:
             item.isShow = true
@@ -409,7 +407,8 @@ export default {
             }
             break
           case 5:
-            if (item.status == this.$t('GjModel.offlineText')) {//'离线'
+            if (item.status == this.$t('GjModel.offlineText')) {
+              //'离线'
               item.isShow = true
             } else {
               item.isShow = false
@@ -479,7 +478,12 @@ export default {
         })
         resolve('成功')
       }).then(() => {
-        this.$bus.$emit('generalRouting', 'gjGeneral', this.$t('HeaderEdge.firstLevel1'), 'icon-shouye1')//'总貌图'
+        this.$bus.$emit(
+          'generalRouting',
+          'gjGeneral',
+          this.$t('HeaderEdge.firstLevel1'),
+          'icon-shouye1'
+        ) //'总貌图'
       })
       return
     },
@@ -489,7 +493,7 @@ export default {
       if (machine.pumps && machine.pumps.length) {
         machine.pump_id = machine.pumps[0].pump_id
       } else {
-        this.$pop(this.$t('Common.noOverviewTips'))//该机组无总貌图
+        this.$pop(this.$t('Common.noOverviewTips')) //该机组无总貌图
         return
       }
       let pump_id = machine.pump_id
@@ -549,7 +553,7 @@ export default {
         this.$bus.$emit(
           'generalRouting',
           'gjModel',
-          this.$t('YtModel.macModel'),//'设备模型',
+          this.$t('YtModel.macModel'), //'设备模型',
           'icon-shijingsanwei-'
         )
       })
@@ -591,7 +595,8 @@ export default {
             }
             break
           case 5:
-            if (item.status == this.$t('GjModel.offlineText')) {//'离线'
+            if (item.status == this.$t('GjModel.offlineText')) {
+              //'离线'
               item.isShow = true
             } else {
               item.isShow = false

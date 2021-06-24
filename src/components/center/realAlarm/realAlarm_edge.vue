@@ -49,20 +49,22 @@
 import { getTime, round, cloneObj, matchRule } from 'utils/utils.js'
 export default {
   data() {
+    const vm = window.vm;
     return {
+      vm: vm,
       realAlarm: {},
       head: [
-        '序号',
-        '组织名称',
-        '设备名称',
-        '测点名称',
-        '时间',
-        '报警类型',
-        '报警值',
-        '报警(高)',
-        '预警(高)',
-        '预警(低)',
-        '报警(低)',
+        vm.$t('Common.order'),//'序号',
+        vm.$t('Common.treeName'),//'组织名称',
+        vm.$t('realAlarm.EquipName'),//'设备名称',
+        vm.$t('Common.posName'),//'测点名称',
+        vm.$t('Common.time'),//'时间',
+        vm.$t('Alarm.AlarmType'),//'报警类型',
+        vm.$t('Alarm.AlarmValue'),//'报警值',
+        vm.$t('Alarm.Alarmh'),//'报警(高)',
+        vm.$t('Alarm.Warnh'),//'预警(高)',
+        vm.$t('Alarm.Warnl'),//'预警(低)',
+        vm.$t('Alarm.Alarml'),//'报警(低)',
       ],
     }
   },
@@ -119,8 +121,8 @@ export default {
         el.pos_name = alarm[k].pos_name
         el.status = alarm[k].alarm_status
           ? alarm[k].alarm_status == 3
-            ? '报警'
-            : '预警'
+            ? this.$t('realAlarm.Alarm')//'报警'
+            : this.$t('realAlarm.warn')//'预警'
           : '—'
         el.h_limit = alarm[k].h_limit ? alarm[k].h_limit : '—'
         el.hh_limit = alarm[k].hh_limit ? alarm[k].hh_limit : '—'
@@ -131,7 +133,7 @@ export default {
           let info = alarm[k].baseInfo.baseInfo
           el.saveTime_Com = info.saveTime_Com
             ? getTime(info.saveTime_Com)
-            : '无数据'
+            : this.$t('Common.noDataText')//'无数据'
         }
         alarmData.push(el)
       }
@@ -226,13 +228,13 @@ export default {
                 let params = {
                   key,
                   name: 'wave',
-                  val: '波形频谱图',
+                  val: this.$t('Common.Wave'),//'波形频谱图',
                   icon: 'icon-boxing_huaban',
                 }
                 this.$bus.$emit('getPath', params)
                 return
               } else {
-                this.$pop('该测点没有此图谱')
+                this.$pop(this.$t('Common.noPosChartTips'))//该测点没有此图谱
               }
             }
           })

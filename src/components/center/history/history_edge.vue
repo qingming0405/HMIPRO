@@ -54,8 +54,8 @@
       </div>
     </div>
     <div class="search-data">
-      <button @click="exportData">导出数据</button>
-      <button @click="dataRetrieval">数据检索</button>
+      <button @click="exportData"><!-- 导出数据 -->{{this.$t('Common.derivedData')}}</button>
+      <button @click="dataRetrieval"><!-- 数据检索 -->{{this.$t('Common.retrieval')}}</button>
       <a href="" ref="exportData"></a>
     </div>
   </div>

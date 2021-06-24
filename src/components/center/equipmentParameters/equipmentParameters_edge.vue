@@ -11,7 +11,7 @@
         <li>
           <label :for="'head' + index">
             <i :class="setClass(data.checkHead, 'check')"></i>
-            序号
+            <!-- 序号 -->{{$t('Common.order')}}
           </label>
           <input
             type="checkbox"
@@ -21,13 +21,22 @@
             @change="checkAll()"
           />
         </li>
-        <li v-for="(item, index) in head" :key="index">{{ item }}</li>
+        <li
+          v-for="(item, index) in head"
+          :key="index"
+        >{{ item }}</li>
       </ul>
       <ul class="my-system-body hide-scroll">
-        <li v-for="(body, idx) in data.body" :key="idx">
+        <li
+          v-for="(body, idx) in data.body"
+          :key="idx"
+        >
           <div>
             <label :for="'childCheck' + index + idx">
-              <i class="my-icon" :class="setClass(body.isCheck, 'check')"></i>
+              <i
+                class="my-icon"
+                :class="setClass(body.isCheck, 'check')"
+              ></i>
             </label>
             <span class="num">
               {{ idx + 1 }}
@@ -46,35 +55,53 @@
           <div class="text-overflow">{{ body.value }}</div>
         </li>
       </ul>
-      <div class="none-data-box" v-show="data.empty.isShow">
+      <div
+        class="none-data-box"
+        v-show="data.empty.isShow"
+      >
         <span>{{ data.empty.text }}</span>
       </div>
     </div>
     <div class="search-data">
-      <button @click="addRecord">添加参数</button>
-      <button @click="deleteRecord">删除参数</button>
-      <button @click="exportData">导出数据</button>
+      <button @click="addRecord">
+        <!-- 添加参数 -->{{$t('equipmentParameters.AddParam')}}
+      </button>
+      <button @click="deleteRecord">
+        <!-- 删除参数 -->{{$t('equipmentParameters.DelParam')}}
+      </button>
+      <button @click="exportData">
+        <!-- 导出数据 -->{{$t('Common.derivedData')}}
+      </button>
     </div>
     <div
       class="pop-box-background select-none pop-bg"
       v-show="addIsShow"
       @keyup.13="enter"
     >
-      <div class="pop-box radius box-shadow" @keyup.13="enter" ref="popBox">
+      <div
+        class="pop-box radius box-shadow"
+        @keyup.13="enter"
+        ref="popBox"
+      >
         <div
           class="pop-box-title"
           @mousedown="dragElem(1, $event)"
           @mouseup="dragElem(0, $event)"
         >
-          添加参数
-          <span class="close-pop" @click="closeAlert(0)">
+          <!-- 添加参数 -->{{$t('equipmentParameters.AddParam')}}
+          <span
+            class="close-pop"
+            @click="closeAlert(0)"
+          >
             <i class="iconfont icon-cuohao"></i>
           </span>
         </div>
         <div class="pop-box-text">
           <!-- 记录名称 -->
           <div class="select-time-mac">
-            <div class="time-title">机组</div>
+            <div class="time-title">
+              <!-- 机组 -->{{$t('Common.mac')}}
+            </div>
             <div
               class="time-value radius text-overflow select-none edge-border edge-outside-border"
               @click.stop="chooseMac"
@@ -84,21 +111,27 @@
             <i class="iconfont icon-zhongzi-zhankai"></i>
           </div>
           <div class="select-time">
-            <div class="time-title">设备类型</div>
+            <div class="time-title">
+              <!-- 设备类型 -->{{$t('equipmentParameters.equipType')}}
+            </div>
             <input
               class="time-value radius text-overflow select-none edge-border edge-outside-border"
               v-model="params.device_type"
             />
           </div>
           <div class="select-time">
-            <div class="time-title">参数名称</div>
+            <div class="time-title">
+              <!-- 参数名称 -->{{$t('equipmentParameters.paramName')}}
+            </div>
             <input
               class="time-value radius text-overflow select-none edge-border edge-outside-border"
               v-model="params.param_name"
             />
           </div>
           <div class="select-time">
-            <div class="time-title">数值</div>
+            <div class="time-title">
+              <!-- 数值 -->{{$t('equipmentParameters.value')}}
+            </div>
             <input
               class="time-value radius text-overflow select-none edge-border edge-outside-border"
               v-model="params.value"
@@ -106,14 +139,17 @@
           </div>
         </div>
         <div class="pop-box-button">
-          <button class="pop-btn pop-btn-ok" @click="closeAlert(1)">
-            确定
+          <button
+            class="pop-btn pop-btn-ok"
+            @click="closeAlert(1)"
+          >
+            <!-- 确定 -->{{$t('Common.sureBtn')}}
           </button>
           <button
             class="pop-btn pop-btn-cancel disable-btn"
             @click="closeAlert(0)"
           >
-            取消
+            <!-- 取消 -->{{$t('Common.cancelBtn')}}
           </button>
         </div>
       </div>
@@ -122,43 +158,50 @@
 </template>
 
 <script>
-import { getTime, cloneObj } from "utils/utils.js";
-import BASE_URL from "network/base_url.js";
+import { getTime, cloneObj } from 'utils/utils.js'
+import BASE_URL from 'network/base_url.js'
 
 export default {
-  name: "equipmentParameters", // 设备参数
+  name: 'equipmentParameters', // 设备参数
   data() {
+    const vm = window.vm
     return {
+      vm: vm,
       chartData: {} /* 系统日志信息 */,
-      head: ["机组", "设备类别", "参数名称", "数值"],
+      head: [
+        vm.$t('Common.mac'),
+        vm.$t('equipmentParameters.equipType'),
+        vm.$t('equipmentParameters.paramName'),
+        vm.$t('equipmentParameters.value'),
+      ], //"机组", "设备类型", "参数名称", "数值"
       params: {
-        macId: "",
-        macName: "",
-        device_type: "", //设备类型
-        param_name: "", //参数名称
-        value: "" //值
+        macId: '',
+        macName: '',
+        device_type: '', //设备类型
+        param_name: '', //参数名称
+        value: '', //值
       },
-      addIsShow: false /*添加纪录弹窗是否出现*/
-    };
+      addIsShow: false /*添加纪录弹窗是否出现*/,
+    }
   },
   methods: {
     /* 改变存储测点的数据 */
     openChartList(key, type, delKey) {
-      if (typeof key !== "string") return;
+      if (typeof key !== 'string') return
       if (type === 0 || type === 1) {
-        this.key = key;
+        this.key = key
         for (let k in this.chartData) {
-          this.chartData[k].isShow = false;
+          this.chartData[k].isShow = false
         }
       }
       /* 获取当前的t_id */
-      let t_id = this.$store.state.checkMsg.tree.t_id;
-      let t_Name = this.$store.state.checkMsg.tree.t_name;
-      let macArray = this.$store.state.mac[t_id];
+      let t_id = this.$store.state.checkMsg.tree.t_id
+      let t_Name = this.$store.state.checkMsg.tree.t_name
+      let macArray = this.$store.state.mac[t_id]
       //给默认值
       if (macArray && macArray[0]) {
-        this.params.macId = macArray[0].mac_id;
-        this.params.macName = macArray[0].mac_me;
+        this.params.macId = macArray[0].mac_id
+        this.params.macName = macArray[0].mac_me
       }
       if (type == 0) {
         //添加数据
@@ -170,150 +213,150 @@ export default {
           t_Name,
           body: [], //放所有数据
           rd: {
-            tree_ids: [t_id] //当前组织的id
+            tree_ids: [t_id], //当前组织的id
           },
           empty: {
             isShow: false,
-            text: "无数据"
-          }
-        });
+            text: this.$t('Common.noDataText'), //"无数据"
+          },
+        })
         /* 获得设备参数 */
-        this.getData();
+        this.getData()
       } else if (type == 1) {
         //切换
-        this.chartData[key].isShow = true;
+        this.chartData[key].isShow = true
       } else if (type == 2) {
         //删除
-        this.$delete(this.chartData, key);
+        this.$delete(this.chartData, key)
       }
     },
     getData() {
-      let chartData = this.chartData[this.key];
-      let requestData = this.chartData[this.key].rd;
-      this.$emit("loadingImg", true);
-      this.$getApi.getDeviceParameters(requestData).then(res => {
-        this.$emit("loadingImg", false);
+      let chartData = this.chartData[this.key]
+      let requestData = this.chartData[this.key].rd
+      this.$emit('loadingImg', true)
+      this.$getApi.getDeviceParameters(requestData).then((res) => {
+        this.$emit('loadingImg', false)
         if (res) {
           if (res.data.length > 0) {
-            let body = [];
-            res.data.forEach(item => {
-              item.isCheck = false;
-              body.push(item);
-            });
-            chartData.body = body;
+            let body = []
+            res.data.forEach((item) => {
+              item.isCheck = false
+              body.push(item)
+            })
+            chartData.body = body
           } else {
-            chartData.body = [];
+            chartData.body = []
           }
         }
-      });
+      })
     },
 
     // 设置类名
     setClass(bool, type) {
-      const iName = "iconfont";
+      const iName = 'iconfont'
       const strArr = {
-        check: ["icon-zhongzi_xuanzekuang", "icon-zhongzi_xuanzekuang1"],
-        open: ["icon-zhankai_huaban", "icon-shouqi_huaban"],
+        check: ['icon-zhongzi_xuanzekuang', 'icon-zhongzi_xuanzekuang1'],
+        open: ['icon-zhankai_huaban', 'icon-shouqi_huaban'],
         isOpen: [
-          "my-census-li text-overflow",
-          "my-census-li text-overflow openList"
+          'my-census-li text-overflow',
+          'my-census-li text-overflow openList',
         ],
-        hasOpen: ["", "hasOpen"],
-        tHead: ["census-list-head", "census-list-head-pos"],
-        tBody: ["census-list-body", "census-list-body-pos"]
-      };
-      return `${iName} ${strArr[type][Number(bool)]}`;
+        hasOpen: ['', 'hasOpen'],
+        tHead: ['census-list-head', 'census-list-head-pos'],
+        tBody: ['census-list-body', 'census-list-body-pos'],
+      }
+      return `${iName} ${strArr[type][Number(bool)]}`
     },
     // 添加纪录
     addRecord() {
-      this.addIsShow = true;
+      this.addIsShow = true
     },
     // 删除记录
     deleteRecord() {
-      let body = this.chartData[this.key].body;
-      let deleteList = [];
+      let body = this.chartData[this.key].body
+      let deleteList = []
       if (body != null && body != undefined && body.length > 0) {
-        body.forEach(item => {
+        body.forEach((item) => {
           if (item.isCheck) {
-            let obj = {};
-            obj.device_type = item.device_type;
-            obj.id = item.id;
-            obj.param_name = item.param_name;
-            deleteList.push(obj);
+            let obj = {}
+            obj.device_type = item.device_type
+            obj.id = item.id
+            obj.param_name = item.param_name
+            deleteList.push(obj)
           }
-        });
+        })
       }
       if (deleteList.length > 0) {
         this.$pop({
-          content: "是否删除此条记录",
-          btnNum: 2
-        }).then(res => {
+          content: this.$t('equipmentParameters.isSureDel'), //"是否删除此条记录",
+          btnNum: 2,
+        }).then((res) => {
           if (res) {
-            this.$getApi.deleteDeviceParam(deleteList).then(res => {
+            this.$getApi.deleteDeviceParam(deleteList).then((res) => {
               if (res.msg == 0) {
-                this.getData();
+                this.getData()
               }
-            });
+            })
           }
-        });
+        })
       } else {
         this.$pop({
-          content: "请选择需要删除的记录",
-          btnNum: 1
-        });
+          content: this.$t('equipmentParameters.SelDelRecord'), //请选择需要删除的记录
+          btnNum: 1,
+        })
       }
     },
     // 全选
     checkAll() {
-      let data = this.chartData[this.key];
-      data.body.forEach(item => {
+      let data = this.chartData[this.key]
+      data.body.forEach((item) => {
         if (data.checkHead) {
-          item.isCheck = true;
+          item.isCheck = true
         } else {
-          item.isCheck = false;
+          item.isCheck = false
         }
-      });
+      })
     },
     // 点击选中非选中
     changeCheck() {
-      let data = this.chartData[this.key];
-      let flag = 0;
-      data.body.forEach(item => {
+      let data = this.chartData[this.key]
+      let flag = 0
+      data.body.forEach((item) => {
         if (item.isCheck) {
-          flag++;
+          flag++
         }
-      });
+      })
       if (flag == data.body.length) {
-        data.checkHead = true;
+        data.checkHead = true
       } else {
-        data.checkHead = false;
+        data.checkHead = false
       }
     },
     // 拖动弹出框
     dragElem(type, e) {
       this.offset = {
         x: e.offsetX,
-        y: e.offsetY
-      };
+        y: e.offsetY,
+      }
       if (type === 1) {
-        this.$refs.popBox.addEventListener("mousemove", this.dropElem);
+        window.addEventListener('mousemove', this.dropElem)
       } else {
-        this.$refs.popBox.removeEventListener("mousemove", this.dropElem);
+        window.removeEventListener('mousemove', this.dropElem)
       }
     },
     // 拖放弹出框
     dropElem(e) {
-      const el = this.$refs.popBox;
-      const offset = this.offset;
-      el.style.left = `${e.x - offset.x}px`;
-      el.style.top = `${e.y - offset.y}px`;
+      const el = this.$refs.popBox
+      const offset = this.offset
+      el.style.left = `${e.x - offset.x}px`
+      el.style.top = `${e.y - offset.y}px`
     },
     // 关闭弹窗
     closeAlert(type) {
-      this.addIsShow = false;
+      this.addIsShow = false
       if (type === 1) {
         /* 点击确定按钮 */
-        let t_id = this.chartData[this.key].t_id;
+        let t_id = this.chartData[this.key].t_id
         let requestData = [
           {
             tree_id: t_id,
@@ -321,100 +364,119 @@ export default {
             device_type: this.params.device_type,
             id: this.params.macId,
             param_name: this.params.param_name,
-            value: this.params.value
-          }
-        ];
+            value: this.params.value,
+          },
+        ]
 
         // 将数据发送给服务器
-        this.$getApi.insertAndUpdateDeviceParam(requestData).then(res => {
+        this.$getApi.insertAndUpdateDeviceParam(requestData).then((res) => {
           if (res) {
             /* 成功添加之后，刷新所有数据 */
-            this.getData();
+            this.getData()
             /* 清空参数列表 */
-            this.params.device_type = "";
-            this.params.param_name = "";
-            this.params.value = "";
+            this.params.device_type = ''
+            this.params.param_name = ''
+            this.params.value = ''
           }
-        });
+        })
       }
     },
     /* 选择机组 */
     chooseMac(e) {
-      let text = [];
-      let macArray = this.chartData[this.key].macArray;
+      let text = []
+      let macArray = this.chartData[this.key].macArray
       if (macArray) {
-        macArray.forEach(item => {
-          text.push({ type: item.mac_id, val: item.mac_me });
-        });
+        macArray.forEach((item) => {
+          text.push({ type: item.mac_id, val: item.mac_me })
+        })
       }
-      const size = e.currentTarget.getBoundingClientRect();
+      const size = e.currentTarget.getBoundingClientRect()
       this.$list({
         text,
         pattern: {
-          maxHeight: "400px",
+          maxHeight: '400px',
           width: `${size.width}px`,
           left: `${size.left}px`,
-          top: `${size.top + size.height}px`
-        }
-      }).then(res => {
+          top: `${size.top + size.height}px`,
+        },
+      }).then((res) => {
         if (res.index > -1) {
-          this.params.macId = res.item.type;
-          this.params.macName = res.item.val;
+          this.params.macId = res.item.type
+          this.params.macName = res.item.val
         }
-      });
+      })
     },
     // 导出数据
     exportData() {
       /* 下载csv文件 */
-      let chartData = this.chartData[this.key];
-      let t_Name = chartData.t_Name;
+      let chartData = this.chartData[this.key]
+      let t_Name = chartData.t_Name
       // /* 获取当前数据，拼装成json */
-      let body = chartData.body;
-      let myData = [];
-      body.forEach(item => {
-        if (item.isCheck) {
-          myData.push({
-            机组: item.m_me,
-            设备类型: item.device_type,
-            参数名称: item.param_name,
-            数值: item.value
-          });
-        }
-      });
-      let fields = ["机组", "设备类型", "参数名称", "数值"];
-      var Parser = require("json2csv").Parser;
-      let json2csvParser = new Parser({ fields });
-      let csv = json2csvParser.parse(myData);
-      csv = "\ufeff" + csv;
-      var aTag = document.createElement("a");
-      var blob = new Blob([csv]);
-      aTag.download = `设备参数${t_Name}.csv`;
-      aTag.href = URL.createObjectURL(blob);
-      aTag.click();
-      URL.revokeObjectURL(blob);
-    }
+      let body = chartData.body
+      let myData = []
+      if (this.$t('Common.mac') == '机组') {
+        body.forEach((item) => {
+          if (item.isCheck) {
+            myData.push({
+              机组: item.m_me,
+              设备类型: item.device_type,
+              参数名称: item.param_name,
+              数值: item.value,
+            })
+          }
+        })
+      } else {
+        body.forEach((item) => {
+          if (item.isCheck) {
+            myData.push({
+              'machine set': item.m_me,
+              'Equipment type': item.device_type,
+              'parameter name': item.param_name,
+              'numerical value': item.value,
+            })
+          }
+        })
+      }
+
+      let fields = [
+        this.$t('Common.mac'),
+        this.$t('equipmentParameters.equipType'),
+        this.$t('equipmentParameters.paramName'),
+        this.$t('equipmentParameters.value'),
+      ] //"机组", "设备类型", "参数名称", "数值"
+      var Parser = require('json2csv').Parser
+      let json2csvParser = new Parser({ fields })
+      let csv = json2csvParser.parse(myData)
+      csv = '\ufeff' + csv
+      var aTag = document.createElement('a')
+      var blob = new Blob([csv])
+      aTag.download = `${this.$t('HeaderEdge.secondLevel4_5')}${t_Name}.csv` //设备参数
+      aTag.href = URL.createObjectURL(blob)
+      aTag.click()
+      URL.revokeObjectURL(blob)
+    },
   },
   created() {
-    this.$store.commit("set_keepAlive", {
-      method: "add",
-      keepAlive: "equipmentParameters"
-    });
+    this.$store.commit('set_keepAlive', {
+      method: 'add',
+      keepAlive: 'equipmentParameters',
+    })
   },
   watch: {
-    "$store.state.equipmentParametersMsg": {
+    '$store.state.equipmentParametersMsg': {
       handler(value) {
         if (value.length !== 0) {
           while (value.length) {
-            let item = value.shift();
-            this.openChartList(item.key, item.state);
+            let item = value.shift()
+            this.openChartList(item.key, item.state)
           }
         }
       },
       deep: true,
-      immediate: true
-    }
-  }
-};
+      immediate: true,
+    },
+  },
+}
 </script>
 <style scoped lang="scss">
 @mixin grid-title {
@@ -432,7 +494,7 @@ export default {
     .my-system-head {
       display: grid;
       /* grid-template-columns: 10% 20% 15% 15% 10% 30%; */
-      grid-template-columns: 7% 23% 23% 23% 24%;
+      grid-template-columns: 10% 23% 22% 22% 23%;
       font-size: 16px;
       li {
         height: 40px;
@@ -466,8 +528,8 @@ export default {
     width: 100%;
     button {
       height: 30px;
-      width: 100px;
-      margin: 0px 10px;
+      min-width: 100px;
+      margin: 10px 10px;
     }
   }
   .pop-box-background {

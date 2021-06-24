@@ -175,7 +175,209 @@ export default {
     return {
       currentHeadList: [] /* 头部菜单显示信息 */,
       headList: {
-        0: [
+        '-1':[
+          /* 通用 */
+          {
+            name: '基本图谱',
+            listMsg: [
+              {
+                val: '趋势图',
+                icon: 'icon-qushitu_huaban1',
+                key: 'trend',
+                isUse: 'disabled-icon',
+                type: [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  15,
+                  16,
+                  17,
+                ],
+              },
+              {
+                val: '波形频谱图',
+                icon: 'icon-boxing_huaban',
+                key: 'wave',
+                isUse: 'disabled-icon',
+                type: [1, 3, 4, 6, 8, 9, 12, 200, 14, 15, 16, 17],
+              },
+              {
+                val: '对比分析图',
+                icon: 'icon-duibifenxitu_huaban',
+                key: 'compare',
+                isUse: 'disabled-icon',
+                type: [1, 3, 4, 6, 8, 9, 12, 200],
+              },
+              {
+                val: '机组对比分析图',
+                icon: 'icon-duibifenxitu',
+                key: 'macCompare',
+                isUse: 'disabled-icon',
+                type: [1, 3, 4, 6, 8, 9, 12, 200],
+              },
+              {
+                val: '三维频谱图',
+                icon: 'icon-sanweipinputu_huaban',
+                key: 'wave3d',
+                isUse: 'disabled-icon',
+                type: [3, 4, 6, 8, 9, 12, 16],
+              },
+              {
+                key: 'spectrum',
+                icon: 'icon-zhuanjiapinpu_huaban',
+                val: '专家频谱图',
+                isUse: 'disabled-icon',
+                type: [3],
+              },
+              {
+                key: 'dip1',
+                icon: 'icon-qingjiaofenbutu_huaban_huaban',
+                val: '倾角分布图',
+                isUse: 'disabled-icon',
+                type: [13],
+              },
+              {
+                key: 'dip2',
+                icon: 'icon-chenjianggenzongtu_huaban',
+                val: '沉降跟踪图',
+                isUse: 'disabled-icon',
+                type: [13],
+              },
+              {
+                key: 'overturn',
+                icon: 'icon-jicangguijitu',
+                val: '机舱轨迹图',
+                isUse: 'disabled-icon',
+                type: [13],
+              },
+              {
+                val: '散点图',
+                icon: 'icon-sandiantu_huaban',
+                key: 'scatter',
+                isUse: 'disabled-icon',
+                type: [
+                  1,
+                  2,
+                  3,
+                  4,
+                  5,
+                  6,
+                  7,
+                  8,
+                  9,
+                  10,
+                  11,
+                  12,
+                  13,
+                  14,
+                  200,
+                  15,
+                  16,
+                  17,
+                ],
+              },
+              {
+                val: '圆周图',
+                icon: 'icon-yuanzhoutu_huaban',
+                key: 'circle',
+                isUse: 'disabled-icon',
+                type: [1, 3, 4, 6, 8, 9, 12, 200],
+              },
+            ],
+          },
+          {
+            name: '数据列表',
+            listMsg: [
+              {
+                val: '实时数据列表',
+                icon: 'icon-shishishuju_huaban',
+                key: 'real',
+                isUse: 'disabled-icon',
+                type: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+              },
+              {
+                val: '历史数据列表',
+                icon: 'icon-lishishujuliebiao_huaban',
+                key: 'history',
+                isUse: 'disabled-icon',
+                type: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+              },
+              {
+                key: 'monitor',
+                icon: 'icon-jiancebaobiao_huaban_huaban',
+                val: '监测报表',
+                isUse: 'disabled-icon',
+                type: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+              },
+              {
+                val: '统计列表',
+                icon: 'icon-tongjiliebiao_huaban',
+                key: 'census',
+                isUse: 'disabled-icon',
+                type: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+              },
+            ],
+          },
+          {
+            name: '记录日志',
+            listMsg: [
+              {
+                key: 'alarm',
+                icon: 'icon-baojing_huaban',
+                val: '报警日志',
+                isUse: 'disabled-icon',
+                type: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+              },
+              /* {key: 'alarmProcessing', icon: 'icon-baojingchulirizhi_huaban', val: '报警处理日志', isUse: 'disabled-icon', type: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14]}, */
+              {
+                key: 'system',
+                icon: 'icon-xitongrizhi_',
+                val: '系统日志',
+                isUse: 'disabled-icon',
+                type: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14],
+              },
+              {
+                key: 'maintain',
+                icon: 'icon-shebei',
+                val: '设备维护记录',
+                isUse: 'disabled-icon',
+                type: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 200],
+              },
+              {
+                key: 'server',
+                icon: 'icon-fuwuqi',
+                val: '服务器信息',
+                isUse: 'disabled-icon',
+                type: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 200],
+              },
+            ],
+          },
+          {
+            name: '系统工具',
+            listMsg: [
+              {
+                key: 'export',
+                icon: 'icon-baogaodaochugongju_huaban1',
+                val: '报告导出工具',
+                isUse: 'disabled-icon',
+                type: [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 200],
+              },
+              // {key: 'use', icon: 'icon-', val: '使用手册', isUse: 'disabled-icon'},
+            ],
+          },
+        ],
+        '0': [
           /* 风电 */
           {
             name: '基本图谱',
@@ -377,7 +579,7 @@ export default {
             ],
           },
         ],
-        1: [
+        '1': [
           /* 水泥 */
           {
             name: '基本图谱',
@@ -542,7 +744,7 @@ export default {
             ],
           },
         ],
-        2: [
+        '2': [
           /* 行走部 */
           {
             name: '基本图谱',
@@ -686,7 +888,7 @@ export default {
             ],
           },
         ] /* 走行部 */,
-        3: [
+        '3': [
           /* 油田 */
           {
             name: '基本图谱',
@@ -1062,7 +1264,8 @@ export default {
             }
           }
           if (idx === 0) {
-            this.currentHeadList = this.headList[Number(msg.t_root)]
+            console.log(msg.t_root)
+            this.currentHeadList = this.headList[String(msg.t_root)]
             list = this.currentHeadList
           }
           for (let val of list) {

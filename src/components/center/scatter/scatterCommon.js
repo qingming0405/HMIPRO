@@ -64,7 +64,7 @@ export default {
         },
         x: {
           name: data.posMsg.posNameX,
-          name2: data.posMsg.codeNameX + "(" + data.posMsg.posUnitX + ")",
+          name2: data.posMsg.codeNameX + `${data.posMsg.posUnitX ? "(" + data.posMsg.posUnitX + ")" : ''}`,
           nameStyle: {
             color: color.axis.name,
             size: "14px",
@@ -86,7 +86,7 @@ export default {
         },
         y: {
           name: data.posMsg.posNameY,
-          name2: data.posMsg.codeNameY + "(" + data.posMsg.posUnitY + ")",
+          name2: data.posMsg.codeNameY + `${data.posMsg.posUnitY ? "(" + data.posMsg.posUnitY + ")" : ''}`,
           nameStyle: {
             color: color.axis.name,
             size: "14px",
@@ -171,7 +171,7 @@ export default {
             dom: document.getElementsByClassName(
               "icon-savemage_huaban_scatter"
             )[index],
-            imageName: this.fileName + "_散点图"
+            imageName: this.fileName + "_" + this.$t('HeaderEdge.secondLevel2_9')//散点图
           }
         },
         backgroundColor: color.background
@@ -474,14 +474,14 @@ export default {
         } else {
           od.empty = {
             isShow: true,
-            text: "此特征值无对应数据"
+            text: this.$t('scatter.eigenNoData')//此特征值无对应数据
           };
           // this.$pop(`此特征值无对应数据`);
         }
       } else {
         od.empty = {
           isShow: true,
-          text: `${od.posMsg.posNameX}无数据`
+          text: `${od.posMsg.posNameX}${this.$t('Common.noDataText')}`//无数据
         };
         // this.$pop(`${od.posMsg.posNameX}无数据`);
       }

@@ -336,7 +336,7 @@ export default {
       /* 通过判断测点类型 是否是统一机组来判断这个测点是否能够拖入 */
       let chartType = chart.posType
       if (item.positionType !== chartType) {
-        this.$pop('请添加同类型的测点')
+        this.$pop(this.$t('tmsTrend.TipAddSamepType'))//请添加同类型的测点
       }
       let key = ''
       /* 判断数据是否已经存在 */
@@ -386,7 +386,7 @@ export default {
               chart.data[key].cond = cond
             }
             if (flag) {
-              this.$pop('存在无数据时间点')
+              this.$pop(this.$t('tmsTrend.TipNoData'))//存在无数据时间点
             }
             /* 多个chart 只更新一次 */
             clearTimeout(this.timer)
@@ -689,7 +689,7 @@ export default {
       }).then((canvas) => {
         let downLoad = document.createElement('a')
         downLoad.href = canvas.toDataURL()
-        downLoad.download = '轨道波磨图.png'
+        downLoad.download = this.$t('HeaderEdge.secondLevel2_5')+'.png'//轨道波磨图
         downLoad.dispatchEvent(new MouseEvent('click'))
       })
     },
@@ -710,7 +710,7 @@ export default {
           if (result[0].length === 0) return //第一条线路没有值
           let requesetData_Time = chartData.requesetData_Time
           requesetData_Time.lineInfo = result
-          requesetData_Time.route = { name: '线路1', index: 0 } //默认第一条路线
+          requesetData_Time.route = { name: this.$t('tmsTrend.Line1'), index: 0 } //线路1  默认第一条路线 
           /* 计算每个站点的总路程 */
           result.forEach((line) => {
             let distance = 0

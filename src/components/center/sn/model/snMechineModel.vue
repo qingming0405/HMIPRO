@@ -3,7 +3,6 @@
   <div>
     <div
       class="sn-model"
-      :class="'sn-model'+key"
       v-for="(param,key) in snMechineModel"
       :key="key"
       v-show="param.isShow"
@@ -13,47 +12,75 @@
         v-show="param.isShowBackground"
       />
       <div
-        v-show="param.title.name!='' && !param.isShowBackground"
-        class="sn-title"
-        :style="'margin:15px;'"
+        class="sn-model-content"
+        :class="'sn-model'+key"
       >
-        <div :style="'font-size:'+param.title.fontsize">{{param.title.name}}</div>
-      </div>
-      <canvas
-        v-show="!param.isShowBackground"
-        id="canvas"
-        :class="'canvas'+key"
-      > </canvas>
-      <!-- 旧版测点 -->
-      <canvas
-        v-show="!param.version && !param.isShowBackground"
-        id="canvas-pos"
-        :ref="'canvas-pos'+key"
-      > </canvas>
-      <div v-show="param.version == 1 && !param.isShowBackground">
-        <div v-for="item in param.points">
-          <div
-            :style="item.boxStyle"
-            class="pointBox"
-            :class="item.isChoose ? 'active':''"
-            @click="pointClick(item)"
-            @dblclick="toTrend(item)"
-            @contextmenu.prevent="showContextmenu($event, item)"
-          >
-            <p
-              class="font font-border"
-              :style="'fontSize:'+item.namesize +'px'"
-            >{{item.name}}</p>
-            <p
-              class="font"
-              :style="item.textStyle"
-            >{{item.text}}</p>
+        <div
+          v-show="param.title.name!='' && !param.isShowBackground"
+          class="sn-title"
+          :style="'margin:15px;'"
+        >
+          <div :style="'font-size:'+param.title.fontsize">{{param.title.name}}</div>
+        </div>
+        <canvas
+          v-show="!param.isShowBackground"
+          id="canvas"
+          :class="'canvas'+key"
+        > </canvas>
+        <!-- 旧版测点 -->
+        <canvas
+          v-show="!param.version && !param.isShowBackground"
+          id="canvas-pos"
+          :ref="'canvas-pos'+key"
+        > </canvas>
+        <div v-show="param.version == 1 && !param.isShowBackground">
+          <div v-for="item in param.points">
+            <div
+              :style="item.boxStyle"
+              class="pointBox"
+              :class="item.isChoose ? 'active':''"
+              @click="pointClick(item)"
+              @dblclick="toTrend(item)"
+              @contextmenu.prevent="showContextmenu($event, item)"
+            >
+              <p
+                class="font font-border"
+                :style="'fontSize:'+item.namesize +'px'"
+              >{{item.name}}</p>
+              <p
+                class="font"
+                :style="item.textStyle"
+              >{{item.text}}</p>
+            </div>
+            <div
+              :style="item.pointStyle"
+              class="point-circle"
+              :class="item.isChoose ? 'circle-active'+item.alarm_status:''"
+            ></div>
           </div>
+        </div>
+      </div>
+      <!-- 智能诊断 -->
+      <div class="diagnosis-box">
+        <div class="diagnosis-title">
+          <p>设备诊断</p>
+        </div>
+        <div class="diagnosis-content-box">
           <div
-            :style="item.pointStyle"
-            class="point-circle"
-            :class="item.isChoose ? 'circle-active'+item.alarm_status:''"
-          ></div>
+            class="diagnosis-content"
+            v-for="diagnosis in param.diagnosis"
+          >
+            <div class="diagnosis">
+              <i class="iconfont icon-shijian"></i>
+              <div class="title">时间</div>
+              <div class="content">{{diagnosis.time}}</div>
+            </div>
+            <div class="diagnosis">
+              <i class="iconfont icon-jieguo"></i>
+              <div class="title">结果</div>
+              <div class="content">{{diagnosis.content}}</div>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -83,12 +110,18 @@ export default {
 #canvas-pos {
   position: absolute;
   left: 0px;
+  top: 0px;
 }
 
 .sn-model {
   width: 100%;
   height: 100%;
   position: relative;
+  .sn-model-content {
+    width: calc(100% - 290px);
+    height: 100%;
+    position: relative;
+  }
   .pointBox {
     border: 1px solid #005ec2;
     background: rgba(7, 39, 74, 0.8);
@@ -140,6 +173,60 @@ export default {
     box-shadow: 4px 4px 6px rgba(248, 0, 0, 0.6),
       4px -4px 6px rgba(248, 0, 0, 0.6), -4px -4px 6px rgba(248, 0, 0, 0.6),
       -4px 4px 6px rgba(248, 0, 0, 0.6);
+  }
+  .diagnosis-box {
+    width: 290px;
+    min-height: 130px;
+    background: rgba(4, 30, 57, 0.5);
+    padding: 15px;
+    position: relative;
+    top: -100%;
+    left: calc(100% - 290px);
+    .diagnosis-title {
+      width: 100%;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      p {
+        width: 65px;
+        font-size: 16px;
+        font-family: Source Han Sans CN;
+        font-weight: 400;
+        color: #f1f6f9;
+        text-align: center;
+        padding-bottom: 7px;
+        border-bottom: 1px solid #093868;
+      }
+    }
+    .diagnosis-content-box {
+      width: 100%;
+      min-height: 70px;
+      padding: 10px 10px 0px 10px;
+      background-color: #041e39;
+      .diagnosis-content {
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        .diagnosis {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          margin-bottom: 10px;
+          .title {
+            margin-right: 10px;
+            font-size: 14px;
+          }
+          .iconfont {
+            color: #33ffff;
+            margin: 2px 8px 0px 0px;
+          }
+          .content {
+            width: 177px;
+            font-size: 12px;
+          }
+        }
+      }
+    }
   }
 }
 </style>

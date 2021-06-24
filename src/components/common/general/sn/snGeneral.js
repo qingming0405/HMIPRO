@@ -142,9 +142,9 @@ const snGeneral = {
                 if (res.folder.overview.bgurl) {
                   param.isShowBackground = false // 关闭默认图片
                   param.generalImg = res.folder.overview.bgurl
-                  // param.generalImg =
-                  //   'http://10.100.50.81:8085' + res.folder.overview.bgurl //测试使用
-                  // 'http://10.100.50.36:8085' + res.folder.overview.bgurl
+                  /* param.generalImg =
+                    // 'http://10.100.50.81:8085' + res.folder.overview.bgurl //测试使用
+                    'http://10.100.0.101:8085' + res.folder.overview.bgurl */
                   let result = res.folder.overview
                   /* 处理背景图片 */
                   this.setBackgroundImg(result)
@@ -355,40 +355,63 @@ const snGeneral = {
       let t_id = item.t_id
       let macList = this.$store.state.mac[t_id]
       let mac
-      macList.forEach((item) => {
-        if (item.pump_id === pump_id) {
-          mac = item
-          return
+      let choosetree = cloneObj(this.$store.state.checkMsg.tree)
+      let choosemac = cloneObj(this.$store.state.checkMsg.mac)
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        if (choosemac !== null && choosemac.pump_id == item.pump_id) {
+          if (choosemac.t_id != choosetree.t_id) {
+            let treeArray = this.$store.state.tree
+            treeArray.forEach((tree) => {
+              if (choosemac.t_id == tree.t_id) {
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(tree),
+                  type: 'tree',
+                })
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(choosemac),
+                  type: 'mac',
+                })
+                resolve('成功')
+              }
+            })
+          }
+          resolve('成功')
+        } else {
+          macList.forEach((item) => {
+            if (item.pump_id === item.pump_id) {
+              mac = item
+              return
+            }
+          })
+          /* 设置当前的机组 */
+          if (mac.t_id != choosetree.t_id) {
+            let treeArray = this.$store.state.tree
+            treeArray.forEach((tree) => {
+              if (mac.t_id == tree.t_id) {
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(tree),
+                  type: 'tree',
+                })
+              }
+            })
+          }
+          // 取机组
+          this.$store.commit('getCheckMsg', {
+            msg: cloneObj(mac),
+            type: 'mac',
+          })
+          resolve('成功')
         }
+      }).then(() => {
+        /* 设置当前的机组 */
+        this.$bus.$emit(
+          'generalRouting',
+          'snModel',
+          this.$t('YtModel.macModel'),//'设备模型',
+          'icon-shijingsanwei-'
+        )
       })
-      // 若已选中当前机泵则直接跳转
-      let choosemac = this.$store.state.checkMsg.mac
-      if (choosemac !== null) {
-        if (choosemac.pump_id == mac.pump_id) {
-          // this.$router.push('snModel')
-          this.$bus.$emit(
-            'generalRouting',
-            'snModel',
-            this.$t('YtModel.macModel'),//'设备模型',
-            'icon-shijingsanwei-'
-          )
-          return
-        }
-      }
-      this.$store.commit('getCheckMsg', {
-        msg: cloneObj(mac),
-        type: 'mac',
-      })
-      /* 设置当前的机组 */
-      this.$bus.$emit(
-        'generalRouting',
-        'snModel',
-        this.$t('YtModel.macModel'),//'设备模型',
-        'icon-shijingsanwei-'
-      )
-      // this.$router.push({
-      //   name: 'snModel',
-      // })
     },
   },
   deactivated () {

@@ -12,7 +12,7 @@
         @mouseup="moveDivUp"
       >
       <!--  波磨数据-->
-        <span>{{$t('Common.waveData')}}</span>
+        <span>{{vm.$t('Common.waveData')}}</span>
         <div
           class="close-retrieval"
           @click="closeRetrieval"
@@ -22,7 +22,7 @@
       </div>
       <!-- 测点选择 -->
       <div class="select-box">
-        <div class="select-title msg-title">{{$t('Common.pos')}}</div>
+        <div class="select-title msg-title">{{vm.$t('Common.pos')}}</div>
         <div
           class="select-value viewMsg-name radius text-overflow select-none outside-border edge-outside-border"
           @click.stop="changePos"
@@ -35,7 +35,7 @@
       <div class="check-eigenvalue-box scroll-style-edge">
         <div class="select-title">
           <!-- 时间列表 -->
-          <p>{{$t('Common.timeList')}}</p>
+          <p>{{vm.$t('Common.timeList')}}</p>
         </div>
         <div
           class="radius select-none"
@@ -55,12 +55,12 @@
         <button
           class="add-pos"
           @click="addPos"
-        >{{$t('Common.addPos')}}</button>
+        >{{vm.$t('Common.addPos')}}</button>
         <!-- 取消 -->
         <button
           class="disable-btn"
           @click="closeRetrieval"
-        >{{$t('Common.cancelBtn')}}</button>
+        >{{vm.$t('Common.cancelBtn')}}</button>
       </div>
     </div>
   </div>
@@ -72,12 +72,16 @@ export default {
     viewMsg: {
       type: Object,
       default: function () {
-        return {}
+        return {
+
+        }
       },
     },
   },
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       moveDivMsg: {
         /* 移动的表头信息 */ x: null,
         y: null,

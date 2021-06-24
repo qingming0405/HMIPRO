@@ -66,6 +66,10 @@ const mechineModel = {
             },
             isShow: true,
             timer: null,
+            diagnosis: [{
+              time: this.$t('Common.noDataText'),//无数据
+              content: this.$t('Common.noDiagText')//'暂无诊断结果'
+            }]
           })
           break
         case 1 /* 切换图表 */:
@@ -102,6 +106,15 @@ const mechineModel = {
             /* 清空测点列表 */
             param.pos = []
             param.points = []
+            if (res.dignosis_result && res.dignosis_result.length > 0) {
+              param.diagnosis = []
+              res.dignosis_result.forEach(diagn => {
+                param.diagnosis.push({
+                  time: diagn.time,
+                  content: diagn.desc
+                })
+              })
+            }
             if (res.overview.itemList) {
               res.overview.itemList.forEach((item, index) => {
                 let text = '',
@@ -183,10 +196,10 @@ const mechineModel = {
               })
             }
             if (param.imgSrc != res.overview.bgurl) {
-              // if (param.imgSrc != 'http://10.100.50.81:8085' + res.overview.bgurl) {
+            // if (param.imgSrc != 'http://10.100.0.101:8085' + res.overview.bgurl) {
               // if (param.imgSrc != 'http://10.100.50.36:8085' + res.overview.bgurl) {
               param.imgSrc = res.overview.bgurl
-              // param.imgSrc = 'http://10.100.50.81:8085' + res.overview.bgurl
+              // param.imgSrc = 'http://10.100.0.101:8085' + res.overview.bgurl
               // param.imgSrc = 'http://10.100.0.101:8085' + res.overview.bgurl
               this.drawPicture(res.overview)
             } else {

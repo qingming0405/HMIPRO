@@ -318,9 +318,8 @@ const towerdrum = {
   mounted () {
     
   },
-  beforeDestroy () {
-    console.log("清除定时器");
-    clearInterval(this.timer);
+  deactivated () {
+    clearInterval(this.snTowerdrum[key].timer)
   },
 }
 export default towerdrum;

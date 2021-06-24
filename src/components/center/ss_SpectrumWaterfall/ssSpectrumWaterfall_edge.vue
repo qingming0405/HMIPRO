@@ -21,7 +21,9 @@
         />
       </div>
       <div class='search-data'>
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{$t('Common.retrieval')}}
+        </button>
       </div>
     </div>
   </div>
@@ -97,7 +99,7 @@ export default {
             empty: {
               /* 无报警数据 */
               isShow: true,
-              text: `无数据`,
+              text: this.$t('Common.noDataText'),//无数据
             },
             chartData: {
               data: null,
@@ -267,7 +269,7 @@ export default {
         this.$emit('loadingImg', false)
         if (res) {
           if (res.info.length == 0) {
-            this.$pop('当前时间没有数据')
+            this.$pop(this.$t('Common.noDataText'))//无数据
             chartData.vdata = []
             chartData.dataY = []
             chartData.option.series = []
@@ -335,7 +337,7 @@ export default {
             params.timeData = res.list
             this.ssSelect(params.timeData[0])
           } else {
-            this.$pop('无启停数据！')
+            this.$pop(this.$t('Common8000.NoStartStopData'))//无启停数据！
           }
         }
       })

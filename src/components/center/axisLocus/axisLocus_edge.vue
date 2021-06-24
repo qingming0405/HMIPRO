@@ -33,11 +33,15 @@
         ></div>
       </div>
       <div class="search-data">
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{$t('Common.retrieval')}}
+        </button>
         <button
           :class="chart.isReal ? '' : 'disable-btn'"
           @click="setRealData"
-        >实时数据</button>
+        >
+          <!-- 实时数据 -->{{$t('Common.realData')}}
+        </button>
       </div>
     </div>
   </div>
@@ -106,9 +110,13 @@ export default {
       const keyArr = Object.keys(this.paramsData)
       const state = this.$store.state
       const dataType = [
-        { val: '定时历史数据', isChecked: true, type: 1 },
-        { val: '启停机数据', isChecked: false, type: 2 },
-        { val: '报警存储数据', isChecked: false, type: 3 },
+        { val: this.$t('Common8000.TimedHisData'), isChecked: true, type: 1 }, //定时历史数据
+        { val: this.$t('Common8000.StartStopData'), isChecked: false, type: 2 }, //启停机数据
+        {
+          val: this.$t('Common8000.AlarmStorageData'),
+          isChecked: false,
+          type: 3,
+        }, //报警存储数据
       ] //定时历史数据默认选中
       const posA = {
         id: -1,
@@ -388,7 +396,7 @@ export default {
             padding: [65, 0, 0, 10],
             color: '#F3F3F3',
           },
-          name: '时间（s）',
+          name: this.$t('Common.time')+'（s）',//时间
           type: 'value',
           splitLine: {
             show: false,
@@ -443,7 +451,7 @@ export default {
               opacity: 0.2,
             },
           },
-          name: '幅值',
+          name: this.$t('Common.amplitude'),//幅值
         },
         series: [
           {
@@ -486,7 +494,7 @@ export default {
             padding: [65, 0, 0, 10],
             color: '#F3F3F3',
           },
-          name: '时间（s）',
+          name: this.$t('Common.time')+'（s）',//时间
           type: 'value',
           splitLine: {
             show: false,
@@ -541,7 +549,7 @@ export default {
               opacity: 0.2,
             },
           },
-          name: '幅值',
+          name: this.$t('Common.amplitude'),//幅值
         },
         series: [
           {
@@ -717,9 +725,9 @@ export default {
     },
     getTrendToolTip(data) {
       let tip = ''
-      tip += '时间：' + getTime(data[0]) + '<br>'
-      tip += '幅值：' + data[1].toFixed(4) + '<br>'
-      tip += '转速：' + data[2].toFixed(0) + '<br>'
+      tip += this.$t('Common.time')+'：' + getTime(data[0]) + '<br>'//时间
+      tip += this.$t('Common.amplitude')+'：' + data[1].toFixed(4) + '<br>'//幅值
+      tip += this.$t('eigenvalue.speed')+'：' + data[2].toFixed(0) + '<br>'//转速
       return tip
     },
     updateTrendMarkLine(data) {
@@ -787,7 +795,7 @@ export default {
             }
           } else {
             paramsData.trendDataList = []
-            this.$pop('无趋势数据')
+            this.$pop(this.$t('Common8000.noTrendData'))//无趋势数据
           }
         } else {
           this.showProgress(false)
@@ -795,14 +803,8 @@ export default {
       })
     },
     getChartData(time) {
-      const {
-        requestData,
-        posA,
-        posB,
-        type,
-        dataListA,
-        dataListB,
-      } = this.curParamsData
+      const { requestData, posA, posB, type, dataListA, dataListB } =
+        this.curParamsData
       requestData.spectrum.time = time
       this.$getApi.getAxisOrbit(requestData.spectrum).then((res) => {
         if (res && res.msg === 0 && res.data != null && res.data.length > 0) {
@@ -967,15 +969,8 @@ export default {
     },
     // 当前波形数据，更新波形图
     setChartData() {
-      const {
-        posA,
-        posB,
-        echartIns,
-        type,
-        dataListA,
-        dataListB,
-        curDataList,
-      } = this.curParamsData
+      const { posA, posB, echartIns, type, dataListA, dataListB, curDataList } =
+        this.curParamsData
       dataListA.curWave = this.getCurWave(type, posA, dataListA)
       dataListB.curWave = this.getCurWave(type, posB, dataListB)
       this.setWaveOption(posA, echartIns[1], dataListA)
@@ -997,7 +992,7 @@ export default {
     setWaveOption(pos, echart, dataList) {
       const option = {
         yAxis: {
-          name: `幅值：（${pos.unitName}） ${pos.name} ∠${pos.angle}°`,
+          name: `${this.$t('Common.amplitude')}：（${pos.unitName}） ${pos.name} ∠${pos.angle}°`,//幅值
         },
         series: [
           {

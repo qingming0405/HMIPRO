@@ -223,10 +223,11 @@ export default {
       display: flex;
       text-align: center;
       overflow-y: auto;
-      height: calc(100% - 40px);
+      height: calc(100% - 89px);
       width: 100%;
       margin-top: 40px;
       flex-direction: column;
+      position: absolute;
       &::-webkit-scrollbar {
         // display: none;
       }

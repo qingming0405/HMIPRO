@@ -22,11 +22,13 @@
         />
       </div>
       <div class='search-data'>
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{$t('Common.retrieval')}}
+        </button>
         <button
           :class="item.showFrequency ? '' : 'disable-btn'"
           @click="changeShow"
-        >切换显示模式</button>
+        ><!-- 切换显示模式 -->{{$t('cascade.SwitchDisplayMode')}}</button>
       </div>
     </div>
   </div>
@@ -93,7 +95,7 @@ export default {
             empty: {
               /* 无报警数据 */
               isShow: true,
-              text: `无数据`,
+              text: this.$t('Common.noDataText'), //无数据
             },
             chartData: {
               vdata: null,
@@ -131,7 +133,7 @@ export default {
         tooltip: {},
         xAxis3D: {
           type: 'value',
-          name: '频率 (Hz)',
+          name: this.$t('Common.freq')+'(Hz)',//频率
           max: function (value) {
             return Math.ceil(value.max)
           },
@@ -158,7 +160,7 @@ export default {
         },
         yAxis3D: {
           type: 'value',
-          name: '转速',
+          name: this.$t('eigenvalue.speed'),//转速
           // max: 'dataMax',
           max: function (value) {
             return Math.ceil(value.max)
@@ -187,7 +189,7 @@ export default {
         },
         zAxis3D: {
           type: 'value',
-          name: '幅值',
+          name: this.$t('Common.amplitude'),//幅值
           max: function (value) {
             return Math.ceil(value.max)
           },
@@ -309,7 +311,7 @@ export default {
             params.timeData = res.list
             this.ssSelect(params.timeData[0])
           } else {
-            this.$pop('无启停数据！')
+            this.$pop(this.$t('Common8000.NoStartStopData'))//无启停数据！
           }
         }
       })

@@ -124,21 +124,69 @@ export default {
       for (let i = 0; i < param.monitorePos.length; i++) {
         if (index === i) {
           param.monitorePos[i].isChoose = true
-          this.$store.commit('setGeneralModel', {
-            key: this.currentKey,
-            router: param.monitorePos[i].router,
+          const mac = param.mac
+          const store = this.$store
+          let macArray = store.state.mac[mac.t_id]
+          let choosemac = store.state.checkMsg.mac
+          let choosetree = cloneObj(store.state.checkMsg.tree)
+          // 使用线程防止组织测点为重选就进行了跳转
+          new Promise((resolve, reject) => {
+            if (choosemac !== null && choosemac.machine_id == mac.mac_id) {
+              if (choosemac.t_id != choosetree.t_id) {
+                let treeArray = store.state.tree
+                treeArray.forEach((tree) => {
+                  if (choosemac.t_id == tree.t_id) {
+                    store.commit('getCheckMsg', {
+                      msg: cloneObj(tree),
+                      type: 'tree',
+                    })
+                    store.commit('getCheckMsg', {
+                      msg: cloneObj(choosemac),
+                      type: 'mac',
+                    })
+                    resolve('成功')
+                  }
+                })
+              }
+              resolve('成功')
+            } else {
+              for (let i = 0; i < macArray.length; i++) {
+                if (macArray[i].mac_id == mac.mac_id) {
+                  /* 设置当前的机组 */
+                  if (macArray[i].t_id != choosetree.t_id) {
+                    let treeArray = store.state.tree
+                    treeArray.forEach((tree) => {
+                      if (macArray[i].t_id == tree.t_id) {
+                        store.commit('getCheckMsg', {
+                          msg: cloneObj(tree),
+                          type: 'tree',
+                        })
+                      }
+                    })
+                  }
+                  store.commit('getCheckMsg', {
+                    msg: macArray[i],
+                    type: 'mac',
+                  })
+                  resolve('成功')
+                  break
+                }
+              }
+            }
+          }).then(() => {
+            this.$store.commit('setGeneralModel', {
+              key: this.currentKey,
+              router: param.monitorePos[i].router,
+            })
+            // 设备模型跳转设备模型使用同一个key值调用getPath方法
+            let params = {
+              key: this.currentKey,
+              val: this.$t('YtModel.macModel'), //'设备模型',
+              name: param.monitorePos[i].router,
+              icon: 'icon-shijingsanwei-',
+            }
+            this.$bus.$emit('getPath', params)
           })
-          // 设备模型跳转设备模型使用同一个key值调用getPath方法
-          let params = {
-            key: this.currentKey,
-            val: this.$t('YtModel.macModel'),//'设备模型',
-            name: param.monitorePos[i].router,
-            icon: 'icon-shijingsanwei-',
-          }
-          this.$bus.$emit('getPath', params)
-          // this.$router.push({
-          //   name: this.monitorePos[i].router,
-          // })
         } else {
           param.monitorePos[i].isChoose = false
         }
@@ -155,7 +203,7 @@ export default {
       // 默认推到水泥设备模型中
       let params = {
         key: this.currentKey,
-        val: this.$t('YtModel.macModel'),//'设备模型',
+        val: this.$t('YtModel.macModel'), //'设备模型',
         name: router,
         icon: 'icon-shijingsanwei-',
       }

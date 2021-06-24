@@ -784,6 +784,28 @@ export default {
             dom: document.getElementsByClassName(
               'icon-subtime_huaban-compare_wave'
             )[currentIndex],
+            formatter(isTimeDifferent) {
+              let className = document
+                .getElementsByClassName('icon-subtime_huaban-compare_wave')
+                [currentIndex].className.split(' ')
+              if (isTimeDifferent) {
+                if (className.indexOf('chart-btn-active') == -1) {
+                  addClass(
+                    document.getElementsByClassName(
+                      'icon-subtime_huaban-compare_wave'
+                    )[currentIndex],
+                    'chart-btn-active'
+                  )
+                }
+              } else {
+                removeClass(
+                  document.getElementsByClassName(
+                    'icon-subtime_huaban-compare_wave'
+                  )[currentIndex],
+                  'chart-btn-active'
+                )
+              }
+            },
           },
           // 导出图片
           /* exportImage: {
@@ -1565,7 +1587,7 @@ export default {
                   let flag = value.curUnitY === res.unit
                   if (!shieldUnit.includes(value.srcUnitY)) {
                     this.setUnit(1, res.unit, k)
-                    !flag && this.getFreq(k, 1);
+                    !flag && this.getFreq(k, 1)
                   }
                 }
                 this.setSpectrum()
@@ -1626,7 +1648,7 @@ export default {
                   if (data.curUnitY === data.srcUnitY) {
                     this.getFreq(k)
                   } else {
-                  //若当前单位切换过，getFreq则处理时取curY
+                    //若当前单位切换过，getFreq则处理时取curY
                     this.getFreq(k, 1)
                   }
                 }
@@ -1648,7 +1670,7 @@ export default {
                   if (data.curUnitY === data.srcUnitY) {
                     this.getFreq(k)
                   } else {
-                  //若当前单位切换过，getFreq则处理时取curY
+                    //若当前单位切换过，getFreq则处理时取curY
                     this.getFreq(k, 1)
                   }
                 }

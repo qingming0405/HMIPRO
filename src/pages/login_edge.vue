@@ -222,6 +222,7 @@ export default {
     //切换语言
     changeLang() {
       this.$i18n.locale = this.language
+      // sessionStorage.setItem('language', this.language)
       this.getVertionFun()
     },
     getVertionFun() {

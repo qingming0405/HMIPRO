@@ -74,9 +74,15 @@
       </div>
     </div>
     <div class="search-data">
-      <button @click="addRecord">添加纪录</button>
-      <button @click="deleteRecord">删除记录</button>
-      <button @click="dataRetrieval">数据检索</button>
+      <button @click="addRecord">
+        <!-- 添加纪录 -->{{$t('maintain.addRecord')}}
+      </button>
+      <button @click="deleteRecord">
+        <!-- 删除记录 -->{{$t('maintain.delRecord')}}
+      </button>
+      <button @click="dataRetrieval">
+        <!-- 数据检索 -->{{$t('Common.retrieval')}}
+      </button>
     </div>
     <div
       class="pop-box-background select-none pop-bg"
@@ -93,7 +99,7 @@
           @mousedown="dragElem($event)"
           @mouseup="dropElem($event)"
         >
-          添加纪录
+          <!-- 添加纪录 -->{{$t('maintain.addRecord')}}
           <span
             class="close-pop"
             @click.stop="closeAlert(0)"
@@ -107,7 +113,9 @@
         <div class="pop-box-text">
           <!-- 记录名称 -->
           <div class="select-time">
-            <div class="time-title">记录名称</div>
+            <div class="time-title">
+              <!-- 记录名称 -->{{$t('maintain.RecordName')}}
+            </div>
             <input
               class="time-value radius text-overflow select-none edge-border edge-outside-border"
               v-model="recordName"
@@ -115,17 +123,23 @@
           </div>
           <!-- 开始时间 -->
           <div class="select-time">
-            <div class="time-title">开始时间</div>
+            <div class="time-title">
+              <!-- 开始时间 -->{{$t('Common.startTime')}}
+            </div>
             <input class="start-times time-value radius text-overflow select-none edge-border edge-outside-border" />
           </div>
           <!-- 结束时间 -->
           <div class="select-time">
-            <div class="time-title">结束时间</div>
+            <div class="time-title">
+              <!-- 结束时间 -->{{$t('Common.endTime')}}
+            </div>
             <input class="end-times time-value radius text-overflow select-none edge-border edge-outside-border" />
           </div>
           <!-- 记录人 -->
           <div class="select-time">
-            <div class="time-title">记录人</div>
+            <div class="time-title">
+              <!-- 记录人 -->{{$t('maintain.recorder')}}
+            </div>
             <input
               class="time-value radius text-overflow select-none edge-border edge-outside-border"
               v-model="recordUser"
@@ -133,7 +147,9 @@
           </div>
           <!-- 备注 -->
           <div class="select-time">
-            <div class="time-title">备注</div>
+            <div class="time-title">
+              <!-- 备注 -->{{$t('maintain.Remarks')}}
+            </div>
             <textarea
               class="radius select-none edge-border edge-outside-border"
               rows="6"
@@ -142,7 +158,9 @@
           </div>
           <!-- 附件 -->
           <div class="select-time">
-            <div class="time-title">附件</div>
+            <div class="time-title">
+              <!-- 附件 -->{{$t('maintain.annex')}}
+            </div>
             <input
               class="time-value radius text-overflow edge-border select-none"
               v-model="fileName"
@@ -161,19 +179,19 @@
             class="pop-btn upload-btn"
             @click="uploadFile()"
           >
-            上传附件
+            <!-- 上传附件 -->{{$t('maintain.UploadAttachment')}}
           </button>
           <button
             class="pop-btn pop-btn-ok"
             @click="closeAlert(1)"
           >
-            确定
+            <!-- 确定 -->{{$t('Common.sureBtn')}}
           </button>
           <button
             class="pop-btn pop-btn-cancel disable-btn"
             @click="closeAlert(0)"
           >
-            取消
+            <!-- 取消 -->{{$t('Common.cancelBtn')}}
           </button>
         </div>
       </div>
@@ -267,7 +285,7 @@ export default {
           margin: 0 5px;
         }
         .upload-btn {
-          width: 90px;
+          width: 132px;
         }
       }
     }

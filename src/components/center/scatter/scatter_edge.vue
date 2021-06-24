@@ -10,9 +10,9 @@
       @dragover.prevent
     >
       <div class='chart-base-title'>
-        <span v-show="data.x.length>0 && paramsData[index].xValue!==''">x轴：{{paramsData[index].xValue + '('+data.posMsg.posUnitX+')'}}</span>
-        <span v-show="data.y.length>0 && paramsData[index].yValue!==''">y轴: {{paramsData[index].yValue+ '('+data.posMsg.posUnitY+')'}}</span>
-        <span v-show="data.time.length>0 && paramsData[index].timeValue!==''">时间: {{paramsData[index].timeValue}}</span>
+        <span v-show="data.x.length>0 && paramsData[index].xValue!==''"><!-- x轴 -->{{$t('scatter.xAxis')}}：{{paramsData[index].xValue + '('+data.posMsg.posUnitX+')'}}</span>
+        <span v-show="data.y.length>0 && paramsData[index].yValue!==''"><!-- y轴 -->{{$t('scatter.xAxis')}}: {{paramsData[index].yValue+ '('+data.posMsg.posUnitY+')'}}</span>
+        <span v-show="data.time.length>0 && paramsData[index].timeValue!==''"><!-- 时间 -->{{$t('Common.time')}}: {{paramsData[index].timeValue}}</span>
       </div>
       <div
         class='none-data-box'
@@ -31,7 +31,7 @@
       ></wave-chart>
     </div>
     <div class='search-data'>
-      <button @click='dataRetrieval'>数据检索</button>
+      <button @click='dataRetrieval'><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
     </div>
   </div>
 </template>

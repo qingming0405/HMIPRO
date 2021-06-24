@@ -32,49 +32,53 @@
             <div class="topContentInnerLeftBGC">
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">校正面1</div>
+                  <div class="perLineHeader"><!-- 校正面 -->{{$t('singledynamicBalance.CorrectionSurface')}}1</div>
                   ：
                 </div>
                 <div class="perLineBody">
+                  <!-- 请输入校正面 -->
                   <el-input
                     v-model="item.setParam.reviseValue1"
-                    placeholder="请输入校正面"
+                    :placeholder="vm.$t('singledynamicBalance.enterCorrectionSurface')"
                   ></el-input>
                 </div>
               </div>
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">校正面2</div>
+                  <div class="perLineHeader"><!-- 校正面 -->{{$t('singledynamicBalance.CorrectionSurface')}}2</div>
                   ：
                 </div>
                 <div class="perLineBody">
+                  <!-- 请输入校正面 -->
                   <el-input
                     v-model="item.setParam.reviseValue2"
-                    placeholder="请输入校正面"
+                    :placeholder="vm.$t('singledynamicBalance.enterCorrectionSurface')"
                   ></el-input>
                 </div>
               </div>
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">平衡转速</div>
+                  <div class="perLineHeader"><!-- 平衡转速 -->{{vm.$t('singledynamicBalance.BalanceSpeed')}}</div>
                   ：
                 </div>
                 <div class="perLineBody">
+                  <!-- 请输入平衡转速 -->
                   <el-input
                     v-model="item.setParam.balanceSpeed"
-                    placeholder="请输入平衡转速"
+                    :placeholder="vm.$t('singledynamicBalance.enterBalanceSpeed')"
                   ></el-input>
                 </div>
               </div>
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">旋转方向</div>
+                  <div class="perLineHeader"><!-- 旋转方向 -->{{vm.$t('singledynamicBalance.turnAround')}}</div>
                   ：
                 </div>
                 <div class="perLineBody">
+                  <!-- 请选择旋转方向 -->
                   <el-select
                     v-model="item.setParam.senseRotationValue"
-                    placeholder="请选择旋转方向"
+                    :placeholder="vm.$t('singledynamicBalance.enterturnAround')"
                     class="perLineBody"
                     @change="changeDirection"
                   >
@@ -89,13 +93,14 @@
               </div>
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">坐标极值</div>
+                  <div class="perLineHeader"><!-- 坐标极值 -->{{vm.$t('singledynamicBalance.CoordinateExtremum')}}</div>
                   ：
                 </div>
                 <div class="perLineBody">
+                  <!-- 请输入坐标极值 -->
                   <el-input
                     v-model="item.setParam.Coordinate"
-                    placeholder="请输入坐标极值"
+                    :placeholder="vm.$t('singledynamicBalance.enterCoordinateExtremum')"
                   ></el-input>
                 </div>
               </div>
@@ -116,7 +121,7 @@
               </div> -->
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">原始振动</div>
+                  <div class="perLineHeader"><!-- 原始振动 -->{{vm.$t('singledynamicBalance.OriginVib')}}</div>
                   ：
                 </div>
                 <div style="display: flex">
@@ -130,7 +135,7 @@
               </div>
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">试重振动1</div>
+                  <div class="perLineHeader"><!-- 试重振动 -->{{vm.$t('singledynamicBalance.TryToVib')}}1</div>
                   ：
                 </div>
                 <div style="display: flex">
@@ -145,7 +150,7 @@
 
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">试重振动2</div>
+                  <div class="perLineHeader"><!-- 试重振动 -->{{vm.$t('singledynamicBalance.TryToVib')}}2</div>
                   ：
                 </div>
                 <div style="display: flex">
@@ -159,7 +164,7 @@
               </div>
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">残余振动</div>
+                  <div class="perLineHeader"><!-- 残余振动 -->{{vm.$t('singledynamicBalance.ResidualVib')}}</div>
                   ：
                 </div>
                 <div style="display: flex">
@@ -173,7 +178,7 @@
               </div>
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">试重</div>
+                  <div class="perLineHeader"><!-- 试重 -->{{vm.$t('singledynamicBalance.Retry')}}</div>
                   ：
                 </div>
                 <div style="display: flex">
@@ -187,7 +192,7 @@
               </div>
               <div class="perLine">
                 <div>
-                  <div class="perLineHeader">配重</div>
+                  <div class="perLineHeader"><!-- 配重 -->{{vm.$t('singledynamicBalance.Counterweight')}}</div>
                   ：
                 </div>
                 <div style="display: flex">
@@ -209,9 +214,9 @@
               <!-- 历史数据列表 -->
               <ul>
                 <li v-for="data in item.histroyData">
-                  时间：
+                  <!-- 时间 -->{{vm.$t('Common.time')}}：
                   <div>{{data.time}}</div>
-                  <div>备注：</div>
+                  <div><!-- 备注 -->{{vm.$t('singledynamicBalance.Remarks')}}：</div>
                 </li>
               </ul>
             </div>
@@ -227,12 +232,13 @@
               v-for="item in tableItemList"
               :key="item.id"
               :style="{ width: (10 / 9) * 10 + '%' }"
+              :title="item"
             >
               {{ item }}
             </div>
           </div>
           <div class="topContentInnerTableBody">
-            <div class="itemBody">原始振动</div>
+            <div class="itemBody"><!-- 原始振动 -->{{vm.$t('singledynamicBalance.OriginVib')}}</div>
             <div
               class="itemBody"
               v-for="(item, index) in item.dataBindingObject.originalVibration"
@@ -245,7 +251,7 @@
             </div>
           </div>
           <div class="topContentInnerTableBody">
-            <div class="itemBody">试重振动1</div>
+            <div class="itemBody"><!-- 试重振动 -->{{vm.$t('singledynamicBalance.TryToVib')}}1</div>
             <div
               class="itemBody"
               v-for="(item, index) in item.dataBindingObject.testMassOne"
@@ -258,7 +264,7 @@
             </div>
           </div>
           <div class="topContentInnerTableBody">
-            <div class="itemBody">试重振动2</div>
+            <div class="itemBody"><!-- 试重振动 -->{{vm.$t('singledynamicBalance.TryToVib')}}2</div>
             <div
               class="itemBody"
               v-for="(item, index) in item.dataBindingObject.testMassTwo"
@@ -274,7 +280,7 @@
             class="topContentInnerTableBody"
             style="border-bottom: 1px solid rgb(52, 75, 128)"
           >
-            <div class="itemBody">残余振动</div>
+            <div class="itemBody"><!-- 残余振动 -->{{vm.$t('singledynamicBalance.ResidualVib')}}</div>
 
             <div
               class="itemBody"
@@ -290,8 +296,8 @@
         </div>
       </div>
       <div class='search-data'>
-        <button @click="onCalculate">平衡配重计算</button>
-        <button @click="showResidual">残振矢量显示</button>
+        <button @click="onCalculate"><!-- 平衡配重计算 -->{{vm.$t('singledynamicBalance.BalanceweightCalc')}}</button>
+        <button @click="showResidual"><!-- 残振矢量显示 -->{{vm.$t('singledynamicBalance.ResidualVibvectordisplay')}}</button>
         <!-- <button>保存试验结果</button>
         <button @click="dataRetrieval">数据检索</button> -->
       </div>
@@ -306,28 +312,30 @@ import elementResizeDetectorMaker from 'element-resize-detector'
 export default {
   name: 'doubledynamicBalance',
   data() {
+    const vm = window.vm;
     return {
+      vm:vm,
       paramsData: {},
       senseRotationOptions: [
         {
           value: '1',
-          label: '顺时针',
+          label: vm.$t('singledynamicBalance.Clockwise'),//顺时针
         },
         {
           value: '2',
-          label: '逆时针',
+          label: vm.$t('singledynamicBalance.Counterclockwise'),//逆时针
         },
       ],
       tableItemList: [
-        '测试次数',
-        '振幅(um)',
-        '相位(°)',
-        '振幅(um)',
-        '相位(°)',
-        '校正面1加重(g)',
-        '校正面1加重角(°)',
-        '校正面2加重(g)',
-        '校正面2加重角(°)',
+        vm.$t('singledynamicBalance.TestFreq'),//测试次数
+        vm.$t('doubledynamicBalance.amplitude')+'(um)',//振幅
+        vm.$t('doubledynamicBalance.Phase')+'(°)',//相位
+        vm.$t('doubledynamicBalance.amplitude')+'(um)',//振幅
+        vm.$t('doubledynamicBalance.Phase')+'(°)',//相位
+        vm.$t('doubledynamicBalance.Correction1_accentuated')+'(g)',//校正面1加重
+        vm.$t('doubledynamicBalance.Correction1_accentAngle')+'(°)',//校正面1加重角
+        vm.$t('doubledynamicBalance.Correction2_accentuated')+'(g)',//校正面2加重
+        vm.$t('doubledynamicBalance.Correction2_accentAngle')+'(°)',//校正面2加重角
       ],
       // 颜色选择器预定义颜色
       predefineColors: [
@@ -648,7 +656,7 @@ export default {
       xa2_c = this.radianToangle(xa2_c)
       xb2_c = this.radianToangle(xb2_c)
       if ((xa1_a == 0 && xb1_a == 0) || (xa2_a == 0 && xb2_a == 0)) {
-        this.$pop('平衡配重计算溢出，请检查输入数据')
+        this.$pop(this.$t('doubledynamicBalance.errorInput'))//平衡配重计算溢出，请检查输入数据
         return
       }
       let parameterObj = {}
@@ -696,7 +704,7 @@ export default {
         u0Obj = this.getbalanceWeight(parameterObj)
       }
       if (u0Obj.flag == false) {
-        this.$pop('平衡配重计算溢出，请检查输入数据')
+        this.$pop(this.$t('doubledynamicBalance.errorInput'))//平衡配重计算溢出，请检查输入数据
         return
       }
       let rm1 = u0Obj.u0_m
@@ -741,7 +749,7 @@ export default {
       }
       u0Obj = this.getbalanceWeight(parameterObj)
       if (u0Obj.flag == false) {
-        this.$pop('平衡配重计算溢出，请检查输入数据')
+        this.$pop(this.$t('doubledynamicBalance.errorInput'))//平衡配重计算溢出，请检查输入数据
         return
       }
       let rm2 = u0Obj.u0_m
@@ -887,26 +895,26 @@ export default {
           setParam.reviseValue1 == null ||
           setParam.reviseValue1.length == 0
         ) {
-          this.$pop('校正面1不能为空')
+          this.$pop(vm.$t('doubledynamicBalance.errorInput1'))//校正面1不能为空
           return false
         }
         if (
           setParam.reviseValue2 == null ||
           setParam.reviseValue2.length == 0
         ) {
-          this.$pop('校正面2不能为空')
+          this.$pop(vm.$t('doubledynamicBalance.errorInput2'))//校正面2不能为空
           return false
         }
         if (
           setParam.balanceSpeed == null ||
           setParam.balanceSpeed.length == 0
         ) {
-          this.$pop('平衡转速不能为空')
+          this.$pop(vm.$t('singledynamicBalance.BalanceSpeedNull'))//平衡转速不能为空
           return false
         }
         vertifiy = vertifiy && this.vertifyFloat(setParam.balanceSpeed)
         if (!vertifiy) {
-          this.$pop('平衡转速必须为非负实数')
+          this.$pop(vm.$t('singledynamicBalance.BalanceSpeedWrong'))//平衡转速必须为非负实数
           return false
         }
         vertifiy =
@@ -918,7 +926,7 @@ export default {
           this.vertifyPlusFloat(data.originalVibration[2].firstLine2) &&
           this.vertifyFloat(data.originalVibration[3].firstLine3, true)
         if (!vertifiy) {
-          this.$pop('请输入正确的原始振动幅值（正实数）和相位（0~360）')
+          this.$pop(vm.$t('singledynamicBalance.errorInput'))//请输入正确的原始振动幅值（正实数）和相位（0~360）
           return false
         }
         vertifiy =
@@ -926,7 +934,7 @@ export default {
           this.vertifyPlusFloat(data.testMassOne[4].firstLine4) &&
           this.vertifyFloat(data.testMassOne[5].firstLine5, true)
         if (!vertifiy) {
-          this.$pop('请输入正确的增加试重1质量（正实数）和角度（0~360）')
+          this.$pop(vm.$t('doubledynamicBalance.errorInput3'))//请输入正确的增加试重1质量（正实数）和角度（0~360）
           return false
         }
 
@@ -939,7 +947,7 @@ export default {
           this.vertifyPlusFloat(data.testMassOne[2].firstLine2) &&
           this.vertifyFloat(data.testMassOne[3].firstLine3, true)
         if (!vertifiy) {
-          this.$pop('请输入正确的试重1振动幅值（正实数）和相位（0~360）')
+          this.$pop(vm.$t('doubledynamicBalance.errorInput4'))//请输入正确的试重1振动幅值（正实数）和相位（0~360）
           return false
         }
 
@@ -948,7 +956,7 @@ export default {
           this.vertifyPlusFloat(data.testMassTwo[6].firstLine6) &&
           this.vertifyFloat(data.testMassTwo[7].firstLine7, true)
         if (!vertifiy) {
-          this.$pop('请输入正确的增加试重2质量（正实数）和角度（0~360）')
+          this.$pop(vm.$t('doubledynamicBalance.errorInput5'))//请输入正确的增加试重2质量（正实数）和角度（0~360）
           return false
         }
 
@@ -961,7 +969,7 @@ export default {
           this.vertifyPlusFloat(data.testMassTwo[2].firstLine2) &&
           this.vertifyFloat(data.testMassTwo[3].firstLine3, true)
         if (!vertifiy) {
-          this.$pop('请输入正确的试重2振动幅值（正实数）和相位（0~360）')
+          this.$pop(vm.$t('doubledynamicBalance.errorInput6'))//请输入正确的试重2振动幅值（正实数）和相位（0~360）
           return false
         }
       }
@@ -981,7 +989,7 @@ export default {
             true
           )
         if (!vertifiy) {
-          this.$pop('请输入正确的残余振动幅值（正实数）和相位（0~360）')
+          this.$pop(vm.$t('singledynamicBalance.errorInput3'))//请输入正确的残余振动幅值（正实数）和相位（0~360）
           return false
         }
       }
@@ -995,7 +1003,7 @@ export default {
           this.vertifyFloat(data.residualOscillation[6].firstLine6) &&
           this.vertifyFloat(data.residualOscillation[7].firstLine7, true)
         if (!vertifiy) {
-          this.$pop('请检验增加配重质量（非负实数）和角度（0~360）')
+          this.$pop(vm.$t('singledynamicBalance.errorInput4'))//请检验增加配重质量（非负实数）和角度（0~360）
           return false
         }
       }
@@ -1038,7 +1046,7 @@ export default {
         data.residualOscillation[2].firstLine2 == '' &&
         data.residualOscillation[3].firstLine3 == ''
       ) {
-        this.$pop('残余幅值和相位不能为空！')
+        this.$pop(vm.$t('singledynamicBalance.errorInput5'))//残余幅值和相位不能为空！
       } else {
         this.drawLineCharts()
       }
@@ -1082,7 +1090,7 @@ export default {
       )
       let optionOne = {
         title: {
-          text: '校正面1',
+          text: vm.$t('singledynamicBalance.CorrectionSurface')+'1',//校正面
           textStyle: {
             color: '#fff',
           },
@@ -1260,7 +1268,7 @@ export default {
               silent: true,
               data: [
                 {
-                  name: '某个坐标',
+                  name: vm.$t('singledynamicBalance.certainCoordinate'),//某个坐标
                   coord: [
                     Number(params.setParam.Coordinate),
                     Number(data.testMassOne[5].firstLine5),
@@ -1286,7 +1294,7 @@ export default {
               silent: true,
               data: [
                 {
-                  name: '某个坐标',
+                  name: vm.$t('singledynamicBalance.certainCoordinate'),//某个坐标
                   // [坐标极值，配重角度]
                   coord: [
                     Number(params.setParam.Coordinate),
@@ -1305,7 +1313,7 @@ export default {
       }
       let optionTwo = {
         title: {
-          text: '校正面2',
+          text: vm.$t('singledynamicBalance.CorrectionSurface')+'2',//校正面
           textStyle: {
             color: '#fff',
           },
@@ -1483,7 +1491,7 @@ export default {
               silent: true,
               data: [
                 {
-                  name: '某个坐标',
+                  name: vm.$t('singledynamicBalance.certainCoordinate'),//某个坐标
                   coord: [
                     Number(params.setParam.Coordinate),
                     Number(data.testMassTwo[7].firstLine7),
@@ -1509,7 +1517,7 @@ export default {
               silent: true,
               data: [
                 {
-                  name: '某个坐标',
+                  name: vm.$t('singledynamicBalance.certainCoordinate'),//某个坐标
                   coord: [
                     Number(params.setParam.Coordinate),
                     Number(data.residualOscillation[7].firstLine7),

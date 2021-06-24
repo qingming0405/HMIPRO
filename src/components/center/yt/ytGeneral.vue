@@ -31,7 +31,7 @@
           class="general-scroll"
           :ref='"general_scroll" +key'
         >
-          <div v-for="(group, groupkey, i) in param.mac_group">
+          <div v-for="(group, groupkey) in param.mac_group">
             <div class="general-view-content-grout-title">{{ groupkey }}</div>
             <div
               class="general-view-content"
@@ -129,35 +129,44 @@ export default {
       mac_group: {},
     }
   },
+  computed: {
+    generalsearchmac() {
+      if (this.general[this.currentKey]) {
+        return this.general[this.currentKey].searchmac
+      }
+    },
+  },
   created() {
     this.$store.commit('set_keepAlive', {
       method: 'add',
       keepAlive: 'ytGeneral',
     })
-    this.$watch(
-      function () {
-        // 第一个函数就是处理你要监听的属性，只要将其return出去就行
-        return this.general[this.currentKey].searchmac
-      },
-      function (val) {
-        const param = this.general[this.currentKey]
-        param.mac_group = {}
-        val.forEach((item) => {
-          if (param.mac_group[item.fullTName] === undefined) {
-            param.mac_group[item.fullTName] = []
-          }
-          /* 匹配下拼音 */
-          // if (this.searchKey != "") {
-          if (this.pinyin.match(item.name, this.searchKey)) {
-            item.isShow = true
-          } else {
-            item.isShow = false
-          }
-          // }
-          param.mac_group[item.fullTName].push(item)
-        })
-      }
-    )
+    // this.$watch(
+    //   function () {
+    //     // 第一个函数就是处理你要监听的属性，只要将其return出去就行
+    //     return this.general[this.currentKey].searchmac
+    //   },
+    //   function (val) {
+    //     const param = this.general[this.currentKey]
+    //     if (param) {
+    //       param.mac_group = {}
+    //       val.forEach((item) => {
+    //         if (param.mac_group[item.fullTName] === undefined) {
+    //           param.mac_group[item.fullTName] = []
+    //         }
+    //         /* 匹配下拼音 */
+    //         // if (this.searchKey != "") {
+    //         if (this.pinyin.match(item.name, this.searchKey)) {
+    //           item.isShow = true
+    //         } else {
+    //           item.isShow = false
+    //         }
+    //         // }
+    //         param.mac_group[item.fullTName].push(item)
+    //       })
+    //     }
+    //   }
+    // )
   },
   methods: {
     getMacData(requestData) {
@@ -245,6 +254,31 @@ export default {
             let item = value.shift()
             this.openChartList(item.key, item.state)
           }
+        }
+      },
+      deep: true,
+      immediate: true,
+    },
+    generalsearchmac: {
+      handler(val) {
+        const param = this.general[this.currentKey]
+        if (param) {
+          param.mac_group = {}
+          let mac_group = {}
+          val.forEach((item) => {
+            if (mac_group[item.fullTName] === undefined) {
+              mac_group[item.fullTName] = []
+            }
+            /* 匹配下拼音 */
+            if (this.pinyin.match(item.name, this.searchKey)) {
+              item.isShow = true
+            } else {
+              item.isShow = false
+            }
+            mac_group[item.fullTName].push(item)
+          })
+          this.$set(param, 'mac_group', mac_group)
+          this.$forceUpdate()
         }
       },
       deep: true,

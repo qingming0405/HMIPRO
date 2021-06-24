@@ -42,14 +42,14 @@
         @click="search"
         v-show="chartData[currentKey].body.length > 0"
       >
-        查询
+        <!-- 查询 -->{{$t('Common.inquiry')}}
       </button>
-      <button @click="dataRetrieval">数据检索</button>
+      <button @click="dataRetrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
       <button
         @click="dataExport"
         v-show="chartData[currentKey].body.length > 0"
       >
-        导出数据
+        <!-- 导出数据 -->{{$t('Common.derivedData')}}
       </button>
     </div>
   </div>

@@ -13,6 +13,9 @@ const oil = {
       keepAlive: 'snOil',
     })
   },
+  deactivated () {
+    clearInterval(this.snOil[key].timer)
+  },
   methods: {
     openChartList (key, type) {
       if (typeof key !== 'string') return

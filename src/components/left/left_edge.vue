@@ -250,6 +250,7 @@ export default {
       requiredMac: requiredMac(), // (系统日志)可以由机组打开的图谱
       requiredTree: requiredTree(),
       logoUrl: 'logo.png',
+      timer: null,
     }
   },
   mounted() {
@@ -928,36 +929,250 @@ export default {
       res.ch_class
         ? (key = `${res.mac_id}_${res.ch_class}`)
         : (key = res.mac_id)
-      let arr = this.$store.state.pos[key]
+      let arr = cloneObj(this.$store.state.pos[key], true)
       // 获取到机组的信息，去获取测点
       let index = 0
+      console.log(this.$store.state.checkMsg.pos)
       if (!arr) {
-        /* 如果没有数据 ，一直去取，一共取到100s,没有数据就算*/
-        let timer = setInterval(() => {
+        // /* 如果没有数据 ，一直去取，一共取到100s,没有数据就算*/
+        /* this.timer = setInterval(() => {
           arr = this.$store.state.pos[key]
           index++
           if (arr || index == 2000) {
-            clearInterval(timer)
+            clearInterval(this.timer)
             this.posArray = arr
+            
           }
-        }, 50)
+        }, 50) */
+        // 获取到机组的信息，去获取测点
+        // if (arr) {
+        //   this.posArray = arr
+        // } else {
+        this.$getApi
+          .queryAllPositionsByMacId({
+            mac_id: res.mac_id,
+            m_type: res.m_type,
+            t_root: res.t_root,
+            ch_class: res.ch_class,
+          })
+          .then((res1) => {
+            if (res1) {
+              console.log('新增')
+              this.setfdModelTitile(res1, `${res.mac_id}_${res.ch_class}`)
+              this.savePosInfo(res1, key, res.mac_id, res.m_type)
+            }
+          })
+        // }
       } else {
-        /* 如果有数据 */
-        // let newArr
-        // let timer = setInterval(() => {
-        //   newArr = this.$store.state.pos[key]
-        //   index++
-        //   //去store中获取100s,验证数据是否有更新
-        //   if (arr !== newArr || index == 2000) {
-        //     clearInterval(timer)
-        //     this.posArray = newArr
-        //   }
-        //   /* 时间到了也没有更新，那就用原来的数据 */
-        //   if (index == 2000) {
-        //     this.posArray = arr
-        //   }
-        // }, 50)
-        this.posArray = arr
+        this.posArray = cloneObj(arr, true)
+        this.setFirstPos(this.posArray)
+      }
+    },
+    //选中机组后获取该机组下存在的风机设备
+    setfdModelTitile(res, key) {
+      let modelTitleArr = []
+      // let modelTitle = {}
+      let titile = [
+        {
+          name: this.$t('FdModel.locName1'), //'传动链',
+          router: 'fddrivechain',
+          isChoose: false,
+        },
+        {
+          name: this.$t('FdModel.locName2'), //'塔筒',
+          router: 'fdtowerdrum',
+          isChoose: false,
+        },
+        {
+          name: this.$t('FdModel.locName3'), //'螺栓',
+          router: 'fdbolt',
+          isChoose: false,
+        },
+        {
+          name: this.$t('FdModel.locName4'), //'叶轮',
+          router: 'fdimpeller',
+          isChoose: false,
+        },
+        {
+          name: this.$t('FdModel.locName5'), //'油液',
+          router: 'fdoil',
+          isChoose: false,
+        },
+        {
+          name: this.$t('FdModel.locName6'), //'锚栓',
+          router: 'fdanchorbolt',
+          isChoose: false,
+        },
+        {
+          name: this.$t('FdModel.locName7'), //'基础',
+          router: 'fdbasics',
+          isChoose: false,
+        },
+      ]
+      let routerpath = this.$route.name
+      // 存在的风机部件
+      for (let i = 0; i < 7; i++) {
+        let key = i + 1
+        let titleitem = titile[i]
+        if (res[`positions${key}`] === 1) {
+          modelTitleArr.push(titleitem)
+        }
+      }
+      // 判断当前页面是否存在 ，存在：。。。 不存在跳转到第一个部件
+      if (modelTitleArr.length) {
+        let flag = false
+        modelTitleArr.forEach((item) => {
+          // 当前页面 存在部件
+          if (item.router === routerpath) {
+            item.isChoose = true
+            flag = true
+          }
+        })
+        // 不存在该部件
+        if (!flag) {
+          modelTitleArr[0].isChoose = true
+        }
+      }
+      // let data = {
+      //   arr:modelTitleArr,
+      //   m_id:this.$store.state.checkMsg.mac.mac_id
+      // }
+      this.$store.commit('setWindmodelTitle', { key: key, data: modelTitleArr })
+    },
+    savePosInfo(res, key, mac_id, m_type) {
+      let positions = res.positions
+      if (positions && positions.length > 0) {
+        /*增加窑结圈和滚皮脱落测点start==================== */
+        if (positions[0].machine_id == '19071214082895667') {
+          let obj = {
+            name: this.$t('HeaderEdge.yaojiequanPos'), //'窑结圈指数',
+            position_name: this.$t('HeaderEdge.yaojiequanPos'), //'窑结圈指数',
+            isShow: true,
+            position_id: 0,
+            position_type: 99,
+            dgm_type: positions[0].dgm_type,
+            machine_id: positions[0].machine_id,
+            posFlag: `${positions[0].machine_id}_${0}_${99}`,
+          }
+          positions.push(obj)
+        }
+        if (
+          positions[0].machine_id == '19070513381857008' ||
+          positions[0].machine_id == '19070513402674168'
+        ) {
+          let obj = {
+            name: this.$t('HeaderEdge.gunpituoluoPos'), //'辊皮脱落指数',
+            position_name: this.$t('HeaderEdge.gunpituoluoPos'), //'辊皮脱落指数',
+            isShow: true,
+            position_id: 0,
+            position_type: 99,
+            dgm_type: positions[0].dgm_type,
+            machine_id: positions[0].machine_id,
+            posFlag: `${positions[0].machine_id}_${0}_${99}`,
+          }
+          positions.push(obj)
+        }
+        /*end=====================================================================*/
+        positions.forEach((item) => {
+          item.name = item.position_name
+          item.isChoose = false
+          item.isShow = true
+          item.posFlag = `${item.machine_id}_${item.position_id}_${item.position_type}`
+          if (item.tt_ch_type == null && item.tt_ch_type == undefined) {
+            item.ch_type = item.tt_ch_type
+          }
+          if (item.tt_ch_id == null && item.tt_ch_id == undefined) {
+            item.ch_id = item.tt_ch_id
+          }
+        })
+        this.$store.commit('getMsg', {
+          key: 'pos',
+          msg: positions,
+          keys: key,
+        })
+        let chs = []
+        let chArray = []
+        // 通过遍历测点获取通道
+        positions.forEach((pos) => {
+          if (chs.indexOf(`${pos.channel_type}_${pos.channel_id}`) == -1) {
+            chs.push(`${pos.channel_type}_${pos.channel_id}`)
+            chArray.push({
+              type: pos.channel_type,
+              ch_id: pos.channel_id,
+              name: pos.channel_name,
+              flag: `${pos.channel_type}_${pos.channel_id}`,
+              isChecked: true,
+              isShow: true,
+              id: chs.length - 1,
+              isChannel: true,
+            })
+          }
+        })
+        this.chArray = chArray
+        ;(this.channel.val = this.$t('HeaderEdge.all')), //'全部'
+          /* 如果是机泵，也需要以机组为key在系统里保留一份测点 */
+          (this.posArray = positions)
+        this.setFirstPos(positions)
+        if (key.includes('_')) {
+          // 如果是机泵，需要再存一份以macid 为key的数据
+          if (!this.$store.state.pos[mac_id]) {
+            let requestData = {
+              mac_id,
+              m_type,
+              t_root: 0,
+            }
+            this.$getApi.queryAllPositionsByMacId(requestData).then((res) => {
+              if (res && res.positions) {
+                /*增加窑结圈和滚皮脱落测点start==================== */
+                if (res.positions[0].machine_id == '19071214082895667') {
+                  let obj = {
+                    name: this.$t('HeaderEdge.yaojiequanPos'), //'窑结圈指数',
+                    position_name: this.$t('HeaderEdge.yaojiequanPos'), //'窑结圈指数',
+                    isShow: true,
+                    position_id: 0,
+                    position_type: 99,
+                    dgm_type: res.positions[0].dgm_type,
+                    machine_id: res.positions[0].machine_id,
+                    posFlag: `${res.positions[0].machine_id}_${0}_${99}`,
+                  }
+                  res.positions.push(obj)
+                }
+                if (
+                  res.positions[0].machine_id == '19070513381857008' ||
+                  res.positions[0].machine_id == '19070513402674168'
+                ) {
+                  let obj = {
+                    name: this.$t('HeaderEdge.gunpituoluoPos'), //'辊皮脱落指数',
+                    position_name: this.$t('HeaderEdge.gunpituoluoPos'), //'辊皮脱落指数',
+                    isShow: true,
+                    position_id: 0,
+                    position_type: 99,
+                    dgm_type: res.positions[0].dgm_type,
+                    machine_id: res.positions[0].machine_id,
+                    posFlag: `${res.positions[0].machine_id}_${0}_${99}`,
+                  }
+                  res.positions.push(obj)
+                }
+                /*增加窑结圈和滚皮脱落测点end==================== */
+                res.positions.forEach((item) => {
+                  item.posFlag = `${item.machine_id}_${item.position_id}_${item.position_type}`
+                  item.name = item.position_name
+                  if (item.tt_ch_type == null && item.tt_ch_type == undefined) {
+                    item.ch_type = item.tt_ch_type
+                  }
+                  if (item.tt_ch_id == null && item.tt_ch_id == undefined) {
+                    item.ch_id = item.tt_ch_id
+                  }
+                })
+                this.$store.commit('getMsg', {
+                  key: 'pos',
+                  msg: res.positions,
+                  keys: mac_id,
+                })
+              }
+            })
+          }
+        }
       }
     },
     /* 选择测点 */
@@ -1161,15 +1376,25 @@ export default {
           /* 获取参数 */
           /* 重复选择机组的时候，不直接return */
           if (oldValue) {
+            //若二次选择当选选中机组/机泵，清空测点选择
             if (newValue.pump_id) {
-              if (newValue.pump_id === oldValue.pump_id) return
+              if (newValue.pump_id === oldValue.pump_id) {
+                this.posArray.forEach((pos) => {
+                  pos.isChoose = false
+                })
+                return
+              }
             } else if (newValue.mac_id === oldValue.mac_id) {
+              this.posArray.forEach((pos) => {
+                pos.isChoose = false
+              })
               return
             }
           }
           this.mac.val = newValue.mac_me || newValue.pump_name
           this.mac.msg = cloneObj(newValue, true)
           this.mac.gjMacName = this.mac.msg.mac_name
+          clearInterval(this.timer)
           this.getPosInfo(this.mac.msg)
         } else {
           this.mac.val = ''
@@ -1183,6 +1408,7 @@ export default {
     '$store.state.checkMsg.pos': {
       handler(value) {
         if (value != null) {
+          this.choosePos(value)
           this.pos.val = value.name
           this.pos.msg = value
         } else {

@@ -32,7 +32,7 @@
           class="pop-btn pop-btn-ok"
           @click="closeAlert(1)"
         >
-         {{vm.$t('Common.sureBtn')}}
+          {{vm.$t('Common.sureBtn')}}
         </button>
         <!-- 取消 -->
         <button
@@ -71,9 +71,9 @@ export default {
   //import引入的组件需要注入到对象中才能使用
   name: 'PopBox',
   data() {
-    const vm = window.vm;
+    const vm = window.vm
     return {
-      vm:vm,
+      vm: vm,
       offset: {
         x: 0,
         y: 0,
@@ -95,7 +95,7 @@ export default {
   props: {
     title: {
       type: String,
-      default: '提示',//'提示',
+      default: '提示', //'提示',
     },
     content: {
       type: String,
@@ -113,8 +113,8 @@ export default {
       },
     },
   },
-  created(){
-    this.title = vm.$t('Common.tips')//'提示'
+  created() {
+    this.title = vm.$t('Common.tips') //'提示'
   },
   mounted() {
     let that = this
@@ -206,7 +206,7 @@ export default {
     display: flex;
     align-items: center;
     justify-content: center;
-    z-index: 10;
+    z-index: 999;
     .pop-box {
       width: 260px;
       min-height: 124px;

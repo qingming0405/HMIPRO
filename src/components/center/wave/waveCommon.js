@@ -853,10 +853,8 @@ export default {
         case 4 /* 图表跳转图谱 */:
           this.paramsData[key].isShow = true;
           if (state.currentTime != 0) {
-            this.paramsData[key].getReal = {
-              isReal: false,
-              class: "disable-btn"
-            };
+            this.paramsData[key].getReal.isReal = false;
+            this.paramsData[key].getReal.class = "disable-btn"
             this.requestData.wave.isReal = 0
           }
           this.currentIndex = keyArr.indexOf(openKey);
@@ -1472,10 +1470,8 @@ export default {
             formatter: function (params) {
               that.$emit("loadingImg", true);
               that.$store.commit("setCurrentTime", params.val);
-              paramsData.getReal = {
-                isReal: false,
-                class: "disable-btn"
-              };
+              paramsData.getReal.isReal = false
+              paramsData.getReal.isReal = "disable-btn"
               paramsData.updateTime = params.val;
               const wave = that.requestData.wave;
               wave.currTime = [params.val];

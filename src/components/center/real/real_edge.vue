@@ -39,7 +39,8 @@
               :title="value.val"
             >
               {{ value.val }}
-              <span v-show="item.head[i].val == '测点'"
+              <!-- 测点 -->
+              <span v-show="item.head[i].val == $t('Common.pos')"
                 >({{ value.unit }})</span
               >
             </td>
@@ -51,9 +52,9 @@
       </div>
       <div class="search-data">
         <button @click="getRealData" class="get-real-data" ref="getRealData">
-          实时数据
+          <!-- 实时数据 -->{{$t('Common.realData')}}
         </button>
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
       </div>
     </div>
   </div>

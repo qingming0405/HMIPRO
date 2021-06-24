@@ -4,7 +4,7 @@
       <div class="table_block">
         <div class="item">
           <div class="index-table box-shadow">
-            <div class="table-header list-title">系统信息</div>
+            <div class="table-header list-title"><!-- 系统信息 -->{{$t('server.systemMessage')}}</div>
             <ul class="info-list">
               <li class="info-li" v-for="item in systemInfo">
                 <span :title="item.title">{{item.title}}</span>
@@ -23,24 +23,24 @@
                 <span :title="item.info">{{item.info}}</span>
               </li>
             </ul>
-            <div v-if="cpuInfo.length === 0" class="noData">数据加载中...</div>
+            <div v-if="cpuInfo.length === 0" class="noData"><!-- 数据加载中 -->{{$t('server.loading')}}...</div>
           </div>
         </div>
         <div class="item">
           <div class="index-table box-shadow">
-            <div class="table-header list-title">内存信息</div>
+            <div class="table-header list-title"><!-- 内存信息 -->{{$t('server.MemoryInfo')}}</div>
             <ul class="info-list">
               <li class="info-li" v-for="item in memoryInfo">
                 <span :title="item.title">{{item.title}}</span>
                 <span :title="item.info">{{item.info}}</span>
               </li>
             </ul>
-            <div v-if="memoryInfo.length === 0" class="noData">数据加载中...</div>
+            <div v-if="memoryInfo.length === 0" class="noData"><!-- 数据加载中 -->{{$t('server.loading')}}...</div>
           </div>
         </div>
         <div class="item item1">
           <div class="index-table box-shadow">
-            <div class="table-header list-title">磁盘信息</div>
+            <div class="table-header list-title"><!-- 磁盘信息 -->{{$t('server.DiskInfo')}}</div>
             <ul class="info-list">
               <li class="info-li">
                 <span v-for="item in diskInfo" :title="item.name">{{item.name}}</span>
@@ -58,12 +58,12 @@
                 <span v-for="item in diskInfo" :title="item.used">{{item.used}}</span>
               </li>
             </ul>
-            <div v-if="diskInfo.length === 0" class="noData">数据加载中...</div>
+            <div v-if="diskInfo.length === 0" class="noData"><!-- 数据加载中 -->{{$t('server.loading')}}...</div>
           </div>
         </div>
         <div class="item item2">
           <div class="index-table box-shadow">
-            <div class="table-header list-title">网络信息</div>
+            <div class="table-header list-title"><!-- 网络信息 -->{{$t('server.InternetInfo')}}</div>
             <ul class="info-list">
               <li class="info-li">
                 <span v-for="item in networkInfo" :title="item.deviceName">{{item.deviceName}}</span>
@@ -114,7 +114,7 @@
                 >{{item.receiveDropPackage}}</span>
               </li>
             </ul>
-            <div v-if="networkInfo.length === 0" class="noData">数据加载中...</div>
+            <div v-if="networkInfo.length === 0" class="noData"><!-- 数据加载中 -->{{$t('server.loading')}}...</div>
           </div>
         </div>
       </div>

@@ -53,22 +53,6 @@ export default {
     })
   },
   watch: {
-    // '$store.state.checkMsg.mac': {
-    //   handler(newVal, oldVal) {
-    //     if (newVal != null) {
-    //       if ((oldVal && newVal.machine_id != oldVal.machine_id) || !oldVal) {
-    //         clearInterval(this.timer)
-    //         let fn = () => {
-    //           this.getMacInfo()
-    //           return fn
-    //         }
-    //         this.timer = setInterval(fn(), 6000)
-    //       }
-    //     }
-    //   },
-    //   deep: true,
-    //   immediate: true,
-    // },
     '$store.state.gjModelMsg': {
       handler(value) {
         if (value.length !== 0) {
@@ -255,27 +239,66 @@ export default {
       /* 从vuex中获取当前机组 */
       const param = this.gjModel[this.currentKey]
       let mac = param.mac
-      if (this.$store.state.checkMsg.mac.mac_id != mac.mac_id) {
-        this.$store.commit('getCheckMsg', {
-          msg: cloneObj(mac),
-          type: 'mac',
+      let macArray = this.$store.state.mac[mac.t_id]
+      let choosemac = this.$store.state.checkMsg.mac
+      let choosetree = cloneObj(this.$store.state.checkMsg.tree)
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        if (choosemac !== null && choosemac.pump_id == mac.pump_id) {
+          if (choosemac.t_id != choosetree.t_id) {
+            let treeArray = this.$store.state.tree
+            treeArray.forEach((tree) => {
+              if (choosemac.t_id == tree.t_id) {
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(tree),
+                  type: 'tree',
+                })
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(choosemac),
+                  type: 'mac',
+                })
+                resolve('成功')
+              }
+            })
+          }
+          resolve('成功')
+        } else {
+          for (let i = 0; i < macArray.length; i++) {
+            if (macArray[i].pump_id == mac.pump_id) {
+              /* 设置当前的机组 */
+              if (macArray[i].t_id != choosetree.t_id) {
+                let treeArray = this.$store.state.tree
+                treeArray.forEach((tree) => {
+                  if (macArray[i].t_id == tree.t_id) {
+                    this.$store.commit('getCheckMsg', {
+                      msg: cloneObj(tree),
+                      type: 'tree',
+                    })
+                  }
+                })
+              }
+              this.$store.commit('getCheckMsg', {
+                msg: macArray[i],
+                type: 'mac',
+              })
+              resolve('成功')
+              break
+            }
+          }
+        }
+      }).then(() => {
+        this.$store.commit('setGeneralModel', {
+          key: this.currentKey,
+          router: 'gjModelInfo',
         })
-      }
-      this.$store.commit('setGeneralModel', {
-        key: this.currentKey,
-        router: 'gjModelInfo',
+        let params = {
+          key: this.currentKey,
+          val: this.$t('YtModel.macModel'), //'设备模型',
+          name: 'gjModelInfo',
+          icon: 'icon-shijingsanwei-',
+        }
+        this.$bus.$emit('getPath', params)
       })
-      /* 设置当前的机组 */
-      // this.$router.push({
-      //   name: 'gjModelInfo',
-      // })
-      let params = {
-        key: this.currentKey,
-        val: this.$t('YtModel.macModel'),//'设备模型',
-        name: 'gjModelInfo',
-        icon: 'icon-shijingsanwei-',
-      }
-      this.$bus.$emit('getPath', params)
     },
   },
 }

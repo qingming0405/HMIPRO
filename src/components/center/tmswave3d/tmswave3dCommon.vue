@@ -1,6 +1,6 @@
 <template>
   <div class="wave3d box-shadow">
-    <div class="title">当前频率：{{ showFrequence }}</div>
+    <div class="title"><!-- 当前频率 -->{{$t('wave3d.CurrentFreq')}}：{{ showFrequence }}</div>
     <div
       class="histogram"
       v-show="histogramIsShow"
@@ -13,7 +13,7 @@
       @contextmenu.prevent="showMenu(val.MenuShowflag)"
     >
       <div class="valid">
-        有效频率:
+        <!-- 有效频率 -->{{$t('tmsTrend3d.effectFreq')}}:
         <input
           type="number"
           v-model="val.minValid"
@@ -25,7 +25,7 @@
         <button
           class="botton"
           @click="valid(val)"
-        >查询</button>
+        ><!-- 查询 -->{{$t('Common.inquiry')}}</button>
       </div>
       <!-- 右击列表 -->
       <ul
@@ -38,16 +38,16 @@
           v-if="!val.isHanning"
           @click="sethanning(val)"
         >
-          <i class="iconfont icon-hanningchuang_huaban"></i>汉宁窗
+          <i class="iconfont icon-hanningchuang_huaban"></i><!-- 汉宁窗 -->{{$t('icon.hanning')}}
         </li>
         <li
           v-else
           @click="sethanning(val)"
         >
-          <i class="iconfont icon-hanningchuang_huaban"></i>取消汉宁窗
+          <i class="iconfont icon-hanningchuang_huaban"></i><!-- 取消汉宁窗 -->{{$t('wave3d.CancelHanning')}}
         </li>
         <li @click="savePic(key)">
-          <i class="iconfont icon-savemage_huaban"></i>保存界面
+          <i class="iconfont icon-savemage_huaban"></i><!-- 保存为图片 -->{{$t('icon.SavePicture')}}
         </li>
       </ul>
       <div
@@ -64,8 +64,8 @@
       </div>
     </div>
     <div class="search-3d-data">
-      <button @click="timeList">数据列表</button>
-      <button @click="retrieval">数据检索</button>
+      <button @click="timeList"><!-- 数据列表 -->{{$t('tmsTrend3d.DataList')}}</button>
+      <button @click="retrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
     </div>
   </div>
 </template>
@@ -149,7 +149,7 @@ export default {
           requesetData: null,
           empty: {
             isShow: false,
-            text: '无数据',
+            text: this.$t('Common.noDataText')//'无数据'
           },
         })
         let startTime = this.$store.state.srcParams.time.start
@@ -182,7 +182,7 @@ export default {
           if (result[0].length === 0) return //第一条线路没有值
           // let requesetData_Time = chartData.requesetData_Time
           chartData.requesetData_Time.lineInfo = result
-          chartData.requesetData_Time.route = { name: '线路1', index: 0 } //默认第一条路线
+          chartData.requesetData_Time.route = { name: this.$t('tmsTrend3d.Line1'), index: 0 } //线路1 默认第一条路线
           /* 第一次自动打开搜索框 */
           this.retrieval()
         }
@@ -258,7 +258,7 @@ export default {
       let option = {
         title: {
           show: true,
-          text: '左视图',
+          text: this.$t('wave3d.leftView'),//'左视图',
           textAlign: 'center',
           x: 'right',
           textStyle: {
@@ -281,7 +281,7 @@ export default {
         },
         xAxis: [
           {
-            name: '序号',
+            name: this.$t('Common.order'),//'序号',
             nameTextStyle: {
               color: this.lineColor, //坐标名颜色
             },
@@ -304,7 +304,7 @@ export default {
         ],
         yAxis: [
           {
-            name: '幅值',
+            name: this.$t('Common.amplitude'),//'幅值'
             nameTextStyle: {
               color: this.lineColor, //坐标名颜色
             },
@@ -322,7 +322,7 @@ export default {
         ],
         series: [
           {
-            name: '幅值',
+            name: this.$t('Common.amplitude'),//'幅值'
             type: 'bar',
             barWidth: '40%',
             data: yVal,
@@ -420,7 +420,7 @@ export default {
       let option = {
         xAxis3D: {
           type: 'value',
-          name: '频率(Hz)',
+          name: this.$t('Common.freq')+'(Hz)',//频率
 
           scale: true,
           nameTextStyle: {
@@ -440,7 +440,7 @@ export default {
         },
         yAxis3D: {
           type: 'category',
-          name: '距离(m)',
+          name: this.$t('tmsTrend3d.distance')+'(m)',//距离
           nameGap: 80,
           data: value.dataY,
           axisLabel: {
@@ -462,7 +462,7 @@ export default {
         },
         zAxis3D: {
           type: 'value',
-          name: '幅值',
+          name: this.$t('Common.amplitude'),//'幅值'
           nameGap: 30,
           // max: 'dataMax',
           nameTextStyle: {
@@ -505,9 +505,9 @@ export default {
           trigger: 'item',
           formatter: (prams, d, callback) => {
             this.update_frequence(prams.value[0])
-            return `频率:${prams.value[0]}Hz<br/>
-                    幅值:${prams.value[2]}<br/>
-                    距离:${prams.value[1]}m<br/>`
+            return `${this.$t('Common.freq')}:${prams.value[0]}Hz<br/>
+                    ${this.$t('Common.amplitude')}:${prams.value[2]}<br/>
+                    ${this.$t('tmsTrend3d.distance')}:${prams.value[1]}m<br/>`//频率'幅值'距离
           },
         },
         series: series,
@@ -515,7 +515,6 @@ export default {
       // window.addEventListener("resize", function() {
       //   myChart.resize();
       // });
-
       // 使用刚指定的配置项和数据显示图表。
       myChart.setOption(option, true)
       myChart.resize()
@@ -561,7 +560,7 @@ export default {
       var pictureURI = picture.toDataURL()
       let downLoad = document.createElement('a')
       downLoad.href = pictureURI
-      downLoad.download = '3D频谱图.png'
+      downLoad.download = this.$t('Common.wave3d') + '.png'//三维频谱图
       downLoad.dispatchEvent(new MouseEvent('click'))
     },
     /* 搜索框 */
@@ -615,11 +614,11 @@ export default {
         maxValid = ''
       } else {
         if (minValid < 0 || maxValid < 0) {
-          this.$pop('有效频段需要大于0')
+          this.$pop(this.$t('tmsTrend3d.minFreqlimit'))//有效频段需要大于0
           return
         }
         if (minValid >= maxValid) {
-          this.$pop('最大有效频段必须大于最小有效频段')
+          this.$pop(this.$t('Common.popFreqBandText'))//最大有效频段必须大于最小有效频段
           return
         }
       }

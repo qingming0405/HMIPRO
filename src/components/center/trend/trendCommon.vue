@@ -7,7 +7,8 @@
       :key="index"
       v-show="data.isShow"
     >
-      <div :id="'screen-' + index"
+      <div
+        :id="'screen-' + index"
         class="trend-chart"
         v-for="(item, idx) in data.chart"
         :key="item.chartId"
@@ -60,10 +61,10 @@
           >
             <!-- <li>显示/影藏转速</li> -->
             <li @click.stop="dataInput(idx)">
-              <i class="iconfont icon-exportdata_huaban"></i>数据导出
+              <i class="iconfont icon-exportdata_huaban"></i><!-- 数据导出 -->{{$t('icon.dataExport')}}
             </li>
             <li @click.stop="savePic(idx)">
-              <i class="iconfont icon-savemage_huaban"></i>保存
+              <i class="iconfont icon-savemage_huaban"></i><!-- 保存 -->{{$t('icon.SavePicture')}}
             </li>
           </ul>
         </div>
@@ -72,21 +73,25 @@
         <button
           class="addPosTrend"
           @click="addTrend('new')"
-        >新增图谱</button>
+        >
+          <!-- 新增图谱 -->{{$t('trend.addMap')}}
+        </button>
         <button
           @click="realBtn"
           class="get-real-data"
           :class="{ 'no-real-date': !trendData[currentKey].realBtn }"
         >
-          实时数据
+          <!-- 实时数据 -->{{$t('Common.realData')}}
         </button>
         <button
           @click="getWave"
           :class="{ 'no-real-date': !trendData[currentKey].getWave }"
         >
-          波形
+          <!-- 波形 -->{{$t('trend.wave')}}
         </button>
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{$t('Common.retrieval')}}
+        </button>
       </div>
     </div>
   </div>
@@ -224,7 +229,7 @@ export default {
     },
     //右键删除测点
     contextmenu(e, data, key) {
-      let text = [{ type: 'del', val: '删除' }]
+      let text = [{ type: 'del', val: this.$t('trend.del') }] //删除
       const size = e.currentTarget.getBoundingClientRect()
       this.$list({
         text,
@@ -316,9 +321,21 @@ export default {
             timer: [], //实时数据请求的定时器,
             isShow: true,
             dataType: [
-              { val: '定时历史数据', isChecked: true, type: 1 },
-              { val: '启停机数据', isChecked: false, type: 2 },
-              { val: '报警存储数据', isChecked: false, type: 3 },
+              {
+                val: this.$t('Common8000.TimedHisData'),
+                isChecked: true,
+                type: 1,
+              }, //定时历史数据
+              {
+                val: this.$t('Common8000.StartStopData'),
+                isChecked: false,
+                type: 2,
+              }, //启停机数据
+              {
+                val: this.$t('Common8000.AlarmStorageData'),
+                isChecked: false,
+                type: 3,
+              }, //报警存储数据
             ], //8000数据类型选择
           })
           this.addTrend()
@@ -370,7 +387,7 @@ export default {
         posType = checkMsg.pos.position_type
         let flag = matchRule(posType, 'trend')
         if (!flag) {
-          this.$pop('不支持此类测点')
+          this.$pop(this.$t('trend.dropPosLimit')) //不支持此类测点
           return
         }
       } else {
@@ -407,25 +424,25 @@ export default {
     // 生成随机颜色
     getRandomColor() {
       // 生成10~D9的三基色
-      let red = Math.floor(Math.random()*224 + 16)
-      let green = Math.floor(Math.random()*224 + 16)
-      let blue = Math.floor(Math.random()*224 + 16)
-      let color = '#' + red.toString(16) + green.toString(16) + blue.toString(16)
-      if(this.colorList.indexOf(color) >= 0) {
+      let red = Math.floor(Math.random() * 224 + 16)
+      let green = Math.floor(Math.random() * 224 + 16)
+      let blue = Math.floor(Math.random() * 224 + 16)
+      let color =
+        '#' + red.toString(16) + green.toString(16) + blue.toString(16)
+      if (this.colorList.indexOf(color) >= 0) {
         return this.getRandomColor()
       }
       return color
     },
     //添加测点
     add_pos(key, chart, posMsg) {
-      let chartDataLen 
-      (chart.data) && (chartDataLen =  Object.keys(chart.data).length)
+      let chartDataLen
+      chart.data && (chartDataLen = Object.keys(chart.data).length)
       let colorLen = this.colorList.length
       let color = '#000000'
-      if(chartDataLen < colorLen) {
+      if (chartDataLen < colorLen) {
         color = this.colorList[chartDataLen]
-      }
-      else {
+      } else {
         color = this.getRandomColor()
       }
       let pos_name = posMsg.position_name
@@ -479,9 +496,14 @@ export default {
       let predTime = this.trendData[this.currentKey].predTime
       let alp = this.trendData[this.currentKey].alp
       this.trendData[this.currentKey].chart.forEach((item, index) => {
-        let keyArr = []
+        let keyArr = {}
         for (let k in item.data) {
-          keyArr.push(`${item.data[k].pos.t_root}_${k}`)
+          // keyArr.push(`${item.data[k].pos.t_root}_${k}`)
+          // if(item.data[k].tendencyList && item.data[k].tendencyList.length > 0){
+          //   keyArr[`${item.data[k].pos.t_root}_${k}`] = item.data[k].tendencyList[item.data[k].tendencyList.length-1].saveTime
+          // } else {
+          keyArr[`${item.data[k].pos.t_root}_${k}`] = 0
+          // }
         }
         requestData = {
           key: keyArr,
@@ -497,20 +519,29 @@ export default {
           /* 请求实时数据，先请求一小时的历史数据，再循环请求 */
           requestDataSave.startTime = new Date().valueOf() - 60 * 60 * 1000 //实时数据是获取一小时前面的数据
           requestDataSave.endTime = new Date().valueOf()
+
           requestDataReal.isSave = 0
           requestDataReal.isReal = 1
-          // 先请求历史数据
-          this.getData(item, requestDataSave, type)
-          /* 再设置定时器请求实时数据 */
-          let timer = setInterval(() => {
-            let time = new Date().valueOf() //获取当前时间
-            requestDataReal.time = time
-            this.$getApi.getTendency(requestDataReal).then((res) => {
-              if (!res) return
-              this.realData(res, item)
-            })
-          }, 5000)
-          timers.push(timer) // 存放所有定时器
+          new Promise((resolve, reject) => {
+            // 先请求历史数据
+            this.getData(item, requestDataSave, type, true, resolve)
+          }).then((timeObj) => {
+            requestDataReal.key = timeObj
+            /* 再设置定时器请求实时数据 */
+            let timer = setInterval(() => {
+              let time = new Date().valueOf() //获取当前时间
+              requestDataReal.time = time
+              console.log(requestDataReal)
+              this.$getApi.getTendency(requestDataReal).then((res) => {
+                if (!res) return
+                this.realData(res, item, requestDataReal)
+              })
+            }, 5000)
+            timers.push(timer) // 存放所有定时器
+          })
+
+          console.log(requestDataReal.key)
+
           return
         } else if (type === 2) {
           requestData.isTrendPrediction = 1
@@ -522,13 +553,20 @@ export default {
       })
     },
     /* 普通数据检索 发送网络请求 */
-    getData(chart, requestData, type = 0, isResize) {
+    getData(
+      chart,
+      requestData,
+      type = 0,
+      isResize = true,
+      resolve = undefined
+    ) {
       this.$emit('loadingImg', true)
       this.$getApi.getTendency(requestData).then((res) => {
         this.$emit('loadingImg', false)
         if (res.msg === 0) {
           let data = res.data
           let flag = true //显示无数据
+          let time = {}
           for (let key in data) {
             let alarm = data[key].alarm || {}
             const cond = [
@@ -564,6 +602,21 @@ export default {
             if (tendencyList && tendencyList.length) {
               flag = false
             }
+            for (let k in requestData.key) {
+              let index = k.substring(2)
+              console.log(index)
+              if (index == key) {
+                if (type === 1) {
+                  //获取开启实时数据时的最后一波数据时间
+                  if (tendencyList && tendencyList.length) {
+                    time[k] = tendencyList[tendencyList.length - 1].saveTime
+                  } else {
+                    time[k] = new Date().valueOf() //若前一小时不存在数据则获取当前时间
+                  }
+                }
+              }
+            }
+
             let [mid, pid, ptype] = key.split('_')
             let k = `${mid}_${pid}_${ptype}`
             chart.data[k].tendencyList = tendencyList
@@ -586,17 +639,20 @@ export default {
                 tendencyList: tendencyList,
               })
             } else if (data[key].hasTrendPredict == 0) {
-              this.$pop('样本数量不足')
+              this.$pop(this.$t('trend.InsufficientSample'))
             }
           }
           if (type === 0 && flag) {
-            this.$pop('此测点在搜索时间内无数据')
+            this.$pop(this.$t('Common.noDataText')) //无数据
           }
           /* 多个chart 只更新一次 */
           clearTimeout(this.timer)
           this.timer = setTimeout(() => {
             this.setOption(isResize)
           }, 100)
+          if (type == 1) {
+            resolve(time)
+          }
         }
       })
     },
@@ -619,12 +675,13 @@ export default {
       }
     },
     /* 处理实时数据 */
-    realData(res, chart) {
+    realData(res, chart, requestData) {
       res = res.data
       let time = new Date().valueOf()
       for (let key in res) {
         let realInfo = res[key].realInfo
-        if (realInfo) if (!realInfo) continue
+        // if (realInfo)
+        if (!realInfo) continue
         /* 清除1小时之前的历史数据 */
         let tendencyList = chart.data[key].tendencyList
         for (let i = tendencyList.length - 1; i >= 0; i--) {
@@ -632,11 +689,28 @@ export default {
             tendencyList.splice(i, 1)
           }
         }
-        /* 加入新的数据 */
-        tendencyList.push({
-          saveTime: realInfo.saveTime,
+        console.log({
+          saveTime: realInfo.saveTime
+            ? realInfo.saveTime
+            : realInfo.saveTime_Com,
           tempValue: realInfo[chart.value],
         })
+        /* 加入新的数据 */
+        tendencyList.push({
+          saveTime: realInfo.saveTime
+            ? realInfo.saveTime
+            : realInfo.saveTime_Com,
+          tempValue: realInfo[chart.value],
+        })
+        for (let k in requestData.key) {
+          let index = k.substring(2)
+          if (index == key) {
+            //获取开启实时数据时的最后一波数据时间
+            requestData.key[k] = realInfo.saveTime
+              ? realInfo.saveTime
+              : realInfo.saveTime_Com
+          }
+        }
       }
       if (!document.getElementsByClassName('trend-chart-view')[0]) return //切换到其他图谱的时候不更新，dom消失会导致将界面更新为空白。
       this.setOption()
@@ -914,15 +988,15 @@ export default {
               /* 有些类型的测点不能跳转 */
               let flag = matchRule(posType, 'wave', pos.dgm_type, pos.t_root)
               if (!flag) {
-                this.$pop('该测点没有波形图')
+                this.$pop(this.$t('Common.noWaveAtPos')) //该测点没有波形图
                 return
               }
               /* 存储当前的时间点 */
               this.$store.commit('setCurrentTime', time)
               /* 获取波形图的key */
               key = 'wave_pos_' + key
-              let name = '波形频谱图'
-              let titleName = item.name + '波形频谱图'
+              let name = this.$t('Common.Wave') //波形频谱图
+              let titleName = item.name + this.$t('Common.Wave') //波形频谱图
               //跳转到波形图
               this.$bus.$emit('choiceChartType', key, name, titleName, true)
             }
@@ -974,10 +1048,11 @@ export default {
       ) {
         /* 询问是否替换该测点 */
         if (type == 200) {
-          this.$pop('该测点没有此图谱')
+          this.$pop(this.$t('Common.noPosChartTips')) //'该测点没有此图谱'
           return
         }
-        this.$pop({ content: '加入不同类型测点，是否要替换', btnNum: 2 }).then(
+        //'加入不同类型测点，是否要替换'
+        this.$pop({ content: this.$t('trend.addPosMatch'), btnNum: 2 }).then(
           (res) => {
             if (res) {
               const defaultCode = getdefaultCode(posMsg.dgm_type)
@@ -1000,7 +1075,7 @@ export default {
           }
         )
       } else if (chart.data[key]) {
-        this.$pop('当前图谱已存在该测点')
+        this.$pop(this.$t('trend.existPosTip')) //当前图谱已存在该测点
         return
       } else {
         this.add_pos(key, chart, posMsg)
@@ -1174,25 +1249,45 @@ export default {
       }
       let myData = []
       let body = trend.data
-      for (let key in body) {
-        body[key].tendencyList.forEach((value) => {
-          value.Time = getTime(value.saveTime)
-          myData.push({
-            测点名称: body[key].name,
-            特征值: eigenvalue,
-            x轴: value.Time,
-            y轴: value.tempValue,
+      if (this.$t('Common.posName') == '测点名称') {
+        for (let key in body) {
+          body[key].tendencyList.forEach((value) => {
+            value.Time = getTime(value.saveTime)
+            myData.push({
+              测点名称: body[key].name,
+              特征值: eigenvalue,
+              x轴: value.Time,
+              y轴: value.tempValue,
+            })
           })
-        })
+        }
+      } else {
+        for (let key in body) {
+          body[key].tendencyList.forEach((value) => {
+            value.Time = getTime(value.saveTime)
+            myData.push({
+              'Name Of Measuring Point': body[key].name,
+              eigenvalue: eigenvalue,
+              'x axis': value.Time,
+              'y axis': value.tempValue,
+            })
+          })
+        }
       }
-      let fields = ['测点名称', '特征值', 'x轴', 'y轴']
+
+      let fields = [
+        this.$t('Common.posName'),
+        this.$t('Common.eigenvalue'),
+        this.$t('Common.xAxis'),
+        this.$t('Common.yAxis'),
+      ] //'测点名称', '特征值', 'x轴', 'y轴'
       var Parser = require('json2csv').Parser
       let json2csvParser = new Parser({ fields })
       let csv = json2csvParser.parse(myData)
       csv = '\ufeff' + csv
       var aTag = document.createElement('a')
       var blob = new Blob([csv])
-      aTag.download = '趋势图数据.csv'
+      aTag.download = this.$t('trend.TrendData') + '.csv' //趋势图数据
       aTag.href = URL.createObjectURL(blob)
       aTag.click()
       URL.revokeObjectURL(blob)
@@ -1217,7 +1312,7 @@ export default {
       }).then((canvas) => {
         let downLoad = document.createElement('a')
         downLoad.href = canvas.toDataURL()
-        downLoad.download = '趋势图.png'
+        downLoad.download = this.$t('Common.trend') + '.png' //趋势图
         downLoad.dispatchEvent(new MouseEvent('click'))
       })
     },

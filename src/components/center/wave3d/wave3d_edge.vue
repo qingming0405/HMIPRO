@@ -32,7 +32,7 @@ export default {
     height: 200px;
     width: 323px;
     font-size: 10px;
-    z-index: 999;
+    z-index: 100;
   }
   .my-spectrum-3d-chart {
     height: calc(100% - 49px);

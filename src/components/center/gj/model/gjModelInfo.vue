@@ -107,9 +107,9 @@ import { cloneObj } from 'utils/utils.js'
 export default {
   name: 'gjModelInfo',
   data() {
-    const vm = window.vm;
+    const vm = window.vm
     return {
-      vm:vm,
+      vm: vm,
       gjModelInfo: {},
       currentKey: '',
     }
@@ -133,6 +133,9 @@ export default {
       deep: true,
       immediate: true,
     },
+  },
+  deactivated() {
+    clearInterval(this.gjModelInfo[this.currentKey].timer)
   },
   methods: {
     openChartList(key, type) {
@@ -437,11 +440,11 @@ export default {
     toAlarm(item) {
       if (item.dgm_type != 3) {
         if (item.ch_type == 2) {
-          this.$pop(vm.$t('Common.noAlarmTips'))//转速通道无报警！
+          this.$pop(vm.$t('Common.noAlarmTips')) //转速通道无报警！
           return
         }
         let key = `alarm_enter_${item.pump_id}_${item.dgmInfo.dgm_id}_${item.ch_type}_${item.ch_id}`
-        let name = vm.$t('Common.AlarmLog')//'报警日志'
+        let name = vm.$t('Common.AlarmLog') //'报警日志'
         this.$bus.$emit('choiceChartType', key, name)
         this.$store.commit('setChName', item.ch_name)
       } else {
@@ -548,14 +551,14 @@ export default {
             params.cxtLeft.textBaseline = 'middle'
             // 绘制文字（参数：要写的字，x坐标，y坐标）
             let axis1 = vm.$t('GjModelInfo.axis1'),
-                axis2 = vm.$t('GjModelInfo.axis2');
+              axis2 = vm.$t('GjModelInfo.axis2')
             params.cxtLeft.fillText(
-              axis1,//'1轴',
+              axis1, //'1轴',
               startPicX - 40,
               startPicY + newPH * 0.5
             )
             params.cxtLeft.fillText(
-              axis2,//'2轴',
+              axis2, //'2轴',
               startPicX + newPW + 40,
               startPicY + newPH * 0.5
             )
@@ -665,14 +668,14 @@ export default {
             params.cxtRight.textBaseline = 'middle'
             // 绘制文字（参数：要写的字，x坐标，y坐标）
             let axis3 = vm.$t('GjModelInfo.axis3'),
-                axis4 = vm.$t('GjModelInfo.axis4');
+              axis4 = vm.$t('GjModelInfo.axis4')
             params.cxtRight.fillText(
-              axis3,//'3轴',
+              axis3, //'3轴',
               startPicX - 40,
               startPicY + newPH * 0.5
             )
             params.cxtRight.fillText(
-              axis4,//'4轴',
+              axis4, //'4轴',
               startPicX + newPW + 40,
               startPicY + newPH * 0.5
             )
@@ -784,8 +787,16 @@ export default {
           //绘制ToolTip文字
           params.titleLeft.fillStyle = '#000'
           // this.titleLeft.fillText(item.chInfo, x+35, y + 70)
-          params.titleLeft.fillText(`${vm.$t('GjModelInfo.headChname')}:${chNames}`, x + 10, y + 70)//通道名称
-          params.titleLeft.fillText(`${vm.$t('GjModelInfo.headLoc')}:${chInfo}`, x + 10, y + 100)//安装位置
+          params.titleLeft.fillText(
+            `${vm.$t('GjModelInfo.headChname')}:${chNames}`,
+            x + 10,
+            y + 70
+          ) //通道名称
+          params.titleLeft.fillText(
+            `${vm.$t('GjModelInfo.headLoc')}:${chInfo}`,
+            x + 10,
+            y + 100
+          ) //安装位置
           params.titleLeft.restore()
         }
       } else {
@@ -844,12 +855,12 @@ export default {
             params.titleRight.fillStyle = '#000'
             // 安装位置：${item.chInfo}
             params.titleRight.fillText(
-              `${vm.$t('GjModelInfo.headChname')}:${item.ch_name}`,//通道名称
+              `${vm.$t('GjModelInfo.headChname')}:${item.ch_name}`, //通道名称
               x + 10,
               y + 910
             )
             params.titleRight.fillText(
-              `${vm.$t('GjModelInfo.headLoc')}:${item.chInfo}`,//安装位置
+              `${vm.$t('GjModelInfo.headLoc')}:${item.chInfo}`, //安装位置
               x + 10,
               y + 940
             )
@@ -912,16 +923,16 @@ export default {
       var str = ''
       switch (level) {
         case 0:
-          str = vm.$t('GjModelInfo.advice1');//'正常'
+          str = vm.$t('GjModelInfo.advice1') //'正常'
           break
         case 2:
-          str = vm.$t('GjModelInfo.advice2');//'需要注意'
+          str = vm.$t('GjModelInfo.advice2') //'需要注意'
           break
         case 3:
-          str = vm.$t('GjModelInfo.advice3');//'需要维修'
+          str = vm.$t('GjModelInfo.advice3') //'需要维修'
           break
         default:
-          str = vm.$t('GjModelInfo.advice4');//'已离线'
+          str = vm.$t('GjModelInfo.advice4') //'已离线'
       }
       return str
     },
@@ -930,22 +941,68 @@ export default {
      */
     goToModel() {
       const mac = this.gjModelInfo[this.currentKey].mac
-      this.$store.commit('getCheckMsg', {
-        msg: cloneObj(mac),
-        type: 'mac',
+      // this.$router.push('fdModel')
+      let macArray = this.$store.state.mac[mac.t_id]
+      let choosemac = this.$store.state.checkMsg.mac
+      let choosetree = cloneObj(this.$store.state.checkMsg.tree)
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        if (choosemac !== null && choosemac.pump_id == mac.pump_id) {
+          if (choosemac.t_id != choosetree.t_id) {
+            let treeArray = this.$store.state.tree
+            treeArray.forEach((tree) => {
+              if (choosemac.t_id == tree.t_id) {
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(tree),
+                  type: 'tree',
+                })
+                this.$store.commit('getCheckMsg', {
+                  msg: cloneObj(choosemac),
+                  type: 'mac',
+                })
+                resolve('成功')
+              }
+            })
+          }
+          resolve('成功')
+        } else {
+          for (let i = 0; i < macArray.length; i++) {
+            if (macArray[i].pump_id == mac.pump_id) {
+              /* 设置当前的机组 */
+              if (macArray[i].t_id != choosetree.t_id) {
+                let treeArray = this.$store.state.tree
+                treeArray.forEach((tree) => {
+                  if (macArray[i].t_id == tree.t_id) {
+                    this.$store.commit('getCheckMsg', {
+                      msg: cloneObj(tree),
+                      type: 'tree',
+                    })
+                  }
+                })
+              }
+              this.$store.commit('getCheckMsg', {
+                msg: macArray[i],
+                type: 'mac',
+              })
+              resolve('成功')
+              break
+            }
+          }
+        }
+      }).then(() => {
+        this.$store.commit('setGeneralModel', {
+          key: this.currentKey,
+          router: 'gjModel',
+        })
+        /* 设置当前的机组 */
+        let params = {
+          key: this.currentKey,
+          val: vm.$t('YtModel.macModel'), //'设备模型',
+          name: 'gjModel',
+          icon: 'icon-shijingsanwei-',
+        }
+        this.$bus.$emit('getPath', params)
       })
-      this.$store.commit('setGeneralModel', {
-        key: this.currentKey,
-        router: 'gjModel',
-      })
-      /* 设置当前的机组 */
-      let params = {
-        key: this.currentKey,
-        val: vm.$t('YtModel.macModel'),//'设备模型',
-        name: 'gjModel',
-        icon: 'icon-shijingsanwei-',
-      }
-      this.$bus.$emit('getPath', params)
     },
   },
 }

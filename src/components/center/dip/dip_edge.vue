@@ -1,7 +1,7 @@
 <!-- 倾角分布图(沉降跟踪图) -->
 
 <script>
-import com from "./dipCommon.vue";
+import com from './dipCommon.vue'
 export default {
   // import引入的组件需要注入到对象中才能使用
   mixins: [com],
@@ -9,14 +9,14 @@ export default {
     return {
       lineStyle: {
         // 样式
-        color: "#fff" // 颜色，默认 '#0032ff'
+        color: '#fff', // 颜色，默认 '#0032ff'
       },
       fontStyle: {
-        color: "#fff"
-      }
-    };
-  }
-};
+        color: '#fff',
+      },
+    }
+  },
+}
 </script>
 <style scoped lang="scss">
 .my-dip-chart {
@@ -43,13 +43,13 @@ export default {
           justify-items: center;
           .operation-title {
             &::after {
-              content: "";
+              content: '';
               display: inline-block;
               width: 100%;
             }
             height: 30px;
             line-height: 30px;
-            width: 60px;
+            // width: 60px;
             text-align: justify;
             margin-right: 10px;
           }
@@ -175,8 +175,8 @@ export default {
         }
       }
       .set-color {
-        margin-top:3px ;
-        margin-left:32px ;
+        margin-top: 3px;
+        margin-left: 32px;
         height: 16px;
         width: 16px;
       }
@@ -191,7 +191,8 @@ export default {
     width: 100%;
     button {
       height: 30px;
-      width: 100px;
+      min-width: 100px;
+      padding: 0px 10px;
     }
   }
 }

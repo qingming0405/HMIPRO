@@ -360,8 +360,13 @@ export default new Vuex.Store({
     },
     //获得
     setWindmodelTitle (state, data) {
-      // state.windmodelTitle[data.m_id] = data.arr;
-      state.windmodelTitle = data;
+      console.log('store新增')
+      let obj1 = {}
+      obj1[data.key] = data.data
+      //computed属性监听对象时候，若对象的引导地址未改变，那么computed将不会检测到
+      let obj = Object.assign({},state.windmodelTitle, obj1); // 使用Object.assign来更新state.personInfo对象
+      console.log(obj)
+      state.windmodelTitle = obj
     },
     setChooseTitle (state, data) {
       state.chooseTitle = data;
@@ -390,6 +395,10 @@ export default new Vuex.Store({
       } 
       */
       state.GeneralModel[data.key] = data.router
+    },
+    delGeneralModel (state, data) {
+      /*  data=key//值 */
+      delete state.GeneralModel[data]
     }
   },
   getters: {

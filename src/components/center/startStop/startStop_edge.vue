@@ -68,7 +68,9 @@
       </div>
     </div>
     <div class="search-data">
-      <button @click="dataRetrieval">数据检索</button>
+      <button @click="dataRetrieval">
+        <!-- 数据检索 -->{{$t('Common.retrieval')}}
+      </button>
       <a
         href=""
         ref="exportData"
@@ -156,7 +158,7 @@ export default {
           const head = [
             {
               isShow: true,
-              val: '测点',
+              val: this.$t('Common.pos'), //测点
               filed: false,
             },
           ].concat(head1)
@@ -171,7 +173,7 @@ export default {
             empty: {
               /* 无报警数据 */
               isShow: true,
-              text: `无数据`,
+              text: this.$t('Common.noDataText'), //无数据
             },
           })
           this.getTimeData(this.requestData.time)
@@ -194,7 +196,7 @@ export default {
             this.setData(res)
             this.paramsData[this.currentKey].empty.isShow = false
           } else {
-            this.$pop('无启停数据！')
+            this.$pop(this.$t('Common8000.NoStartStopData')) //无启停数据！
           }
         }
       })
@@ -223,7 +225,7 @@ export default {
           } else if (v || v === 0) {
             let val
             if (v >= 100000000) {
-              val = '无数据'
+              val = this.$t('Common.noDataText') //无数据
             } else {
               val = round(v, 4)
             }
@@ -234,7 +236,7 @@ export default {
           } else {
             body[i].push({
               isShow: value.isShow,
-              val: '无数据',
+              val: this.$t('Common.noDataText'), //无数据
             })
           }
         }

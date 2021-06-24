@@ -277,7 +277,8 @@ export default {
       })
     },
     setData(requestData) {
-      let data = this.chartData.trendData
+      const param = this.ytPunchCard[this.currentKey]
+      let data = param.chartData.trendData
       let min = requestData.startTime
       let max = requestData.endTime
       let interval, type

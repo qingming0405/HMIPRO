@@ -218,6 +218,7 @@ export default focus = {
                 obj.name = item.mac_me
                 obj.speed = item.speed < 100000000 ? round(item.speed, 2) : 0
                 obj.pumps = item.pumps
+                item.fullTName && (obj.fullTName = item.fullTName)
                 macList.push(obj)
               })
               let compare = function (obj1, obj2) {
@@ -668,7 +669,11 @@ export default focus = {
       this.isShowDropdownIcon();
       let dom = this.$refs[`general_scroll${this.currentKey}`][0];
       //可以滚动
-      dom.scrollTop(dom.scrollLeft, dom.scrollTop + 100);
+      // dom.scrollTop(dom.scrollLeft, dom.scrollTop + 100);
+      //可以滚动
+      if (dom.scrollTop < dom.scrollHeight) {
+        dom.scrollTop = dom.scrollTop + 100;
+      }
     },
     //判断当前的下拉图标是否显示
     isShowDropdownIcon () {
@@ -678,6 +683,10 @@ export default focus = {
       if (dom && dom.scrollHeight - dom.scrollTop - dom.clientHeight <= 0) {
         param.downShow = false;
       }
+    },
+    /* 匹配拼音,匹配到返回true,否则返回flase */
+    matchPinyin (matchVal, val) {
+      return this.pinyin.match(matchVal, val);
     },
   },
   watch: {
@@ -809,5 +818,9 @@ export default focus = {
   created () {
     window.innerWidth < 1380 ? (this.eachRowNum = 5) : (this.eachRowNum = 6)
   },
+  deactivated () {
+    clearInterval(this.focus[this.currentKey].timer.focustimer)
+    clearInterval(this.focus[this.currentKey].timer.seltimer)
+  }
 
 }

@@ -21,7 +21,9 @@
         ></div>
       </div>
       <div class="search-data">
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{$t('Common.retrieval')}}
+        </button>
       </div>
     </div>
   </div>
@@ -66,9 +68,13 @@ export default {
       let pos = null
       let requestData = null
       const dataType = [
-        { val: '定时历史数据', isChecked: true, type: 1 },
-        { val: '启停机数据', isChecked: false, type: 2 },
-        { val: '报警存储数据', isChecked: false, type: 3 },
+        { val: this.$t('Common8000.TimedHisData'), isChecked: true, type: 1 }, //定时历史数据
+        { val: this.$t('Common8000.StartStopData'), isChecked: false, type: 2 }, //启停机数据
+        {
+          val: this.$t('Common8000.AlarmStorageData'),
+          isChecked: false,
+          type: 3,
+        }, //报警存储数据
       ] //定时历史数据默认选中
       if (type === 0 || type === 1) {
         pos = cloneObj(this.$store.state.checkMsg.pos, true)
@@ -110,7 +116,7 @@ export default {
           dataType,
           empty: {
             isShow: false,
-            text: '无数据',
+            text: this.$t('Common.noDataText'),//无数据
           },
         })
         this.addOrDelPos('add', `${macId}_${posType}_${posId}`, {
@@ -201,6 +207,7 @@ export default {
       let chartList = this.chartData[this.currentKey].chartList
       /* 画最后一个，新添加的图谱 */
       let dom = document.getElementsByClassName(`${chartList[key].key}`)[0]
+      const that = this
 
       /* 组合echart配置 */
       let option = {
@@ -229,8 +236,8 @@ export default {
             },
           },
           formatter: function (params) {
-            return `值：${params[0].data[0]}<br/>
-                   ∠：${params[0].data[1]}<br/> `
+            return `${that.$t('polarDiagram.value')}：${params[0].data[0]}<br/>
+                   ∠：${params[0].data[1]}<br/> `//值
           },
         },
         angleAxis: {
@@ -340,10 +347,10 @@ export default {
       let key = `${posMsg.mac_id}_${posMsg.position_type}_${posMsg.position_id}`
       let { chartList } = this.chartData[this.currentKey]
       if (chartList[key]) {
-        this.$pop('已经存在该测点')
+        this.$pop(this.$t('polarDiagram.existsPosTip'))//已经存在该测点
         return
       } else if (Object.keys(chartList).length === 6) {
-        this.$pop('最多添加6个测点')
+        this.$pop(this.$t('polarDiagram.addPosMaxTip'))//最多添加6个测点
       } else {
         this.addOrDelPos('add', key, {
           mac_id: posMsg.mac_id,
@@ -363,9 +370,9 @@ export default {
     //右键删除测点
     contextmenu(e, key) {
       let text = [
-        { type: '1x', val: '1x幅值' },
-        { type: '2x', val: '2x幅值' },
-        { type: 'del', val: '删除' },
+        { type: '1x', val: this.$t('eigenvalue.onexamplitude') },//1x幅值
+        { type: '2x', val: this.$t('eigenvalue.twoxamplitude') },//2x幅值
+        { type: 'del', val: this.$t('Common.del') },//删除
       ]
       this.$list({
         text,

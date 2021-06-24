@@ -491,7 +491,7 @@ export default {
           },
         },
         yAxis: {
-          name: `${this.$t('YtAnalyse.sinkVal')}(m)`,//沉没度
+          name: `${this.$t('YtAnalyse.sinkVal')}(m)`, //沉没度
           type: 'value',
           /* 坐标线 */
           axisLine: {
@@ -613,36 +613,89 @@ export default {
     /* 跳转到实时数据 */
     toReal(item) {
       const param = this.ytAnalyse[this.currentKey]
-      //从vuex取当前机组下的所有测点
-      let posArray = this.$store.state.pos[item.mac_id]
-      for (let i in posArray) {
-        if (
-          posArray[i].posFlag ===
-          `${item.mac_id}_${item.pos_id}_${item.pos_type}`
-        ) {
-          this.$store.commit('getCheckMsg', {
-            msg: posArray[i],
-            type: 'pos',
-          })
-          if (
-            !matchRule(
-              posArray[i].position_type,
-              'real',
-              posArray[i].dgm_type,
-              posArray[i].t_root
-            )
-          ) {
-            //未能匹配
-            this.$pop(this.$t('Common.noChartTips'))//该类型测点没有此图谱
-            return
+      const store = this.$store
+      // this.$router.push('fdModel')
+      const mac = param.mac
+      let macArray = store.state.mac[mac.t_id]
+      let choosemac = store.state.checkMsg.mac
+      let choosetree = cloneObj(store.state.checkMsg.tree)
+      // 使用线程防止组织测点为重选就进行了跳转
+      new Promise((resolve, reject) => {
+        if (choosemac !== null && choosemac.machine_id == mac.mac_id) {
+          if (choosemac.t_id != choosetree.t_id) {
+            let treeArray = store.state.tree
+            treeArray.forEach((tree) => {
+              if (choosemac.t_id == tree.t_id) {
+                store.commit('getCheckMsg', {
+                  msg: cloneObj(tree),
+                  type: 'tree',
+                })
+                store.commit('getCheckMsg', {
+                  msg: cloneObj(choosemac),
+                  type: 'mac',
+                })
+
+                resolve('成功')
+              }
+            })
           }
-          let name = 'real' //实时数据列表
-          let val = this.$t('HeaderEdge.secondLevel4_2');//'实时数据列表'
-          let icon = 'icon-shishishuju_huaban'
-          let key = `${name}_pos_${item.mac_id}_${posArray[i].position_id}_${posArray[i].position_type}`
-          this.$bus.$emit('choiceChartType', key, val)
+          resolve('成功')
+        } else {
+          for (let i = 0; i < macArray.length; i++) {
+            if (macArray[i].mac_id == mac.mac_id) {
+              /* 设置当前的机组 */
+              if (macArray[i].t_id != choosetree.t_id) {
+                let treeArray = store.state.tree
+                treeArray.forEach((tree) => {
+                  if (macArray[i].t_id == tree.t_id) {
+                    store.commit('getCheckMsg', {
+                      msg: cloneObj(tree),
+                      type: 'tree',
+                    })
+                  }
+                })
+              }
+              store.commit('getCheckMsg', {
+                msg: macArray[i],
+                type: 'mac',
+              })
+              resolve('成功')
+              break
+            }
+          }
         }
-      }
+      }).then(() => {
+        //从vuex取当前机组下的所有测点
+        let posArray = this.$store.state.pos[item.mac_id]
+        for (let i in posArray) {
+          if (
+            posArray[i].posFlag ===
+            `${item.mac_id}_${item.pos_id}_${item.pos_type}`
+          ) {
+            this.$store.commit('getCheckMsg', {
+              msg: posArray[i],
+              type: 'pos',
+            })
+            if (
+              !matchRule(
+                posArray[i].position_type,
+                'real',
+                posArray[i].dgm_type,
+                posArray[i].t_root
+              )
+            ) {
+              //未能匹配
+              this.$pop(this.$t('Common.noChartTips')) //该类型测点没有此图谱
+              return
+            }
+            let name = 'real' //实时数据列表
+            let val = this.$t('HeaderEdge.secondLevel4_2') //'实时数据列表'
+            let icon = 'icon-shishishuju_huaban'
+            let key = `${name}_pos_${item.mac_id}_${posArray[i].position_id}_${posArray[i].position_type}`
+            this.$bus.$emit('choiceChartType', key, val)
+          }
+        }
+      })
     },
   },
   watch: {

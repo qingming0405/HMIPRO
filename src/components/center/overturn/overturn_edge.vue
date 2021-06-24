@@ -46,7 +46,7 @@
           <div
             class="none-data-box"
             v-show="data.isTrend"
-          >无数据</div>
+          ><!-- 无数据 -->{{$t('Common.noDataText')}}</div>
         </div>
       </div>
       <div
@@ -60,9 +60,9 @@
           :class="data.realBtn ? 'get-real-data' : 'no-real-date'"
           @click="getRealData(data.realBtn)"
         >
-          实时数据
+          <!-- 实时数据 -->{{$t('Common.realData')}}
         </button>
-        <button @click="dataRetrieval">数据检索</button>
+        <button @click="dataRetrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
       </div>
     </div>
   </div>
