@@ -5,11 +5,15 @@
       <div class="table_block">
         <div class="item">
           <div class="index-table box-shadow">
-            <div class="table-header color1">系统信息</div>
+            <div class="table-header color1">
+              系统信息
+              <span :class="general.system.statusColor">{{general.system.statusDesc}}</span>
+            </div>
             <ul class="info-list">
-              <li class="info-li" v-for="item in systemInfo">
-                <span :title="item.title">{{item.title}}</span>
-                <span :title="item.info">{{item.info}}</span>
+              <li class="info-li" v-for="rowData in systemInfo">
+                <span v-for="item in rowData"  :title="item">
+                  {{item}}
+                </span>
               </li>
             </ul>
             <div v-if="systemInfo.length === 0" class="noData">数据加载中...</div>
@@ -17,11 +21,15 @@
         </div>
         <div class="item">
           <div class="index-table box-shadow">
-            <div class="table-header color2">CPU信息</div>
+            <div class="table-header color2">
+              CPU信息
+              <span :class="general.cpu.statusColor">{{general.cpu.statusDesc}}</span>
+            </div>
             <ul class="info-list">
-              <li class="info-li" v-for="item in cpuInfo">
-                <span :title="item.title">{{item.title}}</span>
-                <span :title="item.info">{{item.info}}</span>
+              <li class="info-li" v-for="rowData in cpuInfo">
+                <span v-for="item in rowData"  :title="item">
+                  {{item}}
+                </span>
               </li>
             </ul>
             <div v-if="cpuInfo.length === 0" class="noData">数据加载中...</div>
@@ -29,11 +37,15 @@
         </div>
         <div class="item">
           <div class="index-table box-shadow">
-            <div class="table-header color3">内存信息</div>
+            <div class="table-header color3">
+              内存信息
+              <span :class="general.memory.statusColor">{{general.memory.statusDesc}}</span>
+            </div>
             <ul class="info-list">
-              <li class="info-li" v-for="item in memoryInfo">
-                <span :title="item.title">{{item.title}}</span>
-                <span :title="item.info">{{item.info}}</span>
+              <li class="info-li" v-for="rowData in memoryInfo">
+                <span v-for="item in rowData"  :title="item">
+                  {{item}}
+                </span>
               </li>
             </ul>
             <div v-if="memoryInfo.length === 0" class="noData">数据加载中...</div>
@@ -41,22 +53,15 @@
         </div>
         <div class="item item1">
           <div class="index-table box-shadow">
-            <div class="table-header color4">磁盘信息</div>
+            <div class="table-header color4">
+              磁盘信息
+              <span :class="general.disk.statusColor">{{general.disk.statusDesc}}</span>
+            </div>
             <ul class="info-list">
-              <li class="info-li">
-                <span v-for="item in diskInfo" :title="item.name">{{item.name}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in diskInfo" :title="item.type">{{item.type}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in diskInfo" :title="item.total">{{item.total}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in diskInfo" :title="item.free">{{item.free}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in diskInfo" :title="item.used">{{item.used}}</span>
+              <li class="info-li" v-for="rowData in diskInfo">
+                <span v-for="item in rowData"  :title="item">
+                  {{item}}
+                </span>
               </li>
             </ul>
             <div v-if="diskInfo.length === 0" class="noData">数据加载中...</div>
@@ -64,55 +69,15 @@
         </div>
         <div class="item item2">
           <div class="index-table box-shadow">
-            <div class="table-header color5">网络信息</div>
+            <div class="table-header color5">
+              网络信息
+              <span :class="general.network.statusColor">{{general.network.statusDesc}}</span>
+            </div>
             <ul class="info-list">
-              <li class="info-li">
-                <span v-for="item in networkInfo" :title="item.deviceName">{{item.deviceName}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in networkInfo" :title="item.ip">{{item.ip}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in networkInfo" :title="item.netMask">{{item.netMask}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in networkInfo" :title="item.macaddr">{{item.macaddr}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in networkInfo" :title="item.info">{{item.info}}</span>
-              </li>
-              <li class="info-li">
-                <span
-                  v-for="item in networkInfo"
-                  :title="item.receivePackage"
-                >{{item.receivePackage}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in networkInfo" :title="item.sendPackage">{{item.sendPackage}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in networkInfo" :title="item.receiveByte">{{item.receiveByte}}</span>
-              </li>
-              <li class="info-li">
-                <span v-for="item in networkInfo" :title="item.sendByte">{{item.sendByte}}</span>
-              </li>
-              <li class="info-li">
-                <span
-                  v-for="item in networkInfo"
-                  :title="item.receiveErrorPackage"
-                >{{item.receiveErrorPackage}}</span>
-              </li>
-              <li class="info-li">
-                <span
-                  v-for="item in networkInfo"
-                  :title="item.sendErrorPackage"
-                >{{item.sendErrorPackage}}</span>
-              </li>
-              <li class="info-li">
-                <span
-                  v-for="item in networkInfo"
-                  :title="item.receiveDropPackage"
-                >{{item.receiveDropPackage}}</span>
+              <li class="info-li" v-for="rowData in networkInfo">
+                <span v-for="item in rowData"  :title="item">
+                  {{item}}
+                </span>
               </li>
             </ul>
             <div v-if="networkInfo.length === 0" class="noData">数据加载中...</div>

@@ -993,6 +993,7 @@ export const en = {
     loading: 'loading',//数据加载中
     MemoryInfo: 'Memory information',//内存信息
     DiskInfo: 'Disk information',//磁盘信息
+    CPUInfo: 'CPU information', // cpu信息
     InternetInfo: 'Internet Information',//网络信息
     HostName: 'Host name',//主机名称
     JVMMemory: 'JVM total memory',//JVM总内存
@@ -1027,6 +1028,7 @@ export const en = {
     receveErrorPacket: 'Number of received error packets',//接收错误包数
     sentErrorPacket: 'Number of sent error packets',//发送错误包数
     discardPacket: 'Number of discarded packets received',//接收丢弃包数
+    networkAbnormality: 'Network Abnormality', // 网络异常
 
   },
   //系统日志
