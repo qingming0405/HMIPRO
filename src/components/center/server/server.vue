@@ -7,7 +7,6 @@
           <div class="index-table box-shadow">
             <div class="table-header color1">
               系统信息
-              <span :class="general.system.statusColor">{{general.system.statusDesc}}</span>
             </div>
             <ul class="info-list">
               <li class="info-li" v-for="rowData in systemInfo">
@@ -23,7 +22,6 @@
           <div class="index-table box-shadow">
             <div class="table-header color2">
               CPU信息
-              <span :class="general.cpu.statusColor">{{general.cpu.statusDesc}}</span>
             </div>
             <ul class="info-list">
               <li class="info-li" v-for="rowData in cpuInfo">
@@ -39,7 +37,6 @@
           <div class="index-table box-shadow">
             <div class="table-header color3">
               内存信息
-              <span :class="general.memory.statusColor">{{general.memory.statusDesc}}</span>
             </div>
             <ul class="info-list">
               <li class="info-li" v-for="rowData in memoryInfo">
@@ -55,7 +52,6 @@
           <div class="index-table box-shadow">
             <div class="table-header color4">
               磁盘信息
-              <span :class="general.disk.statusColor">{{general.disk.statusDesc}}</span>
             </div>
             <ul class="info-list">
               <li class="info-li" v-for="rowData in diskInfo">
@@ -71,7 +67,6 @@
           <div class="index-table box-shadow">
             <div class="table-header color5">
               网络信息
-              <span :class="general.network.statusColor">{{general.network.statusDesc}}</span>
             </div>
             <ul class="info-list">
               <li class="info-li" v-for="rowData in networkInfo">

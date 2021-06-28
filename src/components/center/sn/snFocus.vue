@@ -47,6 +47,37 @@
             <!-- 设备实时转速 -->
             <p>{{$t('SnFocus.macSpeed')}}</p>
             <p>{{ item.speed }}</p>
+            <!-- 报警预警测点显示 -->
+            <div class="status-content">
+              <div
+                class="status-content-item"
+                :title="$t('SnFocus.Alarm')+$t('SnFocus.PosNumber')+'：'+item.alarmPositions"
+              >
+                <!-- class="pos-state state-alarm" -->
+                <div>{{$t('SnFocus.Alarm')}}</div>
+                <p> {{item.alarmPositions}} </p>
+              </div>
+              <div
+                class="status-content-item"
+                :title="$t('SnFocus.warn')+$t('SnFocus.PosNumber')+'：'+item.warningPositions"
+              >
+                <!-- 预警 -->
+                <div>{{$t('SnFocus.warn')}}</div>
+                <p>
+                  {{item.warningPositions}}
+                </p>
+              </div>
+              <div
+                class="status-content-item"
+                :title="$t('SnFocus.Normal')+$t('SnFocus.PosNumber')+'：'+item.normalityPositions"
+              >
+                <!-- 正常 -->
+                <div>{{$t('SnFocus.Normal')}}</div>
+                <p>
+                  {{item.normalityPositions}}
+                </p>
+              </div>
+            </div>
                       
           </div>
             <div class="text">
@@ -134,7 +165,7 @@ export default {
   .general-content {
     height: calc(100% - 37px);
     width: 100%;
-    padding: 20px 30px;
+    padding: 20px 24px;
     display: grid;
     grid-template-columns: 68% 30%;
     grid-template-rows: 60% 40%;
@@ -164,6 +195,34 @@ export default {
       color: #f1f6f9;
       p {
         margin: 5px auto;
+      }
+      .status-content {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        .status-content-item {
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          margin-right: 5px;
+        }
+        .pos-state {
+          width: 8px !important;
+          height: 8px !important;
+          border-radius: 50%;
+          background: #009944;
+          float: left;
+          margin: 10px 2px;
+        }
+        .state-offline {
+          background: #3771b0;
+        }
+        .state-warn {
+          background: #ffa101;
+        }
+        .state-alarm {
+          background: #f80000;
+        }
       }
     }
     .text {

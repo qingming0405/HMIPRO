@@ -177,8 +177,8 @@ const snModel = {
         }
         param.monitorePos[2].isShow = oil;
         param.monitorePos[3].isShow = dip;
-        
-        
+
+
         let router = 'snMechineModel'
         for (let i = 0, l = param.monitorePos.length; i < l; i++) {
           if (param.monitorePos[i].isChoose == true) {
@@ -232,9 +232,11 @@ const snModel = {
           if (value[`${param.mac.mac_id}_${param.mac.ch_class}`]) {
             let flag = true
             let modelTitleName = []
-            param.modelTitle.forEach(el => {
-              modelTitleName.push(el.name)
-            })
+            if (param.modelTitle) {
+              param.modelTitle.forEach(el => {
+                modelTitleName.push(el.name)
+              })
+            }
             if (value[`${param.mac.mac_id}_${param.mac.ch_class}`].length > 0) {
               value[`${param.mac.mac_id}_${param.mac.ch_class}`].forEach(
                 (item) => {

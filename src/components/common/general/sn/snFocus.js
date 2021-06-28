@@ -222,7 +222,7 @@ const snFocus = {
                   }
                   if (item.overview) {
                     obj.imgSrc = item.overview.bgurl
-                    // obj.imgSrc = 'http://10.100.0.101:8085' + item.overview.bgurl
+                    obj.imgSrc = 'http://10.100.50.203:8085' + item.overview.bgurl
                   } else {
                     obj.imgSrc = require('assets/images/hg/hg-foucus-none.png')
                   }
@@ -239,6 +239,9 @@ const snFocus = {
                   obj.msg = item.pump
                   obj.time = time
                   obj.desc = desc
+                  obj.alarmPositions = item.alarmPositions //报警测点个数
+                  obj.warningPositions = item.warningPositions //报警测点个数
+                  obj.normalityPositions = item.normalityPositions,//正常测点个数
                   macArray.push(obj)
                 })
                 let compare = function (obj1, obj2) {

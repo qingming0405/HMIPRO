@@ -93,7 +93,7 @@ import VueI18n from "vue-i18n";//国际化
 import { cn } from './common/lang/HMIedge/cn'    // 引入lang文件
 import { en } from './common/lang/HMIedge/en'
 Vue.use(VueI18n);
-const i18n = new VueI18n({
+/* const i18n = new VueI18n({
   locale: 'cn',   // 设置语言
   messages: {
     cn: { 
@@ -105,11 +105,12 @@ const i18n = new VueI18n({
       ...enLocale
     }
   }
-})
+}) */
+import i18n from './common/i18n'
 // import i18n from './common/i18n'
 
 /* eslint-disable no-new */
-window.vm = new Vue({
+let vueMain = window.vm = new Vue({
   el: "#app",
   store,
   router,
@@ -117,4 +118,4 @@ window.vm = new Vue({
   components: { App },
   template: "<App/>",
 });
-ElementLocale.i18n((key, value) => i18n.t(key, value))
+// ElementLocale.i18n((key, value) => i18n.t(key, value))

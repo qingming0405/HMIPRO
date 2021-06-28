@@ -142,9 +142,9 @@ const snGeneral = {
                 if (res.folder.overview.bgurl) {
                   param.isShowBackground = false // 关闭默认图片
                   param.generalImg = res.folder.overview.bgurl
-                  /* param.generalImg =
-                    // 'http://10.100.50.81:8085' + res.folder.overview.bgurl //测试使用
-                    'http://10.100.0.101:8085' + res.folder.overview.bgurl */
+                  // param.generalImg =
+                  //   'http://10.100.50.81:8085' + res.folder.overview.bgurl //测试使用
+                    // 'http://10.100.0.101:8085' + res.folder.overview.bgurl
                   let result = res.folder.overview
                   /* 处理背景图片 */
                   this.setBackgroundImg(result)
@@ -378,9 +378,9 @@ const snGeneral = {
           }
           resolve('成功')
         } else {
-          macList.forEach((item) => {
-            if (item.pump_id === item.pump_id) {
-              mac = item
+          macList.forEach((macItem) => {
+            if (macItem.pump_id === item.pump_id) {
+              mac = macItem
               return
             }
           })

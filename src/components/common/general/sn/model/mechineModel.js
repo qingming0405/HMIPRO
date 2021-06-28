@@ -1,4 +1,4 @@
-import { defaultCode, getUnit, cloneObj } from 'utils/utils.js'
+import { defaultCode, getUnit, cloneObj, setHead, posTypeName } from 'utils/utils.js'
 import { getMenus, showRightMenu } from 'common/menus/Menus.js'
 const mechineModel = {
   name: 'snMechineModel',
@@ -6,6 +6,13 @@ const mechineModel = {
     return {
       snMechineModel: {},
       currentKey: '',
+      viewPosMsg: {
+        //当前悬浮测点信息
+        isShow: false,
+        posName: '',
+        posTypeName: '',
+        style: {},
+      },
     }
   },
   created () {
@@ -139,7 +146,6 @@ const mechineModel = {
                   } else {
                     text = name + ':\n' + item.realData[filed].toFixed(3) + unit
                   }
-
                 }
                 // 新版本水泥化工画法
                 if (res.overview.version) {
@@ -150,6 +156,22 @@ const mechineModel = {
                   param.version = res.overview.version
                   let boxStyle = {
                     position: 'absolute',
+                  }
+                  // 获取当前测点的特征值
+                  let eigenArray = setHead(1, item.dgm_type, item.pos_type)
+                  let eigenvalue = []
+                  for (let k in item.alarmValue) {
+                    let [warnThreshold, alarmThreshold] = item.alarmValue[k].split('_')
+                    eigenArray.forEach(eigen => {
+                      if (eigen.code == k) {
+                        eigenvalue.push({
+                          eigen: eigen.val,
+                          warnThreshold,
+                          alarmThreshold,
+                          value: item.realData ? item.realData[eigen.filed] == null || item.realData[eigen.filed] == undefined ? '无实时数据' : item.realData[eigen.filed].toFixed(3) : '无实时数据'
+                        })
+                      }
+                    })
                   }
                   let posItem = {
                     px: parseFloat(item.px), //图标左上角在图片上的位置
@@ -168,6 +190,7 @@ const mechineModel = {
                     pos_id: item.pos_id,
                     pos_type: item.pos_type,
                     mac_id: item.mac_id,
+                    alarmValue: eigenvalue,
                   }
                   param.pos.push(posItem)
                 } else {
@@ -204,7 +227,6 @@ const mechineModel = {
               this.drawPicture(res.overview)
             } else {
               if (param.version == 1) {
-                console.log(param.backgroundImage)
                 this.$nextTick(() => { this.setPoints(param.backgroundImage.startPicX, param.backgroundImage.startPicY, param.backgroundImage.newPW, param.backgroundImage.newPH) })
 
               } else {
@@ -361,6 +383,7 @@ const mechineModel = {
           height: item.circleD + 'px',
           background: item.color,
         }
+        point.alarmValue = item.alarmValue
         point.text = item.text
         point.name = item.name
         point.pos_id = item.pos_id
@@ -590,6 +613,40 @@ const mechineModel = {
         pos
       }
       showRightMenu(this, e, text, info)
+    },
+    // 鼠标移入显示测点信息
+    setViewPosMsg (item, e) {
+      console.log('悬停')
+      let top = e.offsetY + 10 + parseInt(item.boxStyle.top)
+      window.innerHeight <= top + 100 && (top = e.y + parseInt(item.boxStyle.top) - 100)
+      this.viewPosMsg = {
+        isShow: false,
+        posName: item.name,
+        posTypeName: posTypeName[item.pos_type],
+        alarm_status: item.alarm_status,
+        alarmValue: item.alarmValue,
+        /*dgmName: item.dgm_name,
+        channelName: item.channel_name, */
+        style: {
+          top: `${top}px`,
+          left: `${e.offsetX + 5 + parseInt(item.boxStyle.left)}px`,
+        },
+      }
+      setTimeout(() => {
+        this.viewPosMsg.isShow = true
+      }, 500)
+    },
+    // 关闭测点信息弹窗
+    closeFloatingWindow (item, e) {
+      console.log('离开')
+      // let top = e.offsetY + 10 + parseInt(item.boxStyle.top)
+      // window.innerHeight <= top + 100 && (top = e.y + parseInt(item.boxStyle.top) - 100)
+      // let left = e.offsetX + 5 + parseInt(item.boxStyle.left) 
+      // if (top)
+      // this.viewPosMsg.isShow = false;
+      setTimeout(() => {
+        this.viewPosMsg.isShow = false
+      }, 500)
     },
   },
   watch: {

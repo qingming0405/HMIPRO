@@ -18,8 +18,9 @@ const i18n = new VueI18n({
     }
   }
 })
+
 export function $t (args) {
   return i18n.tc.call(i18n, args);
 }
 
-export default  i18n;
+export default i18n;

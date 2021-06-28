@@ -35,6 +35,7 @@
             class="my-table-tr"
             v-for="(body, id) in data.body"
             :key="id"
+            :class="body[0].class"
             @contextmenu.prevent="showContextmenu($event, body)"
           >
             <td

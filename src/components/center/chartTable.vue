@@ -47,16 +47,6 @@
 <script>
 // import 《组件名称》 from '《组件路径》';
 
-import {
-  codeObj,
-  defaultCode,
-  round,
-  cloneObj,
-  addClass,
-  removeClass,
-  changeClass,
-} from 'utils/utils.js'
-
 export default {
   // import引入的组件需要注入到对象中才能使用
 

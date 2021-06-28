@@ -197,10 +197,11 @@ export default {
           endTime: new Date().valueOf(),
           value: 'value',
           code: 27000,
-          key: [`3_${key}`], //tRoot_macId_posId_posType
+          key: {}, //tRoot_macId_posId_posType
           density: density,
         }, // 请求参数
       }
+      param.chartData.requestData.key[`3_${key}`]=0
       this.$nextTick(this.setEchartIns)
       this.getData()
     },

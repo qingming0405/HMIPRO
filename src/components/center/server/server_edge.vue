@@ -7,7 +7,6 @@
             <div class="table-header list-title">
               <!-- 系统信息 -->
               {{ $t("server.systemMessage") }}
-              <span :class="general.system.statusColor">{{general.system.statusDesc}}</span>
             </div>
             <ul class="info-list">
               <li class="info-li" v-for="rowData in systemInfo">
@@ -25,7 +24,6 @@
           <div class="index-table box-shadow">
             <div class="table-header list-title">
               <!-- CPU息 -->{{ $t("server.CPUInfo") }}
-              <span :class="general.cpu.statusColor">{{general.cpu.statusDesc}}</span>
             </div>
             <ul class="info-list">
               <li class="info-li" v-for="rowData in cpuInfo">
@@ -43,7 +41,6 @@
           <div class="index-table box-shadow">
             <div class="table-header list-title">
               <!-- 内存信息 -->{{ $t("server.MemoryInfo") }}
-              <span :class="general.memory.statusColor">{{general.memory.statusDesc}}</span>
             </div>
             <ul class="info-list">
               <li class="info-li" v-for="rowData in memoryInfo">
@@ -61,7 +58,6 @@
           <div class="index-table box-shadow">
             <div class="table-header list-title">
               <!-- 磁盘信息 -->{{ $t("server.DiskInfo") }}
-              <span :class="general.disk.statusColor">{{general.disk.statusDesc}}</span>
             </div>
             <ul class="info-list">
               <li class="info-li" v-for="rowData in diskInfo">
@@ -79,7 +75,6 @@
           <div class="index-table box-shadow">
             <div class="table-header list-title">
               <!-- 网络信息 -->{{ $t("server.InternetInfo") }}
-              <span :class="general.network.statusColor">{{general.network.statusDesc}}</span>
             </div>
             <ul class="info-list">
               <li class="info-li" v-for="rowData in networkInfo">

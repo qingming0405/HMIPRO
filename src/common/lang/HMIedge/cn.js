@@ -196,6 +196,140 @@ export const cn = {
     opt_freq_hi_2: '可选频段高2',//可选频段高2
     onexphase: '1x相位',//1x相位
     twoxphase: '2x相位',//2x相位
+    time: '时间',//时间
+    posSpeed: '测点转速值',//测点转速值
+    SpeedDC:'转速直流量',//转速直流量
+    ProcessValue: '过程量值',//过程量值
+    EffectiveValue:'有效值',//有效值
+    ppValue: '峰峰值',//峰峰值
+    EnergyEffecValue:'能量有效值',//能量有效值
+    offsetVoltage: '偏置电压',//偏置电压
+    crestFactor: '峰值因数',//峰值因数
+    margin:'裕度',//裕度
+    skewness: '歪度',//歪度
+    SVvalue: 'SV值',//SV值
+    frequencyRange: '频段',//频段
+    temperature: '温度',//温度
+    temperatureRise: '温升',//温升
+    envelopeDemodulationValue: '包络解调值',//包络解调值
+    EnvelopeEigenvalues:'包络特征值',//包络特征值
+    ExternalRingOfCage: '保持架对外环',//保持架对外环
+    cageToInnerRing: '保持架对内环',//保持架对内环
+    OuterRingInnerRaceway:'外环内滚道',//外环内滚道
+    InnerRingOuterRaceway: '内环外滚道',//内环外滚道
+    RollRder: '滚单',//滚单
+    RollDouble: '滚双',//滚双
+    Tread: '踏面',//踏面
+    AdjacentShaftGear: '邻轴齿轮',//邻轴齿轮
+    MainShaftGear: '本轴齿轮',//本轴齿轮
+    DigitalValue: '数字量值',//数字量值
+    temperatureValue:'温度值',//温度值
+    ProcessQuantity: '工艺量',//工艺量
+    average: '平均值',//平均值
+    LastStationName: '上一站名称',//"上一站名称"
+    nextStationName:'下一站名称',//下一站名称
+    lastStaDistance: '上一站距离',//上一站距离
+    nestStaDistance: '下一站距离',//下一站距离
+    faultMessage: '故障信息',//故障信息
+    WiseValue: '智子值',//智子值
+    vibChMeanValue:'振动通道均值',//振动通道均值
+    MaxVectorSpectrum: '矢量谱最大值',//矢量谱最大值
+    option1amplitude:'可选频段1幅值',//可选频段1幅值
+    option2amplitude: '可选频段2幅值',//可选频段2幅值
+    opt_freq_l_1: '可选频段低1',//可选频段低1
+    opt_freq_l_2: '可选频段低2',//可选频段低2
+    digitalquantitiesTypes:'数字量类型',//数字量类型
+    vibration: '振动',//振动
+    digital: '数字量',//数字量
+    VibOrder:'振动阶次',//振动阶次
+    EnvelopeOrder: '包络阶次',//包络阶次
+    Overturned: '倾覆',//倾覆
+    sink: '沉降',//沉降
+    inclination: '倾角',//倾角
+    bolt: '螺栓',//螺栓
+    Shock:'冲击',//冲击
+    ImpactOrder: '冲击阶次',//冲击阶次
+    OrbitalCorrugation: '轨道波磨',//轨道波磨
+    DerailmentMonitor: '脱轨监测',//脱轨监测
+    BondPhase: '键相',//键相
+    part: '部件',//部件
+    Shake: '晃度',//晃度
+    SyntheticInclination: '合成倾角',//合成倾角
+    ProcessVolume: '过程量',//过程量
+  },
+  // 测点类型
+  posTypeName: {
+    speedPos: '转速测点',//转速测点
+    processPos: '过程量测点',//过程量测点
+    vibPos: '振动测点',//振动测点
+    EnvelopePos: '包络测点',//包络测点
+    DigitalPos: '数字量测点',//数字量测点
+    SloshnessPos: '晃度测点',//晃度测点
+    temperaturePos: '温度测点',//温度测点
+    vibOrderPos:'振动阶次测点',//振动阶次测点
+    EnvelopeOrderPos: '包络阶次测点',//包络阶次测点
+    ProcessPos: '工艺量测点',//工艺量测点
+    OverturnPos: '倾覆测点',//倾覆测点
+    inclinationPos: '倾角测点',//倾角测点
+    SyntheticAnglePos: '合成倾角测点',//合成倾角测点
+    boltPos: '螺栓测点',//螺栓测点
+    LongsamplePos: '长采样测点',//长采样测点
+  },
+  ytMap:{
+    WellheadPressure: '井口压力',//井口压力
+    WellheadTemperature:'井口温度',//井口温度
+    PdOutletPressure: 'Pd出口压力',//Pd出口压力
+    PiSuctionPressure: 'Pi吸入口压力',//Pi吸入口压力
+    TiFluidTemperature: 'Ti流体温度',//Ti流体温度
+    TmmotorOilTemperature: 'Tm电机油温',//Tm电机油温
+    TgDownholeCircuit: 'Tg井下电路',//Tg井下电路
+    VxDownholeVib: 'Vx井下振动',//Vx井下振动
+    VYDownholeVib: 'Vy井下振动',//Vy井下振动
+    VZDownholeVib: 'Vz井下振动',//Vz井下振动
+    TransformationRatio: '变比',//变比
+    OutputVoltageAB:'输出电压AB',//输出电压AB
+    DownOutputVoltageAB: '井下机组给定电压AB',//井下机组给定电压AB
+    OutputVoltageBC: '输出电压BC',//输出电压BC
+    DownOutputVoltageBC: '井下机组给定电压BC',//输出电压BC
+    OutputBoltageAC: '输出电压AC',//输出电压AC
+    DownOutputBoltageAC: '井下机组给定电压CA',//井下机组给定电压CA
+    AphaseCurrent: 'A相电流',//A相电流
+    DownAphaseCurrent: '井下运行A相电流',//井下运行A相电流
+    PhaseBCurrent: 'B相电流',//B相电流
+    DownPhaseBCurrent: '井下运行B相电流',//井下运行B相电流
+    PhaseCCurrent: 'C相电流',//C相电流
+    DownPhaseCCurrent: '井下运行C相电流',//井下运行C相电流
+    Setfreq: '设定频率',//设定频率
+    InverterSetfreq: '变频器设定频率',//变频器设定频率
+    Operatingfreq: '运行频率', //运行频率
+    InverterOperatefreq: '变频器运行频率',//变频器运行频率
+    outputVoltage: '输出电压',//输出电压
+    InverteroutputVoltage: '变频器输出电压',//变频器输出电压
+    OutputOneVoltage: '输出一次电流',//输出一次电流
+    InverterOutputOneVoltage: '变频器输出一次电流',//变频器输出一次电流
+    latStopTime: '上次停机时间',//上次停机时间
+    CumulativeRunTime: '累积运行时间',//累积运行时间
+    DownholeTime: '下井时间',//下井时间
+    CumulativeDownholeTime: '累计下井时间',//累计下井时间
+    ratedpower: '额定功率',//额定功率
+    power: '功率',//功率
+    Load: '载荷',//载荷
+    CLleakageCurrent: 'CL漏电流',//CL漏电流
+    VersoftVersion: 'Ver软件版本号',//Ver软件版本号
+    RXdownResistance: 'Rx井下绝缘电阻',//Rx井下绝缘电阻
+    crccommunicatFailureTimes: 'Crc通讯失败次数',//Crc通讯失败次数
+    ControlIninputVoltageAB: '控制柜输入线电压AB',//控制柜输入线电压AB
+    ControlIninputVoltageBC:'控制柜输入线电压BC',//控制柜输入线电压BC
+    ControlIninputVoltageCA: '控制柜输入线电压CA',//控制柜输入线电压CA
+    ControlInputACurrent: '控制柜输入A相电流',//控制柜输入A相电流
+    ControlInputBCurrent: '控制柜输入B相电流',//控制柜输入B相电流
+    ControlInputCCurrent: '控制柜输入C相电流',//控制柜输入C相电流
+    Inputfreq: '输入频率',//输入频率
+    Powerfreq: '电源频率',//电源频率
+    TotalOperatingPower: '机组运行总电能',//机组运行总电能
+    SystemTotalactivePower: '系统总有功功率',//系统总有功功率
+    SystemTotalReactivePower: '系统总无功功率',//系统总无功功率
+    SystemTotalPowerFactor: '系统总功率因数',//系统总功率因数
   },
   //单位
   unit: {
@@ -446,6 +580,10 @@ export const cn = {
     diagTime: '诊断时间',//诊断时间
     diagResult: '诊断结果',//诊断结果
     noFocusMacTips: '无重点关注机组',//无重点关注机组
+    Alarm: '报警',//报警
+    warn: '预警', //预警
+    Normal: '正常',//正常
+    PosNumber:'测点个数',//测点个数
   },
   //工业设备设备模型
   SnModel: {
@@ -453,6 +591,10 @@ export const cn = {
     titleBtn2: '测点列表',//测点列表
     titleBtn3: '油液参数',//油液参数
     titleBtn4: '倾角',//倾角
+    WarningThreshold: '预警门限',//预警门限
+    alarmThreshold: '报警门限',//报警门限
+    EquipDiagnosis: '设备诊断',//设备诊断
+    Result: '结果',//结果
   },
   //工业设备倾角
   Towerdrum: {
@@ -991,11 +1133,11 @@ export const cn = {
   },
   //服务器信息
   server: {
+    runningState: '运行状态', // 运行状态
     systemMessage: '系统信息',//系统信息
     loading: '数据加载中',//数据加载中
     MemoryInfo: '内存信息',//内存信息
     DiskInfo: '磁盘信息',//磁盘信息
-    CPUInfo: 'CPU信息', // cpu信息
     InternetInfo: '网络信息',//网络信息
     HostName: '主机名称',//主机名称
     JVMMemory: 'JVM总内存',//JVM总内存
@@ -1030,7 +1172,6 @@ export const cn = {
     receveErrorPacket: '接收错误包数',//接收错误包数
     sentErrorPacket: '发送错误包数',//发送错误包数
     discardPacket: '接收丢弃包数',//接收丢弃包数
-    networkAbnormality: '网络异常', // 网络异常
   },
   //系统日志
   system: {
@@ -1325,42 +1466,42 @@ export const cn = {
     SwitchDisplayMode: '切换显示模式',//切换显示模式
   },
   //启停机数据列表
-  startStop:{},
+  startStop: {},
   //专家系统
-  expertSystem:{
-    SymptomType:'征兆类型',//征兆类型
+  expertSystem: {
+    SymptomType: '征兆类型',//征兆类型
     Confidence: '置信度',//置信度
-    MaintenanceRecommend:'维护建议',//维护建议
+    MaintenanceRecommend: '维护建议',//维护建议
     noData: '专家系统无数据！',//专家系统无数据！
-    PoorDynamicBalance:'动平衡不良',//动平衡不良
-    PoorAlignment:'对中不良',//对中不良
+    PoorDynamicBalance: '动平衡不良',//动平衡不良
+    PoorAlignment: '对中不良',//对中不良
     Friction: '有摩擦',//有摩擦
-    OilVortex:'油膜涡动',//油膜涡动
+    OilVortex: '油膜涡动',//油膜涡动
     OilFilmShock: '油膜震荡',//油膜震荡
     adviceStr1_1: '降负荷（或降速）运行；',//降负荷（或降速）运行；
     adviceStr1_2: '如转子不平衡故障由转子结垢不均匀造成，转子动平衡时须彻底清理转子上的结垢；',//如转子不平衡故障由转子结垢不均匀造成，转子动平衡时须彻底清理转子上的结垢；
-    adviceStr1_3:'择机停车处理，按技术要求对转子进行动平衡。',//择机停车处理，按技术要求对转子进行动平衡。
-    adviceStr2_1:'按技术要求调整轴系转子对中量，重新对中；',//按技术要求调整轴系转子对中量，重新对中；
-    adviceStr2_2:'转子冷态对中时，应考虑到热态不对中变化量。',//转子冷态对中时，应考虑到热态不对中变化量。
-    adviceStr3_1:'调整转子与静止件的相对位置（均匀）和间隙（技术要求指标上线）；',//调整转子与静止件的相对位置（均匀）和间隙（技术要求指标上线）；
-    adviceStr3_2:'提高轴系对中精度；',//提高轴系对中精度；
-    adviceStr3_3:'减小转轴振动、径向跳动和外界扰动（如提高转子动平衡精度，降低不平衡力）；',//减小转轴振动、径向跳动和外界扰动（如提高转子动平衡精度，降低不平衡力）；
-    adviceStr3_4:'如发生局部摩擦故障，可采用摩擦方法扩大动静间隙（临时措施）。',//如发生局部摩擦故障，可采用摩擦方法扩大动静间隙（临时措施）。
-    adviceStr4_1:'按技术要求安装轴承，轴承间隙须符合要求，调整好轴承座紧力；',//按技术要求安装轴承，轴承间隙须符合要求，调整好轴承座紧力；
-    adviceStr4_2:'改进轴承工作状况，润滑油须定期检验，如有问题及时处理（如过滤、脱水、补油、添加高性能抗磨剂等）；',//改进轴承工作状况，润滑油须定期检验，如有问题及时处理（如过滤、脱水、补油、添加高性能抗磨剂等）；
+    adviceStr1_3: '择机停车处理，按技术要求对转子进行动平衡。',//择机停车处理，按技术要求对转子进行动平衡。
+    adviceStr2_1: '按技术要求调整轴系转子对中量，重新对中；',//按技术要求调整轴系转子对中量，重新对中；
+    adviceStr2_2: '转子冷态对中时，应考虑到热态不对中变化量。',//转子冷态对中时，应考虑到热态不对中变化量。
+    adviceStr3_1: '调整转子与静止件的相对位置（均匀）和间隙（技术要求指标上线）；',//调整转子与静止件的相对位置（均匀）和间隙（技术要求指标上线）；
+    adviceStr3_2: '提高轴系对中精度；',//提高轴系对中精度；
+    adviceStr3_3: '减小转轴振动、径向跳动和外界扰动（如提高转子动平衡精度，降低不平衡力）；',//减小转轴振动、径向跳动和外界扰动（如提高转子动平衡精度，降低不平衡力）；
+    adviceStr3_4: '如发生局部摩擦故障，可采用摩擦方法扩大动静间隙（临时措施）。',//如发生局部摩擦故障，可采用摩擦方法扩大动静间隙（临时措施）。
+    adviceStr4_1: '按技术要求安装轴承，轴承间隙须符合要求，调整好轴承座紧力；',//按技术要求安装轴承，轴承间隙须符合要求，调整好轴承座紧力；
+    adviceStr4_2: '改进轴承工作状况，润滑油须定期检验，如有问题及时处理（如过滤、脱水、补油、添加高性能抗磨剂等）；',//改进轴承工作状况，润滑油须定期检验，如有问题及时处理（如过滤、脱水、补油、添加高性能抗磨剂等）；
     adviceStr4_3: '调整润滑油温、油压（适当提高供油压力和油温）；',//调整润滑油温、油压（适当提高供油压力和油温）；
     adviceStr4_4: '更换符合技术要求的轴承。',//更换符合技术要求的轴承。
     adviceStr5_1: '调整轴瓦，提高轴径在轴系内的偏心率，提高轴承一阶临界转速，提高失稳转速。',//调整轴瓦，提高轴径在轴系内的偏心率，提高轴承一阶临界转速，提高失稳转速。
   },
   //8000报警
   alarm_8000: {
-    HigherReport:'高高报',//高高报
+    HigherReport: '高高报',//高高报
     HighReport: '高报',//高报
     FrequencyDeviation: '通频值偏差',//通频值偏差
     onexdeviation: '1X偏差',//1X偏差
     twoxdeviation: '2X偏差',//2X偏差
     fivexdeviation: '5X偏差',//5X偏差
-    Optionalxdeviation:'可选X偏差',//可选X偏差
+    Optionalxdeviation: '可选X偏差',//可选X偏差
     ResidualDeviation: '残余量偏差',//残余量偏差
   }
 }

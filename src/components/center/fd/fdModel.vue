@@ -347,20 +347,19 @@
                   </div>
                 </div>
                 <div class="modelitem-separate"></div>
-                <!-- :class="[
-                  modelItems.basics.alarm_status === 2
+                <div :class="[
+                  param.modelItems.basics.alarm_status === 2
                     ? 'modelitem-content-warn'
                     : '',
-                  modelItems.basics.alarm_status === 3
+                  param.modelItems.basics.alarm_status === 3
                     ? 'modelitem-content-alarm'
                     : '',
-                  modelItems.basics.alarm_status === 1 ||
-                  modelItems.basics.alarm_status === 0 ||
-                  modelItems.basics.alarm_status === null
+                  param.modelItems.basics.alarm_status === 1 ||
+                  param.modelItems.basics.alarm_status === 0 ||
+                  param.modelItems.basics.alarm_status === null
                     ? 'modelitem-content'
                     : ''
-                ]" -->
-                <div class="modelitem-content-warn">
+                ]">
                   <div class="circle">
                     <div class="percent-circle percent-circle-left">
                       <div

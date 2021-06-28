@@ -827,6 +827,18 @@ export default {
         }
       });
     },
+    getAlarmClass (alarmStatus, t_root) {
+      switch (alarmStatus) {
+        case 2:
+          return t_root === 2 ? 'warn-TMS-text' : 'warning-text'
+        case 3:
+          return t_root === 2 ? 'alarm1-TMS-text' : 'alarm-text'
+        case 4:
+          return 'alarm-text'
+        default:
+          return ''
+      }
+    },
     // 组合数据
     setData (data, type) {
       let historyData = this.historyData[this.currentKey];
@@ -840,7 +852,8 @@ export default {
         body[i] = [
           {
             isShow: true,
-            val: pos.position_name
+            val: pos.position_name,
+            class: this.getAlarmClass(list.alarmStatus, historyData.t_root),
           }
         ];
         for (let j = 1; j < head.length; j++) {

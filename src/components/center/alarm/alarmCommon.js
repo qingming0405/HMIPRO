@@ -1,7 +1,6 @@
 import {
   getCodeObj, getTime, round, cloneObj, matchRule, addClass, removeClass
 } from 'utils/utils.js';
-import json2csv from 'json2csv'
 import { getMenuItem, getMenus, showRightMenu } from 'common/menus/Menus.js'
 
 export default {

@@ -28,6 +28,7 @@
             v-for="(row, id) in item.body"
             :key="id" 
             :class="row[0].class"
+            :title="row[0].title"
             @dblclick="turnToTrend(item.posInfo[id])"
             @contextmenu.prevent="showContextmenu($event, row, item.posInfo[id])"
           >

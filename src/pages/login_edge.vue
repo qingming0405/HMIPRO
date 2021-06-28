@@ -5,7 +5,7 @@
       class="login-img"
       :src="bgURL"
     />
-    <!-- <select
+    <select
       v-model="language"
       @change="changeLang()"
       class="select-language"
@@ -15,7 +15,7 @@
         :title="item.text"
         :value="item.key"
       >{{item.text}}</option>
-    </select> -->
+    </select>
     <div
       class="login-box"
       @keydown.13="login"
@@ -221,8 +221,13 @@ export default {
     },
     //切换语言
     changeLang() {
+      if(this.$i18n.locale != this.language){
+        localStorage.setItem('language', this.language)
+        localStorage.setItem('isChangelanguage', 'true')
+      }
       this.$i18n.locale = this.language
-      // sessionStorage.setItem('language', this.language)
+      window.location.reload();//刷新当前页面
+      // this.$router.go(0)
       this.getVertionFun()
     },
     getVertionFun() {
@@ -277,6 +282,9 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
+    if(localStorage.getItem('language')){
+      this.language = localStorage.getItem('language')
+    }
     const logoFlag = config.loginlogo
     if (logoFlag != 'loginLogoBg_edge') {
       this.bgURL = `${logoFlag}.png`

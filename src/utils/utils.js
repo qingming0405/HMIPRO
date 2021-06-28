@@ -1,754 +1,763 @@
-import {$t} from '../common/i18n'
+import { $t } from '../common/i18n';
+import i18n from '../common/i18n';
 
+function trans (args) {
+  if (localStorage.getItem('language')) {
+    if (i18n.locale != localStorage.getItem('language')) {
+      i18n.locale = localStorage.getItem('language')
+    }
+  }
+  return $t(args)
+}
 const codeObj = {
   /* 测点类型对应特征值 */
   1: [
     /* 转速 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },//时间
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
     {
       filed: "speed_value",
-      name: "测点转速值",
+      name: trans('eigenvalue.posSpeed'),
       code: 16000
     } /* 转速测点转速值 */,
-    { filed: "speed_dc", name: "转速直流量", code: 28000 } /* 转速直流量 */
+    { filed: "speed_dc", name: trans('eigenvalue.SpeedDC'), code: 28000 } /* 转速直流量 */
   ],
   2: [
     /* 过程量 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "value", name: "过程量值", code: 8000 } /* 过程量值 */
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
+    { filed: "value", name: trans('eigenvalue.ProcessValue'), code: 8000 } /* 过程量值 */
   ],
   3: [
     /* 振动 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "vib_rms", name: "有效值", code: 2000 } /* 振动有效值 */,
-    { filed: "vib_p", name: "峰值", code: 3000 } /* 振动峰值 */,
-    { filed: "vib_pp", name: "峰峰值", code: 4000 } /* 振动峰峰值 */,
-    { filed: "pow_rms", name: "能量有效值", code: 19000 } /* 能量有效值 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "vib_rms", name: trans('eigenvalue.EffectiveValue'), code: 2000 } /* 振动有效值 */,
+    { filed: "vib_p", name: trans('eigenvalue.overturn_p'), code: 3000 } /* 振动峰值 */,
+    { filed: "vib_pp", name: trans('eigenvalue.ppValue'), code: 4000 } /* 振动峰峰值 */,
+    { filed: "pow_rms", name: trans('eigenvalue.EnergyEffecValue'), code: 19000 } /* 能量有效值 */,
     {
       filed: "vib_pf",
-      name: "峰值因数",
+      name: trans('eigenvalue.crestFactor'),
       code: 15000
     } /* 峰值因数=振动峰值/振动有效值 */,
-    { filed: "gap", name: "偏置电压", code: 14000 } /* 偏置电压 */,
-    { filed: "vib_k", name: "峭度", code: 24000 } /* 峭度 */,
-    { filed: "vib_cf", name: "裕度", code: 25000 } /* 裕度 */,
-    { filed: "vib_sf", name: "歪度", code: 26000 } /* 歪度 */,
-    { filed: "sv", name: "SV值", code: 46000 } /* 冲击值 */,
-    { filed: "vib_rms1", name: "1x幅值", code: 53000 } /* 1x幅值 */,
-    { filed: "vib_rms2", name: "1x相位", code: 54000 } /* 1x相位 */,
+    { filed: "gap", name: trans('eigenvalue.offsetVoltage'), code: 14000 } /* 偏置电压 */,
+    { filed: "vib_k", name: trans('eigenvalue.Kurtosis'), code: 24000 } /* 峭度 */,
+    { filed: "vib_cf", name: trans('eigenvalue.margin'), code: 25000 } /* 裕度 */,
+    { filed: "vib_sf", name: trans('eigenvalue.skewness'), code: 26000 } /* 歪度 */,
+    { filed: "sv", name: trans('eigenvalue.SVvalue'), code: 46000 } /* 冲击值 */,
+    { filed: "vib_rms1", name: trans('eigenvalue.onexamplitude'), code: 53000 } /* 1x幅值 */,
+    { filed: "vib_rms2", name: trans('eigenvalue.onexphase'), code: 54000 } /* 1x相位 */,
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: "频段1-2",
+      name: trans('eigenvalue.frequencyRange')+"1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: "频段2-2", code: 13002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: "频段3-2", code: 13003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: "频段4-2", code: 13004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: "频段5-2", code: 13005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: "频段6-2", code: 13006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: "频段7-2", code: 13007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: "频段8-2", code: 13008 },
-    { filed: "temperature", name: "温度", code: 57000 },
-    { filed: "temperature_rise", name: "温升", code: 57001 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 },
+    { filed: "temperature", name: trans('eigenvalue.temperature'), code: 57000 },
+    { filed: "temperature_rise", name: trans('eigenvalue.temperatureRise'), code: 57001 }
   ],
   4: [
     /* 包络 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "spm_rms", name: "包络解调值", code: 5000 } /* 包络解调值 */,
-    { filed: "spm_pp", name: "包络特征值", code: 6000 } /* 包络特征值 */,
-    { filed: "pow_rms", name: "能量有效值", code: 19000 } /* 能量有效值 */,
-    { filed: "gap", name: "偏置电压", code: 14000 } /* 偏置电压 */,
-    { filed: "temperature", name: "温度", code: 57000 },
-    { filed: "temperature_rise", name: "温升", code: 57001 },
-    { filed: "sv", name: "SV值", code: 46000 } /* 冲击值 */,
-    { filed: "sv0", name: "1x幅值", code: 55000 } /* 1x幅值 */,
-    { filed: "sv1", name: "1x相位", code: 56000 } /* 1x相位 */,
-    { filed: "sv0", name: "保持架对外环", code: 52001 } /* 保持架对外环频率 */,
-    { filed: "sv1", name: "保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    { filed: "sv2", name: "外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    { filed: "sv3", name: "内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    { filed: "sv4", name: "滚单", code: 52005 } /* 滚单频率 */,
-    { filed: "sv5", name: "滚双", code: 52006 } /* 滚双频率 */,
-    { filed: "sv6", name: "踏面", code: 52007 } /* 踏面频率 */,
-    { filed: "sv7", name: "邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    { filed: "sv8", name: "本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
-    // { filed: "sv10", name: "2-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "spm_rms", name: trans('eigenvalue.envelopeDemodulationValue'), code: 5000 } /* 包络解调值 */,
+    { filed: "spm_pp", name: trans('eigenvalue.EnvelopeEigenvalues'), code: 6000 } /* 包络特征值 */,
+    { filed: "pow_rms", name: trans('eigenvalue.EnergyEffecValue'), code: 19000 } /* 能量有效值 */,
+    { filed: "gap", name: trans('eigenvalue.EnergyEffecValue'), code: 14000 } /* 偏置电压 */,
+    { filed: "temperature", name: trans('eigenvalue.temperature'), code: 57000 },
+    { filed: "temperature_rise", name: trans('eigenvalue.temperatureRise'), code: 57001 },
+    { filed: "sv", name: trans('eigenvalue.SVvalue'), code: 46000 } /* 冲击值 */,
+    { filed: "sv0", name: trans('eigenvalue.onexamplitude'), code: 55000 } /* 1x幅值 */,
+    { filed: "sv1", name: trans('eigenvalue.onexphase'), code: 56000 } /* 1x相位 */,
+    { filed: "sv0", name: trans('eigenvalue.ExternalRingOfCage'), code: 52001 } /* 保持架对外环频率 */,
+    { filed: "sv1", name: trans('eigenvalue.cageToInnerRing'), code: 52002 } /* 保持架对内环频率 */,
+    { filed: "sv2", name: trans('eigenvalue.OuterRingInnerRaceway'), code: 52003 } /* 外环内滚道频率 */,
+    { filed: "sv3", name: trans('eigenvalue.InnerRingOuterRaceway'), code: 52004 } /* 内环外滚道频率 */,
+    { filed: "sv4", name: trans('eigenvalue.RollRder'), code: 52005 } /* 滚单频率 */,
+    { filed: "sv5", name: trans('eigenvalue.RollDouble'), code: 52006 } /* 滚双频率 */,
+    { filed: "sv6", name: trans('eigenvalue.Tread'), code: 52007 } /* 踏面频率 */,
+    { filed: "sv7", name: trans('eigenvalue.AdjacentShaftGear'), code: 52008 } /* 邻轴齿轮频率 */,
+    { filed: "sv8", name: trans('eigenvalue.MainShaftGear'), code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv10", name: "2-"+trans('eigenvalue.ExternalRingOfCage'), code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv11", name: "2-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv12", name: "2-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv13", name: "2-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv14", name: "2-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv15", name: "2-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv16", name: "2-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv17", name: "2-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv18", name: "2-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv12", name: "2-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv13", name: "2-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv14", name: "2-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv15", name: "2-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv16", name: "2-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv17", name: "2-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv18", name: "2-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "sv20", name: "3-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv21", name: "3-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv22", name: "3-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv23", name: "3-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv24", name: "3-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv25", name: "3-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv26", name: "3-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv27", name: "3-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv28", name: "3-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv22", name: "3-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv23", name: "3-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv24", name: "3-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv25", name: "3-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv26", name: "3-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv27", name: "3-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv28", name: "3-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "sv30", name: "4-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv31", name: "4-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv32", name: "4-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv33", name: "4-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv34", name: "4-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv35", name: "4-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv36", name: "4-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv37", name: "4-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv38", name: "4-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv32", name: "4-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv33", name: "4-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv34", name: "4-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv35", name: "4-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv36", name: "4-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv37", name: "4-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv38", name: "4-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "sv40", name: "5-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv41", name: "5-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv42", name: "5-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv43", name: "5-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv44", name: "5-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv45", name: "5-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv46", name: "5-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv47", name: "5-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv48", name: "5-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv42", name: "5-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv43", name: "5-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv44", name: "5-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv45", name: "5-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv46", name: "5-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv47", name: "5-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv48", name: "5-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "sv50", name: "6-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv51", name: "6-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv52", name: "6-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv53", name: "6-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv54", name: "6-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv55", name: "6-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv56", name: "6-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv57", name: "6-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv58", name: "6-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv52", name: "6-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv53", name: "6-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv54", name: "6-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv55", name: "6-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv56", name: "6-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv57", name: "6-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv58", name: "6-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "sv60", name: "7-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv61", name: "7-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv62", name: "7-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv63", name: "7-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv64", name: "7-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv65", name: "7-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv66", name: "7-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv67", name: "7-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv68", name: "7-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv62", name: "7-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv63", name: "7-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv64", name: "7-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv65", name: "7-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv66", name: "7-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv67", name: "7-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 5 2008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv68", name: "7-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "sv70", name: "8-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv71", name: "8-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv72", name: "8-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv73", name: "8-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv74", name: "8-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv75", name: "8-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv76", name: "8-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv77", name: "8-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv78", name: "8-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv72", name: "8-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv73", name: "8-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv74", name: "8-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv75", name: "8-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv76", name: "8-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv77", name: "8-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv78", name: "8-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "sv80", name: "9-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv81", name: "9-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv82", name: "9-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv83", name: "9-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv84", name: "9-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv85", name: "9-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv86", name: "9-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv87", name: "9-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv88", name: "9-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv82", name: "9-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv83", name: "9-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv84", name: "9-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv85", name: "9-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv86", name: "9-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv87", name: "9-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv88", name: "9-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "sv90", name: "10-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv91", name: "10-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv92", name: "10-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv93", name: "10-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv94", name: "10-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv95", name: "10-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv96", name: "10-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv97", name: "10-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv98", name: "10-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv92", name: "10-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv93", name: "10-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv94", name: "10-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv95", name: "10-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv96", name: "10-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv97", name: "10-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv98", name: "10-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: "频段1-2",
+      name: trans('eigenvalue.frequencyRange')+"1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: "频段2-2", code: 13002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: "频段3-2", code: 13003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: "频段4-2", code: 13004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: "频段5-2", code: 13005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: "频段6-2", code: 13006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: "频段7-2", code: 13007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: "频段8-2", code: 13008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 }
   ],
   5: [
     /* 数字量 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "digital_value", name: "数字量值", code: 7000 } /* 数字量值 */
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
+    { filed: "digital_value", name: trans('eigenvalue.DigitalValue'), code: 7000 } /* 数字量值 */
   ],
   6: [
     /* 晃度 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "rock_rms", name: "有效值", code: 9000 } /* 晃度有效值 */,
-    { filed: "rock_p", name: "峰值", code: 10000 } /* 晃度峰值 */,
-    { filed: "rock_pp", name: "峰峰值", code: 11000 } /* 晃度峰峰值 */,
-    { filed: "rock_s", name: "位移", code: 29000 } /* 晃度位移 */,
-    { filed: "pow_rms", name: "能量有效值", code: 19000 } /* 能量有效值 */,
-    { filed: "gap", name: "偏置电压", code: 14000 } /* 偏置电压 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "rock_rms", name: trans('eigenvalue.EffectiveValue'), code: 9000 } /* 晃度有效值 */,
+    { filed: "rock_p", name: trans('eigenvalue.EffectiveValue'), code: 10000 } /* 晃度峰值 */,
+    { filed: "rock_pp", name: trans('eigenvalue.ppValue'), code: 11000 } /* 晃度峰峰值 */,
+    { filed: "rock_s", name: trans('eigenvalue.overturn_s'), code: 29000 } /* 晃度位移 */,
+    { filed: "pow_rms", name: trans('eigenvalue.EnergyEffecValue'), code: 19000 } /* 能量有效值 */,
+    { filed: "gap", name: trans('eigenvalue.EnergyEffecValue'), code: 14000 } /* 偏置电压 */,
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 }
   ],
   7: [
     /* 温度 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "value", name: "温度值", code: 23000 } /* 温度值 */
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
+    { filed: "value", name: trans('eigenvalue.temperatureValue'), code: 23000 } /* 温度值 */
   ],
   8: [
     /* 振动阶次 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "vib_rms", name: "有效值", code: 2000 } /* 振动有效值 */,
-    { filed: "vib_p", name: "峰值", code: 3000 } /* 振动峰值 */,
-    { filed: "vib_pp", name: "峰峰值", code: 4000 } /* 振动峰峰值 */,
-    { filed: "pow_rms", name: "能量有效值", code: 19000 } /* 能量有效值 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "vib_rms", name: trans('eigenvalue.EffectiveValue'), code: 2000 } /* 振动有效值 */,
+    { filed: "vib_p", name: trans('eigenvalue.EffectiveValue'), code: 3000 } /* 振动峰值 */,
+    { filed: "vib_pp", name: trans('eigenvalue.ppValue'), code: 4000 } /* 振动峰峰值 */,
+    { filed: "pow_rms", name: trans('eigenvalue.EnergyEffecValue'), code: 19000 } /* 能量有效值 */,
     {
       filed: "vib_pf",
-      name: "峰值因数",
+      name: trans('eigenvalue.EnergyEffecValue'),
       code: 15000
     } /* 峰值因数=振动峰值/振动有效值 */,
-    { filed: "gap", name: "偏置电压", code: 14000 } /* 偏置电压 */,
-    { filed: "vib_k", name: "峭度", code: 24000 } /* 峭度 */,
-    { filed: "vib_cf", name: "裕度", code: 25000 } /* 裕度 */,
-    { filed: "vib_sf", name: "歪度", code: 26000 } /* 歪度 */,
-    { filed: "sv", name: "SV值", code: 46000 } /* 冲击值 */,
-    { filed: "temperature", name: "温度", code: 57000 },
-    { filed: "temperature_rise", name: "温升", code: 57001 },
+    { filed: "gap", name: trans('eigenvalue.EnergyEffecValue'), code: 14000 } /* 偏置电压 */,
+    { filed: "vib_k", name: trans('eigenvalue.Kurtosis'), code: 24000 } /* 峭度 */,
+    { filed: "vib_cf", name: trans('eigenvalue.margin'), code: 25000 } /* 裕度 */,
+    { filed: "vib_sf", name: trans('eigenvalue.margin'), code: 26000 } /* 歪度 */,
+    { filed: "sv", name: trans('eigenvalue.SVvalue'), code: 46000 } /* 冲击值 */,
+    { filed: "temperature", name: trans('eigenvalue.temperature'), code: 57000 },
+    { filed: "temperature_rise", name: trans('eigenvalue.temperatureRise'), code: 57001 },
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: "频段1-2",
+      name: trans('eigenvalue.frequencyRange')+"1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: "频段2-2", code: 13002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: "频段3-2", code: 13003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: "频段4-2", code: 13004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: "频段5-2", code: 13005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: "频段6-2", code: 13006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: "频段7-2", code: 13007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: "频段8-2", code: 13008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 }
   ],
   9: [
     /* 包络阶次 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "spm_rms", name: "包络解调值", code: 5000 } /* 包络有效值 */,
-    { filed: "spm_pp", name: "包络特征值", code: 6000 } /* 包络峰峰值 */,
-    { filed: "pow_rms", name: "能量有效值", code: 19000 } /* 能量有效值 */,
-    { filed: "gap", name: "偏置电压", code: 14000 } /* 偏置电压 */,
-    { filed: "sv", name: "SV值", code: 46000 } /* 冲击值 */,
-    { filed: "temperature", name: "温度", code: 57000 },
-    { filed: "temperature_rise", name: "温升", code: 57001 },
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "spm_rms", name: trans('eigenvalue.envelopeDemodulationValue'), code: 5000 } /* 包络有效值 */,
+    { filed: "spm_pp", name: trans('eigenvalue.EnvelopeEigenvalues'), code: 6000 } /* 包络峰峰值 */,
+    { filed: "pow_rms", name: trans('eigenvalue.EnergyEffecValue'), code: 19000 } /* 能量有效值 */,
+    { filed: "gap", name: trans('eigenvalue.EnergyEffecValue'), code: 14000 } /* 偏置电压 */,
+    { filed: "sv", name: trans('eigenvalue.SVvalue'), code: 46000 } /* 冲击值 */,
+    { filed: "temperature", name: trans('eigenvalue.temperature'), code: 57000 },
+    { filed: "temperature_rise", name: trans('eigenvalue.temperatureRise'), code: 57001 },
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: "频段1-2",
+      name: trans('eigenvalue.frequencyRange')+"1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: "频段2-2", code: 13002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: "频段3-2", code: 13003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: "频段4-2", code: 13004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: "频段5-2", code: 13005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: "频段6-2", code: 13006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: "频段7-2", code: 13007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: "频段8-2", code: 13008 },
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 },
     // { filed: "part_name0", name: "部件1", code: -1 },/* 部件1 */
-    { filed: "sv0", name: "保持架对外环", code: 52001 } /* 保持架对外环频率 */,
-    { filed: "sv1", name: "保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    { filed: "sv2", name: "外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    { filed: "sv3", name: "内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    { filed: "sv4", name: "滚单", code: 52005 } /* 滚单频率 */,
-    { filed: "sv5", name: "滚双", code: 52006 } /* 滚双频率 */,
-    { filed: "sv6", name: "踏面", code: 52007 } /* 踏面频率 */,
-    { filed: "sv7", name: "邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    { filed: "sv8", name: "本轴齿轮", code: 52009 } /* 本轴齿轮频率 */
+    { filed: "sv0", name: trans('eigenvalue.ExternalRingOfCage'), code: 52001 } /* 保持架对外环频率 */,
+    { filed: "sv1", name: trans('eigenvalue.cageToInnerRing'), code: 52002 } /* 保持架对内环频率 */,
+    { filed: "sv2", name: trans('eigenvalue.OuterRingInnerRaceway'), code: 52003 } /* 外环内滚道频率 */,
+    { filed: "sv3", name: trans('eigenvalue.InnerRingOuterRaceway'), code: 52004 } /* 内环外滚道频率 */,
+    { filed: "sv4", name: trans('eigenvalue.RollRder'), code: 52005 } /* 滚单频率 */,
+    { filed: "sv5", name: trans('eigenvalue.RollDouble'), code: 52006 } /* 滚双频率 */,
+    { filed: "sv6", name: trans('eigenvalue.Tread'), code: 52007 } /* 踏面频率 */,
+    { filed: "sv7", name: trans('eigenvalue.AdjacentShaftGear'), code: 52008 } /* 邻轴齿轮频率 */,
+    { filed: "sv8", name: trans('eigenvalue.MainShaftGear'), code: 52009 } /* 本轴齿轮频率 */
     // { filed: "part_name1", name: "部件2", code: -1 },/* 部件2 */
     // { filed: "sv10", name: "2-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv11", name: "2-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv12", name: "2-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv13", name: "2-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv14", name: "2-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv15", name: "2-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv16", name: "2-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv17", name: "2-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv18", name: "2-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv12", name: "2-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv13", name: "2-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv14", name: "2-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv15", name: "2-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv16", name: "2-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv17", name: "2-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv18", name: "2-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "part_name2", name: "部件3", code: -1 },/* 部件3 */
     // { filed: "sv20", name: "3-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv21", name: "3-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv22", name: "3-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv23", name: "3-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv24", name: "3-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv25", name: "3-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv26", name: "3-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv27", name: "3-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv28", name: "3-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv22", name: "3-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv23", name: "3-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv24", name: "3-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv25", name: "3-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv26", name: "3-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv27", name: "3-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv28", name: "3-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "part_name3", name: "部件4", code: -1 },/* 部件4 */
     // { filed: "sv30", name: "4-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv31", name: "4-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv32", name: "4-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv33", name: "4-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv34", name: "4-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv35", name: "4-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv36", name: "4-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv37", name: "4-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv38", name: "4-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv32", name: "4-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv33", name: "4-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv34", name: "4-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv35", name: "4-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv36", name: "4-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv37", name: "4-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv38", name: "4-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "part_name4", name: "部件5", code: -1 },/* 部件5 */
     // { filed: "sv40", name: "5-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv41", name: "5-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv42", name: "5-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv43", name: "5-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv44", name: "5-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv45", name: "5-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv46", name: "5-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv47", name: "5-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv48", name: "5-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv42", name: "5-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv43", name: "5-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv44", name: "5-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv45", name: "5-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv46", name: "5-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv47", name: "5-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv48", name: "5-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "part_name5", name: "部件6", code: -1 },/* 部件6 */
     // { filed: "sv50", name: "6-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv51", name: "6-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv52", name: "6-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv53", name: "6-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv54", name: "6-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv55", name: "6-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv56", name: "6-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv57", name: "6-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv58", name: "6-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv52", name: "6-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv53", name: "6-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv54", name: "6-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv55", name: "6-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv56", name: "6-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv57", name: "6-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv58", name: "6-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "part_name6", name: "部件7", code: -1 },/* 部件7 */
     // { filed: "sv60", name: "7-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv61", name: "7-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv62", name: "7-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv63", name: "7-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv64", name: "7-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv65", name: "7-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv66", name: "7-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv67", name: "7-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv68", name: "7-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv62", name: "7-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv63", name: "7-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv64", name: "7-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv65", name: "7-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv66", name: "7-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv67", name: "7-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv68", name: "7-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "part_name7", name: "部件8", code: -1 },/* 部件8 */
     // { filed: "sv70", name: "8-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv71", name: "8-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv72", name: "8-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv73", name: "8-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv74", name: "8-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv75", name: "8-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv76", name: "8-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv77", name: "8-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv78", name: "8-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv72", name: "8-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv73", name: "8-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv74", name: "8-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv75", name: "8-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv76", name: "8-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv77", name: "8-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv78", name: "8-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "part_name8", name: "部件9", code: -1 },/* 部件9 */
     // { filed: "sv80", name: "9-保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv81", name: "9-保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv82", name: "9-外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv83", name: "9-内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv84", name: "9-滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv85", name: "9-滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv86", name: "9-踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv87", name: "9-邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv88", name: "9-本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv82", name: "9-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv83", name: "9-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv84", name: "9-"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv85", name: "9-"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv86", name: "9-"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv87", name: "9-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv88", name: "9-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     // { filed: "part_name9", name: "部件10", code: -1 },/* 部件10 */
     // { filed: "sv90", name: "10保持架对外环", code: 52001 } /* 保持架对外环频率 */,
     // { filed: "sv91", name: "10保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    // { filed: "sv92", name: "10外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    // { filed: "sv93", name: "10内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    // { filed: "sv94", name: "10滚单", code: 52005 } /* 滚单频率 */,
-    // { filed: "sv95", name: "10滚双", code: 52006 } /* 滚双频率 */,
-    // { filed: "sv96", name: "10踏面", code: 52007 } /* 踏面频率 */,
-    // { filed: "sv97", name: "10邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    // { filed: "sv98", name: "10本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    // { filed: "sv92", name: "10"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道 code: 52003 } /* 外环内滚道频率 */,
+    // { filed: "sv93", name: "10"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道 code: 52004 } /* 内环外滚道频率 */,
+    // { filed: "sv94", name: "10"+trans('eigenvalue.RollRder'),//滚单 code: 52005 } /* 滚单频率 */,
+    // { filed: "sv95", name: "10"+trans('eigenvalue.RollDouble'),//滚双 code: 52006 } /* 滚双频率 */,
+    // { filed: "sv96", name: "10"+trans('eigenvalue.Tread'),//踏面 code: 52007 } /* 踏面频率 */,
+    // { filed: "sv97", name: "10"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮 code: 52008 } /* 邻轴齿轮频率 */,
+    // { filed: "sv98", name: "10"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
   ],
   10: [
     /* 工艺量 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "value", name: "工艺量", code: 27000 } /* 工艺量 */
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
+    { filed: "value", name: trans('eigenvalue.ProcessQuantity'), code: 27000 } /* 工艺量 */
   ],
   11: [
     /* 倾覆 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "overturn_rms", name: "有效值", code: 20000 } /* 倾覆值 */,
-    { filed: "overturn_p", name: "峰值", code: 30000 } /* 倾覆峰值 */,
-    { filed: "overturn_pp", name: "峰峰值", code: 31000 } /* 倾覆峰峰值 */,
-    { filed: "overturn_s", name: "位移", code: 32000 } /* 倾覆位移值 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },//时间
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "overturn_rms", name: trans('eigenvalue.EffectiveValue'), code: 20000 } /* 倾覆值 */,
+    { filed: "overturn_p", name: trans('eigenvalue.EffectiveValue'), code: 30000 } /* 倾覆峰值 */,
+    { filed: "overturn_pp", name: trans('eigenvalue.ppValue'), code: 31000 } /* 倾覆峰峰值 */,
+    { filed: "overturn_s", name: trans('eigenvalue.overturn_s'), code: 32000 } /* 倾覆位移值 */,
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 }
   ],
   12: [
     /* 倾角 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "rock_rms", name: "有效值", code: 33000 } /* 倾角有效值 */,
-    { filed: "rock_p", name: "峰值", code: 34000 } /* 倾角峰值 */,
-    { filed: "rock_pp", name: "峰峰值", code: 35000 } /* 倾角峰峰值 */,
-    { filed: "rock_avg", name: "平均值", code: 36000 } /* 倾角平均值 */,
-    { filed: "rock_s", name: "位移", code: 47000 } /* 倾角位移值 */,
-    { filed: "temperature", name: "温度值", code: 51000 } /* 温度值 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "rock_rms", name: trans('eigenvalue.EffectiveValue'), code: 33000 } /* 倾角有效值 */,
+    { filed: "rock_p", name: trans('eigenvalue.EffectiveValue'), code: 34000 } /* 倾角峰值 */,
+    { filed: "rock_pp", name: trans('eigenvalue.ppValue'), code: 35000 } /* 倾角峰峰值 */,
+    { filed: "rock_avg", name: trans('eigenvalue.average'), code: 36000 } /* 倾角平均值 */,
+    { filed: "rock_s", name: trans('eigenvalue.overturn_s'), code: 47000 } /* 倾角位移值 */,
+    { filed: "temperature", name: trans('eigenvalue.temperatureValue'), code: 51000 } /* 温度值 */,
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 }
   ],
   13: [
     /* 合成倾角 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "overturn_rms", name: "有效值", code: 37000 } /* 合成倾角有效值 */,
-    { filed: "overturn_p", name: "峰值", code: 38000 } /* 合成倾角峰值 */,
-    { filed: "overturn_pp", name: "峰峰值", code: 39000 } /* 合成倾角峰峰值 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "overturn_rms", name: trans('eigenvalue.EffectiveValue'), code: 37000 } /* 合成倾角有效值 */,
+    { filed: "overturn_p", name: trans('eigenvalue.EffectiveValue'), code: 38000 } /* 合成倾角峰值 */,
+    { filed: "overturn_pp", name: trans('eigenvalue.ppValue'), code: 39000 } /* 合成倾角峰峰值 */,
     {
       filed: "rock_avg",
-      name: ["平均值", "沉降角度"],
+      name: [trans('eigenvalue.average'), trans('eigenvalue.SettlementAngle')],
       code: 40000
     } /* 合成倾角平均值/沉降角度 */,
-    { filed: "rock_pp", name: "沉降量", code: 43000 } /* （合成）沉降量 */,
+    { filed: "rock_pp", name: trans('eigenvalue.rock_pp'), code: 43000 } /* （合成）沉降量 */,
     {
       filed: "rock_rms",
-      name: "平均值方位",
+      name: trans('eigenvalue.rock_rms'),
       code: 41000
     } /* （合成）平均值相位 */,
-    { filed: "rock_p", name: "峰值方位", code: 42000 } /* （合成）峰值相位 */,
-    { filed: "overturn_s", name: "位移", code: 48000 } /* （合成）倾角位移值 */,
-    { filed: "temperature", name: "温度值", code: 51000 } /* 温度值 */,
+    { filed: "rock_p", name: trans('eigenvalue.rock_p'), code: 42000 } /* （合成）峰值相位 */,
+    { filed: "overturn_s", name: trans('eigenvalue.overturn_s'), code: 48000 } /* （合成）倾角位移值 */,
+    { filed: "temperature", name: trans('eigenvalue.temperatureValue'), code: 51000 } /* 温度值 */,
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 }
   ],
   14: [
     /* 螺栓 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed_value", name: "预紧力值", code: 44000 } /* 预紧力值 */,
-    { filed: "speed_dc", name: "温度值", code: 45000 } /* 温度值 */
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "speed_value", name: trans('eigenvalue.PreloadValue'), code: 44000 } /* 预紧力值 */,
+    { filed: "speed_dc", name: trans('eigenvalue.temperatureValue'), code: 45000 } /* 温度值 */
   ],
   15: [
     /* 冲击 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "spm_rms", name: "包络解调值", code: 5000 } /* 包络解调值 */,
-    { filed: "spm_pp", name: "包络特征值", code: 6000 } /* 包络特征值 */,
-    { filed: "pow_rms", name: "能量有效值", code: 19000 } /* 能量有效值 */,
-    { filed: "gap", name: "偏置电压", code: 14000 } /* 偏置电压 */,
-    { filed: "sv", name: "SV值", code: 46000 } /* 冲击值 */,
-    { filed: "sv0", name: "1x幅值", code: 55000 } /* 1x幅值 */,
-    { filed: "sv1", name: "1x相位", code: 56000 } /* 1x相位 */,
-    { filed: "sv0", name: "保持架对外环", code: 52001 } /* 保持架对外环频率 */,
-    { filed: "sv1", name: "保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    { filed: "sv2", name: "外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    { filed: "sv3", name: "内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    { filed: "sv4", name: "滚单", code: 52005 } /* 滚单频率 */,
-    { filed: "sv5", name: "滚双", code: 52006 } /* 滚双频率 */,
-    { filed: "sv6", name: "踏面", code: 52007 } /* 踏面频率 */,
-    { filed: "sv7", name: "邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    { filed: "sv8", name: "本轴齿轮", code: 52009 } /* 本轴齿轮频率 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "spm_rms", name: trans('eigenvalue.envelopeDemodulationValue'), code: 5000 } /* 包络解调值 */,
+    { filed: "spm_pp", name: trans('eigenvalue.EnvelopeEigenvalues'), code: 6000 } /* 包络特征值 */,
+    { filed: "pow_rms", name: trans('eigenvalue.EnergyEffecValue'), code: 19000 } /* 能量有效值 */,
+    { filed: "gap", name: trans('eigenvalue.EnergyEffecValue'), code: 14000 } /* 偏置电压 */,
+    { filed: "sv", name: trans('eigenvalue.SVvalue'), code: 46000 } /* 冲击值 */,
+    { filed: "sv0", name: trans('eigenvalue.onexamplitude'), code: 55000 } /* 1x幅值 */,
+    { filed: "sv1", name: trans('eigenvalue.onexphase'), code: 56000 } /* 1x相位 */,
+    { filed: "sv0", name: trans('eigenvalue.ExternalRingOfCage'), code: 52001 } /* 保持架对外环频率 */,
+    { filed: "sv1", name: trans('eigenvalue.cageToInnerRing'), code: 52002 } /* 保持架对内环频率 */,
+    { filed: "sv2", name: trans('eigenvalue.OuterRingInnerRaceway'), code: 52003 } /* 外环内滚道频率 */,
+    { filed: "sv3", name: trans('eigenvalue.InnerRingOuterRaceway'), code: 52004 } /* 内环外滚道频率 */,
+    { filed: "sv4", name: trans('eigenvalue.RollRder'), code: 52005 } /* 滚单频率 */,
+    { filed: "sv5", name: trans('eigenvalue.RollDouble'), code: 52006 } /* 滚双频率 */,
+    { filed: "sv6", name: trans('eigenvalue.Tread'), code: 52007 } /* 踏面频率 */,
+    { filed: "sv7", name: trans('eigenvalue.AdjacentShaftGear'), code: 52008 } /* 邻轴齿轮频率 */,
+    { filed: "sv8", name: trans('eigenvalue.MainShaftGear'), code: 52009 } /* 本轴齿轮频率 */,
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: "频段1-2",
+      name: trans('eigenvalue.frequencyRange')+"1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: "频段2-2", code: 13002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: "频段3-2", code: 13003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: "频段4-2", code: 13004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: "频段5-2", code: 13005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: "频段6-2", code: 13006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: "频段7-2", code: 13007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: "频段8-2", code: 13008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 }
   ],
   16: [
     /* 冲击阶次 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "spm_rms", name: "包络解调值", code: 5000 } /* 包络有效值 */,
-    { filed: "spm_pp", name: "包络特征值", code: 6000 } /* 包络峰峰值 */,
-    { filed: "pow_rms", name: "能量有效值", code: 19000 } /* 能量有效值 */,
-    { filed: "gap", name: "偏置电压", code: 14000 } /* 偏置电压 */,
-    { filed: "sv", name: "SV值", code: 46000 } /* 冲击值 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "spm_rms", name: trans('eigenvalue.envelopeDemodulationValue'), code: 5000 } /* 包络有效值 */,
+    { filed: "spm_pp", name: trans('eigenvalue.EnvelopeEigenvalues'), code: 6000 } /* 包络峰峰值 */,
+    { filed: "pow_rms", name: trans('eigenvalue.EnergyEffecValue'), code: 19000 } /* 能量有效值 */,
+    { filed: "gap", name: trans('eigenvalue.EnergyEffecValue'), code: 14000 } /* 偏置电压 */,
+    { filed: "sv", name: trans('eigenvalue.SVvalue'), code: 46000 } /* 冲击值 */,
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: "频段1-2",
+      name: trans('eigenvalue.frequencyRange')+"1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: "频段2-2", code: 13002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: "频段3-2", code: 13003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: "频段4-2", code: 13004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: "频段5-2", code: 13005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: "频段6-2", code: 13006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: "频段7-2", code: 13007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: "频段8-2", code: 13008 },
-    { filed: "sv0", name: "保持架对外环", code: 52001 } /* 保持架对外环频率 */,
-    { filed: "sv1", name: "保持架对内环", code: 52002 } /* 保持架对内环频率 */,
-    { filed: "sv2", name: "外环内滚道", code: 52003 } /* 外环内滚道频率 */,
-    { filed: "sv3", name: "内环外滚道", code: 52004 } /* 内环外滚道频率 */,
-    { filed: "sv4", name: "滚单", code: 52005 } /* 滚单频率 */,
-    { filed: "sv5", name: "滚双", code: 52006 } /* 滚双频率 */,
-    { filed: "sv6", name: "踏面", code: 52007 } /* /踏面频率 */,
-    { filed: "sv7", name: "邻轴齿轮", code: 52008 } /* 邻轴齿轮频率 */,
-    { filed: "sv8", name: "本轴齿轮", code: 52009 } /* 本轴齿轮频率 */
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 },
+    { filed: "sv0", name: trans('eigenvalue.ExternalRingOfCage'), code: 52001 } /* 保持架对外环频率 */,
+    { filed: "sv1", name: trans('eigenvalue.cageToInnerRing'), code: 52002 } /* 保持架对内环频率 */,
+    { filed: "sv2", name: trans('eigenvalue.OuterRingInnerRaceway'), code: 52003 } /* 外环内滚道频率 */,
+    { filed: "sv3", name: trans('eigenvalue.InnerRingOuterRaceway'), code: 52004 } /* 内环外滚道频率 */,
+    { filed: "sv4", name: trans('eigenvalue.RollRder'), code: 52005 } /* 滚单频率 */,
+    { filed: "sv5", name: trans('eigenvalue.RollDouble'), code: 52006 } /* 滚双频率 */,
+    { filed: "sv6", name: trans('eigenvalue.Tread'), code: 52007 } /* /踏面频率 */,
+    { filed: "sv7", name: trans('eigenvalue.AdjacentShaftGear'), code: 52008 } /* 邻轴齿轮频率 */,
+    { filed: "sv8", name: trans('eigenvalue.MainShaftGear'), code: 52009 } /* 本轴齿轮频率 */
   ],
   17: [
     /* 轨道波磨 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "vib_rms", name: "有效值", code: 2000 } /* 振动有效值 */,
-    { filed: "vib_p", name: "峰值", code: 3000 } /* 振动峰值 */,
-    { filed: "vib_pp", name: "峰峰值", code: 4000 } /* 振动峰峰值 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "vib_rms", name: trans('eigenvalue.EffectiveValue'), code: 2000 } /* 振动有效值 */,
+    { filed: "vib_p", name: trans('eigenvalue.EffectiveValue'), code: 3000 } /* 振动峰值 */,
+    { filed: "vib_pp", name: trans('eigenvalue.ppValue'), code: 4000 } /* 振动峰峰值 */,
     {
       filed: "vib_pf",
-      name: "峰值因数",
+      name: trans('eigenvalue.EnergyEffecValue'),
       code: 15000
     } /* 峰值因数=振动峰值/振动有效值 */,
-    { filed: "gap", name: "偏置电压", code: 14000 } /* 偏置电压 */,
-    { filed: "vib_k", name: "峭度", code: 24000 } /* 峭度 */,
-    { filed: "vib_cf", name: "裕度", code: 25000 } /* 裕度 */,
-    { filed: "vib_sf", name: "歪度", code: 26000 } /* 歪度 */,
+    { filed: "gap", name: trans('eigenvalue.EnergyEffecValue'), code: 14000 } /* 偏置电压 */,
+    { filed: "vib_k", name: trans('eigenvalue.Kurtosis'), code: 24000 } /* 峭度 */,
+    { filed: "vib_cf", name: trans('eigenvalue.margin'), code: 25000 } /* 裕度 */,
+    { filed: "vib_sf", name: trans('eigenvalue.margin'), code: 26000 } /* 歪度 */,
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 },
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
     {
       filed: "from_sta",
-      name: "上一站名称",
+      name: trans('eigenvalue.LastStationName'),//上一站名称
       code: 57002,
       check: false
     },
-    { filed: "to_sta", name: "下一站名称", code: 57003, check: false },
+    { filed: "to_sta", name: trans('eigenvalue.nextStationName'), code: 57003, check: false },//下一站名称
     {
       filed: "from_distance",
-      name: "上一站距离",
+      name: trans('eigenvalue.lastStaDistance'),//上一站距离
       code: 57004,
       check: false
     },
     {
       filed: "to_distance",
-      name: "下一站距离",
+      name: trans('eigenvalue.nestStaDistance'),//下一站距离
       code: 57005,
       check: false
     }
   ],
   200: [
     /* 长采样 目前完全与振动一致 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "speed", name: "转速", code: 1000 } /* 转速（振动和包络字段） */,
-    { filed: "vib_rms", name: "有效值", code: 2000 } /* 振动有效值 */,
-    { filed: "vib_p", name: "峰值", code: 3000 } /* 振动峰值 */,
-    { filed: "vib_pp", name: "峰峰值", code: 4000 } /* 振动峰峰值 */,
-    { filed: "pow_rms", name: "能量有效值", code: 19000 } /* 能量有效值 */,
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 } /* 转速（振动和包络字段） */,
+    { filed: "vib_rms", name: trans('eigenvalue.EffectiveValue'), code: 2000 } /* 振动有效值 */,
+    { filed: "vib_p", name: trans('eigenvalue.EffectiveValue'), code: 3000 } /* 振动峰值 */,
+    { filed: "vib_pp", name: trans('eigenvalue.ppValue'), code: 4000 } /* 振动峰峰值 */,
+    { filed: "pow_rms", name: trans('eigenvalue.EnergyEffecValue'), code: 19000 } /* 能量有效值 */,
     {
       filed: "vib_pf",
-      name: "峰值因数",
+      name: trans('eigenvalue.EnergyEffecValue'),
       code: 15000
     } /* 峰值因数=振动峰值/振动有效值 */,
-    { filed: "gap", name: "偏置电压", code: 14000 } /* 偏置电压 */,
-    { filed: "vib_k", name: "峭度", code: 24000 } /* 峭度 */,
-    { filed: "vib_cf", name: "裕度", code: 25000 } /* 裕度 */,
-    { filed: "vib_sf", name: "歪度", code: 26000 } /* 歪度 */,
-    { filed: "sv", name: "冲击值", code: 46000 } /* 冲击值 */,
-    { filed: "vib_rms1", name: "1x幅值", code: 53000 } /* 1x幅值 */,
-    { filed: "vib_rms2", name: "1x相位", code: 54000 } /* 1x相位 */,
+    { filed: "gap", name: trans('eigenvalue.EnergyEffecValue'), code: 14000 } /* 偏置电压 */,
+    { filed: "vib_k", name: trans('eigenvalue.Kurtosis'), code: 24000 } /* 峭度 */,
+    { filed: "vib_cf", name: trans('eigenvalue.margin'), code: 25000 } /* 裕度 */,
+    { filed: "vib_sf", name: trans('eigenvalue.margin'), code: 26000 } /* 歪度 */,
+    { filed: "sv", name: trans('eigenvalue.SVvalue'), code: 46000 } /* 冲击值 */,
+    { filed: "vib_rms1", name: trans('eigenvalue.onexamplitude'), code: 53000 } /* 1x幅值 */,
+    { filed: "vib_rms2", name: trans('eigenvalue.onexphase'), code: 54000 } /* 1x相位 */,
     {
       filed: "vib_vsx1",
-      name: "频段1-1",
+      name: trans('eigenvalue.frequencyRange')+"1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: "频段1-2",
+      name: trans('eigenvalue.frequencyRange')+"1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: "频段2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: "频段2-2", code: 13002 },
-    { filed: "vib_vsx3", name: "频段3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: "频段3-2", code: 13003 },
-    { filed: "vib_vsx4", name: "频段4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: "频段4-2", code: 13004 },
-    { filed: "vib_vsx5", name: "频段5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: "频段5-2", code: 13005 },
-    { filed: "vib_vsx6", name: "频段6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: "频段6-2", code: 13006 },
-    { filed: "vib_vsx7", name: "频段7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: "频段7-2", code: 13007 },
-    { filed: "vib_vsx8", name: "频段8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: "频段8-2", code: 13008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 }
   ],
   99: [
     /* 故障信息 */
-    { filed: "proVal", name: "故障信息", code: 999 },
+    { filed: "proVal", name: trans('eigenvalue.faultMessage'), code: 999 },//故障信息
   ],
   // 智子测点
   201: [
-    { filed: 'saveTime_Com', name: '时间', code: 0, check: true },
-    { filed: 'value', name: '智子值', code: 58000, check: true }, /* 智子值用来做故障预测 */
+    { filed: 'saveTime_Com', name: trans('Common.time'), code: 0, check: true },
+    { filed: 'value', name: trans('eigenvalue.WiseValue'), code: 58000, check: true }, /* 智子值  智子值用来做故障预测 */
   ]
 };
 // dgmtype为10时取codeObj1
 const codeObj1 = {
   2: [
     /* 过程量 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "value", name: "过程量值", code: 8000 } /* 过程量值 */
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "value", name: trans('eigenvalue.ProcessValue'), code: 8000 } /* 过程量值 */
   ],
   3: [
     /* 振动 */
-    { filed: "saveTime_Com", name: "时间", code: 0 },
-    { filed: "vib_rms", name: "加速度有效值", code: 57006 } /* 加速度有效值 */,
-    { filed: "vib_rms1", name: "速度有效值", code: 57007 } /* 速度有效值 */,
-    { filed: "vib_rms2", name: "位移有效值", code: 57008 } /* 位移有效值 */,
-    { filed: "vib_k", name: "峭度", code: 57009 } /* 峭度 */,
-    { filed: "sv", name: "包络", code: 57010 } /* 包络 */
+    { filed: "saveTime_Com", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "vib_rms", name: trans('eigenvalue.accelerationValue'), code: 57006 } /* 加速度有效值 */,
+    { filed: "vib_rms1", name: trans('eigenvalue.speedValue'), code: 57007 } /* 速度有效值 */,
+    { filed: "vib_rms2", name: trans('eigenvalue.displacementValue'), code: 57008 } /* 位移有效值 */,
+    { filed: "vib_k", name: trans('eigenvalue.Kurtosis'), code: 57009 } /* 峭度 */,
+    { filed: "sv", name: trans('eigenvalue.envelope'), code: 57010 } /* 包络 */
   ],
   // 智子测点
   201: [
-    { filed: 'saveTime_Com', name: '时间', code: 0, check: true },
-    { filed: 'value', name: '智子值', code: 58000, check: true }, /* 智子值用来做故障预测 */
+    { filed: 'saveTime_Com', name: trans('eigenvalue.time'), code: 0, check: true },
+    { filed: 'value', name: trans('eigenvalue.WiseValue'), code: 58000, check: true }, /* 智子值用来做故障预测 */
   ]
 };
 // dgmType = 11,DS8000
 const codeObj2 = {
   2: [
     //过程量
-    { filed: "time", name: "时间", code: 0 },
-    { filed: "value", name: "过程量值", code: 8000 }
+    { filed: "time", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "value", name: trans('eigenvalue.ProcessValue'), code: 8000 }
   ],
   3: [
     //振动
-    { filed: "time", name: "时间", code: 0 },
-    { filed: "rms", name: "有效值", code: 57011 },
-    { filed: "speed", name: "转速", code: 1000 },
-    { filed: "rv", name: "残余量", code: 57012 },
-    { filed: "average", name: "振动通道均值", code: 57013 },
-    { filed: "direc", name: "通频值", code: 57014 },
-    { filed: "gap", name: "偏置电压", code: 14000 },
-    { filed: "vbmax", name: "矢量谱最大值", code: 57014 },
-    { filed: "p1x", name: "1x相位", code: 57015 },
-    { filed: "p2x", name: "2x相位", code: 57016 },
-    { filed: "v1x", name: "1x幅值", code: 57017 },
-    { filed: "v2x", name: "2x幅值", code: 57018 },
-    { filed: "v3x", name: "0.5x幅值", code: 57019 },
-    { filed: "vsx1", name: "可选频段1幅值", code: 57020 },
-    { filed: "vsx2", name: "可选频段2幅值", code: 57021 },
-    { filed: "opt_freq_hi_1", name: "可选频段高1", code: 57022 },
-    { filed: "opt_freq_hi_2", name: "可选频段高2", code: 57023 },
-    { filed: "opt_freq_low_1", name: "可选频段低1", code: 57024 },
-    { filed: "opt_freq_low_2", name: "可选频段低2", code: 57025 }
+    { filed: "time", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "rms", name: trans('eigenvalue.EffectiveValue'), code: 57011 },
+    { filed: "speed", name: trans('eigenvalue.speed'), code: 1000 },
+    { filed: "rv", name: trans('eigenvalue.rv'), code: 57012 },
+    { filed: "average", name: trans('eigenvalue.vibChMeanValue'), code: 57013 },
+    { filed: "direc", name: trans('eigenvalue.direc'), code: 57014 },//通频值
+    { filed: "gap", name: trans('eigenvalue.EnergyEffecValue'), code: 14000 },
+    { filed: "vbmax", name: trans('eigenvalue.MaxVectorSpectrum'), code: 57014 },//矢量谱最大值
+    { filed: "p1x", name: trans('eigenvalue.onexphase'), code: 57015 },
+    { filed: "p2x", name: trans('eigenvalue.twoxphase'), code: 57016 },//2x相位
+    { filed: "v1x", name: trans('eigenvalue.onexamplitude'), code: 57017 },
+    { filed: "v2x", name: trans('eigenvalue.twoxamplitude'), code: 57018 },//2x幅值
+    { filed: "v3x", name: trans('eigenvalue.halfxamplitude'), code: 57019 },//0.5x幅值
+    { filed: "vsx1", name: trans('eigenvalue.option1amplitude'), code: 57020 },//可选频段1幅值
+    { filed: "vsx2", name: trans('eigenvalue.option2amplitude'), code: 57021 },//可选频段2幅值
+    { filed: "opt_freq_hi_1", name: trans('eigenvalue.opt_freq_hi_1'), code: 57022 },//可选频段高1
+    { filed: "opt_freq_hi_2", name: trans('eigenvalue.opt_freq_hi_2'), code: 57023 },//可选频段高2
+    { filed: "opt_freq_low_1", name: trans('eigenvalue.opt_freq_l_1'), code: 57024 },//可选频段低1
+    { filed: "opt_freq_low_2", name: trans('eigenvalue.opt_freq_l_2'), code: 57025 }//可选频段低2
   ],
   10: [
     /* 工艺量 */
-    { filed: "time", name: "时间", code: 0 },
-    { filed: "value", name: "工艺量", code: 27000 } /* 工艺量 */
+    { filed: "time", name: trans('eigenvalue.time'), code: 0 },
+    { filed: "value", name: trans('eigenvalue.ProcessQuantity'), code: 27000 } /* 工艺量 */
   ],
   19: [
     // 键相
   ],
   // 智子测点
   201: [
-    { filed: 'saveTime_Com', name: '时间', code: 0, check: true },
-    { filed: 'value', name: '智子值', code: 58000, check: true }, /* 智子值用来做故障预测 */
+    { filed: 'saveTime_Com', name: trans('eigenvalue.time'), code: 0, check: true },
+    { filed: 'value', name: trans('eigenvalue.WiseValue'), code: 58000, check: true }, /* 智子值用来做故障预测 */
   ]
 };
 // 获取code对象
@@ -864,7 +873,7 @@ function setHead (tRoot, dgmType, pType, posLoc = 1, type = false) {
             continue;
           }
         }
-        if (value.name == "能量有效值") {
+        if (value.name == trans('eigenvalue.EnergyEffecValue')) {
           isShow = false;
         }
         let name = value.name;
@@ -913,7 +922,7 @@ function setHead (tRoot, dgmType, pType, posLoc = 1, type = false) {
   if (Number(pType) === 5 && dgmType != 11 && dgmType != 10) {
     head.push({
       isShow: true,
-      val: "数字量类型",
+      val: trans('eigenvalue.digitalquantitiesTypes'),//数字量类型
       filed: "type",
       code: 18000
     });
@@ -924,45 +933,45 @@ const defaultCode = {
   /* 趋势图默认code */
   1: {
     filed: "speed_value",
-    name: "测点转速值",
+    name: trans('eigenvalue.posSpeed'),//测点转速值
     code: 16000
   } /* 转速测点转速值 */,
-  2: { filed: "value", name: "过程量值", code: 8000 } /* 过程量值 */,
-  3: { filed: "vib_rms", name: "有效值", code: 2000 } /* 振动有效值 */,
-  4: { filed: "spm_rms", name: "包络解调值", code: 5000 } /* 包络解调值 */,
-  5: { filed: "digital_value", name: "数字量值", code: 7000 } /* 数字量值 */,
-  6: { filed: "rock_rms", name: "有效值", code: 9000 } /* 晃度有效值 */,
-  7: { filed: "value", name: "温度值", code: 23000 } /* 温度值 */,
-  8: { filed: "vib_rms", name: "有效值", code: 2000 } /* 振动有效值 */,
-  9: { filed: "spm_rms", name: "包络解调值", code: 5000 } /* 包络有效值 */,
-  10: { filed: "value", name: "工艺量", code: 27000 } /* 工艺量 */,
-  11: { filed: "overturn_rms", name: "有效值", code: 20000 } /* 倾覆值 */,
-  12: { filed: "rock_rms", name: "有效值", code: 33000 } /* 倾角有效值 */,
+  2: { filed: "value", name: trans('eigenvalue.ProcessValue'), code: 8000 } /* 过程量值 */,
+  3: { filed: "vib_rms", name: trans('eigenvalue.EffectiveValue'), code: 2000 } /* 振动有效值 */,
+  4: { filed: "spm_rms", name: trans('eigenvalue.envelopeDemodulationValue'), code: 5000 } /* 包络解调值 */,
+  5: { filed: "digital_value", name: trans('eigenvalue.DigitalValue'), code: 7000 } /* 数字量值 */,
+  6: { filed: "rock_rms", name: trans('eigenvalue.EffectiveValue'), code: 9000 } /* 晃度有效值 */,
+  7: { filed: "value", name: trans('eigenvalue.temperatureValue'), code: 23000 } /* 温度值 */,
+  8: { filed: "vib_rms", name: trans('eigenvalue.EffectiveValue'), code: 2000 } /* 振动有效值 */,
+  9: { filed: "spm_rms", name: trans('eigenvalue.envelopeDemodulationValue'), code: 5000 } /* 包络有效值 */,
+  10: { filed: "value", name: trans('eigenvalue.ProcessQuantity'), code: 27000 } /* 工艺量 */,
+  11: { filed: "overturn_rms", name: trans('eigenvalue.EffectiveValue'), code: 20000 } /* 倾覆值 */,
+  12: { filed: "rock_rms", name: trans('eigenvalue.EffectiveValue'), code: 33000 } /* 倾角有效值 */,
   13: {
-    filed: "overturn_rms", name: "有效值", code: 37000
+    filed: "overturn_rms", name: trans('eigenvalue.EffectiveValue'), code: 37000
   } /* 合成倾角有效值 */,
   14: { filed: "speed_value", name: "预紧力值", code: 44000 } /* 预紧力值 */,
-  15: { filed: "spm_rms", name: "包络解调值", code: 5000 } /* 冲击测点 */,
-  16: { filed: "spm_rms", name: "包络解调值", code: 5000 } /* 包络有效值 */,
-  17: { filed: "vib_rms", name: "有效值", code: 2000 } /* 轨道波磨测点 */,
-  200: { filed: "vib_rms", name: "有效值", code: 2000 } /* 长采样有效值 */,
+  15: { filed: "spm_rms", name: trans('eigenvalue.envelopeDemodulationValue'), code: 5000 } /* 冲击测点 */,
+  16: { filed: "spm_rms", name: trans('eigenvalue.envelopeDemodulationValue'), code: 5000 } /* 包络有效值 */,
+  17: { filed: "vib_rms", name: trans('eigenvalue.EffectiveValue'), code: 2000 } /* 轨道波磨测点 */,
+  200: { filed: "vib_rms", name: trans('eigenvalue.EffectiveValue'), code: 2000 } /* 长采样有效值 */,
   99: {
     filed: "proVal",
-    name: "故障信息",
+    name: trans('eigenvalue.faultMessage'),
     code: 999
   } /* 转速测点转速值 */,
-  201: { filed: 'value', name: '智子值', code: 58000, check: true }
+  201: { filed: 'value', name: trans('eigenvalue.WiseValue'), code: 58000, check: true }
 };
 const defaultCode_1 = {
   /* WL9100默认code */
-  2: { filed: "value", name: "过程量值", code: 8000 } /* 过程量值 */,
-  3: { filed: "vib_rms", name: "加速度有效值", code: 57006 } /* 振动有效值 */
+  2: { filed: "value", name: trans('eigenvalue.ProcessValue'), code: 8000 } /* 过程量值 */,
+  3: { filed: "vib_rms", name: trans('eigenvalue.accelerationValue'), code: 57006 } /* 振动有效值 */
 };
 // 8000
 const defaultCode_2 = {
-  2: { filed: "value", name: "过程量值", code: 8000 },
-  3: { filed: "direc", name: "通频值", code: 57014 } /* 振动通频值 */,
-  10: { filed: "value", name: "工艺量", code: 27000 } /* 工艺量 */,
+  2: { filed: "value", name: trans('eigenvalue.ProcessValue'), code: 8000 },
+  3: { filed: "direc", name: trans('eigenvalue.direc'), code: 57014 } /* 振动通频值 */,
+  10: { filed: "value", name: trans('eigenvalue.ProcessQuantity'), code: 27000 } /* 工艺量 */,
   19: {}
 };
 export function getdefaultCode (dgmType) {
@@ -1009,21 +1018,21 @@ const defaultCode1 = {
 
 const posTypeName = {
   /* 测点类型 */
-  1: "转速测点",
-  2: "过程量测点",
-  3: "振动测点",
-  4: "包络测点",
-  5: "数字量测点",
-  6: "晃度测点",
-  7: "温度测点",
-  8: "振动阶次测点",
-  9: "包络阶次测点",
-  10: "工艺量测点",
-  11: "倾覆测点",
-  12: "倾角测点",
-  13: "合成倾角测点",
-  14: "螺栓测点",
-  200: "长采样测点"
+  1: trans('posTypeName.speedPos'),//转速测点
+  2: trans('posTypeName.processPos'),//过程量测点
+  3: trans('posTypeName.vibPos'),//振动测点
+  4: trans('posTypeName.EnvelopePos'),//包络测点
+  5: trans('posTypeName.DigitalPos'),//数字量测点
+  6: trans('posTypeName.SloshnessPos'),//晃度测点
+  7: trans('posTypeName.temperaturePos'),//温度测点
+  8: trans('posTypeName.vibOrderPos'),//振动阶次测点
+  9: trans('posTypeName.EnvelopeOrderPos'),//包络阶次测点
+  10: trans('posTypeName.ProcessPos'),//工艺量测点
+  11: trans('posTypeName.OverturnPos'),//倾覆测点
+  12: trans('posTypeName.inclinationPos'),//倾角测点
+  13: trans('posTypeName.SyntheticAnglePos'),//合成倾角测点
+  14: trans('posTypeName.boltPos'),//螺栓测点
+  200: trans('posTypeName.LongsamplePos')//长采样测点
 };
 /* 测点,图谱打开测点类型限制 */
 const matchingRules = {
@@ -1277,7 +1286,7 @@ function setConditionAlarm () {
         h: alarm[code].h_limit_5,
         hh: alarm[code].hh_limit_5
       },
-      name: "其它工况",
+      name: trans('Common.OtherCond'),//其它工况
       isShow: true,
       x: [],
       y: [],
@@ -1656,41 +1665,41 @@ export function realCode (position_type, pos_loc) {
 export function realCodeName (code) {
   switch (code) {
     case 'speed':
-      return '转速'
+      return trans('eigenvalue.speed')//转速
     case 'sta':
-      return '过程量'
+      return trans('eigenvalue.ProcessValue')//过程量
     case 'vib':
-      return '振动'
+      return trans('eigenvalue.vibration')//振动
     case 'spm':
-      return '包络'
+      return trans('eigenvalue.envelope')//包络
     case 'digital':
-      return '数字量'
+      return trans('eigenvalue.digital')//数字量
     case 'temp':
-      return '温度'
+      return trans('eigenvalue.temperature')//温度
     case 'vib_order':
-      return '振动阶次'
+      return trans('eigenvalue.VibOrder')//振动阶次
     case 'spm_order':
-      return '包络阶次'
+      return trans('eigenvalue.EnvelopeOrder')//包络阶次
     case 'mod':
-      return '工艺量'
+      return trans('eigenvalue.ProcessQuantity')//'工艺量'
     case 'overturn':
-      return '倾覆'
+      return trans('eigenvalue.Overturned')//倾覆
     case 'settle':
-      return '沉降'
+      return trans('eigenvalue.sink')//沉降
     case 'dip':
-      return '倾角'
+      return trans('eigenvalue.inclination')//倾角
     case 'bolt':
-      return '螺栓'
+      return trans('eigenvalue.bolt')//螺栓
     case 'sv':
-      return '冲击'
+      return trans('eigenvalue.Shock')//冲击
     case 'sv_order':
-      return '冲击阶次'
+      return trans('eigenvalue.ImpactOrder')//冲击阶次
     case 'rail':
-      return '轨道波磨'
+      return trans('eigenvalue.OrbitalCorrugation')//轨道波磨
     case 'derail':
-      return '脱轨监测'
+      return trans('eigenvalue.DerailmentMonitor')//脱轨监测
     case 'keyphase':
-      return '键相'
+      return trans('eigenvalue.BondPhase')//键相
   }
   return ''
 }
@@ -1717,601 +1726,601 @@ export function realCodeList (t_root, dgm_type, position_type, pos_loc = 1) {
     head2.push(
       {
         filed: "part_name0",
-        val: "部件1",
+        val: trans('eigenvalue.part')+"1",
         code: -1,
         isShow: false
       } /* 部件1 */,
       {
         filed: "sv0",
-        val: "1-保持架对外环",
+        val: "1-" + trans('eigenvalue.ExternalRingOfCage'),//保持架对外环
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv1",
-        val: "1-保持架对内环",
+        val: "1-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv2",
-        val: "1-外环内滚道",
+        val: "1-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv3",
-        val: "1-内环外滚道",
+        val: "1-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv4",
-        val: "1-滚单",
+        val: "1-"+trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv5",
-        val: "1-滚双",
+        val: "1-"+trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv6",
-        val: "1-踏面",
+        val: "1-"+trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv7",
-        val: "1-邻轴齿轮",
+        val: "1-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv8",
-        val: "1-本轴齿轮",
+        val: "1-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name1",
-        val: "部件2",
+        val: trans('eigenvalue.part')+"2",
         code: -1,
         isShow: false
       } /* 部件2 */,
       {
         filed: "sv10",
-        val: "2-保持架对外环",
+        val: "2-"+trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv11",
-        val: "2-保持架对内环",
+        val: "2-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv12",
-        val: "2-外环内滚道",
+        val: "2-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv13",
-        val: "2-内环外滚道",
+        val: "2-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv14",
-        val: "2-滚单",
+        val: "2-"+trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv15",
-        val: "2-滚双",
+        val: "2-"+trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv16",
-        val: "2-踏面",
+        val: "2-"+trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv17",
-        val: "2-邻轴齿轮",
+        val: "2-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv18",
-        val: "2-本轴齿轮",
+        val: "2-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name2",
-        val: "部件3",
+        val: trans('eigenvalue.part')+"3",
         code: -1,
         isShow: false
       } /* 部件3 */,
       {
         filed: "sv20",
-        val: "3-保持架对外环",
+        val: "3-"+trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv21",
-        val: "3-保持架对内环",
+        val: "3-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv22",
-        val: "3-外环内滚道",
+        val: "3-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv23",
-        val: "3-内环外滚道",
+        val: "3-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv24",
-        val: "3-滚单",
+        val: "3-"+trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv25",
-        val: "3-滚双",
+        val: "3-"+trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv26",
-        val: "3-踏面",
+        val: "3-"+trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv27",
-        val: "3-邻轴齿轮",
+        val: "3-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv28",
-        val: "3-本轴齿轮",
+        val: "3-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name3",
-        val: "部件4",
+        val: trans('eigenvalue.part')+"4",
         code: -1,
         isShow: false
       } /* 部件4 */,
       {
         filed: "sv30",
-        val: "4-保持架对外环",
+        val: "4-"+trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv31",
-        val: "4-保持架对内环",
+        val: "4-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv32",
-        val: "4-外环内滚道",
+        val: "4-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv33",
-        val: "4-内环外滚道",
+        val: "4-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv34",
-        val: "4-滚单",
+        val: "4-"+trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv35",
-        val: "4-滚双",
+        val: "4-"+trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv36",
-        val: "4-踏面",
+        val: "4-"+trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv37",
-        val: "4-邻轴齿轮",
+        val: "4-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv38",
-        val: "4-本轴齿轮",
+        val: "4-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name4",
-        val: "部件5",
+        val: trans('eigenvalue.part')+"5",
         code: -1,
         isShow: false
       } /* 部件5 */,
       {
         filed: "sv40",
-        val: "5-保持架对外环",
+        val: "5-"+trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv41",
-        val: "5-保持架对内环",
+        val: "5-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv42",
-        val: "5-外环内滚道",
+        val: "5-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv43",
-        val: "5-内环外滚道",
+        val: "5-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv44",
-        val: "5-滚单",
+        val: "5-"+trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv45",
-        val: "5-滚双",
+        val: "5-"+trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv46",
-        val: "5-踏面",
+        val: "5-"+trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv47",
-        val: "5-邻轴齿轮",
+        val: "5-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv48",
-        val: "5-本轴齿轮",
+        val: "5-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name5",
-        val: "部件6",
+        val: trans('eigenvalue.part')+"6",
         code: -1,
         isShow: false
       } /* 部件6 */,
       {
         filed: "sv50",
-        val: "6-保持架对外环",
+        val: "6-"+trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv51",
-        val: "6-保持架对内环",
+        val: "6-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv52",
-        val: "6-外环内滚道",
+        val: "6-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv53",
-        val: "6-内环外滚道",
+        val: "6-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv54",
-        val: "6-滚单",
+        val: "6-"+trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv55",
-        val: "6-滚双",
+        val: "6-"+trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv56",
-        val: "6-踏面",
+        val: "6-"+trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv57",
-        val: "6-邻轴齿轮",
+        val: "6-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv58",
-        val: "6-本轴齿轮",
+        val: "6-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name6",
-        val: "部件7",
+        val: trans('eigenvalue.part')+"7",
         code: -1,
         isShow: false
       } /* 部件7 */,
       {
         filed: "sv60",
-        val: "7-保持架对外环",
+        val: "7-"+trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv61",
-        val: "7-保持架对内环",
+        val: "7-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv62",
-        val: "7-外环内滚道",
+        val: "7-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv63",
-        val: "7-内环外滚道",
+        val: "7-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv64",
-        val: "7-滚单",
+        val: "7-"+trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv65",
-        val: "7-滚双",
+        val: "7-"+trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv66",
-        val: "7-踏面",
+        val: "7-"+trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv67",
-        val: "7-邻轴齿轮",
+        val: "7-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv68",
-        val: "7-本轴齿轮",
+        val: "7-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name7",
-        val: "部件8",
+        val: trans('eigenvalue.part')+"8",
         code: -1,
         isShow: false
       } /* 部件8 */,
       {
         filed: "sv70",
-        val: "8-保持架对外环",
+        val: "8-"+trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv71",
-        val: "8-保持架对内环",
+        val: "8-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv72",
-        val: "8-外环内滚道",
+        val: "8-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv73",
-        val: "8-内环外滚道",
+        val: "8-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv74",
-        val: "8-滚单",
+        val: "8-"+trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv75",
-        val: "8-滚双",
+        val: "8-"+trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv76",
-        val: "8-踏面",
+        val: "8-"+trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv77",
-        val: "8-邻轴齿轮",
+        val: "8-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv78",
-        val: "8-本轴齿轮",
+        val: "8-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name8",
-        val: "部件9",
+        val: trans('eigenvalue.part')+"9",
         code: -1,
         isShow: false
       } /* 部件9 */,
       {
         filed: "sv80",
-        val: "9-保持架对外环",
+        val: "9-"+trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv81",
-        val: "9-保持架对内环",
+        val: "9-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv82",
-        val: "9-外环内滚道",
+        val: "9-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv83",
-        val: "9-内环外滚道",
+        val: "9-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv84",
-        val: "9-滚单",
+        val: "9-"+trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv85",
-        val: "9-滚双",
+        val: "9-"+trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv86",
-        val: "9-踏面",
+        val: "9-"+trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv87",
-        val: "9-邻轴齿轮",
+        val: "9-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv88",
-        val: "9-本轴齿轮",
+        val: "9-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name9",
-        val: "部件10",
+        val: trans('eigenvalue.part')+"10",
         code: -1,
         isShow: false
       } /* 部件10 */,
       {
         filed: "sv90",
-        val: "10保持架对外环",
+        val: "10"+trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv91",
-        val: "10保持架对内环",
+        val: "10"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv92",
-        val: "10外环内滚道",
+        val: "10"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv93",
-        val: "10内环外滚道",
+        val: "10"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv94",
-        val: "10滚单",
+        val: "10"+trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv95",
-        val: "10滚双",
+        val: "10"+trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv96",
-        val: "10踏面",
+        val: "10"+trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv97",
-        val: "10邻轴齿轮",
+        val: "10"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv98",
-        val: "10本轴齿轮",
+        val: "10"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */
@@ -3120,43 +3129,43 @@ export function posType_name (type) {
   let postType_name = "";
   switch (parseInt(type)) {
     case 3:
-      postType_name = "振动";
+      postType_name = trans('eigenvalue.vibration');//振动
       break;
     case 4:
-      postType_name = "包络";
+      postType_name = trans('eigenvalue.envelope');//包络
       break;
     case 8:
-      postType_name = "振动阶次";
+      postType_name = trans('eigenvalue.VibOrder');//振动阶次
       break;
     case 9:
-      postType_name = "包络阶次";
+      postType_name = trans('eigenvalue.EnvelopeOrder')//包络阶次
       break;
     case 1:
-      postType_name = "转速";
+      postType_name = trans('eigenvalue.speed');//转速
       break;
     case 6:
-      postType_name = "晃度";
+      postType_name = trans('eigenvalue.Shake');//晃度
       break;
     case 11:
-      postType_name = "倾覆";
+      postType_name = trans('eigenvalue.Overturned');//"倾覆";
       break;
     case 12:
-      postType_name = "倾角";
+      postType_name = trans('eigenvalue.inclination');//"倾角";
       break;
     case 13:
-      postType_name = "合成倾角";
+      postType_name = trans('eigenvalue.SyntheticInclination');//"合成倾角";
       break;
     case 7:
-      postType_name = "温度";
+      postType_name = trans('eigenvalue.temperature');//温度
       break;
     case 2:
-      postType_name = "过程量";
+      postType_name = trans('eigenvalue.ProcessVolume');//"过程量";
       break;
     case 5:
-      postType_name = "数字量";
+      postType_name = trans('eigenvalue.digital');//"数字量";
       break;
     case 10:
-      postType_name = "工艺量";
+      postType_name = trans('eigenvalue.overturn_s');//工艺量
       break;
   }
   return postType_name;
@@ -3173,108 +3182,108 @@ export function itemMapping (key) {
   const itemList = {
     /* 其他的测点 */
     O_01: {
-      CNname: "井口压力",
+      CNname: trans('ytMap.WellheadPressure'),//井口压力
       mappingKey: 7766
     },
     O_02: {
-      CNname: "井口温度",
+      CNname: trans('ytMap.WellheadTemperature'),//井口温度
       mappingKey: 7766
     },
     O_03: {
-      CNname: "Pd出口压力",
+      CNname: trans('ytMap.PdOutletPressure'),//Pd出口压力
       mappingKey: "Pd"
     },
     O_04: {
-      CNname: "Pi吸入口压力",
+      CNname: trans('ytMap.PiSuctionPressure'),//Pi吸入口压力
       mappingKey: "Pi"
     },
     O_05: {
-      CNname: "Ti流体温度",
+      CNname: trans('ytMap.TiFluidTemperature'),//Ti流体温度
       mappingKey: "Ti"
     },
     O_06: {
-      CNname: "Tm电机油温",
+      CNname: trans('ytMap.TmmotorOilTemperature'),//Tm电机油温
       mappingKey: "Tm"
     },
     O_07: {
-      CNname: "Tg井下电路",
+      CNname: trans('ytMap.TgDownholeCircuit'),//Tg井下电路
       mappingKey: "Tg"
     },
     O_08: {
-      CNname: "Vx井下振动",
+      CNname: trans('ytMap.VxDownholeVib'),//Vx井下振动
       mappingKey: "Vx"
     },
     O_09: {
-      CNname: "Vy井下振动",
+      CNname: trans('ytMap.VYDownholeVib'),//Vy井下振动
       mappingKey: "Vy"
     },
     O_10: {
-      CNname: "Vz井下振动",
+      CNname: trans('ytMap.VZDownholeVib'),//Vz井下振动
       mappingKey: "Vz"
     },
 
     // A:变压器 B、变频器 C、运行记录 D、井下电机 E、井下传感器 F、智能电表
     A_01: {
-      CNname: "变比",
+      CNname: trans('ytMap.TransformationRatio'),//变比
       mappingKey: 7766
     },
     A_02: {
-      CNname: "输出电压AB",
-      mappingKey: "井下机组给定电压AB"
+      CNname: trans('ytMap.OutputVoltageAB'),//输出电压AB
+      mappingKey: trans('ytMap.DownOutputVoltageAB')//井下机组给定电压AB
     },
     A_03: {
-      CNname: "输出电压BC",
-      mappingKey: "井下机组给定电压BC"
+      CNname: trans('ytMap.OutputVoltageBC'),//输出电压BC
+      mappingKey: trans('ytMap.DownOutputVoltageBC')//井下机组给定电压BC
     },
     A_04: {
-      CNname: "输出电压AC",
-      mappingKey: "井下机组给定电压CA"
+      CNname: trans('ytMap.OutputBoltageAC'),//输出电压AC
+      mappingKey: trans('ytMap.DownOutputBoltageAC')//井下机组给定电压CA
     },
     A_05: {
-      CNname: "A相电流",
-      mappingKey: "井下运行A相电流"
+      CNname: trans('ytMap.AphaseCurrent'),//A相电流
+      mappingKey: trans('ytMap.DownAphaseCurrent')//井下运行A相电流
     },
     A_06: {
-      CNname: "B相电流",
-      mappingKey: "井下运行B相电流"
+      CNname: trans('ytMap.PhaseBCurrent'),//B相电流
+      mappingKey: trans('ytMap.DownPhaseBCurrent')//井下运行B相电流
     },
     A_07: {
-      CNname: "C相电流",
-      mappingKey: "井下运行C相电流"
+      CNname: trans('ytMap.PhaseCCurrent'),//C相电流
+      mappingKey: trans('ytMap.DownPhaseCCurrent')//井下运行C相电流
     },
 
     //变频器
     B_01: {
-      CNname: "设定频率",
-      mappingKey: "变频器设定频率"
+      CNname: trans('ytMap.Setfreq'),//设定频率
+      mappingKey: trans('ytMap.InverterSetfreq')//变频器设定频率
     },
     B_02: {
-      CNname: "运行频率",
-      mappingKey: "变频器运行频率"
+      CNname: trans('ytMap.Operatingfreq'),//运行频率
+      mappingKey: trans('ytMap.InverterOperatefreq')//变频器运行频率
     },
     B_03: {
-      CNname: "输出电压",
-      mappingKey: "变频器输出电压"
+      CNname: trans('ytMap.outputVoltage'),//输出电压
+      mappingKey: trans('ytMap.InverteroutputVoltage')//变频器输出电压
     },
     B_04: {
-      CNname: "输出一次电流",
-      mappingKey: "变频器输出一次电流"
+      CNname: trans('ytMap.OutputOneVoltage'),//输出一次电流
+      mappingKey: trans('ytMap.InverterOutputOneVoltage')//变频器输出一次电流
     },
     //运行记录
     C_01: {
-      CNname: "上次停机时间",
+      CNname: trans('ytMap.latStopTime'),//上次停机时间
       mappingKey: "lastStoptime"
     },
     C_02: {
-      CNname: "累积运行时间",
+      CNname: trans('ytMap.CumulativeRunTime'),//累积运行时间
       mappingKey: "totalRuntime"
     },
     C_03: {
-      CNname: "下井时间",
+      CNname: trans('ytMap.DownholeTime'),//下井时间
       mappingKey: "downWelltime"
     },
     C_04: {
-      CNname: "累计下井时间",
+      CNname: trans('ytMap.CumulativeDownholeTime'),//累计下井时间
       mappingKey: "downWellRuntime"
     },
     //井下电机
@@ -3287,32 +3296,32 @@ export function itemMapping (key) {
       mappingKey: "eta"
     },
     D_03: {
-      CNname: "额定功率",
+      CNname: trans('ytMap.ratedpower'),//额定功率
       mappingKey: "ratedPower"
     },
     D_04: {
-      CNname: "功率",
+      CNname: trans('ytMap.power'),//功率
       mappingKey: "power"
     },
     D_05: {
-      CNname: "载荷",
+      CNname: trans('ytMap.Load'),//载荷
       mappingKey: "load"
     },
     //井下传感器
     E_01: {
-      CNname: "CL漏电流",
+      CNname: trans('ytMap.CLleakageCurrent'),//CL漏电流
       mappingKey: "CL"
     },
     E_02: {
-      CNname: "Ver软件版本号",
+      CNname: trans('ytMap.VersoftVersion'),//Ver软件版本号
       mappingKey: "Ver"
     },
     E_03: {
-      CNname: "Rx井下绝缘电阻",
+      CNname: trans('ytMap.RXdownResistance'),//Rx井下绝缘电阻
       mappingKey: "Rx"
     },
     E_04: {
-      CNname: "Crc通讯失败次数",
+      CNname: trans('ytMap.crccommunicatFailureTimes'),//Crc通讯失败次数
       mappingKey: "Crc"
     },
     // F_01: {
@@ -3328,48 +3337,48 @@ export function itemMapping (key) {
     //   mappingKey: "控制柜输入电压C相"
     // },
     F_04: {
-      CNname: "控制柜输入线电压AB",
-      mappingKey: "控制柜输入线电压AB"
+      CNname: trans('ytMap.ControlIninputVoltageAB'),//控制柜输入线电压AB
+      mappingKey: trans('ytMap.ControlIninputVoltageAB')//控制柜输入线电压AB
     },
     F_05: {
-      CNname: "控制柜输入线电压BC",
-      mappingKey: "控制柜输入线电压BC"
+      CNname: trans('ytMap.ControlIninputVoltageBC'),//控制柜输入线电压BC
+      mappingKey: trans('ytMap.ControlIninputVoltageBC')//控制柜输入线电压BC
     },
     F_06: {
-      CNname: "控制柜输入线电压CA",
-      mappingKey: "控制柜输入线电压CA"
+      CNname: trans('ytMap.ControlIninputVoltageCA'),//控制柜输入线电压CA
+      mappingKey: trans('ytMap.ControlIninputVoltageCA')//控制柜输入线电压CA
     },
     F_07: {
-      CNname: "控制柜输入A相电流",
-      mappingKey: "控制柜输入A相电流"
+      CNname: trans('ytMap.ControlInputACurrent'),//控制柜输入A相电流
+      mappingKey: trans('ytMap.ControlInputACurrent')//控制柜输入A相电流
     },
     F_08: {
-      CNname: "控制柜输入B相电流",
-      mappingKey: "控制柜输入B相电流"
+      CNname: trans('ytMap.ControlInputBCurrent'),//控制柜输入B相电流
+      mappingKey: trans('ytMap.ControlInputBCurrent')//控制柜输入B相电流
     },
     F_09: {
-      CNname: "控制柜输入C相电流",
-      mappingKey: "控制柜输入C相电流"
+      CNname: trans('ytMap.ControlInputCCurrent'),//控制柜输入C相电流
+      mappingKey: trans('ytMap.ControlInputCCurrent')//控制柜输入C相电流
     },
     F_10: {
-      CNname: "输入频率",
-      mappingKey: "电源频率"
+      CNname: trans('ytMap.Inputfreq'),//输入频率
+      mappingKey: trans('ytMap.Powerfreq')//电源频率
     },
     F_11: {
-      CNname: "机组运行总电能",
-      mappingKey: "机组运行总电能"
+      CNname: trans('ytMap.TotalOperatingPower'),//机组运行总电能
+      mappingKey: trans('ytMap.TotalOperatingPower')//机组运行总电能
     },
     F_12: {
-      CNname: "系统总有功功率",
-      mappingKey: "系统总有功功率"
+      CNname: trans('ytMap.SystemTotalactivePower'),//系统总有功功率
+      mappingKey: trans('ytMap.SystemTotalactivePower')//系统总有功功率
     },
     F_13: {
-      CNname: "系统总无功功率",
-      mappingKey: "系统总无功功率"
+      CNname: trans('ytMap.SystemTotalReactivePower'),//系统总无功功率
+      mappingKey: trans('ytMap.SystemTotalReactivePower')//系统总无功功率
     },
     F_14: {
-      CNname: "系统总功率因数",
-      mappingKey: "系统总功率因数"
+      CNname: trans('ytMap.SystemTotalPowerFactor'),//系统总功率因数
+      mappingKey: trans('ytMap.SystemTotalPowerFactor')//系统总功率因数
     }
   }; //条目的映射关系
   let item = itemList[key];

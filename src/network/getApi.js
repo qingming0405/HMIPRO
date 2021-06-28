@@ -63,7 +63,7 @@ function getApi (router) {
         code2: 0,
         isSave: 1,
         isReal: 0,
-        key: [],
+        key: {},
         time: 0
       };
       /*  startTime	是	long		开始时间 ，时间定死，取一天

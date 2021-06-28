@@ -2,7 +2,6 @@ export default {
   name: 'server',
   data() {
     return {
-      general: {}, // 总览
       systemInfo: [], //系统信息
       cpuInfo: [], //cpu信息
       memoryInfo: [], //内存信息
@@ -26,13 +25,6 @@ export default {
   },
   methods: {
     initParams() {
-      this.general = {
-        system: {status: 0, statusDesc: this.statusDesc(0), statusColor: this.statusColor(0)},
-        cpu: {status: 0, statusDesc: this.statusDesc(0), statusColor: this.statusColor(0)},
-        memory: {status: 0, statusDesc: this.statusDesc(0), statusColor: this.statusColor(0)},
-        disk: {status: 0, statusDesc: this.statusDesc(0), statusColor: this.statusColor(0)},
-        network: {status: 0, statusDesc: this.statusDesc(0), statusColor: this.statusColor(0)}
-      }
       this.systemInfo = []
       this.cpuInfo = []
       this.memoryInfo = []
@@ -100,17 +92,11 @@ export default {
           let memory = res.memory;
           let diskInfo = res.diskInfo;
           let networkInfo = res.networkInfo;
-          let status
           if (diskInfo != undefined && diskInfo.length > 0) {
-            status = diskInfo.status
-            that.general.disk = {
-              status,
-              statusDesc: this.statusDesc(status),
-              statusColor: this.statusColor(status)
-            }
             let tempList = [];
             let obj = [
               this.$t('server.DiskName'),//"磁盘名称"
+              this.$t('server.runningState'), // 运行状态
               this.$t('server.DiskType'),//"磁盘类型",
               this.$t('server.DiskCapacity'),//"磁盘容量",
               this.$t('server.AvailableSpace'),//"可用空间",
@@ -120,6 +106,7 @@ export default {
             for (let i = 0; i < diskInfo.length; i++) {
               obj = [
                 diskInfo[i].name,
+                this.statusDesc(diskInfo[i].status),
                 diskInfo[i].type,
                 diskInfo[i].total,
                 diskInfo[i].free,
@@ -130,12 +117,6 @@ export default {
             that.diskInfo = this.transColToRow(tempList)
           }
           if (systemInfo != undefined) {
-            status = systemInfo.status
-            that.general.system = {
-              status,
-              statusDesc: this.statusDesc(status),
-              statusColor: this.statusColor(status)
-            }
             that.systemInfo = [
               [this.$t('server.HostName'), systemInfo.hostName ],
               [this.$t('server.JVMMemory'), systemInfo.jvmTotal ],
@@ -147,29 +128,19 @@ export default {
             ];//'主机名称', 'JVM总内存', 'JVM剩余内存', 'JAVA版本', 'JAVA路径', '操作系统', 'CPUEndian'
           }
           if (cpu != undefined) {
-            status = cpu.status
-            that.general.cpu = {
-              status,
-              statusDesc: this.statusDesc(status),
-              statusColor: this.statusColor(status)
-            }
             that.cpuInfo = [
-              [this.$t('server.CPUNumber'), cpu.processorCount ],
+              [this.$t('server.runningState'), this.statusDesc(cpu.status)], // 运行状态
               [this.$t('server.CPUBrand'), cpu.cpuBrand ],
               [this.$t('server.CPUModel'), cpu.cpuType ],
+              [this.$t('server.CPUNumber'), cpu.processorCount ],
               [this.$t('server.UserUtilization'), cpu.cpuUserUsed ],
               [this.$t('server.SystemUtilization'), cpu.cpuSystemUsed ],
               [this.$t('server.TotalUsage'), cpu.cpuTotalUsed ]
             ];//'CPU核心个数', 'CPU品牌', 'CPU型号', '用户使用率', '系统使用率', '总使用率'
           }
           if (memory != undefined) {
-            status = memory.status
-            that.general.memory = {
-              status,
-              statusDesc: this.statusDesc(status),
-              statusColor: this.statusColor(status)
-            }
             that.memoryInfo = [
+              [this.$t('server.runningState'), this.statusDesc(memory.status)],
               [ this.$t('server.TotalMemory'), memory.totalMemory ],
               [ this.$t('server.MemoryUsage'), memory.usedMemory ],
               [ this.$t('server.RemainMemory'), memory.freeMemory ],
@@ -178,15 +149,10 @@ export default {
           }
           
           if (networkInfo != undefined && networkInfo.length > 0) {
-            status = networkInfo.status == 1 ? 2 : 0 // 0正常 1：网络异常
-            that.general.network = {
-              status,
-              statusDesc: status === '1' ? this.$t('server.networkAbnormality') : this.$t('Common.normalText'),
-              statusColor: this.statusColor(status)
-            }
             let tempList = [];
             let obj = [
                 this.$t('server.EquipName'),//"设备名称",
+                this.$t('server.runningState'), // 运行状态
                 this.$t('server.IPAddress'),//"IP地址",
                 this.$t('server.SubnetMask'),//"子网掩码",
                 this.$t('server.MACAddress'),//"MAC地址",
@@ -204,6 +170,7 @@ export default {
               let obj = {};
               obj = [
                 networkInfo[i].deviceName,
+                networkInfo[i].status === '1' ? this.$t('server.networkAbnormality') : this.$t('Common.normalText'),
                 networkInfo[i].ip.join('/'),
                 networkInfo[i].netMask.join('/'),
                 networkInfo[i].macaddr,
@@ -243,31 +210,31 @@ export default {
     exportData() {
       // 构造数据
       let csv = "\ufeff"  
-      csv += this.csvRow(this.$t("server.systemMessage"),this.general.system.statusDesc)
+      csv += this.csvRow(this.$t("server.systemMessage"))
       for(let row of this.systemInfo){
         csv += this.csvRow(row)
       }
 
       csv += this.csvRow('')
-      csv += this.csvRow(this.$t("server.CPUInfo"), this.general.cpu.statusDesc)
+      csv += this.csvRow(this.$t("server.CPUInfo"))
       for(let row of this.cpuInfo){
         csv += this.csvRow(row)
       }
 
       csv += this.csvRow('')
-      csv += this.csvRow(this.$t("server.MemoryInfo"), this.general.memory.statusDesc)
+      csv += this.csvRow(this.$t("server.MemoryInfo"))
       for(let row of this.memoryInfo){
         csv += this.csvRow(row)
       }
 
       csv += this.csvRow('')
-      csv += this.csvRow(this.$t("server.DiskInfo"), this.general.disk.statusDesc)
+      csv += this.csvRow(this.$t("server.DiskInfo"))
       for(let row of this.diskInfo){
         csv += this.csvRow(row)
       }
 
       csv += this.csvRow('')
-      csv += this.csvRow(this.$t("server.InternetInfo"), this.general.network.statusDesc)
+      csv += this.csvRow(this.$t("server.InternetInfo"))
       for(let row of this.networkInfo){
         csv += this.csvRow(row)
       }

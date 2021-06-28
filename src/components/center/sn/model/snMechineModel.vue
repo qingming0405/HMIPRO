@@ -42,6 +42,8 @@
               @click="pointClick(item)"
               @dblclick="toTrend(item)"
               @contextmenu.prevent="showContextmenu($event, item)"
+              @mousemove.stop.prevent="setViewPosMsg(item, $event)"
+              @mouseleave="closeFloatingWindow(item,$event)"
             >
               <p
                 class="font font-border"
@@ -59,11 +61,50 @@
             ></div>
           </div>
         </div>
+        <!-- 测点浮窗信息 -->
+        <ul
+          class="pos-floating-window select-none box-shadow radius default-border"
+          style="position: absolute;"
+          :style="viewPosMsg.style"
+          v-show="viewPosMsg.isShow"
+        >
+          <li>
+            <!-- 测点名称 -->
+            <div>{{$t('Left.posNameToolTip')}}</div>
+            <div>：{{ viewPosMsg.posName }}</div>
+          </li>
+          <li>
+            <!-- 测点类型 -->
+            <div>{{$t('Left.posTypeToolTip')}}</div>
+            <div>：{{ viewPosMsg.posTypeName }}</div>
+          </li>
+          <div
+            v-for="alarmValue in viewPosMsg.alarmValue"
+            v-if="viewPosMsg.alarm_status > 1"
+          >
+            <li>
+              <!-- 报警特征值 -->
+              <div>{{alarmValue.eigen}}</div>
+              <div>：{{ alarmValue.value }}</div>
+            </li>
+            <li>
+              <!-- 报警特征值 -->
+              <div><!-- 预警门限 -->{{$t('SnModel.WarningThreshold')}}</div>
+              <div>：{{ alarmValue.warnThreshold }}</div>
+            </li>
+            <li>
+              <!-- 报警特征值 -->
+              <div>{{$t('SnModel.alarmThreshold')}}</div>
+              <div>：{{ alarmValue.alarmThreshold }}</div>
+            </li>
+          </div>
+        </ul>
       </div>
+
       <!-- 智能诊断 -->
       <div class="diagnosis-box">
         <div class="diagnosis-title">
-          <p>设备诊断</p>
+          <p><!-- 设备诊断 -->{{$t('SnModel.EquipDiagnosis')}}</p>
         </div>
         <div class="diagnosis-content-box">
           <div
@@ -72,12 +113,12 @@
           >
             <div class="diagnosis">
               <i class="iconfont icon-shijian"></i>
-              <div class="title">时间</div>
+              <div class="title"><!-- 时间 -->{{$t('Common.time')}}</div>
               <div class="content">{{diagnosis.time}}</div>
             </div>
             <div class="diagnosis">
               <i class="iconfont icon-jieguo"></i>
-              <div class="title">结果</div>
+              <div class="title"><!-- 结果 -->{{$t('SnModel.Result')}}</div>
               <div class="content">{{diagnosis.content}}</div>
             </div>
           </div>
@@ -226,6 +267,19 @@ export default {
           }
         }
       }
+    }
+  }
+  .pos-floating-window {
+    position: fixed;
+    z-index: 5;
+    padding: 5px;
+    font-size: 12px;
+    li {
+      height: 20px;
+      line-height: 20px;
+      display: flex;
+      flex-direction: row;
+      min-width: 120px;
     }
   }
 }

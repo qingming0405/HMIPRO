@@ -195,6 +195,140 @@ export const en = {
     opt_freq_hi_2: 'Optional frequency band high 2',//可选频段高2
     onexphase: '1*phase',//1x相位
     twoxphase: '2*phase',//2x相位
+    time: 'time',//时间
+    posSpeed:'Measuring point speed value',//测点转速值
+    SpeedDC: 'Speed direct flow',//转速直流量
+    ProcessValue: 'Process value',//过程量值
+    EffectiveValue: 'Effective value',//有效值
+    ppValue:'peak-to-peak value',//峰峰值
+    EnergyEffecValue: 'Energy effective value',//能量有效值
+    offsetVoltage:'offset voltage',//偏置电压
+    crestFactor: 'crest factor',//峰值因数
+    margin: 'margin',//裕度
+    skewness:'skewness',//歪度
+    SVvalue: 'impactValue',//SV值
+    frequencyRange: 'frequency range',//频段
+    temperature:'temperature',//温度
+    temperatureRise: 'temperature rise',//温升
+    envelopeDemodulationValue:'envelope demodulation value',//包络解调值
+    EnvelopeEigenvalues: 'Envelope eigenvalues',//包络特征值
+    ExternalRingOfCage: 'External ring of cage',//保持架对外环
+    cageToInnerRing:'cage to inner ring',//保持架对内环
+    OuterRingInnerRaceway: 'Outer ring inner raceway',//外环内滚道
+    InnerRingOuterRaceway:'Inner ring outer raceway',//内环外滚道
+    RollRder: 'Roll order',//滚单
+    RollDouble: 'Roll double',//滚双
+    Tread: 'Tread',//踏面
+    AdjacentShaftGear: 'Adjacent shaft gear',//邻轴齿轮
+    MainShaftGear: 'Main shaft gear',//本轴齿轮
+    DigitalValue:'Digital value',//数字量值
+    temperatureValue: 'temperature',//温度值
+    ProcessQuantity:'Process quantity',//工艺量
+    average: 'average',//平均值
+    LastStationName:'Last station name',//"上一站名称"
+    nextStationName: 'Name of the next station',//下一站名称
+    lastStaDistance:'Distance from the last station',//上一站距离
+    nestStaDistance: 'Next station distance',//下一站距离
+    faultMessage:'fault message',//故障信息
+    WiseValue:'Wise value',//智子值
+    vibChMeanValue: 'Mean value of vibration channel',//振动通道均值
+    MaxVectorSpectrum:'Maximum value of vector spectrum',//矢量谱最大值
+    option1amplitude: 'Optional band 1 amplitude',//可选频段1幅值
+    option2amplitude: 'Optional band 2 amplitude',//可选频段2幅值
+    opt_freq_l_1: 'Optional frequency band low 1',//可选频段低1
+    opt_freq_l_2: 'Optional frequency band low 2',//可选频段低2
+    digitalquantitiesTypes: 'Types of digital quantities',//数字量类型
+    vibration: 'vibration',//振动
+    digital: 'digital',//数字量
+    VibOrder: 'Vibration order',//振动阶次
+    EnvelopeOrder: 'Envelope order',//包络阶次
+    Overturned: 'Overturned',//倾覆
+    sink: 'Sink',//沉降
+    inclination: 'inclination',//倾角
+    bolt: 'bolt',//螺栓
+    Shock: 'Shock',//冲击
+    ImpactOrder:'Impact order',//冲击阶次
+    OrbitalCorrugation:'Orbital corrugation',//轨道波磨
+    DerailmentMonitor: 'Derailment monitoring',//脱轨监测
+    BondPhase:'Bond phase',//键相
+    part: 'part',//部件
+    Shake: 'Shake',//晃度
+    SyntheticInclination:'Synthetic inclination',//合成倾角
+    ProcessVolume: 'Process volume',//过程量
+  },
+  // 测点类型
+  posTypeName:{
+    speedPos: 'Speed measuring point',//转速测点
+    processPos: 'Process measuring points',//过程量测点
+    vibPos: 'vibration measuring point',//振动测点
+    EnvelopePos: 'Envelope measuring points',//包络测点
+    DigitalPos: 'Digital measuring points',//数字量测点
+    SloshnessPos: 'Sloshness measuring point',//晃度测点
+    temperaturePos: 'temperature measuring point',//温度测点
+    vibOrderPos: 'Vibration order measuring point',//振动阶次测点
+    EnvelopeOrderPos:'Envelope order measuring point',//包络阶次测点
+    ProcessPos: 'Process measuring points',//工艺量测点
+    OverturnPos: 'Overturning measuring points',//倾覆测点
+    inclinationPos: 'inclination measuring point',//倾角测点
+    SyntheticAnglePos: 'Synthetic angle measuring points',//合成倾角测点
+    boltPos: 'Bolt measuring points',//螺栓测点
+    LongsamplePos: 'Long sampling points',//长采样测点
+  },
+  ytMap: {
+    WellheadPressure: 'Wellhead pressure',//井口压力
+    WellheadTemperature:'Wellhead temperature',//井口温度
+    PdOutletPressure: 'Pd outlet pressure',//Pd出口压力
+    PiSuctionPressure: 'Pi suction port pressure',//Pi吸入口压力
+    TiFluidTemperature: 'Ti fluid temperature',//Ti流体温度
+    TmmotorOilTemperature: 'Tm motor oil temperature',//Tm电机油温
+    TgDownholeCircuit: 'Tg downhole circuit',//Tg井下电路
+    VxDownholeVib: 'Vx downhole vibration',//Vx井下振动
+    VYDownholeVib: 'Vy downhole vibration',//Vy井下振动
+    VZDownholeVib: 'Vz downhole vibration',//Vz井下振动
+    TransformationRatio: 'Transformation ratio',//变比
+    OutputVoltageAB: 'Output voltage AB',//输出电压AB
+    DownOutputVoltageAB: 'The given voltage AB of the underground unit',//井下机组给定电压AB
+    OutputVoltageBC: 'Output voltage BC',//输出电压BC
+    DownOutputVoltageBC: 'The given voltage of the underground unit BC',//输出电压BC
+    OutputBoltageAC: 'Output voltage AC',//输出电压AC
+    DownOutputBoltageAC: 'The given voltage of the underground unit CA',//井下机组给定电压CA
+    AphaseCurrent: 'A phase current',//A相电流
+    DownAphaseCurrent: 'Phase A current of underground operation',//井下运行A相电流
+    PhaseBCurrent:'Phase B current',//B相电流
+    DownPhaseBCurrent: 'B-phase current in underground operation',//井下运行B相电流
+    PhaseCCurrent: 'Phase C current',//C相电流
+    DownPhaseCCurrent: 'C-phase current in underground operation',//井下运行C相电流
+    Setfreq: 'Set frequency',//设定频率
+    InverterSetfreq: 'Inverter set frequency',//变频器设定频率
+    Operatingfreq: 'Operating frequency', //运行频率
+    InverterOperatefreq: 'Inverter operating frequency',//变频器运行频率
+    outputVoltage: 'The output voltage',//输出电压
+    InverteroutputVoltage: 'Inverter output voltage',//变频器输出电压
+    OutputOneVoltage: 'Output primary current',//输出一次电流
+    InverterOutputOneVoltage: 'Inverter output primary current',//变频器输出一次电流
+    latStopTime: 'Last down time',//上次停机时间
+    CumulativeRunTime: 'Cumulative running time',//累积运行时间
+    DownholeTime: 'Downhole time',//下井时间
+    CumulativeDownholeTime: 'Cumulative downhole time',//累计下井时间
+    ratedpower: 'rated power',//额定功率
+    power: 'power',//功率
+    Load: 'Load',//载荷
+    CLleakageCurrent: 'CL leakage current',//CL漏电流
+    VersoftVersion: 'Ver software version number',//Ver软件版本号
+    RXdownResistance: 'Rx Downhole Insulation Resistance',//Rx井下绝缘电阻
+    crccommunicatFailureTimes: 'Crc communication failure times',//Crc通讯失败次数
+    ControlIninputVoltageAB: 'Control cabinet input line voltage AB',//控制柜输入线电压AB
+    ControlIninputVoltageBC: 'Control cabinet input line voltage BC',//控制柜输入线电压BC
+    ControlIninputVoltageCA: 'Control cabinet input line voltage CA',//控制柜输入线电压CA
+    ControlInputACurrent: 'Control cabinet input phase A current',//控制柜输入A相电流
+    ControlInputBCurrent: 'Control cabinet input phase B current',//控制柜输入B相电流
+    ControlInputCCurrent: 'Control cabinet input phase C current',//控制柜输入C相电流
+    Inputfreq: 'Input frequency',//输入频率
+    Powerfreq: 'Power frequency',//电源频率
+    TotalOperatingPower: 'Total operating power of the unit',//机组运行总电能
+    SystemTotalactivePower: 'System total active power',//系统总有功功率
+    SystemTotalReactivePower: 'System total reactive power',//系统总无功功率
+    SystemTotalPowerFactor: 'System total power factor',//系统总功率因数
   },
   //单位
   unit: {
@@ -444,6 +578,10 @@ export const en = {
     diagTime: 'Time',//诊断时间
     diagResult: 'Result',//诊断结果
     noFocusMacTips: 'No focused data',//无重点关注机组
+    Alarm: 'Alarm',//报警
+    warn: 'warn', //预警
+    Normal:'Normal',//正常
+    PosNumber: 'Number of measuring points',//测点个数
   },
   //工业设备设备模型
   SnModel: {
@@ -451,6 +589,10 @@ export const en = {
     titleBtn2: 'Position',//测点列表
     titleBtn3: 'Oil params',//油液参数
     titleBtn4: 'Angle of Dip',//倾角
+    WarningThreshold:'Warning threshold',//预警门限
+    alarmThreshold: 'alarm threshold',//报警门限
+    EquipDiagnosis: 'Equipment diagnosis',//设备诊断
+    Result: 'Result',//结果
   },
   //工业设备倾角
   Towerdrum: {
@@ -989,11 +1131,11 @@ export const en = {
   },
   //服务器信息
   server: {
+    runningState: 'running state', // 运行状态
     systemMessage: 'system message',//系统信息
     loading: 'loading',//数据加载中
     MemoryInfo: 'Memory information',//内存信息
     DiskInfo: 'Disk information',//磁盘信息
-    CPUInfo: 'CPU information', // cpu信息
     InternetInfo: 'Internet Information',//网络信息
     HostName: 'Host name',//主机名称
     JVMMemory: 'JVM total memory',//JVM总内存
@@ -1028,7 +1170,6 @@ export const en = {
     receveErrorPacket: 'Number of received error packets',//接收错误包数
     sentErrorPacket: 'Number of sent error packets',//发送错误包数
     discardPacket: 'Number of discarded packets received',//接收丢弃包数
-    networkAbnormality: 'Network Abnormality', // 网络异常
 
   },
   //系统日志

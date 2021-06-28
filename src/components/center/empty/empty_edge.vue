@@ -60,6 +60,12 @@ export default {
     /* 申请缓存 */
     this.$store.commit('set_keepAlive', { method: 'add', keepAlive: 'empty' })
   },
+  /* created() {
+    if (localStorage.getItem('isChangelanguage')) {
+      localStorage.setItem('isChangelanguage', false)
+      this.$router.go(0)
+    }
+  }, */
 }
 </script>
 

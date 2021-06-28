@@ -233,7 +233,8 @@ export default {
             isShow: true,
             val: list.pos_name,
             unit: list.unit,
-            class: this.getAlarmClass(list.alarmStatus, realData.t_root)
+            class: this.getAlarmClass(list.alarmStatus, realData.t_root),
+            title: this.getAlarmInfo(list, head, realData.t_root)
           }
         ];
         for (let j = 1; j < head.length; j++) {
@@ -648,6 +649,29 @@ export default {
         default:
           return ''
       }
+    },
+    getAlarmInfo(rowData, head, t_root) {
+      if(t_root === 2 || !rowData.hasOwnProperty('alarmValue')) {
+        return ''
+      }
+      let alarmValue = rowData.alarmValue
+      let info = ''
+      head.forEach(headItem => {
+        if(headItem.hasOwnProperty('code')) {
+          let code = headItem.code
+          if(alarmValue.hasOwnProperty(code)) {
+            let [warn, alarm] = item.alarmValue[k].split('_')
+            info += this.codeAlarmString(head.val, list[code], warn, alarm)
+          }
+        }
+      })
+    },
+    codeAlarmString(codeName, value, warn, alarm) {
+      let str = ''
+      str += codeName + '：' + value + ', '
+      str += this.$t('Common.warnText') + ': ' + warn + ', '
+      str += this.$t('Common.alarmText') + ': ' + alarm + '\n'
+      return str
     },
     // 拖动tbody，调整thead,切换图谱他时候将 标签放置
     scrollBar (e) {

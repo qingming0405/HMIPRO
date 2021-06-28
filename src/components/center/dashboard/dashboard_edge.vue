@@ -140,9 +140,10 @@ export default {
         isSave: 1,
         isReal: 0,
         density: 2,
-        key: [`${dashBoard.pos.t_root}_${dashBoard.key}`],
+        key: {},
         time: 0,
       }
+      requestData.key[`${dashBoard.pos.t_root}_${dashBoard.key}`] = 0
       /* 获取历史数据 */
       this.getData(dashBoard, requestData)
     },
@@ -175,6 +176,9 @@ export default {
     },
     /* 第一次获取仪表盘转速,time =0 */
     firstGetRealData(dashBoard) {
+      const params = this.dashBoardData[this.currentKey]
+      let time1 = params.rms[params.rms.length - 1].saveTime
+      let time2 = params.speed[params.rms.length - 1].saveTime
       let requestData = {
         value1: 'speed', //测点转速值
         code1: 1000,
@@ -183,9 +187,12 @@ export default {
         isSave: 0,
         isReal: 1,
         density: 2,
-        key: [`${dashBoard.pos.t_root}_${dashBoard.key}`],
+        key: {},
         time: 0, //this.updateTime
+        startTime: new Date().valueOf() - 1000 * 60 * 60 * 24, //默认获取一天前的历史数据
+        endTime: new Date().valueOf(),
       }
+      requestData.key[`${dashBoard.pos.t_root}_${dashBoard.key}`] = time1 >= time2 ? time1: time2
       this.$getApi.getSpeedDangerRange(requestData).then((res) => {
         if (res) {
           if (res.realInfo) {
@@ -202,7 +209,11 @@ export default {
     getRealData(dashBoard) {
       /* 先清除原始数据 */
       clearInterval(dashBoard.timer)
-      this.updateTime = new Date().valueOf()
+      // this.updateTime = new Date().valueOf()
+      const params = this.dashBoardData[this.currentKey]
+      let time1 = params.rms[params.rms.length - 1].saveTime
+      let time2 = params.speed[params.rms.length - 1].saveTime
+      this.updateTime = time1 >= time2 ? time1: time2
       dashBoard.timer = setInterval(() => {
         let requestData = {
           value1: 'speed', //测点转速值
@@ -212,9 +223,10 @@ export default {
           isSave: 0,
           isReal: 1,
           density: 2,
-          key: [`${dashBoard.pos.t_root}_${dashBoard.key}`],
+          key: {},
           time: this.updateTime,
         }
+        requestData.key[`${dashBoard.pos.t_root}_${dashBoard.key}`] = this.updateTime
         /* 发送网络请求 */
         this.$getApi.getSpeedDangerRange(requestData).then((res) => {
           if (res) {

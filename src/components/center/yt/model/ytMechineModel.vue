@@ -559,6 +559,7 @@ export default {
 <style scoped lang="scss">
 .Yt-Model {
   position: relative;
+  height: 100%;
   .yt-table:first-child {
     width: 380px;
   }

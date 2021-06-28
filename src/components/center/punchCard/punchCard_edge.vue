@@ -96,10 +96,11 @@ export default {
             endTime: new Date().valueOf(),
             value: "value",
             code: 27000,
-            key: [`3_${macId}_${posId}_${posType}`],//tRoot_macId_posId_posType
+            key: {},//tRoot_macId_posId_posType
             density: density
           } // 请求参数
         });
+        this.chartData[key].requestData[`3_${macId}_${posId}_${posType}`] = 0
         this.$nextTick(this.setEchartIns);
         this.getData();
       } else if (type == 1) {
