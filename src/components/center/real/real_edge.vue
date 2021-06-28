@@ -37,7 +37,6 @@
               :key="i"
               v-show="item.head[i].isShow"
               class="text-overflow"
-              :title="value.val"
             >
               {{ value.val }}
               <!-- 测点 -->

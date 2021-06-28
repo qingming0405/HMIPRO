@@ -1137,6 +1137,7 @@ export const cn = {
     systemMessage: '系统信息',//系统信息
     loading: '数据加载中',//数据加载中
     MemoryInfo: '内存信息',//内存信息
+    CPUInfo: 'CPU信息', //CPU信息
     DiskInfo: '磁盘信息',//磁盘信息
     InternetInfo: '网络信息',//网络信息
     HostName: '主机名称',//主机名称
@@ -1172,6 +1173,7 @@ export const cn = {
     receveErrorPacket: '接收错误包数',//接收错误包数
     sentErrorPacket: '发送错误包数',//发送错误包数
     discardPacket: '接收丢弃包数',//接收丢弃包数
+    networkAbnormality: '网络异常', // 网络异常
   },
   //系统日志
   system: {

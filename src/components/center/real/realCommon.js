@@ -237,6 +237,7 @@ export default {
             title: this.getAlarmInfo(list, head, realData.t_root)
           }
         ];
+        console.log('title', body[i][0].title);
         for (let j = 1; j < head.length; j++) {
           let value = head[j];
           /* 倾角的实时数据做一个转化 */
@@ -655,16 +656,17 @@ export default {
         return ''
       }
       let alarmValue = rowData.alarmValue
-      let info = ''
+      let info = rowData.pos_name + '\n'
       head.forEach(headItem => {
         if(headItem.hasOwnProperty('code')) {
           let code = headItem.code
           if(alarmValue.hasOwnProperty(code)) {
-            let [warn, alarm] = item.alarmValue[k].split('_')
-            info += this.codeAlarmString(head.val, list[code], warn, alarm)
+            let [warn, alarm] = alarmValue[code].split('_')
+            info += this.codeAlarmString(headItem.val, round(rowData[headItem.filed]), warn, alarm)
           }
         }
       })
+      return info
     },
     codeAlarmString(codeName, value, warn, alarm) {
       let str = ''

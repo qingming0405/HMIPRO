@@ -1135,6 +1135,7 @@ export const en = {
     systemMessage: 'system message',//系统信息
     loading: 'loading',//数据加载中
     MemoryInfo: 'Memory information',//内存信息
+    CPUInfo: 'CPU information', //CPU信息
     DiskInfo: 'Disk information',//磁盘信息
     InternetInfo: 'Internet Information',//网络信息
     HostName: 'Host name',//主机名称
@@ -1170,7 +1171,7 @@ export const en = {
     receveErrorPacket: 'Number of received error packets',//接收错误包数
     sentErrorPacket: 'Number of sent error packets',//发送错误包数
     discardPacket: 'Number of discarded packets received',//接收丢弃包数
-
+    networkAbnormality: 'Network Abnormality', // 网络异
   },
   //系统日志
   system: {
