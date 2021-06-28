@@ -129,6 +129,8 @@ export const cn = {
     noAlarmTips: '转速通道无报警',//转速通道无报警
     color: '颜色',//颜色
     del: '删除',//删除
+    yes: '是', // 是
+    no: '否', // 否
   },
   Common8000: {
     TimedHisData: '定时历史数据',//定时历史数据
@@ -1174,6 +1176,7 @@ export const cn = {
     sentErrorPacket: '发送错误包数',//发送错误包数
     discardPacket: '接收丢弃包数',//接收丢弃包数
     networkAbnormality: '网络异常', // 网络异常
+    outerNetConnection: '外网连接', //外网连接
   },
   //系统日志
   system: {

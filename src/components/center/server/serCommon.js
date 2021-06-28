@@ -152,7 +152,7 @@ export default {
             let tempList = [];
             let obj = [
                 this.$t('server.EquipName'),//"设备名称",
-                this.$t('server.runningState'), // 运行状态
+                this.$t('server.outerNetConnection'), // 运行状态
                 this.$t('server.IPAddress'),//"IP地址",
                 this.$t('server.SubnetMask'),//"子网掩码",
                 this.$t('server.MACAddress'),//"MAC地址",
@@ -170,7 +170,7 @@ export default {
               let obj = {};
               obj = [
                 networkInfo[i].deviceName,
-                networkInfo[i].status === '1' ? this.$t('server.networkAbnormality') : this.$t('Common.normalText'),
+                networkInfo[i].status === '1' ? this.$t('Common.no') : this.$t('Common.yes'),
                 networkInfo[i].ip.join('/'),
                 networkInfo[i].netMask.join('/'),
                 networkInfo[i].macaddr,

@@ -128,6 +128,8 @@ export const en = {
     noAlarmTips: 'No alarm for speed channel',//转速通道无报警
     color: 'color',//颜色
     del: 'delete',//删除
+    yes: '是', // 是
+    no: '否', // 否
   },
   Common8000: {
     TimedHisData: 'Timed historical data',//定时历史数据
@@ -1171,7 +1173,8 @@ export const en = {
     receveErrorPacket: 'Number of received error packets',//接收错误包数
     sentErrorPacket: 'Number of sent error packets',//发送错误包数
     discardPacket: 'Number of discarded packets received',//接收丢弃包数
-    networkAbnormality: 'Network Abnormality', // 网络异
+    networkAbnormality: 'Network Abnormality', // 网络异常
+    outerNetConnection: 'Outer net connection', //外网连接
   },
   //系统日志
   system: {
