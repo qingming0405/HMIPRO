@@ -8,7 +8,7 @@
       <div
         v-for="(item, index) in param.mac"
         class="view-content"
-        :ref="'view_content' + index"
+        :ref="'view_content'+ key + '_' + index"
         @click="choosemac(index)"
         @dblclick="jumpToModel(item)"
         :class="{
@@ -165,9 +165,9 @@ export default {
   .general-content {
     height: calc(100% - 37px);
     width: 100%;
-    padding: 20px 24px;
+    padding: 20px 20px;
     display: grid;
-    grid-template-columns: 68% 30%;
+    grid-template-columns: 60% 38%;
     grid-template-rows: 60% 40%;
     grid-row-gap: 10px;
     grid-column-gap: 10px;
@@ -190,7 +190,7 @@ export default {
     }
     .status {
       align-self: center;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: 400;
       color: #f1f6f9;
       p {
@@ -204,7 +204,7 @@ export default {
           display: flex;
           flex-direction: column;
           justify-content: center;
-          margin-right: 5px;
+          margin-right: 2px;
         }
         .pos-state {
           width: 8px !important;

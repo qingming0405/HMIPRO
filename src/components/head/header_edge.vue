@@ -818,6 +818,7 @@ export default {
         'dashboard',
         'railCorrugation',
         /* 8000 */
+        'alarm1',
         'bode', //伯德图
         'axisPosition' /* 轴心位置图 */,
         'speedTime' /* 转速时间 */,
@@ -980,7 +981,7 @@ export default {
           item.isShow = false
         }
       }
-      if (item.val === '智能诊断趋势') {
+      if (item.val === this.$t('HeaderEdge.secondLevel2_1')) {//'智能诊断趋势'
         if (config.fdDiagnosis == 1) {
           item.isShow = true
         } else if (config.fdDiagnosis == 0) {
@@ -1403,7 +1404,7 @@ export default {
         // 从别的图谱跳转过来的
         val = params.val
         // 报警跳转时
-        if (params.name == 'alarm' && params.val == '报警日志') {
+        if (params.name == 'alarm' && params.val == this.$t('HeaderEdge.secondLevel5_1')) {//报警日志
           if (
             this.$store.state.checkMsg.pos &&
             this.$store.state.checkMsg.mac
@@ -1424,9 +1425,9 @@ export default {
         }
       } else if (
         routerName === 'alarm' &&
-        params.val.indexOf('报警日志') >= 0
+        params.val.indexOf(this.$t('HeaderEdge.secondLevel5_1')) >= 0
       ) {
-        params.val = '报警日志'
+        params.val = this.$t('HeaderEdge.secondLevel5_1')//'报警日志'
         if (this.pos.val && this.mac.val) {
           val = this.mac.val + '-' + this.pos.val + '-' + params.val
         } else if (this.mac.val) {
@@ -2233,7 +2234,7 @@ export default {
     position: relative;
     .title1-item {
       display: flex;
-      width: 180px;
+      width: 200px;
       height: 100%;
       flex-direction: row;
       align-items: center;
@@ -2249,7 +2250,7 @@ export default {
     &:hover {
       .title1-item {
         background: #173973;
-        width: 180px;
+        width: 200px;
         height: 100%;
       }
       .title1-division {
@@ -2262,8 +2263,8 @@ export default {
       z-index: 999;
       position: absolute;
       top: 50px;
-      right: 20px;
-      width: 180px;
+      right: 10px;
+      width: 200px;
       background: #081d3b;
       border-radius: 4px;
       box-shadow: 0px 2px 4px 3px rgba(145, 144, 144, 0.24);
@@ -2272,16 +2273,19 @@ export default {
       .title2-li {
         height: 40px;
         font-size: 15px;
-        line-height: 40px;
-        padding-left: 10px;
+        line-height: 20px;
+        padding-left: 15px;
+        display: flex;
+        // justify-content: center; // 内容自适应：上下居中
+        align-items: center; // 子项对齐方式：左右居中
         /*margin-left: 10px;*/
         // i {
         //   padding-left: 20px;
         // }
         & > div {
-          display: inline-block;
-          width: 120px;
+          width: 140px;
           margin-left: 10px;
+          font-size: 14px;
         }
         &:hover,
         &:focus {

@@ -229,7 +229,7 @@ export default {
       display: flex;
       justify-content: center;
       p {
-        width: 65px;
+        // width: 65px;
         font-size: 16px;
         font-family: Source Han Sans CN;
         font-weight: 400;
@@ -253,13 +253,15 @@ export default {
           display: flex;
           flex-direction: row;
           margin-bottom: 10px;
+          align-items: center;
+          justify-content: center;
           .title {
             margin-right: 10px;
             font-size: 14px;
           }
           .iconfont {
             color: #33ffff;
-            margin: 2px 8px 0px 0px;
+            margin: 0 8px 0px 0px;
           }
           .content {
             width: 177px;

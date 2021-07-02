@@ -31,7 +31,7 @@ export default {
         clearInterval(timer)
       }
       if (tree) {
-        let name
+        let name = 'tyGeneral'
         // 使用线程防止异步产生标题错乱
         new Promise((resolve, reject) => {
           // 获取到第一个组织;
@@ -53,7 +53,7 @@ export default {
           }
           resolve('成功')
         }).then(() => {
-          this.$bus.$emit('generalRouting', name, '总貌图', 'icon-shouye1')
+          this.$bus.$emit('generalRouting', name, this.$t('HeaderEdge.firstLevel1'), 'icon-shouye1')
         })
       }
     }, 10)

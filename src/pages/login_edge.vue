@@ -409,9 +409,9 @@ export default {
     }
     .warn-tip {
       color: red;
-      text-align: left;
-      margin-top: 5px;
-      padding-left: 60px;
+      text-align: center;
+      margin-top: 10px;
+      // padding-left: 60px;
       // font-size: ;
     }
     .login-btn {

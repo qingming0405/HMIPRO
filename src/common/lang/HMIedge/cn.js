@@ -503,6 +503,8 @@ export const cn = {
     advice2: '需要注意',//需要注意
     advice3: '需要维修',//需要维修
     advice4: '已离线',//已离线
+    axis:'轴',//轴
+    bit:'位',//位
   },
   //油田总貌图
   YtGeneral: {
@@ -821,6 +823,9 @@ export const cn = {
   },
   // 智能诊断趋势
   diagnosisTrend: {
+    haveFalut: '有故障',//有故障
+    noFalut: '无故障',//无故障
+    DetailFault: '详细故障',//详细故障
     fault01: '主轴前轴承外圈故障',//主轴前轴承外圈故障
     fault02: '主轴前轴承内圈故障',//主轴前轴承内圈故障
     fault03: '主轴前轴承滚动体故障',//主轴前轴承滚动体故障

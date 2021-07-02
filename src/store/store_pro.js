@@ -3,6 +3,17 @@ import Vuex from "vuex";
 import router from "../router/router_edge";
 
 Vue.use(Vuex);
+import i18n from '../common/i18n';
+import { $t } from '../common/i18n';
+
+function trans (args) {
+  if (localStorage.getItem('language')) {
+    if (i18n.locale != localStorage.getItem('language')) {
+      i18n.locale = localStorage.getItem('language')
+    }
+  }
+  return $t(args)
+}
 
 export default new Vuex.Store({
   state: {
@@ -177,7 +188,7 @@ export default new Vuex.Store({
         /* 开始时间 */
         end: Date.now(),
         /* 结束时间 */
-        val: "前一天"
+        val: trans('Common.previousDay')//"前一天"
         /* 时间类型 */
       },
       speed: {
@@ -195,7 +206,7 @@ export default new Vuex.Store({
       density: {
         /* 选中查询密度型 */
         type: 2,
-        val: "全部"
+        val: trans('HeaderEdge.all')//"全部"
       }
     },
     /* 总貌图的标题 */

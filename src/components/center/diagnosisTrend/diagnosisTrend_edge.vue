@@ -320,10 +320,11 @@ export default {
         chartData.data.splice(changeData[k][0], 0, changeData[k][1])
       }
       console.log(chartData.data) */
+      const that = this
       const option = {
         animation: false,
         title: {
-          text: param.mac.mac_me + '-传动链',
+          text: param.mac.mac_me + '-' +that.$t('FdModel.locName1'),//传动链
           textStyle: {
             color: '#fff',
             fontSize: 16,
@@ -354,13 +355,13 @@ export default {
                   '</br>'
               }
             } else {
-              fault = '无故障'
+              fault = that.$t('diagnosisTrend.noFalut')//'无故障'
             }
             return (
-              '时间：' +
+              that.$t('Common.time')+'：' +//时间
               getTime(Number(param.data[0])) +
               '</br>' +
-              '部件：传动链</br>详细故障：' +
+              that.$t('eigenvalue.part')+'：'+that.$t('FdModel.locName1')+'</br>' +that.$t('diagnosisTrend.DetailFault')+'：'+ //部件  传动链  详细故障
               fault
             )
           },
@@ -414,9 +415,9 @@ export default {
             color: '#F3F3F3',
             formatter: function (params) {
               if (params == 0) {
-                return '无故障'
+                return that.$t('diagnosisTrend.noFalut')//'无故障
               } else if (params == 1) {
-                return '有故障'
+                return that.$t('diagnosisTrend.haveFalut')//'有故障'
               }
             },
           },

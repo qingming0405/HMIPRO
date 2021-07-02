@@ -86,7 +86,7 @@
                 <!-- <td class='text-overflow'>{{tr.alarm_text}}</td> -->
                 <td class='text-overflow'>{{tr.vib_text}}</td> <!-- 振动报警 -->
                 <td class='text-overflow'>{{tr.temp_text}}</td> <!-- 温度报警 -->
-                <td class='text-overflow'>{{tr.fix_text}}</td>
+                <td class='text-overflow' :title="tr.fix_text">{{tr.fix_text}}</td>
               </tr>
             </tbody>
           </table>
@@ -306,7 +306,7 @@ export default {
             params.noneData = false
             res.data.forEach((ch) => {
               if (ch.pos_class != 0 && ch.pos_loc != 255) {
-                ch.chInfo = ch.pos_class + '轴' + ch.pos_loc + '位'
+                ch.chInfo = ch.pos_class + vm.$t('GjModelInfo.axis') + ch.pos_loc + vm.$t('GjModelInfo.bit')//轴、位
               } else {
                 ch.chInfo = '—'
               }

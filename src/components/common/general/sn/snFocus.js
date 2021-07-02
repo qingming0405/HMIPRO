@@ -157,9 +157,9 @@ const snFocus = {
       }
       for (let j = 0; j < params.mac.length; j++) {
         if (params.mac[j].chooseflag) {
-          this.$refs[`view_content${j}`][0].style.border = '1px solid #00fcf9'
+          this.$refs[`view_content${this.currentKey}_${j}`][0].style.border = '1px solid #00fcf9'
         } else {
-          this.$refs[`view_content${j}`][0].style.border = ''
+          this.$refs[`view_content${this.currentKey}_${j}`][0].style.border = ''
         }
       }
     },

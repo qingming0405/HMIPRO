@@ -12,7 +12,7 @@
         :style="table.tableStyle"
         v-show="table.isShow"
       >
-        <div class="left">
+        <div class="left" :class="language==='en'?'left-en':''">
           <div>{{ table.name }}</div>
         </div>
 
@@ -63,9 +63,11 @@ export default {
     return {
       ytMechineModel: {},
       currentKey: '',
+      language:localStorage.getItem('language'),
     }
   },
   created() {
+    
     this.$store.commit('set_keepAlive', {
       method: 'add',
       keepAlive: 'ytMechineModel',
@@ -570,12 +572,12 @@ export default {
     position: absolute;
     z-index: 2;
     .left {
-      width: 45px;
+      width: 60px;
       background: #0092fe;
       text-align: center;
       position: relative;
       div {
-        width: 14px;
+        // width: 14px;
         font-size: 14px;
         line-height: 15px;
         position: absolute;
@@ -583,6 +585,9 @@ export default {
         top: 50%;
         transform: translate(-50%, -50%);
       }
+    }
+    .left-en{
+      width: 120px;
     }
     .content {
       width: 100%;
@@ -644,7 +649,7 @@ export default {
       position: absolute;
       z-index: 2;
       display: flex;
-      width: 185px;
+      width: 238px;
       div:nth-child(2) {
         position: absolute;
         right: 0px;

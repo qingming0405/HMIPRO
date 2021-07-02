@@ -867,7 +867,7 @@ export default {
       const [, , macId, posId, posType] = key.split("_");
       const isReal = this.requestData.wave.isReal;
       const state = this.$store.state;
-      const getRealBtnClassName = !!isReal ? "" : "disable-btn";
+      const getRealBtnClassName = isReal ? "" : "disable-btn";
       this.isNewChart = true;
       let maxFreq = 0;
       let minFreq = 0;
@@ -1471,7 +1471,7 @@ export default {
               that.$emit("loadingImg", true);
               that.$store.commit("setCurrentTime", params.val);
               paramsData.getReal.isReal = false
-              paramsData.getReal.isReal = "disable-btn"
+              paramsData.getReal.class = "disable-btn"
               paramsData.updateTime = params.val;
               const wave = that.requestData.wave;
               wave.currTime = [params.val];

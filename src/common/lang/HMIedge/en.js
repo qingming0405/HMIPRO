@@ -1,7 +1,7 @@
 export const en = {
   //公共字段
   Common: {
-    noPosText: 'No Position Data',//无测点
+    noPosText: 'No Point Data',//无测点
     noDataText: ' No Data',//无数据
     noRealData: 'No real data',//无实时数据
     noDiagText: 'No diagnosis result',//暂无诊断结果
@@ -16,17 +16,18 @@ export const en = {
     abnormalText: 'Abnormal self-test',//自检异常
     focausText: 'Focus',//关注
     allText: 'All',//全部
+    searchHolder: 'search the machine name',
     chainText: 'Drive chain',//传动链
     moreText: 'more',//详情
     noFocusMacTips: 'No focused data',//无重点关注机组
-    noWaveAtPos: 'There is no waveform at this measuring point.',//该测点没有波形图
+    noWaveAtPos: 'There is no waveform at this points.',//该测点没有波形图
     Wave: 'Waveform spectrum',//波形频谱图
     trend: 'slip chart',//趋势图
     Case1: 'Case 1',//工况1
     Case2: 'Case 2',//工况2
     Case3: 'Case 3',//工况3
     Case4: 'Case 4',//工况4
-    OtherCond: 'Other working conditions',//其它工况
+    OtherCond: 'Other conditions',//其它工况
     AlarmLog: 'Alarm Log',//报警日志
     inquiry: 'Inquiry',//查询
     realData: 'Real Time Data',//实时数据
@@ -39,16 +40,16 @@ export const en = {
     pastYear: 'The Past Year',//前一年
     custom: 'custom',//自定义
     tree: 'organization',//组织
-    mac: 'machine set',//机组
-    pos: 'measuring point',//测点
+    mac: 'Turbine',//机组
+    pos: 'Point',//测点
     eigenvalue: 'eigenvalue',//特征值
-    order: 'Serial Number',//序号
+    order: 'Serial',//序号
     treeName: 'Organization Name',//组织名称
-    macName: 'Unit Name',//机组名称
-    posName: 'Name Of Measuring Point',//测点名称
+    macName: 'Turbine Name',//机组名称
+    posName: 'Point Name',//测点名称
     popTreeTips: 'Please select an organization',//请选择组织
-    popMacTips: 'Please select a machine',//请选择机组
-    popPosTips: 'Please select a position',//请选择测点
+    popMacTips: 'Please select a Turbine',//请选择机组
+    popPosTips: 'Please select a Point',//请选择测点
     noPosChartTips: 'No Such Kind of Chart',//该测点没有此图谱
     /* 数据检索 */
     title: 'Data Retrieval',//数据检索
@@ -69,8 +70,8 @@ export const en = {
     hour: 'Hour',//小时
     day: 'Day',//天
     mouth: 'Mouth',//月
-    allMac: 'All Machines',//所有机组
-    allPosition: 'All Positions',//所有测点
+    allMac: 'All Turbine',//所有机组
+    allPosition: 'All Point',//所有测点
     allEignin: 'All Eigenvalue',//特征值全选
     filterUp: 'Upper Limit',//上限过滤
     filterDown: 'Lower Limit',//下限过滤
@@ -101,7 +102,7 @@ export const en = {
     toToday: 'Until Now',//至今
     /* 组件-tms趋势 */
     waveData: 'Wave Data',//波磨数据 
-    addPos: 'Add Position',//加入测点
+    addPos: 'Add Point',//加入测点
     timeList: 'Time List',//时间列表
     dataScreening: 'data screening',//数据筛选
     StatisticalList: 'Statistical list',//统计列表
@@ -117,7 +118,7 @@ export const en = {
     startFreq: 'Start Frequency',//开始频率
     endFreq: 'End Frequency',//截止频率
     points: 'Points',//点数
-    selectPos: 'Select Postion',//选择测点
+    selectPos: 'Select Point',//选择测点
     clearSet: 'Clear Settings',//清空设置
     effectiveTime: 'Effective Time',//有效时间
     loadingUnfinished: 'The model is not loaded',//模型未加载完成
@@ -162,7 +163,7 @@ export const en = {
     reset: 'reset',//重置
     openWindow: 'Window zoom',//开窗放大
     SavePicture: 'Save as picture',//保存为图片
-    EffectiveFreqAllPos: 'Effective frequency setting of all measuring points',//所有测点有效频率设置
+    EffectiveFreqAllPos: 'Effective frequency setting of all points',//所有测点有效频率设置
     TimeDifference: 'Time difference',//时间差
     LogarithmicCoordinates: 'Logarithmic coordinates',//对数坐标
     SpeedPulse: 'Speed pulse',//转速脉冲
@@ -198,43 +199,43 @@ export const en = {
     onexphase: '1*phase',//1x相位
     twoxphase: '2*phase',//2x相位
     time: 'time',//时间
-    posSpeed:'Measuring point speed value',//测点转速值
+    posSpeed: 'Point speed value',//测点转速值
     SpeedDC: 'Speed direct flow',//转速直流量
     ProcessValue: 'Process value',//过程量值
     EffectiveValue: 'Effective value',//有效值
-    ppValue:'peak-to-peak value',//峰峰值
+    ppValue: 'peak-to-peak value',//峰峰值
     EnergyEffecValue: 'Energy effective value',//能量有效值
-    offsetVoltage:'offset voltage',//偏置电压
+    offsetVoltage: 'offset voltage',//偏置电压
     crestFactor: 'crest factor',//峰值因数
     margin: 'margin',//裕度
-    skewness:'skewness',//歪度
+    skewness: 'skewness',//歪度
     SVvalue: 'impactValue',//SV值
     frequencyRange: 'frequency range',//频段
-    temperature:'temperature',//温度
+    temperature: 'temperature',//温度
     temperatureRise: 'temperature rise',//温升
-    envelopeDemodulationValue:'envelope demodulation value',//包络解调值
+    envelopeDemodulationValue: 'envelope demodulation value',//包络解调值
     EnvelopeEigenvalues: 'Envelope eigenvalues',//包络特征值
     ExternalRingOfCage: 'External ring of cage',//保持架对外环
-    cageToInnerRing:'cage to inner ring',//保持架对内环
+    cageToInnerRing: 'cage to inner ring',//保持架对内环
     OuterRingInnerRaceway: 'Outer ring inner raceway',//外环内滚道
-    InnerRingOuterRaceway:'Inner ring outer raceway',//内环外滚道
+    InnerRingOuterRaceway: 'Inner ring outer raceway',//内环外滚道
     RollRder: 'Roll order',//滚单
     RollDouble: 'Roll double',//滚双
     Tread: 'Tread',//踏面
     AdjacentShaftGear: 'Adjacent shaft gear',//邻轴齿轮
     MainShaftGear: 'Main shaft gear',//本轴齿轮
-    DigitalValue:'Digital value',//数字量值
+    DigitalValue: 'Digital value',//数字量值
     temperatureValue: 'temperature',//温度值
-    ProcessQuantity:'Process quantity',//工艺量
+    ProcessQuantity: 'Process quantity',//工艺量
     average: 'average',//平均值
-    LastStationName:'Last station name',//"上一站名称"
+    LastStationName: 'Last station name',//"上一站名称"
     nextStationName: 'Name of the next station',//下一站名称
-    lastStaDistance:'Distance from the last station',//上一站距离
+    lastStaDistance: 'Distance from the last station',//上一站距离
     nestStaDistance: 'Next station distance',//下一站距离
-    faultMessage:'fault message',//故障信息
-    WiseValue:'Wise value',//智子值
+    faultMessage: 'fault message',//故障信息
+    WiseValue: 'Wise value',//智子值
     vibChMeanValue: 'Mean value of vibration channel',//振动通道均值
-    MaxVectorSpectrum:'Maximum value of vector spectrum',//矢量谱最大值
+    MaxVectorSpectrum: 'Maximum value of vector spectrum',//矢量谱最大值
     option1amplitude: 'Optional band 1 amplitude',//可选频段1幅值
     option2amplitude: 'Optional band 2 amplitude',//可选频段2幅值
     opt_freq_l_1: 'Optional frequency band low 1',//可选频段低1
@@ -249,40 +250,40 @@ export const en = {
     inclination: 'inclination',//倾角
     bolt: 'bolt',//螺栓
     Shock: 'Shock',//冲击
-    ImpactOrder:'Impact order',//冲击阶次
-    OrbitalCorrugation:'Orbital corrugation',//轨道波磨
+    ImpactOrder: 'Impact order',//冲击阶次
+    OrbitalCorrugation: 'Orbital corrugation',//轨道波磨
     DerailmentMonitor: 'Derailment monitoring',//脱轨监测
-    BondPhase:'Bond phase',//键相
+    BondPhase: 'Bond phase',//键相
     part: 'part',//部件
     Shake: 'Shake',//晃度
-    SyntheticInclination:'Synthetic inclination',//合成倾角
+    SyntheticInclination: 'Synthetic inclination',//合成倾角
     ProcessVolume: 'Process volume',//过程量
   },
   // 测点类型
-  posTypeName:{
-    speedPos: 'Speed measuring point',//转速测点
-    processPos: 'Process measuring points',//过程量测点
-    vibPos: 'vibration measuring point',//振动测点
-    EnvelopePos: 'Envelope measuring points',//包络测点
-    DigitalPos: 'Digital measuring points',//数字量测点
-    SloshnessPos: 'Sloshness measuring point',//晃度测点
-    temperaturePos: 'temperature measuring point',//温度测点
-    vibOrderPos: 'Vibration order measuring point',//振动阶次测点
-    EnvelopeOrderPos:'Envelope order measuring point',//包络阶次测点
-    ProcessPos: 'Process measuring points',//工艺量测点
-    OverturnPos: 'Overturning measuring points',//倾覆测点
-    inclinationPos: 'inclination measuring point',//倾角测点
-    SyntheticAnglePos: 'Synthetic angle measuring points',//合成倾角测点
-    boltPos: 'Bolt measuring points',//螺栓测点
+  posTypeName: {
+    speedPos: 'Speed point',//转速测点
+    processPos: 'Process points',//过程量测点
+    vibPos: 'vibration point',//振动测点
+    EnvelopePos: 'Envelope points',//包络测点
+    DigitalPos: 'Digital points',//数字量测点
+    SloshnessPos: 'Sloshness point',//晃度测点
+    temperaturePos: 'temp point',//温度测点
+    vibOrderPos: 'Vibration order point',//振动阶次测点
+    EnvelopeOrderPos: 'Envelope order point',//包络阶次测点
+    ProcessPos: 'Process points',//工艺量测点
+    OverturnPos: 'Overturning points',//倾覆测点
+    inclinationPos: 'inclination points',//倾角测点
+    SyntheticAnglePos: 'Synthetic angle points',//合成倾角测点
+    boltPos: 'Bolt points',//螺栓测点
     LongsamplePos: 'Long sampling points',//长采样测点
   },
   ytMap: {
     WellheadPressure: 'Wellhead pressure',//井口压力
-    WellheadTemperature:'Wellhead temperature',//井口温度
+    WellheadTemperature:'Wellhead temp',//井口温度
     PdOutletPressure: 'Pd outlet pressure',//Pd出口压力
-    PiSuctionPressure: 'Pi suction port pressure',//Pi吸入口压力
-    TiFluidTemperature: 'Ti fluid temperature',//Ti流体温度
-    TmmotorOilTemperature: 'Tm motor oil temperature',//Tm电机油温
+    PiSuctionPressure: 'Pi inlet pressure',//Pi吸入口压力
+    TiFluidTemperature: 'Ti fluid temp',//Ti流体温度
+    TmmotorOilTemperature: 'Tm motor oil temp',//Tm电机油温
     TgDownholeCircuit: 'Tg downhole circuit',//Tg井下电路
     VxDownholeVib: 'Vx downhole vibration',//Vx井下振动
     VYDownholeVib: 'Vy downhole vibration',//Vy井下振动
@@ -296,7 +297,7 @@ export const en = {
     DownOutputBoltageAC: 'The given voltage of the underground unit CA',//井下机组给定电压CA
     AphaseCurrent: 'A phase current',//A相电流
     DownAphaseCurrent: 'Phase A current of underground operation',//井下运行A相电流
-    PhaseBCurrent:'Phase B current',//B相电流
+    PhaseBCurrent: 'Phase B current',//B相电流
     DownPhaseBCurrent: 'B-phase current in underground operation',//井下运行B相电流
     PhaseCCurrent: 'Phase C current',//C相电流
     DownPhaseCCurrent: 'C-phase current in underground operation',//井下运行C相电流
@@ -500,6 +501,8 @@ export const en = {
     advice2: 'Requires attention',//需要注意
     advice3: 'Requires repair',//需要维修
     advice4: 'Offline',//已离线
+    axis:'axis',//轴
+    bit:'bit',//位
   },
   //油田总貌图
   YtGeneral: {
@@ -510,8 +513,8 @@ export const en = {
   //油田重点关注
   YtFocus: {
     filterText: 'Filter',//过滤
-    macTitle: 'Machine',//机组
-    searchMacText: 'search machine',//搜索机组
+    macTitle: 'Turbine',//机组
+    searchMacText: 'search Turbine',//搜索机组
     posTitle: 'Position',//测点
     searchPosText: 'search position',//搜索测点
     valTitle: 'Eigenvalues',//特征值
@@ -581,9 +584,9 @@ export const en = {
     diagResult: 'Result',//诊断结果
     noFocusMacTips: 'No focused data',//无重点关注机组
     Alarm: 'Alarm',//报警
-    warn: 'warn', //预警
-    Normal:'Normal',//正常
-    PosNumber: 'Number of measuring points',//测点个数
+    warn: 'Warn', //预警
+    Normal: 'Normal',//正常
+    PosNumber: 'Number of points',//测点个数
   },
   //工业设备设备模型
   SnModel: {
@@ -591,7 +594,7 @@ export const en = {
     titleBtn2: 'Position',//测点列表
     titleBtn3: 'Oil params',//油液参数
     titleBtn4: 'Angle of Dip',//倾角
-    WarningThreshold:'Warning threshold',//预警门限
+    WarningThreshold: 'Warning threshold',//预警门限
     alarmThreshold: 'alarm threshold',//报警门限
     EquipDiagnosis: 'Equipment diagnosis',//设备诊断
     Result: 'Result',//结果
@@ -613,7 +616,7 @@ export const en = {
     manualTitle: 'Manual',//使用手册
     firstLevel1: 'Overview',//总貌图
     firstLevel2: 'Atlas Analysis',//图谱分析
-    firstLevel3: 'Start-stop Analysis',//启停机分析
+    firstLevel3: 'Start-stop',//启停机分析
     firstLevel4: 'Data Analysis',//数据分析
     firstLevel5: 'Log List',//日志列表
     /*风电、水泥、轨交、油田、化工、通用总貌图*/
@@ -622,42 +625,42 @@ export const en = {
     secondLevel1_3: 'Device Model',//设备模型
     /* 图谱分析二级导航 */
     secondLevel2_1: 'Diagnosis of trend',//智能诊断趋势
-    secondLevel2_2: 'Waveform-spectrum Analysis',//波形频谱图
-    secondLevel2_3: 'Trend Chart',//趋势图
-    secondLevel2_4: '3d Spectrogram',//三维频谱图
-    secondLevel2_5: 'Rail Corrugation Chart',//轨道波磨图
-    secondLevel2_6: 'Spectrum Waterfall of Rail Corrugation',//轨道波磨频谱瀑布
-    secondLevel2_7: 'Angle Distribution Chart',//倾角分布图
-    secondLevel2_8: 'Engine Room Track Chart',//机舱轨迹图
+    secondLevel2_2: 'Waveform & Spectrum',//波形频谱图
+    secondLevel2_3: 'Trend',//趋势图
+    secondLevel2_4: 'Waterfall',//三维频谱图
+    secondLevel2_5: 'Rail Corrugation',//轨道波磨图
+    secondLevel2_6: 'Rail Waterfall',//轨道波磨频谱瀑布
+    secondLevel2_7: 'Dip profile',//倾角分布图
+    secondLevel2_8: 'Dip orbit',//机舱轨迹图
     secondLevel2_9: 'Scatter Diagram',//散点图
-    secondLevel2_10: 'Range monitoring of dangerous speed',//危险转速区间监测
+    secondLevel2_10: 'Speed Monitoring',//危险转速区间监测
     secondLevel2_11: 'Rail corrugation map',//轨道波磨地图
-    secondLevel2_12: 'Single value bar chart',//单值棒图
-    secondLevel2_13: 'Multivalued bar chart',//多值棒图
-    secondLevel2_14: 'Full Spectrum Chart',//全频谱图
-    secondLevel2_15: 'Multi-spectrum Chart',//多频谱图
+    secondLevel2_12: 'Single value bar',//单值棒图
+    secondLevel2_13: 'Multivalued bar',//多值棒图
+    secondLevel2_14: 'Full Spectrum',//全频谱图
+    secondLevel2_15: 'Multi-spectrum',//多频谱图
     secondLevel2_16: 'Single-side Dynamic Balance',//单面动平衡
     secondLevel2_17: 'Double-sided Dynamic Balance',//双面动平衡
     secondLevel2_18: 'Polar Diagram',//极坐标图
-    secondLevel2_19: 'Axis Orbit Chart',//轴心轨迹图
-    secondLevel2_20: 'Axis Position Chart',//轴心位置图
+    secondLevel2_19: 'Axis Orbit',//轴心轨迹图
+    secondLevel2_20: 'Axis Position',//轴心位置图
     /* 启停机分析二级导航 */
-    secondLevel3_1: 'Speed Time Chart',//转速时间图
+    secondLevel3_1: 'Speed Time',//转速时间图
     secondLevel3_2: 'Nyquist Diagram',//奈奎斯特图
     secondLevel3_3: 'Bode Diagram',//伯德图
-    secondLevel3_4: 'Spectrum Waterfall Diagram of Start-stop',//启停机频谱瀑布图
+    secondLevel3_4: 'Start-stop Waterfall',//启停机频谱瀑布图
     secondLevel3_5: 'Cascade Graphs',//级联图
     secondLevel3_6: 'Start-stop Data List',//启停机数据列表
     /* 数据分析二级导航 */
-    secondLevel4_1: 'Real-time data summary list',//实时数据汇总列表
-    secondLevel4_2: 'Real-time data list',//实时数据列表
-    secondLevel4_3: 'Historical data list',//历史数据列表
+    secondLevel4_1: 'Real-time data summary',//实时数据汇总列表
+    secondLevel4_2: 'Real-time data',//实时数据列表
+    secondLevel4_3: 'Historical data',//历史数据列表
     secondLevel4_4: 'Monitor Log',//监测报表
     secondLevel4_5: 'Plant Parameter',//设备参数
-    secondLevel4_6: 'Equipment maintenance records',//设备维护记录
+    secondLevel4_6: 'Equipment records',//设备维护记录
     secondLevel4_7: 'Statistical list',//统计列表
     secondLevel4_8: 'Expert system',//专家系统
-    secondLevel4_9: 'Real-time Alarm Summary List',//实时报警汇总列表
+    secondLevel4_9: 'Real-time Alarm',//实时报警汇总列表
     secondLevel4_10: 'Tread surface Data',//踏面测量数据
     secondLevel4_11: 'Trend of tread wear',//踏面磨损趋势
     secondLevel4_12: 'Prediction of tread life',//踏面寿命预估
@@ -678,7 +681,7 @@ export const en = {
   //左侧栏
   Left: {
     searchTreeText: 'search organization',//搜索组织
-    searchMacText: 'search machine',//搜索机组
+    searchMacText: 'search Turbine',//搜索机组
     posNameToolTip: 'Position Name',//测点名称
     posTypeToolTip: 'Position Type',//测点类型
     dgmNameToolTip: 'Collector Name',//采集器名称
@@ -687,7 +690,7 @@ export const en = {
   //数据检索-报警
   AlarmRetrieval: {
     typePos: 'Position',//测点
-    typeMac: 'Machine',//机组
+    typeMac: 'Turbine',//机组
     typeChannel: 'Channel',//通道
   },
   //数据检索-监测报表
@@ -696,7 +699,7 @@ export const en = {
     warningAlarmValue: 'Warning Alarm Value',//预警报警值
     statisticalWays: 'Statistical Ways',//统计方式
     noStatistics: 'No Statistics',//不统计
-    nowMac: 'Current Machine',//当前机组
+    nowMac: 'Current Turbine',//当前机组
     nowPos: 'Current Position',//当前测点
   },
   //数据检索-三维频谱图
@@ -740,18 +743,18 @@ export const en = {
     ChannelName: 'Channel Name',//通道名称
     EventTime: 'Event Time',//事件时间
     EventDescription: 'Event Description',//事件描述
-    condType: 'Type Of Working Condition',//工况类型
+    condType: 'Working Condition Type',//工况类型
     AlarmValue: 'Alarm Value',//报警值
-    Alarmh: 'Alarm High',//报警(高)
-    Warnh: 'High Early Warning',//预警(高)
-    Warnl: 'Low Early Warning',//预警(低)
-    Alarml: 'Alarm Low',//报警(低)   
+    Alarmh: 'Alarm(High)',//报警(高)
+    Warnh: 'Warning(High)',//预警(高)
+    Warnl: 'Warning(Low)',//预警(低)
+    Alarml: 'Alarm(Low)',//报警(低)   
     Normal: 'Normal',//正常
     SecondAlarmh: 'Secondary Alarm High', //Ⅱ级报警(高)
     SecondAlarml: 'Secondary Alarm Low', //Ⅱ级报警(低)
     FirstAlarmh: 'First Level Alarm High', //Ⅰ级报警(高)
     FirstAlarml: 'First Level Alarm Low', //Ⅰ级报警(低)
-    chNoData: 'No measuring point in current channel!',//当前通道无测点
+    chNoData: 'No points in current channel!',//当前通道无测点
     treeTitle: 'Organize alarm log',//组织报警日志
     macTitle: 'Unit alarm log',//机组报警日志
     NormalToAlarmh: 'From normal to alarm (high)',//从正常到报警（高）
@@ -791,7 +794,7 @@ export const en = {
     explainedVariance: 'Variance : Measurement of dispersion when measuring random variables or a set of data in probability theory and statistical variance.',//方差:在概率论和统计方差衡量随机变量或一组数据时离散程度的度量
     selectTree: 'Please select the organization',//请选择组织
     selectMac: 'Please select the unit',//请选择机组
-    selectPos: 'Please select the measuring point',//请选择测点
+    selectPos: 'Please select the points',//请选择测点
     selectEigen: 'Please select the eigenvalue',//请选择特征值
     enterTree: 'Please enter the organization',//请输入组织
     proportion: 'proportion',//比例
@@ -804,7 +807,7 @@ export const en = {
     StatisticalCond: 'Statistical Conditions',//统计工况
     selectUnit: 'Please select the unit',//请选择单位
     entirety: 'entirety',//全部
-    SearchPos: 'Searching measuring points',//搜索测点
+    SearchPos: 'Searching points',//搜索测点
     errorInpur: 'The input scale format is incorrect, please re-enter',//输入比例格式有误，请重新输入
     enterProportion: 'Please enter the proportion',//请输入比例
     enterSpeedRange: 'Please enter the correct speed range.',//请输入正确的转速区间
@@ -819,6 +822,9 @@ export const en = {
   },
   // 智能诊断趋势
   diagnosisTrend: {
+    haveFalut: 'have fault',//有故障
+    noFalut: 'No fault',//无故障
+    DetailFault: 'Detailed fault',//详细故障
     fault01: 'Outer ring fault of spindle front bearing.',//主轴前轴承外圈故障
     fault02: 'Inner ring fault of spindle front bearing',//主轴前轴承内圈故障
     fault03: 'Roller Fault of Front Bearing of Spindle',//主轴前轴承滚动体故障
@@ -933,7 +939,7 @@ export const en = {
     effecFreqBand: 'effective frequency band',//有效频段
     effecOrderRank: 'effective order rank',//有效阶次
     effectFreqError: 'The effective frequency input is incorrect！',//有效频率输入不正确
-    noLowWaveData: 'There is no low-density waveform at the current measuring point!',//当前测点无低密度波形！
+    noLowWaveData: 'There is no low-density waveform at the current point!',//当前测点无低密度波形！
     EffectFreqFilter: 'Effective frequency filtering',//有效频率过滤
     freq: 'frequency',//频率
     freq1: 'frequency',//频
@@ -979,7 +985,7 @@ export const en = {
   // 轨道波磨图
   tmsTrend: {
     DataList: 'Data list',//数据列表
-    TipAddSamepType: 'Please add measuring points of the same type',//请添加同类型的测点
+    TipAddSamepType: 'Please add points of the same type',//请添加同类型的测点
     TipNoData: 'There is no data point in time',//存在无数据时间点
     Line1: 'Line 1',//线路1
   },
@@ -1018,7 +1024,7 @@ export const en = {
   // 踏面磨损趋势
   wearTrend: {
     addMap: 'Add a map',//新增图谱
-    dropPosLimit: 'Does not support such measuring points',//不支持此类测点
+    dropPosLimit: 'Does not support such points',//不支持此类测点
     existPosTip: 'The measurement point already exists in the current map.',//当前图谱已存在该测点
     existCarTip: 'The current map already exists in the current car',//当前图谱已存在当前车厢
     del: 'delete',//删除
@@ -1044,9 +1050,9 @@ export const en = {
     operating: 'operate',//操作
     AlarmLine: 'Alarm line',//报警线
     DataDisplay: 'Data Display',//数据显示
-    posList: 'List of measuring points',//测点列表
+    posList: 'List of points',//测点列表
     isCheck: 'Whether to check',//是否勾选
-    posChoose: 'Measuring point selection',//测点选择
+    posChoose: 'point selection',//测点选择
     AddComparison: 'Add comparison',//加入对比
   },
   //机舱轨迹图
@@ -1129,7 +1135,7 @@ export const en = {
   realAlarm: {
     EquipName: 'Equipment name',//设备名称
     Alarm: 'Alarm',//报警
-    warn: 'warn', //预警
+    warn: 'Warn', //预警
   },
   //服务器信息
   server: {
@@ -1344,9 +1350,9 @@ export const en = {
     addMap: 'Add a map',//新增图谱
     wave: 'wave',//波形
     del: 'delete',//删除
-    dropPosLimit: 'Does not support such measuring points',//不支持此类测点
+    dropPosLimit: 'Does not support such points',//不支持此类测点
     InsufficientSample: 'Insufficient sample size',//样本数量不足
-    addPosMatch: 'Add different types of measuring points, do you want to replace',//加入不同类型测点，是否要替换
+    addPosMatch: 'Add different types of points, do you want to replace',//加入不同类型测点，是否要替换
     existPosTip: 'The measurement point already exists in the current map.',//当前图谱已存在该测点
     xAxis: 'x axis',//x轴
     yAxis: 'y axis',//y轴
@@ -1363,9 +1369,9 @@ export const en = {
   },
   //多频谱图
   multiSpectrum: {
-    addPosLimit: 'Drag in up to six measuring points',//最多拖入六个测点
+    addPosLimit: 'Drag in up to six points',//最多拖入六个测点
 
-    existsSpectrogram: 'Spectrogram of the measuring point already exists',//已存在该测点频谱图
+    existsSpectrogram: 'Spectrogram of the point already exists',//已存在该测点频谱图
     posTypeLimit: 'The spectrum can only be dragged into the vibration measurement point',//该图谱只能拖入振动测点
   },
   //单面动平衡
@@ -1424,8 +1430,8 @@ export const en = {
   // 极坐标图
   polarDiagram: {
     value: 'value',//值
-    existsPosTip: 'The measuring point already exists',//已经存在该测点
-    addPosMaxTip: 'Add up to 6 measuring points',//最多添加6个测点
+    existsPosTip: 'The point already exists',//已经存在该测点
+    addPosMaxTip: 'Add up to 6 points',//最多添加6个测点
   },
   //轴心轨迹图
   axisLocus: {

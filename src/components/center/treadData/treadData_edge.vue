@@ -4,13 +4,19 @@
     <div class="treadData-content">
       <div class="treadData-table">
         <div class="tread-param">
-          <div><!-- 设计参数 -->{{vm.$t('trendData.DesignParam')}}</div>
-          <div><!-- 设计寿命 -->{{vm.$t('trendData.DesignLife')}}(km)</div>
+          <div>
+            <!-- 设计参数 -->{{vm.$t('trendData.DesignParam')}}
+          </div>
+          <div>
+            <!-- 设计寿命 -->{{vm.$t('trendData.DesignLife')}}(km)
+          </div>
           <div><input
               type="number"
               v-model="wheel_life"
             /></div>
-          <div><!-- 车轮到限直径 -->{{vm.$t('trendData.WheelLimitDiameter')}}(mm)</div>
+          <div>
+            <!-- 车轮到限直径 -->{{vm.$t('trendData.WheelLimitDiameter')}}(mm)
+          </div>
           <div><input
               type="number"
               v-model="diameter_end"
@@ -37,7 +43,9 @@
                   rowspan="1"
                   class="th-sj"
                 >
-                  <div style="height:43px"><!-- 时间 -->{{vm.$t('Common.time')}}</div>
+                  <div style="height:43px">
+                    <!-- 时间 -->{{vm.$t('Common.time')}}
+                  </div>
                 </th>
 
                 <th
@@ -54,7 +62,7 @@
                   :style="item === maxLength ? 'padding-right: 10px;':''"
                 >
 
-                  <div :style="'width:'+(98*5-1)+'px;border:none'">
+                  <div :style="lang=='en'?'width:'+(108*5-2)+'px;border:none':'width:'+(98*5-1)+'px;border:none'">
                     <!-- 选择日期时间 -->
                     <el-date-picker
                       v-model="timeList[item-1]"
@@ -75,7 +83,12 @@
           rowspan="1"
           class="th-cl"
         >
-          <div style="height:82px"><!-- 测量参数 -->{{vm.$t('trendData.MeasurementParam')}}</div>
+          <div
+            style="height:82px"
+            :style="lang=='en'?'font-size: 14px;width:106px;':''"
+          >
+            <!-- 测量参数 -->{{vm.$t('trendData.MeasurementParam')}}
+          </div>
         </th>
         <th
           rowspan="1"
@@ -85,14 +98,14 @@
             <div
               class="thead-div-1"
               v-for="len in maxLength"
-              :style="len === maxLength ? 'border:none;':''"
+              :style="[len === maxLength ? 'border:none;':'']"
             >
         <th
           v-for="(item,headlen) in head"
           :key="item.value"
           rowspan="1"
           colspan="1"
-          :style="len === maxLength && headlen === head.length-1 ? 'padding-right: 10px;border:none;':''"
+          :style="len === maxLength && headlen === head.length-1 ? 'padding-right: 10px;border:none;':'',lang=='en'?'font-size: 14px;width:106px;':''"
         >{{item.name}}</th>
     </div>
   </div>
@@ -123,69 +136,81 @@
           :colspan="maxLength > 0? (maxLength-1)*5 + 6 : 0"
         >
           <div v-for="(data,index) in carriageInfo[item].data">
-            <tr v-for="(pos,index) in data.posArray">
-              <td
-                rowspan="1"
-                colspan="1"
-                ref="td-cl"
-                class="td-cl"
-                :title="pos.tms_wheel!==null && pos.tms_wheel!==''?pos.tms_wheel:pos.channel_name"
-              >
-                <div>{{pos.tms_wheel!==null && pos.tms_wheel!==''?pos.tms_wheel:pos.channel_name}}</div>
-              </td>
-              <td rowspan="1" colspan="5" v-for="item in maxLength">
-                <div style="display:flex;flex-direction: row;">
-                  <td
-                    rowspan="1"
-                    colspan="1"
-                  ><input
-                      type="number"
-                      v-model="pos.editdata_train.diameter[item-1]"
-                    /></td>
-                  <td
-                    rowspan="1"
-                    colspan="1"
-                  ><input
-                      type="number"
-                      v-model="pos.editdata_train.thickness[item-1]"
-                    /></td>
-                  <td
-                    rowspan="1"
-                    colspan="1"
-                  ><input
-                      type="number"
-                      v-model="pos.editdata_train.height[item-1]"
-                    /></td>
-                  <td
-                    rowspan="1"
-                    colspan="1"
-                  >
-                    <select v-model="pos.editdata_train.type[item-1]">
-                      <option value="X"><!-- 镟轮 -->{{vm.$t('trendData.spinRoller')}}</option>
-                      <option value="H"><!-- 换轮 -->{{vm.$t('trendData.ChangeWheel')}}</option>
-                      <option value="N"><!-- 未镟轮或换轮 -->{{vm.$t('trendData.unspinWheelOChangeWheel')}}</option>
-                      <option value="SX"><!-- 首次镟轮 -->{{vm.$t('trendData.Firstwheel')}}</option>
-                    </select>
-                  </td>
-                  <td
-                    :rowspan="data.posArray.length"
-                    colspan="1"
-                    v-if="index === 0"
-                  >
-                    <div style="position: relative;width: 100%;height: 100%;">
-                      <textarea
-                        class="textarea"
-                        :style="'height:'+data.posArray.length*40+'px;vertical-align: middle;'"
-                        type="number"
-                        v-model="data.mileage[item-1]"
-                      />
-                      </textarea>
-                    </div>
-                  </td>
-                </div>
-              </td>
-              <!-- 获取到的已保存的踏面测量数据 -->
-              <!-- <td
+      <tr v-for="(pos,index) in data.posArray">
+        <td
+          rowspan="1"
+          colspan="1"
+          ref="td-cl"
+          class="td-cl"
+          :title="pos.tms_wheel!==null && pos.tms_wheel!==''?pos.tms_wheel:pos.channel_name"
+        >
+          <div>{{pos.tms_wheel!==null && pos.tms_wheel!==''?pos.tms_wheel:pos.channel_name}}</div>
+        </td>
+        <td
+          rowspan="1"
+          colspan="5"
+          v-for="item in maxLength"
+        >
+          <div style="display:flex;flex-direction: row;">
+        <td
+          rowspan="1"
+          colspan="1"
+        ><input
+            type="number"
+            v-model="pos.editdata_train.diameter[item-1]"
+          /></td>
+        <td
+          rowspan="1"
+          colspan="1"
+        ><input
+            type="number"
+            v-model="pos.editdata_train.thickness[item-1]"
+          /></td>
+        <td
+          rowspan="1"
+          colspan="1"
+        ><input
+            type="number"
+            v-model="pos.editdata_train.height[item-1]"
+          /></td>
+        <td
+          rowspan="1"
+          colspan="1"
+        >
+          <select v-model="pos.editdata_train.type[item-1]">
+            <option value="X">
+              <!-- 镟轮 -->{{vm.$t('trendData.spinRoller')}}
+            </option>
+            <option value="H">
+              <!-- 换轮 -->{{vm.$t('trendData.ChangeWheel')}}
+            </option>
+            <option value="N">
+              <!-- 未镟轮或换轮 -->{{vm.$t('trendData.unspinWheelOChangeWheel')}}
+            </option>
+            <option value="SX">
+              <!-- 首次镟轮 -->{{vm.$t('trendData.Firstwheel')}}
+            </option>
+          </select>
+        </td>
+        <td
+          :rowspan="data.posArray.length"
+          colspan="1"
+          v-if="index === 0"
+        >
+          <div style="position: relative;width: 100%;height: 100%;">
+            <textarea
+              class="textarea"
+              :style="'height:'+data.posArray.length*40+'px;vertical-align: middle;'"
+              type="number"
+              v-model="data.mileage[item-1]"
+            />
+            </textarea>
+          </div>
+        </td>
+    </div>
+    </td>
+    <!-- 获取到的已保存的踏面测量数据 -->
+    <!-- <td
                     v-if="index === 0"
                     :rowspan="data.posArray.length"
                     colspan="5"
@@ -256,8 +281,8 @@
                       ></td>
                     </tr>
                   </td> -->
-              <!-- 可输入踏面测量数据 -->
-              <!-- <td
+    <!-- 可输入踏面测量数据 -->
+    <!-- <td
                 v-if="index === 0"
                 :rowspan="data.posArray.length"
                 colspan="5"
@@ -345,10 +370,10 @@
                   </td>
                 </tr>
               </td> -->
-            </tr>
-          </div>
-        </td>
-      </tr>
+    </tr>
+    </div>
+    </td>
+    </tr>
     </div>
   </tbody>
   </table>
@@ -388,10 +413,15 @@
 
   </div>
   <div class="search-data">
-    <button @click="addCol"><!-- 新增列 -->{{vm.$t('trendData.Addrow')}}</button>
-    <button @click="setSaveData"><!-- 保存 -->{{vm.$t('trendData.Save')}}</button>
-    <button @click="retrainModel"><!-- 重新训练模型 -->{{vm.$t('trendData.RetrainModel')}}
-    <!-- 训练模型至少需要两组数据 -->
+    <button @click="addCol">
+      <!-- 新增列 -->{{vm.$t('trendData.Addrow')}}
+    </button>
+    <button @click="setSaveData">
+      <!-- 保存 -->{{vm.$t('trendData.Save')}}
+    </button>
+    <button @click="retrainModel">
+      <!-- 重新训练模型 -->{{vm.$t('trendData.RetrainModel')}}
+      <!-- 训练模型至少需要两组数据 -->
       <el-tooltip
         class="item"
         effect="dark"
@@ -413,15 +443,15 @@ import { getTime } from 'utils/utils.js'
 export default {
   name: 'treadData',
   data() {
-    const vm = window.vm;
+    const vm = window.vm
     return {
-      vm:vm,
+      vm: vm,
       head: [
-        { name: vm.$t('trendData.WheelDiameter')+'(mm)', value: 'diameter' },//车轮直径
-        { name: vm.$t('trendData.RimThickness')+'(mm)', value: 'thickness' },//轮缘厚度
-        { name: vm.$t('trendData.RimHeight')+'(mm)', value: 'height' },//轮缘高度
-        { name: vm.$t('trendData.SpinWheelOrChangeWheel'), value: 'type' },//鏇轮或换轮
-        { name: vm.$t('trendData.mileage')+'(km)', value: 'mileage' },
+        { name: vm.$t('trendData.WheelDiameter') + '(mm)', value: 'diameter' }, //车轮直径
+        { name: vm.$t('trendData.RimThickness') + '(mm)', value: 'thickness' }, //轮缘厚度
+        { name: vm.$t('trendData.RimHeight') + '(mm)', value: 'height' }, //轮缘高度
+        { name: vm.$t('trendData.SpinWheelOrChangeWheel'), value: 'type' }, //鏇轮或换轮
+        { name: vm.$t('trendData.mileage') + '(km)', value: 'mileage' },
       ],
       wheel_life: null /* 设计寿命 */,
       diameter_end: null /* 到限直径 */,
@@ -437,6 +467,7 @@ export default {
       maxLength: 0,
       saveData: {},
       checkList: {},
+      lang: 'cn',
     }
   },
   created() {
@@ -444,6 +475,9 @@ export default {
       method: 'add',
       keepAlive: 'treadData',
     })
+    if (localStorage.getItem('language')) {
+      this.lang = localStorage.getItem('language')
+    }
   },
   watch: {
     '$store.state.treadDataMsg': {
@@ -689,7 +723,7 @@ export default {
         this.saveData = this.reorganizeData()
         this.save(this.saveData)
       } else {
-        this.$pop(vm.$t('trendData.InputLimit'))//请输入设计寿命或车轮到限直径！
+        this.$pop(vm.$t('trendData.InputLimit')) //请输入设计寿命或车轮到限直径！
       }
     },
     // 组织所有数据都填写的测点数据
@@ -747,7 +781,7 @@ export default {
     save() {
       this.$getApi.saveTreadData(this.saveData).then((res) => {
         if (res) {
-          this.$pop(vm.$t('trendData.saveSuccess'))//保存成功！
+          this.$pop(vm.$t('trendData.saveSuccess')) //保存成功！
           this.getData()
         }
       })
@@ -776,7 +810,7 @@ export default {
         }
       }
 
-      text.unshift({ val: vm.$t('Common.allText'), id: -1, isCheck: isCheck })//全部
+      text.unshift({ val: vm.$t('Common.allText'), id: -1, isCheck: isCheck }) //全部
       this.checkList = {
         isShow: true,
         text,
@@ -852,7 +886,7 @@ export default {
       this.$getApi.predictTreadData(data).then((res) => {
         this.$emit('loadingImg', false)
         if (res) {
-          this.$pop(vm.$t('trendData.trainModelSuccess'))//训练模型成功！
+          this.$pop(vm.$t('trendData.trainModelSuccess')) //训练模型成功！
         }
       })
     },
@@ -930,8 +964,8 @@ export default {
           left: 0px;
           border-bottom: 1px solid #979797;
           th {
-            min-width: 98px;
-            width: 98px;
+            min-width: 108px;
+            width: 108px;
             min-height: 40px;
             line-height: 40px;
             text-align: center;
@@ -957,7 +991,7 @@ export default {
         border: 1px solid #979797;
         background: #092e55;
         position: relative;
-        overflow-y: scroll;
+        // overflow-y: scroll;
 
         top: -8px;
         .td-ch,
@@ -966,7 +1000,7 @@ export default {
           background-color: #092e55;
           border-right: 1px solid #979797;
           div {
-            width: 98px;
+            width: 108px;
             text-overflow: ellipsis;
             overflow: hidden;
             white-space: nowrap;
@@ -993,8 +1027,8 @@ export default {
         //   border-bottom: 1px solid #979797;
         // }
         td {
-          min-width: 98px;
-          width: 98px;
+          min-width: 108px;
+          width: 108px;
           min-height: 40px;
           line-height: 40px;
           text-align: center;
@@ -1104,7 +1138,7 @@ export default {
       width: 100px;
       margin: 0px 10px;
       &:nth-child(3) {
-        width: 120px;
+        min-width: 150px;
         .iconfont {
           font-size: 12px;
         }

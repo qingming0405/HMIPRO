@@ -950,7 +950,7 @@ const defaultCode = {
   13: {
     filed: "overturn_rms", name: trans('eigenvalue.EffectiveValue'), code: 37000
   } /* 合成倾角有效值 */,
-  14: { filed: "speed_value", name: "预紧力值", code: 44000 } /* 预紧力值 */,
+  14: { filed: "speed_value", name: trans('eigenvalue.PreloadValue'), code: 44000 } /* 预紧力值 */,
   15: { filed: "spm_rms", name: trans('eigenvalue.envelopeDemodulationValue'), code: 5000 } /* 冲击测点 */,
   16: { filed: "spm_rms", name: trans('eigenvalue.envelopeDemodulationValue'), code: 5000 } /* 包络有效值 */,
   17: { filed: "vib_rms", name: trans('eigenvalue.EffectiveValue'), code: 2000 } /* 轨道波磨测点 */,
@@ -1057,6 +1057,7 @@ const matchingRules = {
   equipmentParameters: { excludingPosType: [201] }, //设备参数
   monitor: { excludingPosType: [201] }, //监测报表
   //8000
+  alarm1: { includePosType: [3] } /* 报警日志 */,
   bode: { includePosType: [3] } /* 伯德图 */,
   axisPosition: { includePosType: [3] } /* 轴心位置图 */,
   speedTime: { includePosType: [3] } /* 转速时间 */,
@@ -3229,45 +3230,45 @@ export function itemMapping (key) {
     },
     A_02: {
       CNname: trans('ytMap.OutputVoltageAB'),//输出电压AB
-      mappingKey: trans('ytMap.DownOutputVoltageAB')//井下机组给定电压AB
+      mappingKey: '井下机组给定电压AB',//井下机组给定电压AB  trans('ytMap.DownOutputVoltageAB')
     },
     A_03: {
       CNname: trans('ytMap.OutputVoltageBC'),//输出电压BC
-      mappingKey: trans('ytMap.DownOutputVoltageBC')//井下机组给定电压BC
+      mappingKey:'井下机组给定电压BC',// trans('ytMap.DownOutputVoltageBC')//井下机组给定电压BC
     },
     A_04: {
       CNname: trans('ytMap.OutputBoltageAC'),//输出电压AC
-      mappingKey: trans('ytMap.DownOutputBoltageAC')//井下机组给定电压CA
+      mappingKey: '井下机组给定电压CA',//trans('ytMap.DownOutputBoltageAC')//井下机组给定电压CA
     },
     A_05: {
       CNname: trans('ytMap.AphaseCurrent'),//A相电流
-      mappingKey: trans('ytMap.DownAphaseCurrent')//井下运行A相电流
+      mappingKey: '井下运行A相电流',//trans('ytMap.DownAphaseCurrent')//井下运行A相电流
     },
     A_06: {
       CNname: trans('ytMap.PhaseBCurrent'),//B相电流
-      mappingKey: trans('ytMap.DownPhaseBCurrent')//井下运行B相电流
+      mappingKey: '井下运行B相电流',//trans('ytMap.DownPhaseBCurrent')//井下运行B相电流
     },
     A_07: {
       CNname: trans('ytMap.PhaseCCurrent'),//C相电流
-      mappingKey: trans('ytMap.DownPhaseCCurrent')//井下运行C相电流
+      mappingKey: '井下运行C相电流',//trans('ytMap.DownPhaseCCurrent')//井下运行C相电流
     },
 
     //变频器
     B_01: {
       CNname: trans('ytMap.Setfreq'),//设定频率
-      mappingKey: trans('ytMap.InverterSetfreq')//变频器设定频率
+      mappingKey: '变频器设定频率',//trans('ytMap.InverterSetfreq')//变频器设定频率
     },
     B_02: {
       CNname: trans('ytMap.Operatingfreq'),//运行频率
-      mappingKey: trans('ytMap.InverterOperatefreq')//变频器运行频率
+      mappingKey: '变频器运行频率',//trans('ytMap.InverterOperatefreq')//变频器运行频率
     },
     B_03: {
       CNname: trans('ytMap.outputVoltage'),//输出电压
-      mappingKey: trans('ytMap.InverteroutputVoltage')//变频器输出电压
+      mappingKey: '变频器输出电压',//trans('ytMap.InverteroutputVoltage')//变频器输出电压
     },
     B_04: {
       CNname: trans('ytMap.OutputOneVoltage'),//输出一次电流
-      mappingKey: trans('ytMap.InverterOutputOneVoltage')//变频器输出一次电流
+      mappingKey: '变频器输出一次电流',//trans('ytMap.InverterOutputOneVoltage')//变频器输出一次电流
     },
     //运行记录
     C_01: {
@@ -3338,47 +3339,47 @@ export function itemMapping (key) {
     // },
     F_04: {
       CNname: trans('ytMap.ControlIninputVoltageAB'),//控制柜输入线电压AB
-      mappingKey: trans('ytMap.ControlIninputVoltageAB')//控制柜输入线电压AB
+      mappingKey: '控制柜输入线电压AB',//trans('ytMap.ControlIninputVoltageAB')//控制柜输入线电压AB
     },
     F_05: {
       CNname: trans('ytMap.ControlIninputVoltageBC'),//控制柜输入线电压BC
-      mappingKey: trans('ytMap.ControlIninputVoltageBC')//控制柜输入线电压BC
+      mappingKey: '控制柜输入线电压BC',//trans('ytMap.ControlIninputVoltageBC')//控制柜输入线电压BC
     },
     F_06: {
       CNname: trans('ytMap.ControlIninputVoltageCA'),//控制柜输入线电压CA
-      mappingKey: trans('ytMap.ControlIninputVoltageCA')//控制柜输入线电压CA
+      mappingKey: '控制柜输入线电压CA',//trans('ytMap.ControlIninputVoltageCA')//控制柜输入线电压CA
     },
     F_07: {
       CNname: trans('ytMap.ControlInputACurrent'),//控制柜输入A相电流
-      mappingKey: trans('ytMap.ControlInputACurrent')//控制柜输入A相电流
+      mappingKey: '控制柜输入A相电流',//trans('ytMap.ControlInputACurrent')//控制柜输入A相电流
     },
     F_08: {
       CNname: trans('ytMap.ControlInputBCurrent'),//控制柜输入B相电流
-      mappingKey: trans('ytMap.ControlInputBCurrent')//控制柜输入B相电流
+      mappingKey:'控制柜输入B相电流',// trans('ytMap.ControlInputBCurrent')//控制柜输入B相电流
     },
     F_09: {
       CNname: trans('ytMap.ControlInputCCurrent'),//控制柜输入C相电流
-      mappingKey: trans('ytMap.ControlInputCCurrent')//控制柜输入C相电流
+      mappingKey: '控制柜输入C相电流',//trans('ytMap.ControlInputCCurrent')//控制柜输入C相电流
     },
     F_10: {
       CNname: trans('ytMap.Inputfreq'),//输入频率
-      mappingKey: trans('ytMap.Powerfreq')//电源频率
+      mappingKey: '电源频率',//trans('ytMap.Powerfreq')//电源频率
     },
     F_11: {
       CNname: trans('ytMap.TotalOperatingPower'),//机组运行总电能
-      mappingKey: trans('ytMap.TotalOperatingPower')//机组运行总电能
+      mappingKey: '机组运行总电能',//trans('ytMap.TotalOperatingPower')//机组运行总电能
     },
     F_12: {
       CNname: trans('ytMap.SystemTotalactivePower'),//系统总有功功率
-      mappingKey: trans('ytMap.SystemTotalactivePower')//系统总有功功率
+      mappingKey: '系统总有功功率',//trans('ytMap.SystemTotalactivePower')//系统总有功功率
     },
     F_13: {
       CNname: trans('ytMap.SystemTotalReactivePower'),//系统总无功功率
-      mappingKey: trans('ytMap.SystemTotalReactivePower')//系统总无功功率
+      mappingKey: '系统总无功功率',//trans('ytMap.SystemTotalReactivePower')//系统总无功功率
     },
     F_14: {
       CNname: trans('ytMap.SystemTotalPowerFactor'),//系统总功率因数
-      mappingKey: trans('ytMap.SystemTotalPowerFactor')//系统总功率因数
+      mappingKey: '系统总功率因数',//trans('ytMap.SystemTotalPowerFactor')//系统总功率因数
     }
   }; //条目的映射关系
   let item = itemList[key];

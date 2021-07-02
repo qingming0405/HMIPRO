@@ -25,6 +25,7 @@
               v-for='(item, idx) in data.head'
               :key=idx
               :class='"head" + idx + data.type'
+              :title="item"
             >{{item}}</th>
           </tr>
         </thead>
@@ -127,7 +128,7 @@
             <td class='text-overflow'>{{tr.name}}</td>
             <td class='text-overflow'>{{tr.viewTime}}</td>
             <td
-              class='text-overflow'
+              class='text-overflow body3pos'
               :title='tr.evenType'
             >{{tr.eventType}}</td>
           </tr>
@@ -313,7 +314,7 @@ export default {
             width: 400px;
           }
           .head3pos {
-            width: 400px;
+            width: 550px;
           }
         }
         .check-all {
@@ -345,7 +346,7 @@ export default {
             width: 400px;
           }
           .body3pos {
-            width: 400px;
+            width: 550px;
           }
         }
       }

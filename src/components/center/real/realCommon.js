@@ -652,21 +652,23 @@ export default {
       }
     },
     getAlarmInfo(rowData, head, t_root) {
-      if(t_root === 2 || !rowData.hasOwnProperty('alarmValue')) {
-        return ''
-      }
-      let alarmValue = rowData.alarmValue
-      let info = rowData.pos_name + '\n'
-      head.forEach(headItem => {
-        if(headItem.hasOwnProperty('code')) {
-          let code = headItem.code
-          if(alarmValue.hasOwnProperty(code)) {
-            let [warn, alarm] = alarmValue[code].split('_')
-            info += this.codeAlarmString(headItem.val, round(rowData[headItem.filed]), warn, alarm)
-          }
-        }
-      })
-      return info
+      // 暂时注释
+      return ''
+      // if(t_root === 2 || !rowData.hasOwnProperty('alarmValue') || rowData.alarmValue === null) {
+      //   return ''
+      // }
+      // let alarmValue = rowData.alarmValue
+      // let info = rowData.pos_name + '\n'
+      // head.forEach(headItem => {
+      //   if(headItem.hasOwnProperty('code')) {
+      //     let code = headItem.code
+      //     if(alarmValue.hasOwnProperty(code)) {
+      //       let [warn, alarm] = alarmValue[code].split('_')
+      //       info += this.codeAlarmString(headItem.val, round(rowData[headItem.filed]), warn, alarm)
+      //     }
+      //   }
+      // })
+      // return info
     },
     codeAlarmString(codeName, value, warn, alarm) {
       let str = ''

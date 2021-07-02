@@ -555,10 +555,10 @@ export function menusSecondLevel () {
         controlShow: true, //后来配置这样表是否显示
         isShow: true,
       },
-      { 
+      {
         val: window.vm.$t('HeaderEdge.secondLevel5_4'),// 使用手册
-        icon: 'icon-icon-test', 
-        name: 'userManual' 
+        icon: 'icon-icon-test',
+        name: 'userManual'
       },
     ],
   ]
@@ -630,6 +630,7 @@ export function requiredMac () {
  */
 export function requiredPos () {
   return [
+    'alarm1',
     'real',
     'history',
     'wave',

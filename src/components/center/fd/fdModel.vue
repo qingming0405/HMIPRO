@@ -14,9 +14,10 @@
       <div class="general-model-content">
         <div class="model-content">
           <div class="model-fengdian">
+            <!-- 传动链 -->
             <div
               class="model-drivechain"
-              v-show="param.modelTitleName.indexOf('传动链') !== -1"
+              v-show="param.modelTitleName.indexOf($t('FdModel.locName1')) !== -1"
             >
               <div
                 v-if="param.modelItems.driveChain"
@@ -68,9 +69,10 @@
                 </div>
               </div>
             </div>
+            <!-- 塔筒 -->
             <div
               class="model-towerdrum"
-              v-show="param.modelTitleName.indexOf('塔筒') !== -1"
+              v-show="param.modelTitleName.indexOf($t('FdModel.locName2')) !== -1"
             >
               <div
                 v-if="param.modelItems.tower"
@@ -121,9 +123,10 @@
                 </div>
               </div>
             </div>
+            <!-- 螺栓 -->
             <div
               class="model-bolt"
-              v-show="param.modelTitleName.indexOf('螺栓') !== -1"
+              v-show="param.modelTitleName.indexOf($t('FdModel.locName3')) !== -1"
             >
               <div
                 v-if="param.modelItems.bolt"
@@ -174,9 +177,10 @@
                 </div>
               </div>
             </div>
+            <!-- 叶轮 -->
             <div
               class="model-impeller"
-              v-show="param.modelTitleName.indexOf('叶轮') !== -1"
+              v-show="param.modelTitleName.indexOf($t('FdModel.locName4')) !== -1"
             >
               <div
                 v-if="param.modelItems.impeller"
@@ -227,9 +231,10 @@
                 </div>
               </div>
             </div>
+            <!-- 油液 -->
             <div
               class="model-oil"
-              v-show="param.modelTitleName.indexOf('油液') !== -1"
+              v-show="param.modelTitleName.indexOf($t('FdModel.locName5')) !== -1"
             >
               <div
                 v-if="param.modelItems.oil"
@@ -278,9 +283,10 @@
                 </div>
               </div>
             </div>
+            <!-- 锚栓 -->
             <div
               class="model-anchorbolt"
-              v-show="param.modelTitleName.indexOf('锚栓') !== -1"
+              v-show="param.modelTitleName.indexOf($t('FdModel.locName6')) !== -1"
             >
               <div
                 v-if="param.modelItems.anchor"
@@ -331,9 +337,10 @@
                 </div>
               </div>
             </div>
+            <!-- 基础 -->
             <div
               class="model-base"
-              v-show="param.modelTitleName.indexOf('基础') !== -1"
+              v-show="param.modelTitleName.indexOf($t('FdModel.locName7')) !== -1"
             >
               <div
                 v-if="param.modelItems.basics"

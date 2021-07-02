@@ -135,44 +135,47 @@
         </div>
       </div>
       <!-- 统计方式 -->
-      <div class="set-realtimeValue">
+      <div class="set-census">
         <div class="select-title">{{vm.$t('MonitorRetrieval.statisticalWays')}}</div>
-        <div class="set-realtimeInput">
-          <input
-            type="radio"
-            value="1"
-            v-model="vital"
-          />
-          <!-- 小时 -->
-          <label>{{vm.$t('Common.hour')}}</label>
+        <div class="set-selcensus">
+          <div class="set-realtimeInput">
+            <input
+              type="radio"
+              value="1"
+              v-model="vital"
+            />
+            <!-- 小时 -->
+            <label>{{vm.$t('Common.hour')}}</label>
+          </div>
+          <div class="set-realtimeInput">
+            <input
+              type="radio"
+              value="2"
+              v-model="vital"
+            />
+            <!-- 天 -->
+            <label>{{vm.$t('Common.day')}}</label>
+          </div>
+          <div class="set-realtimeInput">
+            <input
+              type="radio"
+              value="3"
+              v-model="vital"
+            />
+            <!-- 月 -->
+            <label>{{vm.$t('Common.mouth')}}</label>
+          </div>
+          <div class="set-realtimeInput">
+            <input
+              type="radio"
+              value="0"
+              v-model="vital"
+            />
+            <!-- 不统计 -->
+            <label>{{vm.$t('MonitorRetrieval.noStatistics')}}</label>
+          </div>
         </div>
-        <div class="set-realtimeInput">
-          <input
-            type="radio"
-            value="2"
-            v-model="vital"
-          />
-          <!-- 天 -->
-          <label>{{vm.$t('Common.day')}}</label>
-        </div>
-        <div class="set-realtimeInput">
-          <input
-            type="radio"
-            value="3"
-            v-model="vital"
-          />
-          <!-- 月 -->
-          <label>{{vm.$t('Common.mouth')}}</label>
-        </div>
-        <div class="set-realtimeInput">
-          <input
-            type="radio"
-            value="0"
-            v-model="vital"
-          />
-          <!-- 不统计 -->
-          <label>{{vm.$t('MonitorRetrieval.noStatistics')}}</label>
-        </div>
+
       </div>
 
       <!-- 机组选择 -->
@@ -346,11 +349,11 @@ import { setHead, posType_name, cloneObj } from 'utils/utils.js'
 export default {
   // import引入的组件需要注入到对象中才能使用
   data() {
-    const vm = window.vm;
+    const vm = window.vm
     return {
-      vm:vm,
+      vm: vm,
       info: {
-        title: vm.$t('MonitorRetrieval.nowMac'),//'当前机组',
+        title: vm.$t('MonitorRetrieval.nowMac'), //'当前机组',
         value: null,
         isMac: true,
         key: null, //若从机组进入
@@ -455,8 +458,8 @@ export default {
       } else if (params.type == 'pos') {
         this.posChoose = []
         //测点
-        this.info.title = vm.$t('MonitorRetrieval.nowPos'),//'当前测点'
-        this.info.isMac = false
+        ;(this.info.title = vm.$t('MonitorRetrieval.nowPos')), //'当前测点'
+          (this.info.isMac = false)
         this.info.value = params.msg.position_name
         !flag && this.get_value_choose(params.msg) //初始化信息
         if (params.msg.position_type === 13) {
@@ -497,15 +500,15 @@ export default {
         let density = res.density
 
         if (endTime <= startTime) {
-          this.$pop(vm.$t('Common.popTimeText'))//'结束时间必须大于开始时间'
+          this.$pop(vm.$t('Common.popTimeText')) //'结束时间必须大于开始时间'
           return
         }
         if (!isNaN(maxSpeed) && !isNaN(minSpeed) && maxSpeed <= minSpeed) {
-          this.$pop(vm.$t('Common.popSpeedText'))//'最大转速必须大于最小转速')
+          this.$pop(vm.$t('Common.popSpeedText')) //'最大转速必须大于最小转速')
           return
         }
         if (!isNaN(lower) && !isNaN(upper) && upper <= lower) {
-          this.$pop(vm.$t('Common.popLowerText'))//'上限过滤必须大于下限过滤')
+          this.$pop(vm.$t('Common.popLowerText')) //'上限过滤必须大于下限过滤')
           return
         }
         res.minSpeed === '' && (minSpeed = '')
@@ -540,7 +543,7 @@ export default {
             }
           })
           if (checkNum == 0) {
-            this.$pop(vm.$t('Common.popDataTypeText'))//'请至少选择一个数据类型！')
+            this.$pop(vm.$t('Common.popDataTypeText')) //'请至少选择一个数据类型！')
             return
           }
         }

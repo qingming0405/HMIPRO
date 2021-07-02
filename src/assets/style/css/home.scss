@@ -625,7 +625,7 @@ button,
     .data-retrieval-box {
       background-color: $btnFontColor;
       position: absolute;
-      padding: 0 15px 10px;
+      padding: 0 10px 10px;
       font-size: 12px;
       width: 312px;
       & > div + div {
@@ -634,14 +634,19 @@ button,
         height: 20px;
         line-height: 20px;
         display: grid;
-        grid-template-columns: 20% 75%;
+        grid-template-columns: 25% 70%;
         grid-column-gap: 2%;
         div {
           height: 20px;
           line-height: 20px;
         }
         .select-title {
+          // text-align: right;
           text-align: right;
+          line-height: 12px;
+          display: flex;
+          align-items: center;
+          justify-content: flex-end;
         }
         .select-value {
           position: relative;
@@ -693,7 +698,7 @@ button,
         margin-left: -5%;
         width: 110%;
         button {
-          width: 60px;
+          min-width: 60px;
           line-height: 26px;
           height: 26px;
           font-size: 14px;
@@ -704,7 +709,7 @@ button,
         }
       }
       .set-speed {
-        grid-template-columns: 20% 33.5% 4% 33.5%;
+        grid-template-columns: 25% 31% 4% 31%;
         grid-column-gap: 2%;
         .speed-bar {
           display: flex;
@@ -719,7 +724,7 @@ button,
         }
       }
       .set-realtimeValue {
-        grid-template-columns: 20% 15% 15% 15% 18%;
+        grid-template-columns: 25% 15% 15% 15% 18%;
         grid-column-gap: 2%;
         .set-realtimeInput {
           display: flex;
@@ -729,18 +734,35 @@ button,
           }
         }
       }
+      .set-census {
+        grid-template-columns: 25% 63;
+        grid-column-gap: 2%;
+        .set-selcensus {
+          display: flex;
+          flex-wrap: wrap;
+          .set-realtimeInput{
+            margin-right: 2px;
+          }
+        }
+      }
       .set-limit {
-        grid-template-columns: 20% 34%;
+        grid-template-columns: 25% 31%;
       }
       // 选择工况报警门限
       .check-alarm-threshold {
         height: auto;
         .alarm-value {
           padding: 0;
-          display: grid;
+          /* display: grid;
           grid-template-columns: repeat(3, 33%);
-          grid-template-rows: repeat(2, 26px);
+          grid-template-rows: repeat(2, 26px); */
+          display: flex;
           height: auto;
+          flex-wrap: wrap;
+          height: auto;
+          li {
+            margin-right: 8px;
+          }
         }
       }
       .check-eigenvalue-box {

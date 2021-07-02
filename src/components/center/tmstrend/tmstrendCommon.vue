@@ -215,7 +215,7 @@ export default {
     },
     //右键删除测点
     contextmenu(e, data, key) {
-      let text = [{ type: 'del', val: '删除' }]
+      let text = [{ type: 'del', val: this.$t('Common.del') }]//删除
       const size = e.currentTarget.getBoundingClientRect()
       this.$list({
         text,

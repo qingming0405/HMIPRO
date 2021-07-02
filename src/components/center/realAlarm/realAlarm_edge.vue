@@ -25,7 +25,7 @@
             class="my-table-tr"
             v-for="(body, id) in realAlarm"
             :key="id"
-            :class="body.status != '—' ? body.status== '报警' ? 'alarm-text':'warning-text':''"
+            :class="body.status != '—' ? body.status== $t('Common.alarmText') ? 'alarm-text':'warning-text':''"
             @dblclick="toWave(body)"
           >
             <td>{{body.num}}</td>
@@ -128,7 +128,7 @@ export default {
         el.hh_limit = alarm[k].hh_limit ? alarm[k].hh_limit : '—'
         el.l_limit = alarm[k].l_limit ? alarm[k].l_limit : '—'
         el.ll_limit = alarm[k].ll_limit ? alarm[k].ll_limit : '—'
-        el.value = alarm[k].value ? round(alarm[k].value, 4) : '—'
+        el.value = alarm[k].value !== null && alarm[k].value !== undefined ? round(alarm[k].value, 4) : '—'
         if (alarm[k].baseInfo && alarm[k].baseInfo.baseInfo) {
           let info = alarm[k].baseInfo.baseInfo
           el.saveTime_Com = info.saveTime_Com

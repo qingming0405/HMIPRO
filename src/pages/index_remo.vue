@@ -30,7 +30,7 @@
     </header>
     <div class="left">
       <div class="left-factory">
-        <div class="block-title">行业分类</div>
+        <div class="block-title">服务行业</div>
         <ul class="factory-block">
           <li class="factory" v-for="(item,index) in factoryList" @click="chooseFacTypeData(index,item)" :class="chooseFacIndex === index ?'active':''">
             <div class="img-block">
@@ -42,13 +42,13 @@
                 <div class="progress_area">
                   <span class="progress_bac" :style="item.macPer"></span>
                 </div>
-                <span>{{item.macNum}}台</span>
+                <span>{{item.macNum}}台设备</span>
               </div>
               <div>
                 <div class="progress_area">
                   <span class="progress_bac" :style="item.facPer"></span>
                 </div>
-                <span>{{item.factoryNum}}个</span>
+                <span>{{item.factoryNum}}个现场</span>
               </div>
             </div>
           </li>
@@ -238,7 +238,7 @@
           },
           {
             img:'icon-qita_huaban',
-            text: '其他领域',
+            text: '其他行业',
             macNum: 0,
             factoryNum: 0,
             macPer:{
@@ -320,7 +320,7 @@
       this.initImportFile();
     },
     mounted() {
-      this.getData();
+      // this.getData();
       /*定时更新*/
       clearInterval(this.timer)
       let fn = () => {
@@ -488,7 +488,7 @@
                     }
                     that.dataArr5[province].push(obj);
                   }
-                  else if (obj["type"] == 2||obj["type"] == 3||obj["type"] == 8||obj["type"] == 9) {//其他领域
+                  else if (obj["type"] == 2||obj["type"] == 3||obj["type"] == 8||obj["type"] == 9) {//其他行业
                     if (that.dataArr6[province]==null) {
                       that.dataArr6[province]=[];
                     }
@@ -569,7 +569,7 @@
                   }
                   that.w_styleArr5.push(obj);
                 }
-                else if (result[i]["type"] == 2||result[i]["type"] == 3||result[i]["type"] == 8||result[i]["type"] == 9) {//其他领域
+                else if (result[i]["type"] == 2||result[i]["type"] == 3||result[i]["type"] == 8||result[i]["type"] == 9) {//其他行业
                   if(result[i]["address"]>0 && result[i]["address"] < 35){
                     that.styleArr6.push(obj);
                   }
@@ -647,7 +647,7 @@
                 that.warnNum += mac.hNum;
                 that.offNum += mac.offlineNum;
                 that.facNum += mac.facNum;
-                that.chainNum += mac.driveChainNum;
+                that.chainNum += mac.driveChainNum + mac.bearingNum;
                 that.surfaceNormalNum += mac.surfaceNormalNum;
                 if(mac.type===2 || mac.type===3 || mac.type===8 || mac.type===9){//其他领域求和
                   othernormalNum += mac.normalNum;
@@ -705,7 +705,7 @@
                     obj.img = 'icon-shiyouhuagong';
                     break;
                   case -1:
-                    obj.facType = '其他领域';
+                    obj.facType = '其他行业';
                     obj.img = 'icon-qita_huaban';
                     break;
                 }
@@ -721,7 +721,7 @@
                   normalNum: othernormalNum,
                   offlineNum: otheroffNum,
                   surfaceNormalNum: othersurfaceNormalNum,
-                  facType:'其他领域',
+                  facType:'其他行业',
                 });
               }
               factoryData.forEach((mac,index)=>{
@@ -1517,7 +1517,7 @@
               hoverAnimation: true,
             },
             {
-              name: "其他领域",
+              name: "其他行业",
               type: "scatter",
               coordinateSystem: "geo",
               symbol: 'pin',

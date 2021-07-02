@@ -233,7 +233,7 @@ export default {
 }
 .data-retrieval-btn {
   .add-pos {
-    width: 70px !important;
+    min-width: 70px;
     background: #a47c42;
     &:hover {
       background: #806133;

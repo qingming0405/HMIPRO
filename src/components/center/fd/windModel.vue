@@ -161,17 +161,6 @@ export default {
       currentKey: '',
     }
   },
-  beforeDestroy() {
-    clearInterval(this.timer)
-    // this.$parent.$el.style.background = '#092e55'
-    if (renderer) {
-      //清除掉缓存
-      raycaster = null
-      mouseVector = null
-      this.initParams()
-      this.clearRenderer()
-    }
-  },
   created() {
     this.$store.commit('set_keepAlive', {
       method: 'add',
@@ -183,6 +172,13 @@ export default {
     this.$parent.$el.style.background = '#000'
   },
   deactivated() {
+    if (renderer) {
+      //清除掉缓存
+      raycaster = null
+      mouseVector = null
+      this.initParams()
+      this.clearRenderer()
+    }
     this.windModel[this.currentKey] &&
       clearInterval(this.windModel[this.currentKey].timer)
   },
@@ -196,7 +192,7 @@ export default {
     document.addEventListener('click', () => {
       let domList = document.getElementsByClassName(
         `modelItem${this.currentKey}`
-      )[0]
+      )
       if (domList) {
         for (let i = 0; i < domList.length; i++) {
           let item = domList[i]
@@ -289,6 +285,7 @@ export default {
           this.windModel[key].isShow = true
           break
         case 2 /* 关闭图表 */:
+          clearInterval(this.windModel[key].timer)
           this.$delete(this.windModel, key)
           break
         case 4 /* 从其他图表跳转已存在图标 */:
@@ -508,7 +505,7 @@ export default {
                 name.indexOf('yelun') != -1
               ) {
                 if (name.indexOf('yelun') != -1) {
-                  child.name_text = '叶轮'
+                  child.name_text = _this.$t('FdModel.locName4') //'叶轮'
                 }
                 arr.groupHeadArr.push(child)
               } else if (name.indexOf('maoshuan') != -1) {
@@ -518,7 +515,7 @@ export default {
                 ) {
                   child.visible = false
                 }
-                child.name_text = '锚栓'
+                child.name_text = _this.$t('FdModel.locName6') //'锚栓'
                 if (name.indexOf('banzhiqu') != -1) {
                   //半直驱的需要加入旋转的组合
                   arr.groupFlyArr.push(child)
@@ -526,7 +523,7 @@ export default {
                   arr.otherArr.push(child)
                 }
               } else if (name.indexOf('tatong') != -1) {
-                child.name_text = '塔筒'
+                child.name_text = _this.$t('FdModel.locName2') //'塔筒'
                 if (name.indexOf('banzhiqu') != -1) {
                   //半直驱的需要加入旋转的组合
                   arr.groupFlyArr.push(child)
@@ -534,14 +531,14 @@ export default {
                   arr.otherArr.push(child)
                 }
               } else if (name.indexOf('jichu') != -1) {
-                child.name_text = '基础'
+                child.name_text = _this.$t('FdModel.locName7') //'基础'
                 if (name.indexOf('banzhiqu') != -1) {
                   arr.groupFlyArr.push(child) //半直驱的需要加入旋转的组合
                 } else {
                   arr.otherArr.push(child)
                 }
               } else if (name.indexOf('luoshuan') != -1) {
-                child.name_text = '螺栓'
+                child.name_text = _this.$t('FdModel.locName3') //'螺栓'
                 let num = Number(name.split('_').slice(-1))
                 if (param.flangeNum === 1) {
                   //检测一个法兰
@@ -586,13 +583,13 @@ export default {
                 name === 'neibumoxing_chuandonglian'
               ) {
                 if (name.indexOf('jicang') != -1) {
-                  child.name_text = '机舱'
+                  child.name_text = _this.$t('Common.engineroom') //'机舱'
                 }
                 if (name === 'neibumoxing_chuandonglian') {
-                  child.name_text = '传动链'
+                  child.name_text = _this.$t('FdModel.locName1') //'传动链'
                 }
                 if (name === 'neibumoxing_chilunxiang') {
-                  child.name_text = '油液'
+                  child.name_text = _this.$t('FdModel.locName5') //'油液'
                 }
                 arr.groupFlyArr.push(child)
               } else {
@@ -851,7 +848,7 @@ export default {
       const param = this.windModel[this.currentKey]
       let domList = document.getElementsByClassName(
         `modelItem${this.currentKey}`
-      )[0]
+      )
       for (let i = 0; i < domList.length; i++) {
         let item = domList[i]
         item.classList.remove('active')
@@ -1032,52 +1029,52 @@ export default {
     //跳转modelitem（传动链、塔筒等）
     toModelIitem(model) {
       const param = this.windModel[this.currentKey]
-      let data
-      let name = model.name
+      let data;
+      let name = model.name;
       switch (name) {
-        case '传动链':
+        case this.$t('FdModel.locName1')://'传动链'
           data = {
             name: this.$t('FdModel.locName1'), //'传动链',
             router: 'fddrivechain',
             index: 0,
           }
           break
-        case '塔筒':
+        case this.$t('FdModel.locName2')://塔筒
           data = {
             name: this.$t('FdModel.locName2'), //'塔筒',
             router: 'fdtowerdrum',
             index: 1,
           }
           break
-        case '螺栓':
+        case this.$t('FdModel.locName3')://螺栓
           data = {
             name: this.$t('FdModel.locName3'), //'螺栓',
             router: 'fdbolt',
             index: 2,
           }
           break
-        case '叶轮':
+        case this.$t('FdModel.locName4')://叶轮
           data = {
             name: this.$t('FdModel.locName4'), //'叶轮',
             router: 'fdimpeller',
             index: 3,
           }
           break
-        case '油液':
+        case this.$t('FdModel.locName5')://油液
           data = {
             name: this.$t('FdModel.locName5'), //'油液',
             router: 'fdoil',
             index: 4,
           }
           break
-        case '锚栓':
+        case this.$t('FdModel.locName6')://锚栓
           data = {
             name: this.$t('FdModel.locName6'), //'锚栓',
             router: 'fdanchorbolt',
             index: 5,
           }
           break
-        case '基础':
+        case this.$t('FdModel.locName7')://基础
           data = {
             name: this.$t('FdModel.locName7'), //'基础',
             router: 'fdbasics',
@@ -1199,39 +1196,74 @@ export default {
                     alarm_text: this.getAlarmText(res[k].alarm_status),
                     health: res[k].health === null ? '-' : res[k].health,
                   }
-
+                  //传动链
                   if (
-                    param.modelTitleName.includes('传动链') &&
+                    param.modelTitleName.includes(
+                      this.$t('FdModel.locName1')
+                    ) &&
                     k === 'driveChain'
                   ) {
-                    obj.name = '传动链'
+                    obj.name = this.$t('FdModel.locName1') //'传动链'
                     modelTitle.push(obj)
                   }
+                  //叶轮
                   if (
-                    param.modelTitleName.includes('叶轮') &&
+                    param.modelTitleName.includes(
+                      this.$t('FdModel.locName4')
+                    ) &&
                     k === 'impeller'
                   ) {
-                    obj.name = '叶轮'
+                    obj.name = this.$t('FdModel.locName4') //'叶轮'
                     modelTitle.push(obj)
                   }
-                  if (param.modelTitleName.includes('塔筒') && k === 'tower') {
-                    obj.name = '塔筒'
+                  //塔筒
+                  if (
+                    param.modelTitleName.includes(
+                      this.$t('FdModel.locName2')
+                    ) &&
+                    k === 'tower'
+                  ) {
+                    obj.name = this.$t('FdModel.locName2') //'塔筒'
                     modelTitle.push(obj)
                   }
-                  if (param.modelTitleName.includes('基础') && k === 'basics') {
-                    obj.name = '基础'
+                  //基础
+                  if (
+                    param.modelTitleName.includes(
+                      this.$t('FdModel.locName7')
+                    ) &&
+                    k === 'basics'
+                  ) {
+                    obj.name = this.$t('FdModel.locName7') //'基础'
                     modelTitle.push(obj)
                   }
-                  if (param.modelTitleName.includes('螺栓') && k === 'bolt') {
-                    obj.name = '螺栓'
+                  //螺栓
+                  if (
+                    param.modelTitleName.includes(
+                      this.$t('FdModel.locName3')
+                    ) &&
+                    k === 'bolt'
+                  ) {
+                    obj.name = this.$t('FdModel.locName3') //'螺栓'
                     modelTitle.push(obj)
                   }
-                  if (param.modelTitleName.includes('锚栓') && k === 'anchor') {
-                    obj.name = '锚栓'
+                  //锚栓
+                  if (
+                    param.modelTitleName.includes(
+                      this.$t('FdModel.locName6')
+                    ) &&
+                    k === 'anchor'
+                  ) {
+                    obj.name = this.$t('FdModel.locName6') //'锚栓'
                     modelTitle.push(obj)
                   }
-                  if (param.modelTitleName.includes('油液') && k === 'oil') {
-                    obj.name = '油液'
+                  //油液
+                  if (
+                    param.modelTitleName.includes(
+                      this.$t('FdModel.locName5')
+                    ) &&
+                    k === 'oil'
+                  ) {
+                    obj.name = this.$t('FdModel.locName5') //'油液'
                     modelTitle.push(obj)
                   }
                 }
@@ -1303,25 +1335,25 @@ export default {
       let className = ''
       let name = model.name
       switch (name) {
-        case '传动链':
+        case this.$t('FdModel.locName1'): //传动链
           className = 'icon-chuandonglian'
           break
-        case '塔筒':
+        case this.$t('FdModel.locName2'): //'塔筒':
           className = 'icon-tatong_huaban1'
           break
-        case '螺栓':
+        case this.$t('FdModel.locName3'): //'螺栓':
           className = 'icon-luoshuan_huaban1'
           break
-        case '锚栓':
+        case this.$t('FdModel.locName6'): //'锚栓':
           className = 'icon-maoshuan_huaban1'
           break
-        case '叶轮':
+        case this.$t('FdModel.locName4'): //'叶轮':
           className = 'icon-yepian'
           break
-        case '基础':
+        case this.$t('FdModel.locName7'): //'基础':
           className = 'icon-jichu_huaban1'
           break
-        case '油液':
+        case this.$t('FdModel.locName5'): //'油液':
           className = 'icon-you'
           break
       }
@@ -1428,7 +1460,11 @@ export default {
                   }
                 }
               )
-              if (!flag|| param.modelTitleName.length != value[`${param.mac.mac_id}_${param.mac.ch_class}`].length) {
+              if (
+                !flag ||
+                param.modelTitleName.length !=
+                  value[`${param.mac.mac_id}_${param.mac.ch_class}`].length
+              ) {
                 this.getmodelTitle()
               }
             } else {
@@ -1524,10 +1560,10 @@ export default {
         .modelName {
           display: inline-block;
           font-size: 16px;
-          width: 48px;
-          margin-right: 30px;
-          text-align: justify;
-          text-align-last: justify;
+          width: 100px;
+          margin-right: 10px;
+          // text-align: justify;
+          // text-align-last: justify;
         }
         .health {
           font-size: 19px;
