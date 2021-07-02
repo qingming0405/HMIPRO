@@ -1013,7 +1013,7 @@ export default {
   margin-top: 55px;
   .gjBtn {
     position: absolute;
-    top: 63px;
+    top: 75px;
     right: 25px;
     .modelInfo-btn {
       margin-top: 10px;
@@ -1176,7 +1176,7 @@ export default {
   height: 100%;
   position: absolute;
   background-color: #092e55;
-  top: 55px;
+  top: 80px;
   img {
     width: 82%;
     position: absolute;

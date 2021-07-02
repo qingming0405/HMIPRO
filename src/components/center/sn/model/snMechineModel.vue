@@ -35,6 +35,8 @@
         > </canvas>
         <div v-show="param.version == 1 && !param.isShowBackground">
           <div v-for="item in param.points">
+            <!-- @mousemove.stop.prevent="setViewPosMsg(item, $event)"
+              @mouseleave="closeFloatingWindow(item,$event)" -->
             <div
               :style="item.boxStyle"
               class="pointBox"
@@ -42,8 +44,6 @@
               @click="pointClick(item)"
               @dblclick="toTrend(item)"
               @contextmenu.prevent="showContextmenu($event, item)"
-              @mousemove.stop.prevent="setViewPosMsg(item, $event)"
-              @mouseleave="closeFloatingWindow(item,$event)"
             >
               <p
                 class="font font-border"
@@ -89,7 +89,9 @@
             </li>
             <li>
               <!-- 报警特征值 -->
-              <div><!-- 预警门限 -->{{$t('SnModel.WarningThreshold')}}</div>
+              <div>
+                <!-- 预警门限 -->{{$t('SnModel.WarningThreshold')}}
+              </div>
               <div>：{{ alarmValue.warnThreshold }}</div>
             </li>
             <li>
@@ -104,7 +106,9 @@
       <!-- 智能诊断 -->
       <div class="diagnosis-box">
         <div class="diagnosis-title">
-          <p><!-- 设备诊断 -->{{$t('SnModel.EquipDiagnosis')}}</p>
+          <p>
+            <!-- 设备诊断 -->{{$t('SnModel.EquipDiagnosis')}}
+          </p>
         </div>
         <div class="diagnosis-content-box">
           <div
@@ -113,12 +117,16 @@
           >
             <div class="diagnosis">
               <i class="iconfont icon-shijian"></i>
-              <div class="title"><!-- 时间 -->{{$t('Common.time')}}</div>
+              <div class="title">
+                <!-- 时间 -->{{$t('Common.time')}}
+              </div>
               <div class="content">{{diagnosis.time}}</div>
             </div>
             <div class="diagnosis">
               <i class="iconfont icon-jieguo"></i>
-              <div class="title"><!-- 结果 -->{{$t('SnModel.Result')}}</div>
+              <div class="title">
+                <!-- 结果 -->{{$t('SnModel.Result')}}
+              </div>
               <div class="content">{{diagnosis.content}}</div>
             </div>
           </div>

@@ -10,7 +10,7 @@
         <div class="Model-header">{{$t('SnModel.titleBtn2')}} </div>
         <table class="model-table">
           <tbody class="my-table-tbody pro-scrollbar">
-            <tr v-for="(item,index) in param.oilData">
+            <tr v-for="(item,index) in param.oilData" class="model-tr" @click="toReal(item)">
               <td
                 class="model-td"
                 :title="item.pos_name"
@@ -38,7 +38,6 @@
               <!-- 详情 -->
               <td
                 class="model-td3"
-                @click="toReal(item)"
               >{{$t('Common.moreText')}}</td>
             </tr>
           </tbody>

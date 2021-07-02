@@ -7,7 +7,6 @@ const snGeneral = {
       general: {},
       requestData: {},
       currentKey: '',
-
     }
   },
   watch: {
@@ -143,8 +142,8 @@ const snGeneral = {
                   param.isShowBackground = false // 关闭默认图片
                   param.generalImg = res.folder.overview.bgurl
                   // param.generalImg =
-                  //   'http://10.100.50.81:8085' + res.folder.overview.bgurl //测试使用
-                    // 'http://10.100.0.101:8085' + res.folder.overview.bgurl
+                  //   'http://10.100.50.80:8085' + res.folder.overview.bgurl //测试使用
+                  // 'http://10.100.0.101:8085' + res.folder.overview.bgurl
                   let result = res.folder.overview
                   /* 处理背景图片 */
                   this.setBackgroundImg(result)
@@ -185,8 +184,8 @@ const snGeneral = {
       let background = new Image()
       background.src = param.generalImg
       background.onload = () => {
-        let PW = background.width
-        let PH = background.height
+        let PW = result.bg_width
+        let PH = result.bg_height
         /* 图片居中显示 */
         /* 比例 适应图片 ，现在要求16比9 */
         // let newPW = (BH / 9) * 16;

@@ -9,7 +9,7 @@ export default {
   data() {
     return {
       colorList: [
-        '#F1B232',
+        // '#F1B232',
         '#FF623B',
         '#EAD07B',
         '#E9EC46',

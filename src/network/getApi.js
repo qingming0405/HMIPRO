@@ -1,4 +1,5 @@
 import decoratorRouter from "./request.js";
+const INS = require("./base_url");
 function getApi (router) {
   let request = decoratorRouter(router);
   return {
@@ -429,7 +430,13 @@ function getApi (router) {
       return request.post("getPolarCoordinates", config);
     },
     queryAllAlarmPosition (config) {
-      return request.post("queryAllAlarmPosition", config);
+      if (INS.BASE_URL == "http://10.100.0.101:8085/HMIpro/" || INS.BASE_URL == "http://10.100.0.102:8085/HMIpro/" || INS.BASE_URL == "http://10.100.0.2:8085/HMIpro/") {
+        console.log('当前服务不允许请求queryAllAlarmPosition，会造成崩溃')
+        return
+      } else {
+        return request.post("queryAllAlarmPosition", config);
+      }
+
     },
     getReportTreeTemplateInfo (config) {
       return request.post("getReportTreeTemplateInfo", config);

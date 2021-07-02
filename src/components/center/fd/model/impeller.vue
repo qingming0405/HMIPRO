@@ -17,6 +17,7 @@
               <tr
                 v-for="(item,index) in param.impellerData"
                 v-show="item.list_name === param.impellerDataName[0]"
+                 class="model-tr" @click="toReal(item)"
               >
                 <td
                   class="model-td"
@@ -44,7 +45,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('Impeller.moreText')}}</td>
               </tr>
             </tbody>
@@ -60,6 +60,7 @@
               <tr
                 v-for="(item,index) in param.impellerData"
                 v-show="item.list_name === param.impellerDataName[1]"
+                 class="model-tr" @click="toReal(item)"
               >
                 <td
                   class="model-td"
@@ -87,7 +88,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('Impeller.moreText')}}</td>
               </tr>
             </tbody>
@@ -103,6 +103,7 @@
               <tr
                 v-for="(item,index) in param.impellerData"
                 v-show="item.list_name === param.impellerDataName[2]"
+                 class="model-tr" @click="toReal(item)"
               >
                 <td
                   class="model-td"
@@ -130,7 +131,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('Impeller.moreText')}}</td>
               </tr>
             </tbody>
@@ -147,6 +147,7 @@
               <tr
                 v-for="(item,index) in param.impellerData"
                 v-show="item.list_name == publicText"
+                 class="model-tr" @click="toReal(item)"
               >
                 <td
                   class="model-td"
@@ -174,7 +175,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('Impeller.moreText')}}</td>
               </tr>
             </tbody>

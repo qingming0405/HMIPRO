@@ -51,6 +51,9 @@ body {
 .model-table {
   height: calc(100% - 36px);
   font-size: 14px;
+  .model-tr {
+    cursor: pointer;
+  }
   .model-td {
     line-height: 32px;
     width: 45%;

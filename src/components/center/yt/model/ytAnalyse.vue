@@ -12,7 +12,7 @@
           <div class="Model-header">{{$t('YtAnalyse.tableTitle1')}}</div>
           <table class="model-table">
             <tbody class="my-table-tbody pro-scrollbar">
-              <tr v-for="(item, index) in param.ytData">
+              <tr v-for="(item, index) in param.ytData" class="model-tr" @click="toReal(item)">
                 <td
                   class="model-td"
                   :title="item.pos_name"
@@ -40,7 +40,6 @@
                 </td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('YtAnalyse.moreText')}}</td>
               </tr>
             </tbody>

@@ -203,7 +203,7 @@ export const en = {
     SpeedDC: 'Speed direct flow',//转速直流量
     ProcessValue: 'Process value',//过程量值
     EffectiveValue: 'Effective value',//有效值
-    ppValue: 'peak-to-peak value',//峰峰值
+    ppValue: 'peak value',//峰峰值
     EnergyEffecValue: 'Energy effective value',//能量有效值
     offsetVoltage: 'offset voltage',//偏置电压
     crestFactor: 'crest factor',//峰值因数
@@ -211,10 +211,10 @@ export const en = {
     skewness: 'skewness',//歪度
     SVvalue: 'impactValue',//SV值
     frequencyRange: 'frequency range',//频段
-    temperature: 'temperature',//温度
-    temperatureRise: 'temperature rise',//温升
-    envelopeDemodulationValue: 'envelope demodulation value',//包络解调值
-    EnvelopeEigenvalues: 'Envelope eigenvalues',//包络特征值
+    temperature: 'temp',//温度
+    temperatureRise: 'temp rise',//温升
+    envelopeDemodulationValue: 'envelope demodulation',//包络解调值
+    EnvelopeEigenvalues: 'envelop feature',//包络特征值
     ExternalRingOfCage: 'External ring of cage',//保持架对外环
     cageToInnerRing: 'cage to inner ring',//保持架对内环
     OuterRingInnerRaceway: 'Outer ring inner raceway',//外环内滚道
@@ -224,9 +224,9 @@ export const en = {
     Tread: 'Tread',//踏面
     AdjacentShaftGear: 'Adjacent shaft gear',//邻轴齿轮
     MainShaftGear: 'Main shaft gear',//本轴齿轮
-    DigitalValue: 'Digital value',//数字量值
-    temperatureValue: 'temperature',//温度值
-    ProcessQuantity: 'Process quantity',//工艺量
+    DigitalValue: 'Digital',//数字量值
+    temperatureValue: 'temp',//温度值
+    ProcessQuantity: 'technique',//工艺量
     average: 'average',//平均值
     LastStationName: 'Last station name',//"上一站名称"
     nextStationName: 'Name of the next station',//下一站名称

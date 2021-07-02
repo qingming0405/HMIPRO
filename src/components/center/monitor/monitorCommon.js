@@ -155,43 +155,13 @@ export default {
         currentData.empty.isShow = false;
         data.forEach((item, i) => {
           let eigenvalue = [];
-          for (let macId in this.requestData.positions) {
-            let mac = this.requestData.positions[macId]
-            if (t_root == 1 || t_root == 2 || t_root == -1) {
-              for (let pumpId in mac) {
-                let pump = mac[pumpId]
-                for (let val of pump) {
-                  if (val.id == item.pos_id && val.type == item.pos_type) {
-                    let pos_loc;
-                    if (item.pos_loc === undefined) {
-                      pos_loc = 1;
-                    } else {
-                      pos_loc = item.pos_loc;
-                    }
-                    let headList = setHead(
-                      t_root,
-                      item.dgm_type,
-                      item.pos_type,
-                      pos_loc
-                    );
-                    headList.map(value => {
-                      val.fileds.map(v => {
-                        if (value.filed === v) {
-                          let name = value.val;
-                          eigenvalue.push({
-                            name,
-                            filed: value.filed,
-                            code: value.code,
-                            pos: item
-                          });
-                        }
-                      });
-                    });
-                  }
-                }
-              }
-            } else {
-              for (let val of mac) {
+          // for (let macId in this.requestData.positions) {
+          // let mac = this.requestData.positions[macId]
+          let mac = this.requestData.positions[item.mac_id]
+          if (t_root == 1 || t_root == 2 || t_root == -1) {
+            for (let pumpId in mac) {
+              let pump = mac[pumpId]
+              for (let val of pump) {
                 if (val.id == item.pos_id && val.type == item.pos_type) {
                   let pos_loc;
                   if (item.pos_loc === undefined) {
@@ -221,7 +191,38 @@ export default {
                 }
               }
             }
+          } else {
+            for (let val of mac) {
+              if (val.id == item.pos_id && val.type == item.pos_type) {
+                let pos_loc;
+                if (item.pos_loc === undefined) {
+                  pos_loc = 1;
+                } else {
+                  pos_loc = item.pos_loc;
+                }
+                let headList = setHead(
+                  t_root,
+                  item.dgm_type,
+                  item.pos_type,
+                  pos_loc
+                );
+                headList.map(value => {
+                  val.fileds.map(v => {
+                    if (value.filed === v) {
+                      let name = value.val;
+                      eigenvalue.push({
+                        name,
+                        filed: value.filed,
+                        code: value.code,
+                        pos: item
+                      });
+                    }
+                  });
+                });
+              }
+            }
           }
+          // }
 
           let unitNum = item.units.unitNum;
           unitNum === null ? (unitNum = 4) : null;

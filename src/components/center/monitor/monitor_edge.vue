@@ -159,8 +159,12 @@
       </div>
     </div>
     <div class="search-data">
-      <button @click="download"><!-- 数据导出 -->{{$t('icon.dataExport')}}</button>
-      <button @click="dataRetrieval"><!-- 数据检索 -->{{$t('Common.retrieval')}}</button>
+      <button @click="download">
+        <!-- 数据导出 -->{{$t('icon.dataExport')}}
+      </button>
+      <button @click="dataRetrieval">
+        <!-- 数据检索 -->{{$t('Common.retrieval')}}
+      </button>
     </div>
   </div>
 </template>
@@ -285,6 +289,7 @@ export default {
                 text-align: center;
                 align-items: center;
                 justify-content: center;
+                overflow: hidden;
                 &:nth-child(1) {
                   width: 200px;
                   min-width: 200px;

@@ -11,7 +11,7 @@
           <div class="Model-header">{{$t('DriveChain.mainBearing')}}</div>
           <table class="model-table">
             <tbody class="my-table-tbody pro-scrollbar">
-              <tr v-for="(item,index) in param.mainbearData.mainBearing">
+              <tr v-for="(item,index) in param.mainbearData.mainBearing" class="model-tr" @click="toReal(item)">
                 <td
                   class="model-td"
                   :title="item.pos_name"
@@ -38,7 +38,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('DriveChain.moreText')}}</td>
               </tr>
             </tbody>
@@ -86,7 +85,7 @@
           <div class="Model-header">{{$t('DriveChain.gearBox')}}</div>
           <table class="model-table">
             <tbody class="my-table-tbody pro-scrollbar">
-              <tr v-for="(item,index) in param.mainbearData.gearBox">
+              <tr v-for="(item,index) in param.mainbearData.gearBox" class="model-tr" @click="toReal(item)">
                 <td
                   class="model-td"
                   :title="item.pos_name"
@@ -113,7 +112,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('DriveChain.moreText')}}</td>
               </tr>
             </tbody>
@@ -123,7 +121,7 @@
           <div class="Model-header">{{$t('DriveChain.generator')}}</div>
           <table class="model-table">
             <tbody class="my-table-tbody pro-scrollbar">
-              <tr v-for="(item,index) in param.mainbearData.alternator">
+              <tr v-for="(item,index) in param.mainbearData.alternator" class="model-tr" @click="toReal(item)">
                 <td
                   class="model-td"
                   :title="item.pos_name"
@@ -150,7 +148,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('DriveChain.moreText')}}</td>
               </tr>
             </tbody>
@@ -160,7 +157,7 @@
           <div class="Model-header">{{$t('DriveChain.public')}}</div>
           <table class="model-table">
             <tbody class="my-table-tbody pro-scrollbar">
-              <tr v-for="(item,index) in param.mainbearData.public">
+              <tr v-for="(item,index) in param.mainbearData.public" class="model-tr" @click="toReal(item)">
                 <td
                   class="model-td"
                   :title="item.pos_name"
@@ -187,7 +184,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('DriveChain.moreText')}}</td>
               </tr>
             </tbody>

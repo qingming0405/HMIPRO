@@ -10,7 +10,7 @@
         <div class="Model-header">{{$t('Oil.public')}}</div>
         <table class="model-table">
           <tbody class="my-table-tbody pro-scrollbar">
-            <tr v-for="(item,index) in param.oilData">
+            <tr v-for="(item,index) in param.oilData" class="model-tr" @click="toReal(item)">
               <td
                 class="model-td"
                 :title="item.pos_name"
@@ -37,7 +37,6 @@
               <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
               <td
                 class="model-td3"
-                @click="toReal(item)"
               >{{$t('Oil.moreText')}}</td>
             </tr>
           </tbody>

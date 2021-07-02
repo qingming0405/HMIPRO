@@ -48,12 +48,11 @@
             <p>{{$t('SnFocus.macSpeed')}}</p>
             <p>{{ item.speed }}</p>
             <!-- 报警预警测点显示 -->
-            <div class="status-content">
+            <!-- <div class="status-content">
               <div
                 class="status-content-item"
                 :title="$t('SnFocus.Alarm')+$t('SnFocus.PosNumber')+'：'+item.alarmPositions"
               >
-                <!-- class="pos-state state-alarm" -->
                 <div>{{$t('SnFocus.Alarm')}}</div>
                 <p> {{item.alarmPositions}} </p>
               </div>
@@ -61,7 +60,6 @@
                 class="status-content-item"
                 :title="$t('SnFocus.warn')+$t('SnFocus.PosNumber')+'：'+item.warningPositions"
               >
-                <!-- 预警 -->
                 <div>{{$t('SnFocus.warn')}}</div>
                 <p>
                   {{item.warningPositions}}
@@ -71,13 +69,12 @@
                 class="status-content-item"
                 :title="$t('SnFocus.Normal')+$t('SnFocus.PosNumber')+'：'+item.normalityPositions"
               >
-                <!-- 正常 -->
                 <div>{{$t('SnFocus.Normal')}}</div>
                 <p>
                   {{item.normalityPositions}}
                 </p>
               </div>
-            </div>
+            </div> -->
                       
           </div>
             <div class="text">

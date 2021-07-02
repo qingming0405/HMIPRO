@@ -20,16 +20,6 @@ function decoratorRouter (router, request) {
         version: sessionStorage.getItem("version")
       } //'version'表示接口版本号
     });
-    instance.interceptors.request.use(config => {
-      /* 波形图连续 请求，需要取消请求 */
-      if (config.url == "queryAllAlarmPosition" && INS.BASE_URL == "http://10.100.0.101:8085/HMIpro/") {
-        removePending(config);
-        config.cancelToken = new axios.CancelToken(c => {
-          pending[config.url] = c;
-        });
-      }
-      return config;
-    });
 
     instance.interceptors.request.use(config => {
       /* 波形图连续 请求，需要取消请求 */

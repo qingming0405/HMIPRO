@@ -10,7 +10,7 @@
         <div class="Model-header">{{$t('Basics.base')}}</div>
         <table class="model-table">
           <tbody class="my-table-tbody pro-scrollbar">
-            <tr v-for="(item,index) in param.basicsData">
+            <tr v-for="(item,index) in param.basicsData" class="model-tr" @click="toReal(item)">
               <td
                 class="model-td"
                 :title="item.pos_name"
@@ -37,7 +37,6 @@
               <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
               <td
                 class="model-td3"
-                @click="toReal(item)"
               >{{$t('Basics.moreText')}}</td>
             </tr>
           </tbody>

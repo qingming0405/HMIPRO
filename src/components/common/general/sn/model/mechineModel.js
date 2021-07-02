@@ -168,7 +168,7 @@ const mechineModel = {
                           eigen: eigen.val,
                           warnThreshold,
                           alarmThreshold,
-                          value: item.realData ? item.realData[eigen.filed] == null || item.realData[eigen.filed] == undefined ? '无实时数据' : item.realData[eigen.filed].toFixed(3) : '无实时数据'
+                          value: item.realData ? item.realData[eigen.filed] == null || item.realData[eigen.filed] == undefined ? this.$t('Common.noRealData') : item.realData[eigen.filed].toFixed(3) : this.$t('Common.noRealData')//无实时数据
                         })
                       }
                     })
@@ -220,9 +220,9 @@ const mechineModel = {
             }
             if (param.imgSrc != res.overview.bgurl) {
             // if (param.imgSrc != 'http://10.100.0.101:8085' + res.overview.bgurl) {
-              // if (param.imgSrc != 'http://10.100.50.36:8085' + res.overview.bgurl) {
+            // if (param.imgSrc != 'http://10.100.50.203:8085' + res.overview.bgurl) {
               param.imgSrc = res.overview.bgurl
-              // param.imgSrc = 'http://10.100.0.101:8085' + res.overview.bgurl
+              // param.imgSrc = 'http://10.100.50.203:8085' + res.overview.bgurl
               // param.imgSrc = 'http://10.100.0.101:8085' + res.overview.bgurl
               this.drawPicture(res.overview)
             } else {
@@ -256,7 +256,7 @@ const mechineModel = {
       return color
     },
     // 画
-    drawPicture () {
+    drawPicture (res) {
       const param = this.snMechineModel[this.currentKey]
       let canvas = document.getElementsByClassName(`canvas${this.currentKey}`)[0]
       if (canvas) {
@@ -275,8 +275,8 @@ const mechineModel = {
           scale = 1
         }
         background.onload = () => {
-          const PW = background.width
-          const PH = background.height
+          const PW = res.bg_width
+          const PH = res.bg_height
           /* 默认图片的宽度是总宽度的80% */
           // 判断图片的长宽比,高或者宽是背景的80%
           if (param.version == 1) {
@@ -581,7 +581,8 @@ const mechineModel = {
       }
     },
     pointClick (item) {
-      this.points.forEach(el => {
+      const param = this.snMechineModel[this.currentKey]
+      param.points.forEach(el => {
         el.isChoose = false
       })
       item.isChoose = true

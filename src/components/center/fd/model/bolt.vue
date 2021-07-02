@@ -21,6 +21,7 @@
                 <tr
                   v-for="(item,idx) in param.flangeData"
                   v-if="item.list_name === el.byName"
+                   class="model-tr" @click="toReal(item)"
                 >
                   <td
                     class="model-td"
@@ -52,7 +53,6 @@
                   <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                   <td
                     class="model-td3"
-                    @click="toReal(item)"
                   >{{$t('Bolt.moreText')}}</td>
                 </tr>
               </tbody>

@@ -944,7 +944,7 @@
                   dy <= this._scope.r.b + 40
                 ) {
                   // 仅缩放y轴
-                  let valY = dy * (this._scope.v.y.end - this._scope.v.y.start) / (this._scope.r.b - opt.grid.top)
+                  let valY = this._scope.v.y.end - (dy - opt.grid.top) * (this._scope.v.y.end - this._scope.v.y.start) / (this._scope.r.b - opt.grid.top)
                   multiple = {
                     start: (valY - this._scope.v.y.start) * 0.1,
                     end: (this._scope.v.y.end - valY) * 0.1
@@ -2704,7 +2704,7 @@
                   circle.y.push(valY * params.y.k + params.y.b);
                   if (valueSpeed && valueSpeed[j] !== undefined) {
                     str.push(
-                      `${posName[i]}：${vY}${unit[i]}/转速：${valueSpeed[j]}rpm`
+                      `${posName[i]}：${vY}${unit[i]}/${localStorage.getItem('language') == 'en' ? 'Speed' : '转速'}：${valueSpeed[j] == null || valueSpeed[j] == undefined || valueSpeed[j] >= 100000000 ? (localStorage.getItem('language') == 'en' ? 'No Data' : '无数据') : valueSpeed[j] + 'rpm'}`
                     );
                   } else {
                     str.push(`${posName[i]}：${vY}${unit[i]}`);
@@ -2968,9 +2968,8 @@
                 // 绘制转速
                 if (valueSpeed && typeof valueSpeed !== 'undefined') {
                   if (valueSpeed >= 10 ** 8) {
-                    valueSpeed = '无数据'
-                  }
-                  else {
+                    valueSpeed = localStorage.getItem('language') == 'en' ? 'No Data' : '无数据'
+                  } else {
                     valueSpeed = this.round(valueSpeed, 4) + 'rpm'
                   }
                   let speedCtx = this._drawTools.ctx.speed
@@ -4354,31 +4353,31 @@
                   font = {
                     x: optX.data[flag.line.key] * xk + xb,
                     time:
-                      "时间：" + this.round(optX.data[flag.line.key]) + optX.name,
+                      (localStorage.getItem('language') == 'en' ? 'Time:' : "时间：") + this.round(optX.data[flag.line.key]) + optX.name,
                     timeDif:
-                      "时间差：" +
-                      Math.round(
-                        Math.abs(flag.line.val - optX.data[flag.last_xWave.key]) *
-                        10000
-                      ) /
-                      10000 +
-                      optX.name,
+                      (localStorage.getItem('language') == 'en' ? 'delta-t:' : "时间差：") +
+                        Math.round(
+                          Math.abs(flag.line.val - optX.data[flag.last_xWave.key]) *
+                          10000
+                        ) /
+                        10000 +
+                        optX.name,
                     subFreq:
-                      "频率差：" +
-                      Math.round(
-                        (1 / Math.abs(flag.last_xWave.val - flag.line.val)) *
-                        10000
-                      ) /
-                      10000 +
-                      "Hz",
+                      (localStorage.getItem('language') == 'en' ? 'Delta F:' : "频率差：") +
+                        Math.round(
+                          (1 / Math.abs(flag.last_xWave.val - flag.line.val)) *
+                          10000
+                        ) /
+                        10000 +
+                        "Hz",
                     amplitude:
-                      "幅值：" +
-                      Math.round(optY.data[flag.line.key] * 10000) / 10000 +
-                      optY.name
+                      (localStorage.getItem('language') == 'en' ? 'amplitude:' : "幅值：") +
+                        Math.round(optY.data[flag.line.key] * 10000) / 10000 +
+                        optY.name
                   };
                   if (flag.last_xWave.key === -1)
                     font.timeDif =
-                      "时间差：" +
+                      (localStorage.getItem('language') == 'en' ? 'delta-t:' : "时间差：") +
                       Math.round(Math.abs(flag.line.val - optX.data[0]) * 10000) /
                       10000 +
                       optX.name;
@@ -4387,11 +4386,11 @@
                   font = {
                     x: optX.data[flag.firstCommon.idx][flag.line.key] * xk + xb,
                     time:
-                      "时间：" +
+                      localStorage.getItem('language') == 'en' ? 'Time:' : "时间：" +
                       this.round(optX.data[flag.firstCommon.idx][flag.line.key]) +
                       optX.name[flag.firstCommon.idx],
                     timeDif:
-                      "时间差：" +
+                      localStorage.getItem('language') == 'en' ? 'delta-t:' : "时间差：" +
                       Math.round(
                         Math.abs(
                           flag.line.val -
@@ -4401,7 +4400,7 @@
                       10000 +
                       optX.name,
                     subFreq:
-                      "频率差：" +
+                      localStorage.getItem('language') == 'en' ? 'Delta F:' :"频率差：" +
                       Math.round(
                         (1 / Math.abs(flag.last_xWave.val - flag.line.val)) *
                         10000
@@ -4418,7 +4417,7 @@
                       const valY = valueY[j];
                       if (j == flag.line.key && valX == flag.line.val) {
                         font.amplitude.push([
-                          `幅值${font.amplitude.length}：${this.round(
+                          `${localStorage.getItem('language') == 'en' ? 'amplitude' : "幅值"}${font.amplitude.length}：${this.round(
                             (valY * 10000) / 10000
                           ) + optY.name}`
                         ]);
@@ -4427,7 +4426,7 @@
                   }
                   if (flag.last_xWave.key === -1)
                     font.timeDif =
-                      "时间差：" +
+                      localStorage.getItem('language') == 'en' ? 'delta-t:' : "时间差：" +
                       Math.round(
                         Math.abs(
                           flag.line.val - optX.data[flag.firstCommon.idx][0]
@@ -4491,22 +4490,22 @@
                 if (flag.line.idx == undefined) {
                   font = {
                     x: flag.line.val * xk + xb,
-                    time: "点序：" + this.round(flag.line.val),
+                    time: localStorage.getItem('language') == 'en' ?'order:':"点序：" + this.round(flag.line.val),
                     timeDif:
-                      "点数差：" +
+                      localStorage.getItem('language') == 'en' ? 'order:' :"点数差：" +
                       this.round(flag.line.val - optX.data[flag.last_xWave.key]),
-                    amplitude: "波形值：" + this.round(optY.data[flag.line.key])
+                    amplitude: localStorage.getItem('language') == 'en' ? 'value:' :"波形值：" + this.round(optY.data[flag.line.key])
                   };
                   if (flag.last_xWave.key === -1)
                     font.timeDif =
-                      "点数差：" + this.round(flag.line.val - optX.data[0]);
+                      localStorage.getItem('language') == 'en' ? 'order:' :"点数差：" + this.round(flag.line.val - optX.data[0]);
                 } else {
                   if (flag.last_xWave.idx == undefined) flag.last_xWave.idx = 0;
                   font = {
                     x: flag.line.val * xk + xb,
-                    time: "点序：" + this.round(flag.line.val),
+                    time: localStorage.getItem('language') == 'en' ? 'order：' :"点序：" + this.round(flag.line.val),
                     timeDif:
-                      "点数差：" +
+                      localStorage.getItem('language') == 'en' ? 'order：' :"点数差：" +
                       this.round(
                         flag.line.val -
                         optX.data[flag.firstCommon.idx][flag.last_xWave.key]
@@ -4521,21 +4520,21 @@
                       const valY = valueY[j];
                       if (j == flag.line.key && valX == flag.line.val) {
                         font.amplitude.push([
-                          `波形值${font.amplitude.length}：${this.round(valY)}`
+                          `${localStorage.getItem('language') == 'en' ? 'value:' :'波形值'}${font.amplitude.length}：${this.round(valY)}`
                         ]);
                       }
                     }
                   }
                   if (flag.last_xWave.key === -1)
                     font.timeDif =
-                      "点数差：" +
+                      localStorage.getItem('language') == 'en' ? 'order:' :"点数差：" +
                       this.round(
                         flag.line.val - optX.data[flag.firstCommon.idx][0]
                       );
                 }
                 if (flag.last_xWave.key === -1)
                   font.timeDif =
-                    "点数差：" +
+                    localStorage.getItem('language') == 'en' ? 'order:' :"点数差：" +
                     this.round(
                       flag.line.val - optX.data[flag.firstCommon.idx][0]
                     );
@@ -4746,8 +4745,8 @@
             }
             let font = {
               x: xArr[flagLine.key] * xk + xb,
-              amplitude: `幅值：${this.round(yArr[flagLine.key])}`,
-              subFreq: `差频：${this.round(
+              amplitude: `${localStorage.getItem('language') == 'en' ? 'amplitude' : "幅值"}：${this.round(yArr[flagLine.key])}`,
+              subFreq: `${localStorage.getItem('language') == 'en' ? ' beat' : "差频"}：${this.round(
                 flagLine.val - xArr[flag.arr_B[0]]
               )}${unit}`
             };
@@ -4760,15 +4759,15 @@
             if (this.getDataType(unit) === "Array") {
               font = {
                 x: xArr[flagLine.key] * xk + xb,
-                freq: `频率：${this.round(flagLine.val)}${unit[flagLine.idx]}`,
-                subFreq: `差频：${this.round(
+                freq: `${localStorage.getItem('language') == 'en' ? ' frequency' : "频率"}：${this.round(flagLine.val)}${unit[flagLine.idx]}`,
+                subFreq: `${localStorage.getItem('language') == 'en' ? ' beat' : "差频"}：${this.round(
                   flagLine.val - xArr[flag.arr_B[0]]
                 )}${unit[flagLine.idx]}`
               };
               for (let i = 0, l = optY.data.length; i < l; i++) {
                 const value = optY.data[i];
                 if (value[flagLine.key]) {
-                  font[`amplitude${i + 1}`] = `幅值：${this.round(
+                  font[`amplitude${i + 1}`] = `${localStorage.getItem('language') == 'en' ? 'amplitude' : "幅值"}：${this.round(
                     value[flagLine.key]
                   )}`;
                   index++;
@@ -4776,13 +4775,13 @@
               }
               height = (index + 3) * 15;
             } else if (unit === "NX") {
-              font.freq = `频率：${this.round(
+              font.freq = `${localStorage.getItem('language') == 'en' ? ' frequency' : "频率"}：${this.round(
                 (flagLine.val * opt.series.dataMsg.rotateSpeed) / 60
               )}Hz`;
-              font.nxFreq = `倍频：${this.round(flagLine.val)}${unit}`;
+              font.nxFreq = `${localStorage.getItem('language') == 'en' ? 'SHG' : "倍频"}：${this.round(flagLine.val)}${unit}`;
             } else {
-              font.freq = `频率：${this.round(flagLine.val)}${unit}`;
-              font.nxFreq = `倍频：${this.round(
+              font.freq = `${localStorage.getItem('language') == 'en' ? ' frequency' : "频率"}：${this.round(flagLine.val)}${unit}`;
+              font.nxFreq = `${localStorage.getItem('language') == 'en' ? 'SHG' : "倍频"}：${this.round(
                 (flagLine.val * 60) / opt.series.dataMsg.rotateSpeed
               )}NX`;
             }
@@ -5281,9 +5280,9 @@
             y: null
           };
           const freqObj = {
-            Hz: "频率：",
-            NX: "倍频：",
-            ms: "时间："
+            Hz: `${localStorage.getItem('language') == 'en' ? ' frequency' : "频率"}：`,
+            NX: `${localStorage.getItem('language') == 'en' ? 'SHG' : "倍频"}：`,
+            ms: `${localStorage.getItem('language') == 'en' ? 'Time' : "时间"}：`
           };
           let freq = freqObj[opt.x.name];
           if (Array.isArray(xArr[0])) {
@@ -5336,7 +5335,7 @@
               for (let j = 0; j < length; j++) {
                 const value = arr[j];
                 foreCtx.fillText(
-                  "幅值：" + value.val,
+                  `${localStorage.getItem('language') == 'en' ? 'amplitude' : "幅值"}：` + value.val,
                   _flag.addPeakPos[i].x + 5,
                   _flag.addPeakPos[i].y + 23 + value.dy
                 );
@@ -5374,7 +5373,7 @@
                 _flag.addPeakPos[i].y + 8
               );
               foreCtx.fillText(
-                "幅值：" + opt.y.data[_flag.addPeak[i]].toFixed(4) + opt.y.name,
+                `${localStorage.getItem('language') == 'en' ? 'amplitude' : "幅值"}：` + opt.y.data[_flag.addPeak[i]].toFixed(4) + opt.y.name,
                 _flag.addPeakPos[i].x + 5,
                 _flag.addPeakPos[i].y + 23
               );

@@ -14,6 +14,7 @@
               <tr
                 v-for="(item,index) in param.towerDrumData"
                 v-show="item.list_name === param.towerDrumDataName[0]"
+                 class="model-tr" @click="toReal(item)"
               >
                 <td
                   class="model-td"
@@ -41,7 +42,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('Common.moreText')}}</td>
               </tr>
             </tbody>
@@ -54,6 +54,7 @@
               <tr
                 v-for="(item,index) in param.towerDrumData"
                 v-show="item.list_name === param.towerDrumDataName[1]"
+                 class="model-tr" @click="toReal(item)"
               >
                 <td
                   class="model-td"
@@ -81,7 +82,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('Common.moreText')}}</td>
               </tr>
             </tbody>
@@ -94,6 +94,7 @@
               <tr
                 v-for="(item,index) in param.towerDrumData"
                 v-show="item.list_name === param.towerDrumDataName[2]"
+                 class="model-tr" @click="toReal(item)"
               >
                 <td
                   class="model-td"
@@ -121,7 +122,6 @@
                 <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
                 <td
                   class="model-td3"
-                  @click="toReal(item)"
                 >{{$t('Common.moreText')}}</td>
               </tr>
             </tbody>

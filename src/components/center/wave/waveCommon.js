@@ -1329,6 +1329,7 @@ export default {
       let param = this.paramsData[this.currentKey]
       const className = "wave-spectrum-chart-1";
       const index = this.currentIndex;
+      const trend = this.$refs[`trend${this.currentKey}`][0]
       let elem = this.$refs.waveCharts[index];
       if (param.isTrendClose) {
         if (hasClass(elem, className)) {
@@ -1349,6 +1350,7 @@ export default {
         if (hasClass(elem, 'wave-spectrum-chart-4')) {
           removeClass(elem, 'wave-spectrum-chart-4');
         }
+
       }
       this.paramsData[this.currentKey].structure = Math.abs(
         --this.paramsData[this.currentKey].structure
@@ -2554,6 +2556,10 @@ export default {
         }
         for (let i = 0, l = wave.length; i < l; i++) {
           wave[i].style = null;
+        }
+        // 若关闭趋势图开启则
+        if (params.isTrendClose) {
+          wave[3].style.display = "none";
         }
         chart.style = null;
         this.$store.commit("changeDomStructure");

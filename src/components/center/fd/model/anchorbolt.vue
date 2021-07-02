@@ -11,7 +11,7 @@
         <div class="Model-header">{{$t('Anchorbolt.base')}}</div>
         <table class="model-table">
           <tbody class="my-table-tbody pro-scrollbar">
-            <tr v-for="(item,idx) in param.flangeData">
+            <tr v-for="(item,idx) in param.flangeData" class="model-tr" @click="toReal(item)">
               <td
                 class="model-td"
                 :title="item.pos_name"
@@ -42,7 +42,6 @@
               <td v-else>{{item.eigenvalue.name}}:{{item.eigenvalue.value}}</td>
               <td
                 class="model-td3"
-                @click="toReal(item)"
               >{{$t('Anchorbolt.moreText')}}</td>
             </tr>
           </tbody>

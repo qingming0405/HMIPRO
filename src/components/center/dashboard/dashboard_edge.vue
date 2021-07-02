@@ -88,7 +88,7 @@ export default {
             isShow: true,
             empty: {
               isShow: true,
-              text: this.$t('Common.noRealData')//'无实时数据',
+              text: this.$t('Common.noRealData'), //'无实时数据',
             },
             pos: cloneObj(pos, true),
           })
@@ -166,7 +166,10 @@ export default {
             dashBoard.speed = res.speed.tendencyList
             this.setSpeedOption(dashBoard)
             /* 设置仪表盘 */
-            this.setDashboardOption(dashBoard)
+            this.setDashboardOption(
+              dashBoard,
+              res.speed.tendencyList[res.speed.tendencyList.length - 1].speed
+            )
           }
           this.firstGetRealData(dashBoard)
           /* 请求实时数据 */
@@ -192,7 +195,8 @@ export default {
         startTime: new Date().valueOf() - 1000 * 60 * 60 * 24, //默认获取一天前的历史数据
         endTime: new Date().valueOf(),
       }
-      requestData.key[`${dashBoard.pos.t_root}_${dashBoard.key}`] = time1 >= time2 ? time1: time2
+      requestData.key[`${dashBoard.pos.t_root}_${dashBoard.key}`] =
+        time1 >= time2 ? time1 : time2
       this.$getApi.getSpeedDangerRange(requestData).then((res) => {
         if (res) {
           if (res.realInfo) {
@@ -213,7 +217,7 @@ export default {
       const params = this.dashBoardData[this.currentKey]
       let time1 = params.rms[params.rms.length - 1].saveTime
       let time2 = params.speed[params.rms.length - 1].saveTime
-      this.updateTime = time1 >= time2 ? time1: time2
+      this.updateTime = time1 >= time2 ? time1 : time2
       dashBoard.timer = setInterval(() => {
         let requestData = {
           value1: 'speed', //测点转速值
@@ -226,7 +230,8 @@ export default {
           key: {},
           time: this.updateTime,
         }
-        requestData.key[`${dashBoard.pos.t_root}_${dashBoard.key}`] = this.updateTime
+        requestData.key[`${dashBoard.pos.t_root}_${dashBoard.key}`] =
+          this.updateTime
         /* 发送网络请求 */
         this.$getApi.getSpeedDangerRange(requestData).then((res) => {
           if (res) {
@@ -287,7 +292,7 @@ export default {
           },
         },
         yAxis: {
-          name: this.$t('eigenvalue.speed')+'(rpm)',//转速
+          name: this.$t('eigenvalue.speed') + '(rpm)', //转速
           type: 'value',
           /* 坐标线 */
           axisLine: {
@@ -327,7 +332,9 @@ export default {
         tooltip: {
           trigger: 'axis', //坐标轴触发竖向指示线
           formatter: (params) => {
-            return `${this.$t('Common.time')}：${params[0].name}</br>${this.$t('eigenvalue.speed')}：${params[0].value}`//时间 转速
+            return `${this.$t('Common.time')}：${params[0].name}</br>${this.$t(
+              'eigenvalue.speed'
+            )}：${params[0].value}` //时间 转速
           },
         },
         /* 标题 */
@@ -393,7 +400,7 @@ export default {
           },
         },
         yAxis: {
-          name: this.$t('eigenvalue.Overturn')+'(g)',//倾覆值
+          name: this.$t('eigenvalue.Overturn') + '(g)', //倾覆值
           type: 'value',
           /* 坐标线 */
           axisLine: {
@@ -433,7 +440,9 @@ export default {
         tooltip: {
           trigger: 'axis', //坐标轴触发竖向指示线
           formatter: (params) => {
-            return `${this.$t('Common.time')}：${params[0].name}</br>${this.$t('eigenvalue.Overturn')}：${params[0].value}`//时间 倾覆值
+            return `${this.$t('Common.time')}：${params[0].name}</br>${this.$t(
+              'eigenvalue.Overturn'
+            )}：${params[0].value}` //时间 倾覆值
           },
         },
         /* 标题 */
@@ -504,7 +513,7 @@ export default {
           show: true,
           top: 10,
           left: 10,
-          text: `${this.$t('dashboard.curTime')}： ${time}`,//当前时间
+          text: `${this.$t('dashboard.curTime')}： ${time}`, //当前时间
           textStyle: {
             // 其余属性默认使用全局文本样式，详见TEXTSTYLE
             fontWeight: 'normal',
@@ -517,11 +526,11 @@ export default {
 
         series: [
           {
-            name: this.$t('eigenvalue.speed'),//转速
+            name: this.$t('eigenvalue.speed'), //转速
             type: 'gauge',
             min: 0,
-            max: max,
-            splitNumber: 8,
+            // max: max,
+            // splitNumber: 8,
             radius: '70%', //仪表盘的大小
             // startAngle: 180, //开始弧度
             // endAngle: 0,

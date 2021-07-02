@@ -6,7 +6,7 @@ const MyMixins = {
   data () {
     const vm = window.vm;
     return {
-      vm:vm,
+      vm: vm,
       isShow: true /* 控制显隐 */,
       resolve: "",
       reject: "",
@@ -21,18 +21,18 @@ const MyMixins = {
       endTime: null /* 结束时间工具实例 */,
       dateOption: [
         /* 时间类型 */
-        { type: "day", val: vm.$t('Common.previousDay')},//"前一天" },
-        { type: "week", val: vm.$t('Common.previousWeek')},//"前一周" },
-        { type: "month", val: vm.$t('Common.previousMonth')},//"前一月" },
-        { type: "quarter", val: vm.$t('Common.PreviousQuarter')},//"前一季" },
-        { type: "year", val: vm.$t('Common.pastYear')},//"前一年" }
+        { type: "day", val: vm.$t('Common.previousDay') },//"前一天" },
+        { type: "week", val: vm.$t('Common.previousWeek') },//"前一周" },
+        { type: "month", val: vm.$t('Common.previousMonth') },//"前一月" },
+        { type: "quarter", val: vm.$t('Common.PreviousQuarter') },//"前一季" },
+        { type: "year", val: vm.$t('Common.pastYear') },//"前一年" }
       ],
       densityData: [
         /* 查询密度 */
-        { type: 2, val: vm.$t('Common.allText')},//"全部" },
-        { type: 4, val: vm.$t('Common.highDensity')},//"高密度" },
-        { type: 8, val: vm.$t('Common.mediumDensity')},//"中密度" },
-        { type: 16, val: vm.$t('Common.lowDensity')},// "低密度" }
+        { type: 2, val: vm.$t('Common.allText') },//"全部" },
+        { type: 4, val: vm.$t('Common.highDensity') },//"高密度" },
+        { type: 8, val: vm.$t('Common.mediumDensity') },//"中密度" },
+        { type: 16, val: vm.$t('Common.lowDensity') },// "低密度" }
         // { type: 32, val: '报警数据' },
       ],
       density: {
@@ -98,6 +98,36 @@ const MyMixins = {
         val: time.val
       };
       this.density = params.density;
+      /* 波磨数据不存在密度筛选（除轨道波磨频谱瀑布） */
+      let choosePage = this.$store.state.chooseTitle
+      let key = choosePage.key
+      if (key) {
+        let [, choosetype, , , posType] = key.split('_')
+        if (choosetype == 'pos') {
+          if (posType == 17 && choosePage.name != 'tmswave3d') {
+            this.density = {
+              /* 选中查询密度型 */
+              type: 2,
+              val: vm.$t('Common.allText')//全部
+            };
+            this.densityData = [{
+              type: 2,
+              val: vm.$t('Common.allText')//全部
+            }];
+          } else {
+            this.densityData = [
+              /* 查询密度 */
+              { type: 2, val: vm.$t('Common.allText') },//"全部" },
+              { type: 4, val: vm.$t('Common.highDensity') },//"高密度" },
+              { type: 8, val: vm.$t('Common.mediumDensity') },//"中密度" },
+              { type: 16, val: vm.$t('Common.lowDensity') },// "低密度" }
+              // { type: 32, val: '报警数据' },
+            ]
+          }
+
+        }
+      }
+
       this.result.isReal = isReal; //是否显示实时值
       /* 在自动初始化话数据之前，可以手动初始化 */
       this.result.startTime === null
@@ -162,6 +192,9 @@ const MyMixins = {
         let lower = parseFloat(res.lower);
         let isReal = res.isReal;
         let density = res.density;
+
+
+
 
         if (endTime <= startTime) {
           this.$pop(vm.$t('Common.popTimeText'))//'结束时间必须大于开始时间'

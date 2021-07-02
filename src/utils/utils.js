@@ -48,28 +48,28 @@ const codeObj = {
     { filed: "vib_rms2", name: trans('eigenvalue.onexphase'), code: 54000 } /* 1x相位 */,
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: trans('eigenvalue.frequencyRange')+"1-2",
+      name: trans('eigenvalue.frequencyRange') + "1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 },
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange') + "2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange') + "3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange') + "4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange') + "5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange') + "6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange') + "7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange') + "8-2", code: 13008 },
     { filed: "temperature", name: trans('eigenvalue.temperature'), code: 57000 },
     { filed: "temperature_rise", name: trans('eigenvalue.temperatureRise'), code: 57001 }
   ],
@@ -178,28 +178,28 @@ const codeObj = {
     // { filed: "sv98", name: "10-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮 code: 52009 } /* 本轴齿轮频率 */,
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: trans('eigenvalue.frequencyRange')+"1-2",
+      name: trans('eigenvalue.frequencyRange') + "1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange') + "2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange') + "3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange') + "4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange') + "5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange') + "6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange') + "7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange') + "8-2", code: 13008 }
   ],
   5: [
     /* 数字量 */
@@ -218,16 +218,16 @@ const codeObj = {
     { filed: "gap", name: trans('eigenvalue.EnergyEffecValue'), code: 14000 } /* 偏置电压 */,
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 }
   ],
   7: [
     /* 温度 */
@@ -256,28 +256,28 @@ const codeObj = {
     { filed: "temperature_rise", name: trans('eigenvalue.temperatureRise'), code: 57001 },
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: trans('eigenvalue.frequencyRange')+"1-2",
+      name: trans('eigenvalue.frequencyRange') + "1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange') + "2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange') + "3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange') + "4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange') + "5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange') + "6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange') + "7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange') + "8-2", code: 13008 }
   ],
   9: [
     /* 包络阶次 */
@@ -292,28 +292,28 @@ const codeObj = {
     { filed: "temperature_rise", name: trans('eigenvalue.temperatureRise'), code: 57001 },
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: trans('eigenvalue.frequencyRange')+"1-2",
+      name: trans('eigenvalue.frequencyRange') + "1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 },
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange') + "2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange') + "3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange') + "4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange') + "5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange') + "6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange') + "7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange') + "8-2", code: 13008 },
     // { filed: "part_name0", name: "部件1", code: -1 },/* 部件1 */
     { filed: "sv0", name: trans('eigenvalue.ExternalRingOfCage'), code: 52001 } /* 保持架对外环频率 */,
     { filed: "sv1", name: trans('eigenvalue.cageToInnerRing'), code: 52002 } /* 保持架对内环频率 */,
@@ -430,16 +430,16 @@ const codeObj = {
     { filed: "overturn_s", name: trans('eigenvalue.overturn_s'), code: 32000 } /* 倾覆位移值 */,
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 }
   ],
   12: [
     /* 倾角 */
@@ -453,16 +453,16 @@ const codeObj = {
     { filed: "temperature", name: trans('eigenvalue.temperatureValue'), code: 51000 } /* 温度值 */,
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 }
   ],
   13: [
     /* 合成倾角 */
@@ -487,16 +487,16 @@ const codeObj = {
     { filed: "temperature", name: trans('eigenvalue.temperatureValue'), code: 51000 } /* 温度值 */,
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 }
   ],
   14: [
     /* 螺栓 */
@@ -526,28 +526,28 @@ const codeObj = {
     { filed: "sv8", name: trans('eigenvalue.MainShaftGear'), code: 52009 } /* 本轴齿轮频率 */,
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: trans('eigenvalue.frequencyRange')+"1-2",
+      name: trans('eigenvalue.frequencyRange') + "1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange') + "2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange') + "3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange') + "4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange') + "5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange') + "6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange') + "7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange') + "8-2", code: 13008 }
   ],
   16: [
     /* 冲击阶次 */
@@ -560,28 +560,28 @@ const codeObj = {
     { filed: "sv", name: trans('eigenvalue.SVvalue'), code: 46000 } /* 冲击值 */,
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: trans('eigenvalue.frequencyRange')+"1-2",
+      name: trans('eigenvalue.frequencyRange') + "1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 },
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange') + "2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange') + "3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange') + "4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange') + "5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange') + "6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange') + "7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange') + "8-2", code: 13008 },
     { filed: "sv0", name: trans('eigenvalue.ExternalRingOfCage'), code: 52001 } /* 保持架对外环频率 */,
     { filed: "sv1", name: trans('eigenvalue.cageToInnerRing'), code: 52002 } /* 保持架对内环频率 */,
     { filed: "sv2", name: trans('eigenvalue.OuterRingInnerRaceway'), code: 52003 } /* 外环内滚道频率 */,
@@ -610,16 +610,16 @@ const codeObj = {
     { filed: "vib_sf", name: trans('eigenvalue.margin'), code: 26000 } /* 歪度 */,
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 },
     {
       filed: "from_sta",
       name: trans('eigenvalue.LastStationName'),//上一站名称
@@ -662,28 +662,28 @@ const codeObj = {
     { filed: "vib_rms2", name: trans('eigenvalue.onexphase'), code: 54000 } /* 1x相位 */,
     {
       filed: "vib_vsx1",
-      name: trans('eigenvalue.frequencyRange')+"1-1",
+      name: trans('eigenvalue.frequencyRange') + "1-1",
       code: 12001
     } /* 可选频段频谱幅值可选频段n */,
     {
       filed: "vib_vsx1_scale",
-      name: trans('eigenvalue.frequencyRange')+"1-2",
+      name: trans('eigenvalue.frequencyRange') + "1-2",
       code: 13001
     } /* 可选频段频谱幅值最大值与频谱幅值的比值可选频段n */,
-    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange')+"2-1", code: 12002 },
-    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange')+"2-2", code: 13002 },
-    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange')+"3-1", code: 12003 },
-    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange')+"3-2", code: 13003 },
-    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange')+"4-1", code: 12004 },
-    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange')+"4-2", code: 13004 },
-    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange')+"5-1", code: 12005 },
-    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange')+"5-2", code: 13005 },
-    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange')+"6-1", code: 12006 },
-    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange')+"6-2", code: 13006 },
-    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange')+"7-1", code: 12007 },
-    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange')+"7-2", code: 13007 },
-    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange')+"8-1", code: 12008 },
-    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange')+"8-2", code: 13008 }
+    { filed: "vib_vsx2", name: trans('eigenvalue.frequencyRange') + "2-1", code: 12002 },
+    { filed: "vib_vsx2_scale", name: trans('eigenvalue.frequencyRange') + "2-2", code: 13002 },
+    { filed: "vib_vsx3", name: trans('eigenvalue.frequencyRange') + "3-1", code: 12003 },
+    { filed: "vib_vsx3_scale", name: trans('eigenvalue.frequencyRange') + "3-2", code: 13003 },
+    { filed: "vib_vsx4", name: trans('eigenvalue.frequencyRange') + "4-1", code: 12004 },
+    { filed: "vib_vsx4_scale", name: trans('eigenvalue.frequencyRange') + "4-2", code: 13004 },
+    { filed: "vib_vsx5", name: trans('eigenvalue.frequencyRange') + "5-1", code: 12005 },
+    { filed: "vib_vsx5_scale", name: trans('eigenvalue.frequencyRange') + "5-2", code: 13005 },
+    { filed: "vib_vsx6", name: trans('eigenvalue.frequencyRange') + "6-1", code: 12006 },
+    { filed: "vib_vsx6_scale", name: trans('eigenvalue.frequencyRange') + "6-2", code: 13006 },
+    { filed: "vib_vsx7", name: trans('eigenvalue.frequencyRange') + "7-1", code: 12007 },
+    { filed: "vib_vsx7_scale", name: trans('eigenvalue.frequencyRange') + "7-2", code: 13007 },
+    { filed: "vib_vsx8", name: trans('eigenvalue.frequencyRange') + "8-1", code: 12008 },
+    { filed: "vib_vsx8_scale", name: trans('eigenvalue.frequencyRange') + "8-2", code: 13008 }
   ],
   99: [
     /* 故障信息 */
@@ -1136,6 +1136,15 @@ function getTime (date) {
 // 保留小数
 function round (num, dig = 255) {
   let val = Math.abs(num);
+  // 若数据过大或者过小时
+  if (String(num).indexOf('e') !== -1) {
+    let stringNum = String(num)
+    let [a, b] = stringNum.split('e')
+    if (b.indexOf('+') !== -1) {
+      let len = 10 ** 3;
+      return Math.round(a * len) / len + 'e' + b;
+    }
+  }
   if (val >= 10 ** 8 || val === 0) {
     return val;
   }
@@ -1150,6 +1159,7 @@ function round (num, dig = 255) {
     val >= 1000 && (dig = 0);
     val >= 10 && (dig = 1);
   }
+
   let len = 10 ** dig;
   return Math.round(num * len) / len;
 }
@@ -1599,6 +1609,15 @@ export function unitTransformation (num) {
   if (num !== null) {
     if (num >= 10 ** 8 || num === 0) {
     } else {
+      // 若数据过大或者过小时
+      if (String(num).indexOf('e') !== -1) {
+        let stringNum = String(num)
+        let [a, b] = stringNum.split('e')
+        if (b.indexOf('+') !== -1) {
+          let len = 10 ** 3;
+          return Math.round(a * len) / len + 'e+' + Number(b-3);
+        }
+      }
       num = round(num / 1000, 2);
     }
   }
@@ -1727,7 +1746,7 @@ export function realCodeList (t_root, dgm_type, position_type, pos_loc = 1) {
     head2.push(
       {
         filed: "part_name0",
-        val: trans('eigenvalue.part')+"1",
+        val: trans('eigenvalue.part') + "1",
         code: -1,
         isShow: false
       } /* 部件1 */,
@@ -1739,589 +1758,589 @@ export function realCodeList (t_root, dgm_type, position_type, pos_loc = 1) {
       } /* 保持架对外环频率 */,
       {
         filed: "sv1",
-        val: "1-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
+        val: "1-" + trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv2",
-        val: "1-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
+        val: "1-" + trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv3",
-        val: "1-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
+        val: "1-" + trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv4",
-        val: "1-"+trans('eigenvalue.RollRder'),//滚单
+        val: "1-" + trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv5",
-        val: "1-"+trans('eigenvalue.RollDouble'),//滚双
+        val: "1-" + trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv6",
-        val: "1-"+trans('eigenvalue.Tread'),//踏面
+        val: "1-" + trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv7",
-        val: "1-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
+        val: "1-" + trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv8",
-        val: "1-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
+        val: "1-" + trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name1",
-        val: trans('eigenvalue.part')+"2",
+        val: trans('eigenvalue.part') + "2",
         code: -1,
         isShow: false
       } /* 部件2 */,
       {
         filed: "sv10",
-        val: "2-"+trans('eigenvalue.ExternalRingOfCage'),
+        val: "2-" + trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv11",
-        val: "2-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
+        val: "2-" + trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv12",
-        val: "2-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
+        val: "2-" + trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv13",
-        val: "2-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
+        val: "2-" + trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv14",
-        val: "2-"+trans('eigenvalue.RollRder'),//滚单
+        val: "2-" + trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv15",
-        val: "2-"+trans('eigenvalue.RollDouble'),//滚双
+        val: "2-" + trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv16",
-        val: "2-"+trans('eigenvalue.Tread'),//踏面
+        val: "2-" + trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv17",
-        val: "2-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
+        val: "2-" + trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv18",
-        val: "2-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
+        val: "2-" + trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name2",
-        val: trans('eigenvalue.part')+"3",
+        val: trans('eigenvalue.part') + "3",
         code: -1,
         isShow: false
       } /* 部件3 */,
       {
         filed: "sv20",
-        val: "3-"+trans('eigenvalue.ExternalRingOfCage'),
+        val: "3-" + trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv21",
-        val: "3-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
+        val: "3-" + trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv22",
-        val: "3-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
+        val: "3-" + trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv23",
-        val: "3-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
+        val: "3-" + trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv24",
-        val: "3-"+trans('eigenvalue.RollRder'),//滚单
+        val: "3-" + trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv25",
-        val: "3-"+trans('eigenvalue.RollDouble'),//滚双
+        val: "3-" + trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv26",
-        val: "3-"+trans('eigenvalue.Tread'),//踏面
+        val: "3-" + trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv27",
-        val: "3-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
+        val: "3-" + trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv28",
-        val: "3-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
+        val: "3-" + trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name3",
-        val: trans('eigenvalue.part')+"4",
+        val: trans('eigenvalue.part') + "4",
         code: -1,
         isShow: false
       } /* 部件4 */,
       {
         filed: "sv30",
-        val: "4-"+trans('eigenvalue.ExternalRingOfCage'),
+        val: "4-" + trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv31",
-        val: "4-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
+        val: "4-" + trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv32",
-        val: "4-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
+        val: "4-" + trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv33",
-        val: "4-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
+        val: "4-" + trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv34",
-        val: "4-"+trans('eigenvalue.RollRder'),//滚单
+        val: "4-" + trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv35",
-        val: "4-"+trans('eigenvalue.RollDouble'),//滚双
+        val: "4-" + trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv36",
-        val: "4-"+trans('eigenvalue.Tread'),//踏面
+        val: "4-" + trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv37",
-        val: "4-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
+        val: "4-" + trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv38",
-        val: "4-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
+        val: "4-" + trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name4",
-        val: trans('eigenvalue.part')+"5",
+        val: trans('eigenvalue.part') + "5",
         code: -1,
         isShow: false
       } /* 部件5 */,
       {
         filed: "sv40",
-        val: "5-"+trans('eigenvalue.ExternalRingOfCage'),
+        val: "5-" + trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv41",
-        val: "5-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
+        val: "5-" + trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv42",
-        val: "5-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
+        val: "5-" + trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv43",
-        val: "5-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
+        val: "5-" + trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv44",
-        val: "5-"+trans('eigenvalue.RollRder'),//滚单
+        val: "5-" + trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv45",
-        val: "5-"+trans('eigenvalue.RollDouble'),//滚双
+        val: "5-" + trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv46",
-        val: "5-"+trans('eigenvalue.Tread'),//踏面
+        val: "5-" + trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv47",
-        val: "5-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
+        val: "5-" + trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv48",
-        val: "5-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
+        val: "5-" + trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name5",
-        val: trans('eigenvalue.part')+"6",
+        val: trans('eigenvalue.part') + "6",
         code: -1,
         isShow: false
       } /* 部件6 */,
       {
         filed: "sv50",
-        val: "6-"+trans('eigenvalue.ExternalRingOfCage'),
+        val: "6-" + trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv51",
-        val: "6-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
+        val: "6-" + trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv52",
-        val: "6-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
+        val: "6-" + trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv53",
-        val: "6-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
+        val: "6-" + trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv54",
-        val: "6-"+trans('eigenvalue.RollRder'),//滚单
+        val: "6-" + trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv55",
-        val: "6-"+trans('eigenvalue.RollDouble'),//滚双
+        val: "6-" + trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv56",
-        val: "6-"+trans('eigenvalue.Tread'),//踏面
+        val: "6-" + trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv57",
-        val: "6-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
+        val: "6-" + trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv58",
-        val: "6-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
+        val: "6-" + trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name6",
-        val: trans('eigenvalue.part')+"7",
+        val: trans('eigenvalue.part') + "7",
         code: -1,
         isShow: false
       } /* 部件7 */,
       {
         filed: "sv60",
-        val: "7-"+trans('eigenvalue.ExternalRingOfCage'),
+        val: "7-" + trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv61",
-        val: "7-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
+        val: "7-" + trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv62",
-        val: "7-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
+        val: "7-" + trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv63",
-        val: "7-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
+        val: "7-" + trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv64",
-        val: "7-"+trans('eigenvalue.RollRder'),//滚单
+        val: "7-" + trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv65",
-        val: "7-"+trans('eigenvalue.RollDouble'),//滚双
+        val: "7-" + trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv66",
-        val: "7-"+trans('eigenvalue.Tread'),//踏面
+        val: "7-" + trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv67",
-        val: "7-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
+        val: "7-" + trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv68",
-        val: "7-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
+        val: "7-" + trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name7",
-        val: trans('eigenvalue.part')+"8",
+        val: trans('eigenvalue.part') + "8",
         code: -1,
         isShow: false
       } /* 部件8 */,
       {
         filed: "sv70",
-        val: "8-"+trans('eigenvalue.ExternalRingOfCage'),
+        val: "8-" + trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv71",
-        val: "8-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
+        val: "8-" + trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv72",
-        val: "8-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
+        val: "8-" + trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv73",
-        val: "8-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
+        val: "8-" + trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv74",
-        val: "8-"+trans('eigenvalue.RollRder'),//滚单
+        val: "8-" + trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv75",
-        val: "8-"+trans('eigenvalue.RollDouble'),//滚双
+        val: "8-" + trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv76",
-        val: "8-"+trans('eigenvalue.Tread'),//踏面
+        val: "8-" + trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv77",
-        val: "8-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
+        val: "8-" + trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv78",
-        val: "8-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
+        val: "8-" + trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name8",
-        val: trans('eigenvalue.part')+"9",
+        val: trans('eigenvalue.part') + "9",
         code: -1,
         isShow: false
       } /* 部件9 */,
       {
         filed: "sv80",
-        val: "9-"+trans('eigenvalue.ExternalRingOfCage'),
+        val: "9-" + trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv81",
-        val: "9-"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
+        val: "9-" + trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv82",
-        val: "9-"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
+        val: "9-" + trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv83",
-        val: "9-"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
+        val: "9-" + trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv84",
-        val: "9-"+trans('eigenvalue.RollRder'),//滚单
+        val: "9-" + trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv85",
-        val: "9-"+trans('eigenvalue.RollDouble'),//滚双
+        val: "9-" + trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv86",
-        val: "9-"+trans('eigenvalue.Tread'),//踏面
+        val: "9-" + trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv87",
-        val: "9-"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
+        val: "9-" + trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv88",
-        val: "9-"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
+        val: "9-" + trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */,
       {
         filed: "part_name9",
-        val: trans('eigenvalue.part')+"10",
+        val: trans('eigenvalue.part') + "10",
         code: -1,
         isShow: false
       } /* 部件10 */,
       {
         filed: "sv90",
-        val: "10"+trans('eigenvalue.ExternalRingOfCage'),
+        val: "10" + trans('eigenvalue.ExternalRingOfCage'),
         code: 52001,
         isShow: false
       } /* 保持架对外环频率 */,
       {
         filed: "sv91",
-        val: "10"+trans('eigenvalue.cageToInnerRing'),//保持架对外环
+        val: "10" + trans('eigenvalue.cageToInnerRing'),//保持架对外环
         code: 52002,
         isShow: false
       } /* 保持架对内环频率 */,
       {
         filed: "sv92",
-        val: "10"+trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
+        val: "10" + trans('eigenvalue.OuterRingInnerRaceway'),//外环内滚道
         code: 52003,
         isShow: false
       } /* 外环内滚道频率 */,
       {
         filed: "sv93",
-        val: "10"+trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
+        val: "10" + trans('eigenvalue.InnerRingOuterRaceway'),//内环外滚道
         code: 52004,
         isShow: false
       } /* 内环外滚道频率 */,
       {
         filed: "sv94",
-        val: "10"+trans('eigenvalue.RollRder'),//滚单
+        val: "10" + trans('eigenvalue.RollRder'),//滚单
         code: 52005,
         isShow: false
       } /* 滚单频率 */,
       {
         filed: "sv95",
-        val: "10"+trans('eigenvalue.RollDouble'),//滚双
+        val: "10" + trans('eigenvalue.RollDouble'),//滚双
         code: 52006,
         isShow: false
       } /* 滚双频率 */,
       {
         filed: "sv96",
-        val: "10"+trans('eigenvalue.Tread'),//踏面
+        val: "10" + trans('eigenvalue.Tread'),//踏面
         code: 52007,
         isShow: false
       } /* 踏面频率 */,
       {
         filed: "sv97",
-        val: "10"+trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
+        val: "10" + trans('eigenvalue.AdjacentShaftGear'),//邻轴齿轮
         code: 52008,
         isShow: false
       } /* 邻轴齿轮频率 */,
       {
         filed: "sv98",
-        val: "10"+trans('eigenvalue.MainShaftGear'),//本轴齿轮
+        val: "10" + trans('eigenvalue.MainShaftGear'),//本轴齿轮
         code: 52009,
         isShow: false
       } /* 本轴齿轮频率 */
@@ -3234,7 +3253,7 @@ export function itemMapping (key) {
     },
     A_03: {
       CNname: trans('ytMap.OutputVoltageBC'),//输出电压BC
-      mappingKey:'井下机组给定电压BC',// trans('ytMap.DownOutputVoltageBC')//井下机组给定电压BC
+      mappingKey: '井下机组给定电压BC',// trans('ytMap.DownOutputVoltageBC')//井下机组给定电压BC
     },
     A_04: {
       CNname: trans('ytMap.OutputBoltageAC'),//输出电压AC
@@ -3355,7 +3374,7 @@ export function itemMapping (key) {
     },
     F_08: {
       CNname: trans('ytMap.ControlInputBCurrent'),//控制柜输入B相电流
-      mappingKey:'控制柜输入B相电流',// trans('ytMap.ControlInputBCurrent')//控制柜输入B相电流
+      mappingKey: '控制柜输入B相电流',// trans('ytMap.ControlInputBCurrent')//控制柜输入B相电流
     },
     F_09: {
       CNname: trans('ytMap.ControlInputCCurrent'),//控制柜输入C相电流

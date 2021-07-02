@@ -132,6 +132,10 @@ export default {
             if (requestData.t_root != 4) {
               for (let i = 0; i < l; i++) {
                 const value = list[i];
+                if (store.t_root === 2 && value.code == 16) {
+                  console.log('tms调试信息过滤')
+                  continue;
+                }
                 body.push({
                   time: getTime(value.savetime_com),
                   date: value.savetime_com,
