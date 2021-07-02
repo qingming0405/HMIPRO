@@ -83,7 +83,9 @@
                       height: pos.posHeight,
                     }"
                     :class="`e-color-${posIndex % 2}`"
-                    @click="statusButtonClick(pos, pos.trendStatus, pos.statusId)"
+                    @click="
+                      statusButtonClick(pos, pos.trendStatus, pos.statusId)
+                    "
                     @contextmenu.prevent="showContextmenu($event, pos)"
                   >
                     {{ pos.status }}
@@ -164,6 +166,14 @@
       <div class="none-data-box" v-show="item.empty.isShow">
         <span>{{ item.empty.text }}</span>
       </div>
+      <div class="search-data">
+        <button @click="getRealData" class="get-real-data" ref="getRealData" v-show="false">
+          <!-- 实时数据 -->{{ $t("Common.realData") }}
+        </button>
+        <button @click="dataRetrieval">
+          <!-- 数据检索 -->{{ $t("Common.retrieval") }}
+        </button>
+      </div>
     </div>
   </div>
 </template>
@@ -176,6 +186,8 @@ import {
   getUnit,
   defaultCode,
   round,
+  realCode,
+  realCodeName,
 } from "utils/utils.js";
 import { getMenus, showRightMenu } from "common/menus/Menus.js";
 
@@ -322,6 +334,7 @@ export default {
               isShow: false,
               text: this.$t("Common.noDataText"), //无数据
             },
+            typePosObj: {}, // 测点类型map
           });
           /* 设置定时器 */
           this.setInterval(this.summaryData[key]);
@@ -359,6 +372,8 @@ export default {
       if (flag) {
         this.$emit("loadingImg", true);
       }
+      const data = this.summaryData[this.currentKey];
+      let typePosObj = data.typePosObj
       this.$getApi.getFolderRealTimeList(requestData).then((res) => {
         this.isGetData = true;
         if (flag) {
@@ -389,7 +404,11 @@ export default {
               pumpObj.posArr = [];
               /* 循环测点 */
               if (temp1.positions) {
-                temp1.positions.forEach((temp2) => {
+                for(let temp2 of temp1.positions) {
+                  let code = realCode(temp2.pos_type, temp2.units.pos_loc)
+                  if(!this.isShowTypePos(typePosObj, code, temp2)) {
+                    continue
+                  }
                   let posObj = {};
                   posObj.pos_name = temp2.pos_name;
                   /* 处理趋势报警状态 */
@@ -398,7 +417,7 @@ export default {
                   posObj.pos_id = temp2.pos_id;
                   posObj.pos_type = temp2.pos_type;
                   posObj.m_type = temp.m_type;
-                  posObj.updateTime = temp.updateTime
+                  posObj.updateTime = temp.updateTime;
                   if (temp2.trend) {
                     posObj.statusId = temp2.trend.id;
                     posObj.avg =
@@ -580,7 +599,7 @@ export default {
                   });
                   /* 存入测点对象 */
                   pumpObj.posArr.push(posObj);
-                });
+                }
               }
               /* 存入机泵对象 */
               treeObj.pumpsArr.push(pumpObj);
@@ -646,29 +665,29 @@ export default {
         //已确认
       } else if (status === 1) {
         btnContent = [
-          { name: this.$t('Common.resetBtn'), index: 2 }, //重置
-          { name: this.$t('realSummary.maintain'), index: 3 },
-        ]
+          { name: this.$t("Common.resetBtn"), index: 2 }, //重置
+          { name: this.$t("realSummary.maintain"), index: 3 },
+        ];
         //已重置
       } else if (status === 2) {
         btnContent = [
-          { name: this.$t('Common.sureBtn'), index: 1 }, //确认
-          { name: this.$t('realSummary.maintain'), index: 3 }, //维护
-          { name: this.$t('realSummary.Refuse'), index: 4 }, //拒绝
-        ]
+          { name: this.$t("Common.sureBtn"), index: 1 }, //确认
+          { name: this.$t("realSummary.maintain"), index: 3 }, //维护
+          { name: this.$t("realSummary.Refuse"), index: 4 }, //拒绝
+        ];
         //维护中
       } else if (status === 3) {
-        btnContent = [{ name: this.$t('Common.resetBtn'), index: 2 }] //重置
+        btnContent = [{ name: this.$t("Common.resetBtn"), index: 2 }]; //重置
         //已拒绝
       } else if (status === 4) {
         btnContent = [
-          { name: this.$t('Common.resetBtn'), index: 2 }, //重置
-          { name: this.$t('realSummary.maintain'), index: 3 }, //维护
-        ]
+          { name: this.$t("Common.resetBtn"), index: 2 }, //重置
+          { name: this.$t("realSummary.maintain"), index: 3 }, //维护
+        ];
       } else {
         btnContent = [
-          { name: this.$t('realSummary.maintain'), index: 3 }, //维护
-        ]
+          { name: this.$t("realSummary.maintain"), index: 3 }, //维护
+        ];
       }
       // btnContent = [
       //   { name: "确认", index: 1 },
@@ -679,8 +698,8 @@ export default {
       if (btnContent) {
         this.$pop({
           btnNum: 3,
-          title: this.$t('realSummary.operating'), //操作
-          content: this.$t('realSummary.ModifyAlarmStatus'), //修改报警状态
+          title: this.$t("realSummary.operating"), //操作
+          content: this.$t("realSummary.ModifyAlarmStatus"), //修改报警状态
           btnContent: btnContent,
         }).then((res) => {
           if (res) {
@@ -739,7 +758,7 @@ export default {
     },
     // 右键菜单
     showContextmenu(e, posInfo) {
-      let time = posInfo.updateTime
+      let time = posInfo.updateTime;
       let pos = this.$store.getters.getPos(
         posInfo.mac_id,
         posInfo.pos_type,
@@ -754,6 +773,54 @@ export default {
         time,
       };
       showRightMenu(this, e, text, info);
+    },
+    getRealData() {
+
+    },
+    // 获取典型测点表
+    isShowTypePos (typePosObj, code, pos) {
+      if(!typePosObj.hasOwnProperty(code)) {
+        typePosObj[code] = {
+          code,
+          pos, 
+          isShow: true
+        }
+        return true
+      }
+      return typePosObj[code].isShow
+    },
+    // 数据检索
+    dataRetrieval () {
+      const data = this.summaryData[this.currentKey];
+      this.$retrieval({
+        key: "realSummary",
+        viewMsg: {
+          posTypeList: this.getPosTypeList(data.typePosObj)
+        }
+      }).then(res => {
+        if (res) {
+          this.summaryData[this.currentKey].typePosObj = this.backTypePosObj(res)
+          this.getData(this.summaryData[this.currentKey])
+        }
+      });
+    },
+    backTypePosObj(posTypeList) {
+      let typePosObj = {}
+      for(let item of posTypeList) {
+        typePosObj[item.code] = item
+      }
+      return typePosObj
+    },
+    // 可用的测点类型下拉列表
+    getPosTypeList (typePosObj) {
+      let codes = Object.keys(typePosObj)
+      return codes.map(code => {
+        return { 
+          val: realCodeName(code), 
+          code, 
+          isShow: typePosObj[code].isShow 
+        }
+      })
     },
   },
   created() {
@@ -782,7 +849,7 @@ export default {
     .my-summary-body {
       overflow-y: auto;
       margin-top: 37px;
-      height: calc(100% - 37px);
+      height: calc(100% - 87px);
       // height: 100%;
       // overflow-y: hidden;
     }
@@ -879,6 +946,20 @@ export default {
     .none-data-box {
       height: 100%;
       width: 100%;
+    }
+    .search-data {
+      height: 49px;
+      line-height: 49px;
+      width: 100%;
+      text-align: center;
+      bottom: 0;
+      button {
+        height: 30px;
+        width: 100px;
+      }
+      .get-real-data {
+        margin-right: 20px;
+      }
     }
   }
 }

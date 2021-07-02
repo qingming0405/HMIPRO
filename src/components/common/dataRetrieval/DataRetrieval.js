@@ -5,6 +5,7 @@ import HistoryRetrieval from "./HistoryRetrieval.vue";
 import MonitorRetrieval from "./MonitorRetrieval.vue";
 import OverturnRetrieval from "./OverturnRetrieval.vue";
 import RealRetrieval from "./RealRetrieval.vue";
+import RealSummaryRetrieval from "./RealSummaryRetrieval.vue";
 import ScatterRetrieval from "./ScatterRetrieval.vue";
 import SpectrumRetrieval from "./SpectrumRetrieval.vue";
 import SystemRetrieval from "./SystemRetrieval.vue";
@@ -33,6 +34,7 @@ const DataRetrieval = {
         monitor: MonitorRetrieval,
         overturn: OverturnRetrieval,
         real: RealRetrieval,
+        realSummary: RealSummaryRetrieval,
         scatter: ScatterRetrieval,
         spectrum: SpectrumRetrieval,
         system: SystemRetrieval,/* 踏面磨损趋势图、级联图,单面动平衡，双面动平衡，转速时间图，奈奎斯特图数据检索使用系统日志的 */
