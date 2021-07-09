@@ -78,7 +78,6 @@ const vib = {
           this.getModelInfo(mac);
           return fn;
         };
-        console.log("创建定时器");
         this.snVib[key].timer = setInterval(fn(), 10000);
         this.getChainInfo();
       }
@@ -372,7 +371,6 @@ const vib = {
     //         this.getModelInfo(value);
     //         return fn;
     //       };
-    //       console.log("创建定时器");
     //       this.timer = setInterval(fn(), 10000);
     //       this.getChainInfo();
     //     }

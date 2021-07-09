@@ -531,7 +531,6 @@ export default {
             let timer = setInterval(() => {
               let time = new Date().valueOf() //获取当前时间
               requestDataReal.time = time
-              console.log(requestDataReal)
               this.$getApi.getTendency(requestDataReal).then((res) => {
                 if (!res) return
                 this.realData(res, item, requestDataReal)
@@ -539,9 +538,6 @@ export default {
             }, 5000)
             timers.push(timer) // 存放所有定时器
           })
-
-          console.log(requestDataReal.key)
-
           return
         } else if (type === 2) {
           requestData.isTrendPrediction = 1
@@ -604,7 +600,6 @@ export default {
             }
             for (let k in requestData.key) {
               let index = k.substring(2)
-              console.log(index)
               if (index == key) {
                 if (type === 1) {
                   //获取开启实时数据时的最后一波数据时间
@@ -1147,9 +1142,9 @@ export default {
       this.$retrieval({
         key: 'trend',
         params: {
-          cond: this.trendData[this.currentKey].cond,
-          predTime: this.trendData[this.currentKey].predTime,
-          alp: this.trendData[this.currentKey].alp,
+          cond: params.cond,
+          predTime: params.predTime,
+          alp: params.alp,
         },
         viewMsg,
       }).then((res) => {

@@ -342,7 +342,6 @@ export default {
       this.$getApi.getSpectrumChart(requesetData).then((res) => {
         this.$emit('loadingImg', false)
         if (res && res.info) {
-          console.log(res.info.length)
           let chartData = this.chartData[this.key]
           if (res.info.length == 0) {
             chartData.empty.isShow = true
@@ -356,7 +355,6 @@ export default {
               InfoArr.push(res.info[i])
               i = i + num
             }
-            console.log(InfoArr.length)
           } else {
             InfoArr = res.info
           }

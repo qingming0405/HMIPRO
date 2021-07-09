@@ -108,13 +108,13 @@ export default {
           this.choosemonitore(0)
           break
         case 1 /* 切换图表 */:
-          this.monitorePos[key].isShow = true
+          this.tyModel[key].isShow = true
           break
         case 2 /* 关闭图表 */:
-          this.$delete(this.monitorePos, key)
+          this.$delete(this.tyModel, key)
           break
         case 4 /* 从其他图表跳转已存在图标 */:
-          this.monitorePos[key].isShow = true
+          this.tyModel[key].isShow = true
           break
       }
     },
@@ -197,46 +197,12 @@ export default {
   },
 }
 </script>
-
+<style scoped lang="scss">
+@import '@/assets/style/css/model.scss';
+</style>
 <style scoped lang="scss">
 .snModel {
   height: 100%;
   width: 100%;
-}
-.wpower-modelitems {
-  height: 100%;
-  margin-top: 50px;
-  .wpower-modelitems-title {
-    position: absolute;
-    top: 70px;
-    right: 20px;
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
-    height: 45px;
-    .wpower-monitore-postion {
-      width: 130px;
-      height: 43px;
-      background: #0b1757;
-      border: 1px solid #4574d6;
-      box-shadow: 0px 0px 29px 0px rgba(6, 70, 167, 0.72) inset;
-      border-radius: 10px;
-      font-size: 16px;
-      font-weight: 400;
-      color: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      margin: 0px 0px 0px 30px;
-      cursor: pointer;
-    }
-    .choose-item {
-      border: 1px solid #00fcf9;
-    }
-  }
-  .wpower-modelitems-content {
-    height: calc(100% - 20px);
-    width: 100%;
-  }
 }
 </style>

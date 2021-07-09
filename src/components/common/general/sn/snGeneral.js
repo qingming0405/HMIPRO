@@ -142,7 +142,7 @@ const snGeneral = {
                   param.isShowBackground = false // 关闭默认图片
                   param.generalImg = res.folder.overview.bgurl
                   // param.generalImg =
-                  //   'http://10.100.50.80:8085' + res.folder.overview.bgurl //测试使用
+                  //   'http://10.100.50.203:8085' + res.folder.overview.bgurl //测试使用
                   // 'http://10.100.0.101:8085' + res.folder.overview.bgurl
                   let result = res.folder.overview
                   /* 处理背景图片 */
@@ -186,6 +186,10 @@ const snGeneral = {
       background.onload = () => {
         let PW = result.bg_width
         let PH = result.bg_height
+        if (!result.version) {
+          PW = background.width
+          PH = background.height
+        }
         /* 图片居中显示 */
         /* 比例 适应图片 ，现在要求16比9 */
         // let newPW = (BH / 9) * 16;
@@ -332,7 +336,6 @@ const snGeneral = {
         id: item.pump_id,
         isFocus: item.isCheck ? 1 : 0,
       }
-      console.log(requestData)
       /* 发送网络请求 */
       this.$getApi.updateHmiFoucsStatus(requestData).then((res) => {
         if (res) {

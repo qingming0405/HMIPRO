@@ -3106,8 +3106,6 @@ export default {
         posName.push(params[basic[0].key].posName)
         seriesColor.push(params[basic[0].key].color)
       }
-      console.log(data[basic[0].key])
-
       for (const key in data) {
         const value1 = data[key]
         const value2 = params[key]

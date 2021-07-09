@@ -104,7 +104,9 @@ const MyMixins = {
       if (key) {
         let [, choosetype, , , posType] = key.split('_')
         if (choosetype == 'pos') {
-          if (posType == 17 && choosePage.name != 'tmswave3d') {
+          // 轨道波磨频谱瀑布后端强制做了查询密度
+          /* 趋势图、散点图存在拖入测点所以无法使用该方式判断是否存在查询密度 */
+          if (posType == 17 && choosePage.name != 'tmswave3d' && choosePage.name != 'trend' && choosePage.name != 'scatter') {
             this.density = {
               /* 选中查询密度型 */
               type: 2,

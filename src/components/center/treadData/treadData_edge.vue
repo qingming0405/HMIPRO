@@ -59,10 +59,10 @@
                     >
                 <th
                   colspan="5"
-                  :style="item === maxLength ? 'padding-right: 10px;':''"
+                  :style="item === maxLength ? 'padding-right: 10px;border-right:none;':''"
                 >
 
-                  <div :style="lang=='en'?'width:'+(108*5-2)+'px;border:none':'width:'+(98*5-1)+'px;border:none'">
+                  <div :style="'width:'+(108*5-2.5)+'px;border:none'">
                     <!-- 选择日期时间 -->
                     <el-date-picker
                       v-model="timeList[item-1]"
@@ -98,14 +98,13 @@
             <div
               class="thead-div-1"
               v-for="len in maxLength"
-              :style="[len === maxLength ? 'border:none;':'']"
             >
         <th
           v-for="(item,headlen) in head"
           :key="item.value"
           rowspan="1"
           colspan="1"
-          :style="len === maxLength && headlen === head.length-1 ? 'padding-right: 10px;border:none;':'',lang=='en'?'font-size: 14px;width:106px;':''"
+          :style="len == maxLength && headlen == head.length-1 ? 'padding-right: 10px;border-right:none;':''+ lang=='en'?'font-size: 14px;width:106px;':''"
         >{{item.name}}</th>
     </div>
   </div>
@@ -635,7 +634,6 @@ export default {
           return obj1.time - obj2.time
         }
         item.data_train.sort(compare)
-        console.log(item.data_train)
         item.data_train.forEach((list) => {
           if (this.timeList.indexOf(list.time) == -1) {
             this.timeList.push(list.time)
@@ -975,12 +973,15 @@ export default {
             display: flex;
             flex-direction: row;
             .thead-div-1 {
-              border-right: 1px solid #979797;
+              // border-right: 1px solid #979797;
               th {
                 &:first-child {
                   border-left: none;
                 }
               }
+              /*  &:last-child {
+                border-right: none;
+              } */
             }
           }
         }

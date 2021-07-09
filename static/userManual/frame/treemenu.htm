@@ -55,7 +55,6 @@ if(parent.parent.window.location.search){
   
   // 解码encode
   keyWord = decodeURI(keyWord)
-  console.log(keyWord,t_root)
   if(keyWord == '总貌图' || keyWord == '重点关注' || keyWord == '设备模型'){
     switch(Number(t_root)){
       case 0:
@@ -75,7 +74,6 @@ if(parent.parent.window.location.search){
   } else {
     titleA = titleArr
   }
-  console.log(titleA)
   for( var i in titleArr )
   {
     if(titleA.indexOf(titleArr[i])!== -1){

@@ -932,7 +932,6 @@ export default {
       let arr = cloneObj(this.$store.state.pos[key], true)
       // 获取到机组的信息，去获取测点
       let index = 0
-      console.log(this.$store.state.checkMsg.pos)
       if (!arr) {
         // /* 如果没有数据 ，一直去取，一共取到100s,没有数据就算*/
         /* this.timer = setInterval(() => {
@@ -957,7 +956,6 @@ export default {
           })
           .then((res1) => {
             if (res1) {
-              console.log('新增')
               this.setfdModelTitile(res1, `${res.mac_id}_${res.ch_class}`)
               this.savePosInfo(res1, key, res.mac_id, res.m_type)
             }

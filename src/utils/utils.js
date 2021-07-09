@@ -1444,7 +1444,7 @@ function getUnit (code, pos) {
       break;
     case 29000:
     case 32000:
-      unit = pos.units.sUnitName || "mm";
+      unit = pos.units && pos.units.sUnitName || "mm";
       break;
     case 33000:
     case 34000:
@@ -1454,7 +1454,7 @@ function getUnit (code, pos) {
     case 38000:
     case 39000:
     case 40000:
-      unit = pos.units.sUnitName || "°";
+      unit = pos.units && pos.units.sUnitName || "°";
       break;
     case 41000:
     case 42000:
@@ -1615,7 +1615,7 @@ export function unitTransformation (num) {
         let [a, b] = stringNum.split('e')
         if (b.indexOf('+') !== -1) {
           let len = 10 ** 3;
-          return Math.round(a * len) / len + 'e+' + Number(b-3);
+          return Math.round(a * len) / len + 'e+' + Number(b - 3);
         }
       }
       num = round(num / 1000, 2);

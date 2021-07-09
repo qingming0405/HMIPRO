@@ -2689,7 +2689,6 @@ export default {
                 freq.upperLimit = Number(res.upperLimit);
                 if (freq.lowerLimit !== 0 || freq.upperLimit !== 0)
                   params.chartData.isSetPower = true;
-                console.log(params.chartData, chart)
                 let type = 0
                 if (chart.srcUnitY != chart.curUnitY) {
                   type = 1

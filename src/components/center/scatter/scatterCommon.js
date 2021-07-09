@@ -328,7 +328,6 @@ export default {
       let x = setHead(t_rootX, dgmTypeX, scatterData.comparePos.position_type, posLocX);
       // 获取Y轴特征值
       let y = setHead(t_rootY, dgmTypeY, posType, posLocY);
-      console.log(x, y)
       // 若特征值存在转速则默认x轴特征值为转速
       for (let i = 0, l = x.length; i < l; i++) {
         if (x[i].filed == 'speed') {

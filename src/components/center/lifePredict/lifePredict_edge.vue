@@ -142,7 +142,6 @@ export default {
     getData() {
       this.$getApi.getALLTreadResult().then((res) => {
         if (res) {
-          console.log(res)
           if (Object.keys(res.data).length > 0) {
             this.empty.isShow = false
             this.setData(res.data)

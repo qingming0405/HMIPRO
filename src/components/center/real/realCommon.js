@@ -237,7 +237,6 @@ export default {
             title: this.getAlarmInfo(list, head, realData.t_root)
           }
         ];
-        console.log('title', body[i][0].title);
         for (let j = 1; j < head.length; j++) {
           let value = head[j];
           /* 倾角的实时数据做一个转化 */

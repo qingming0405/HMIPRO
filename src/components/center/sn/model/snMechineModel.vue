@@ -229,7 +229,7 @@ export default {
     background: rgba(4, 30, 57, 0.5);
     padding: 15px;
     position: relative;
-    top: -100%;
+    top: -99%;
     left: calc(100% - 290px);
     .diagnosis-title {
       width: 100%;

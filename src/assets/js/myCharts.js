@@ -5889,7 +5889,6 @@
             for (let i = 0, l = arr.length; i < l; i++) {
               failCtx.beginPath();
               if (arr[i]) {
-                console.log(arr[i])
                 // for (let val of arr[i]) {
                 //机舱轨迹图点击
                 for (let val in arr[i]) {

@@ -282,7 +282,7 @@ export default {
       justify-content: flex-end;
       align-items: center;
       position: absolute;
-      top: 76px;
+      top: 85px;
       right: 25px;
       .wpower-monitore-postion {
         width: 130px;

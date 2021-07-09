@@ -219,8 +219,8 @@ const mechineModel = {
               })
             }
             if (param.imgSrc != res.overview.bgurl) {
-            // if (param.imgSrc != 'http://10.100.0.101:8085' + res.overview.bgurl) {
-            // if (param.imgSrc != 'http://10.100.50.203:8085' + res.overview.bgurl) {
+              // if (param.imgSrc != 'http://10.100.0.101:8085' + res.overview.bgurl) {
+              // if (param.imgSrc != 'http://10.100.50.203:8085' + res.overview.bgurl) {
               param.imgSrc = res.overview.bgurl
               // param.imgSrc = 'http://10.100.50.203:8085' + res.overview.bgurl
               // param.imgSrc = 'http://10.100.0.101:8085' + res.overview.bgurl
@@ -275,8 +275,12 @@ const mechineModel = {
           scale = 1
         }
         background.onload = () => {
-          const PW = res.bg_width
-          const PH = res.bg_height
+          let PW = background.width
+          let PH = background.height
+          if (param.version == 1) {
+            PW = res.bg_width
+            PH = res.bg_height
+          }
           /* 默认图片的宽度是总宽度的80% */
           // 判断图片的长宽比,高或者宽是背景的80%
           if (param.version == 1) {
@@ -617,7 +621,6 @@ const mechineModel = {
     },
     // 鼠标移入显示测点信息
     setViewPosMsg (item, e) {
-      console.log('悬停')
       let top = e.offsetY + 10 + parseInt(item.boxStyle.top)
       window.innerHeight <= top + 100 && (top = e.y + parseInt(item.boxStyle.top) - 100)
       this.viewPosMsg = {
@@ -639,7 +642,6 @@ const mechineModel = {
     },
     // 关闭测点信息弹窗
     closeFloatingWindow (item, e) {
-      console.log('离开')
       // let top = e.offsetY + 10 + parseInt(item.boxStyle.top)
       // window.innerHeight <= top + 100 && (top = e.y + parseInt(item.boxStyle.top) - 100)
       // let left = e.offsetX + 5 + parseInt(item.boxStyle.left) 

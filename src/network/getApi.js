@@ -51,6 +51,17 @@ function getApi (router) {
         time: 0 // 实时数据去后台请求的时间，每次要刷新
       };
       Object.assign(args, config);
+      // 若为波磨测点则默认查询密度为全部density=2
+      if (args.key) {
+        for (let k in args.key) {
+          let [, , , posType] = k.split('_')
+          if (posType == 17) {
+            args.density = 2
+            return request.post("getTendency", args);
+          }
+        }
+
+      }
       return request.post("getTendency", args);
     },
     // 危险转速区间
@@ -136,6 +147,10 @@ function getApi (router) {
         pageNum: null // 每页数据数量
       };
       Object.assign(args, config);
+      // 若为波磨测点则默认查询密度为全部density=2
+      if (args.positionType == 17){
+        args.density = 2
+      }
       return request.post("getSaveData", args);
     },
     // 监测报表
@@ -163,6 +178,10 @@ function getApi (router) {
         isAlarm: false // 是否需要报警
       };
       Object.assign(args, config);
+      // 若为波磨测点则默认查询密度为全部density=2
+      if (args.positionType == 17) {
+        args.density = 2
+      }
       return request.post("getPositionEigenvalue", args);
     },
     // 实时数据
@@ -198,7 +217,7 @@ function getApi (router) {
       return request.post("insertMaintenRecord", config);
     },
     // 散点图数据
-    getScatterDiagram (config) {
+    getScatterDiagram (config) { 
       return request.post("getScatterDiagram", config);
     },
     // 删除已下载文件
@@ -436,7 +455,6 @@ function getApi (router) {
       } else {
         return request.post("queryAllAlarmPosition", config);
       }
-
     },
     getReportTreeTemplateInfo (config) {
       return request.post("getReportTreeTemplateInfo", config);

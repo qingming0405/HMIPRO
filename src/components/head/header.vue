@@ -1264,7 +1264,6 @@ export default {
             }
           }
           if (idx === 0) {
-            console.log(msg.t_root)
             this.currentHeadList = this.headList[String(msg.t_root)]
             list = this.currentHeadList
           }

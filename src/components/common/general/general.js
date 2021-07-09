@@ -68,7 +68,6 @@ const general = {
             let data = []
             // 判断是否为杭海城际
             let isHanghai = config.gjModel === 1
-            console.log(tree.children)
             if (isHanghai && tree.children && tree.children.length > 0) {
               isShowTree = true
               data = tree.children
@@ -298,7 +297,6 @@ const general = {
       id: item.mac_id,
       isFocus: item.isFocus ? 0 : 1
     };
-    console.log(requestData, param)
     this.$getApi.updateHmiFoucsStatus(requestData).then(res => {
       item.isFocus = !item.isFocus;
       if (res) {

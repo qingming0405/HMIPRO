@@ -122,39 +122,41 @@
           </ul>
         </li>
       </ul>
-      <div
-        v-show="audioAlarm"
-        class="iconList"
-        @click="goRealAlarm"
-      >
-        <i
-          class="iconfont icon-shishibaojingtubiao_huaban1"
-          :class="[alarmData.length > 0 ?'iconList-a':'',isBlingIcon?'iconList-bling':'']"
-        ></i>
-        <i
-          v-show="alarmData.length > 0 && isShowIcon"
-          class="iconfont icon-shengyinyinliangmianxing1_fuzhi-01 blingbling"
-          @click.stop="playSound"
-          :title="$t('HeaderEdge.alarmRingTitle')"
-        ></i>
+      <div class="header-right">
         <div
-          class="alarm-number"
-          v-show="alarmData.length > 0"
-        ><span>{{alarmData.length}}</span></div>
+          v-show="audioAlarm"
+          class="iconList"
+          @click="goRealAlarm"
+        >
+          <i
+            class="iconfont icon-shishibaojingtubiao_huaban1"
+            :class="[alarmData.length > 0 ?'iconList-a':'',isBlingIcon?'iconList-bling':'']"
+          ></i>
+          <i
+            v-show="alarmData.length > 0 && isShowIcon"
+            class="iconfont icon-shengyinyinliangmianxing1_fuzhi-01 blingbling"
+            @click.stop="playSound"
+            :title="$t('HeaderEdge.alarmRingTitle')"
+          ></i>
+          <div
+            class="alarm-number"
+            v-show="alarmData.length > 0"
+          ><span>{{alarmData.length}}</span></div>
+        </div>
+        <!-- 全屏按钮-->
+        <div
+          class="max-btn"
+          @click="showMax()"
+        ><i
+            class="iconfont"
+            :class="isMax?'icon-back_huaban':'icon-MAX_huaban'"
+          ></i></div>
+        <!-- 退出按钮 -->
+        <div
+          class="out-btn"
+          @click="logout"
+        >{{$t('HeaderEdge.loginOut')}}</div>
       </div>
-      <!-- 全屏按钮-->
-      <div
-        class="max-btn"
-        @click="showMax()"
-      ><i
-          class="iconfont"
-          :class="isMax?'icon-back_huaban':'icon-MAX_huaban'"
-        ></i></div>
-      <!-- 退出按钮 -->
-      <div
-        class="out-btn"
-        @click="logout"
-      >{{$t('HeaderEdge.loginOut')}}</div>
     </div>
     <div
       class="title"
@@ -981,7 +983,8 @@ export default {
           item.isShow = false
         }
       }
-      if (item.val === this.$t('HeaderEdge.secondLevel2_1')) {//'智能诊断趋势'
+      if (item.val === this.$t('HeaderEdge.secondLevel2_1')) {
+        //'智能诊断趋势'
         if (config.fdDiagnosis == 1) {
           item.isShow = true
         } else if (config.fdDiagnosis == 0) {
@@ -1105,7 +1108,12 @@ export default {
           for (let i = 0, l = this.tab_list.length; i < l; i++) {
             if (this.tab_list[i].name == 'real') {
               let [, , macId, pId, pType] = this.tab_list[i].key.split('_')
-              if (macId == mac.mac_id && pType == pos.position_type) {
+              if (
+                macId == mac.mac_id &&
+                pType == pos.position_type &&
+                pType != 13
+              ) {
+                /* 合成倾角非同类型在一个图谱 */
                 this.getPath({
                   name: this.tab_list[i].name,
                   val: this.tab_list[i].val,
@@ -1376,7 +1384,6 @@ export default {
     //监听左边导航栏点击，路由跳转
     // 总貌图-设备模型内跳转使用同一个key值调用getPath方法（统一机组的设备模型只存在一张）
     getPath(params, fromOther) {
-      console.log(params)
       // 若无传入t_root则从全局取，为了点击用户手册时可以进入相应的组织类型模块
       if (params.t_root === undefined && params.t_root === null) {
         params.t_root = this.$store.state.checkMsg.tree.t_root
@@ -1404,7 +1411,11 @@ export default {
         // 从别的图谱跳转过来的
         val = params.val
         // 报警跳转时
-        if (params.name == 'alarm' && params.val == this.$t('HeaderEdge.secondLevel5_1')) {//报警日志
+        if (
+          params.name == 'alarm' &&
+          params.val == this.$t('HeaderEdge.secondLevel5_1')
+        ) {
+          //报警日志
           if (
             this.$store.state.checkMsg.pos &&
             this.$store.state.checkMsg.mac
@@ -1427,7 +1438,7 @@ export default {
         routerName === 'alarm' &&
         params.val.indexOf(this.$t('HeaderEdge.secondLevel5_1')) >= 0
       ) {
-        params.val = this.$t('HeaderEdge.secondLevel5_1')//'报警日志'
+        params.val = this.$t('HeaderEdge.secondLevel5_1') //'报警日志'
         if (this.pos.val && this.mac.val) {
           val = this.mac.val + '-' + this.pos.val + '-' + params.val
         } else if (this.mac.val) {
@@ -1617,6 +1628,17 @@ export default {
         /* 2、页面跳转 */
         /* 跳到后一个标签 */
         if (this.tab_list.length === 0) {
+          if (item.name == 'windModel') {
+            this.$nextTick(() => {
+              //head部分的样式改回蓝色
+              this.$refs.title &&
+                (this.$refs.title.style.background = '#092e55')
+              this.$parent.$el.getElementsByClassName('my-center-content')[0] &&
+                (this.$parent.$el.getElementsByClassName(
+                  'my-center-content'
+                )[0].style.background = '#092e55')
+            })
+          }
           /* 没有标签跳转到首页 */
           this.$router.push({ name: 'empty' })
         } else {
@@ -1823,7 +1845,6 @@ export default {
           wscript.SendKeys('{F11}')
         }
       }
-      console.log(rfs)
     },
     checkFull() {
       //判断浏览器是否处于全屏状态 （需要考虑兼容问题）
@@ -1842,7 +1863,6 @@ export default {
       return isFull
     },
     goUserManual(item) {
-      console.log(item)
       let params = {
         key: 'userManual',
         name: 'userManual',
@@ -1907,7 +1927,6 @@ export default {
         if (!that.checkFull()) {
           // 退出全屏后要执行的动作
           that.isMax = false
-          console.log('退出全屏')
         }
       }
     })
@@ -2035,66 +2054,96 @@ export default {
     margin: 15px 0;
     padding-left: 20px;
     position: relative;
-    .out-btn {
-      position: absolute;
-      padding: 0 4px;
-      height: 24px;
-      border: 1px solid #ffffff;
-      border-radius: 4px;
-      top: -2px;
-      right: 20px;
-      color: #fff;
-      font-size: 14px;
-      text-align: center;
-      line-height: 21px;
-      cursor: pointer;
-      &:hover,
-      &:focus {
-        background: #fff;
-        border: 1px solid #fff;
-        color: #000;
-      }
-    }
-    .max-btn {
+
+    .header-right {
       position: absolute;
       top: -2px;
-      right: 100px;
-      color: #90bff0;
-      text-align: center;
-      line-height: 21px;
-      cursor: pointer;
-      .iconfont {
-        font-size: 18px;
-      }
-    }
-    .iconList {
-      position: absolute;
-      top: -2px;
-      right: 130px;
-      color: #90bff0;
-      text-align: center;
-      line-height: 21px;
-      cursor: pointer;
-      .iconfont {
-        font-size: 23px;
-      }
-      .alarm-number {
-        width: 15px;
-        height: 15px;
-        background: #f80000;
-        border-radius: 50%;
-        position: relative;
-        top: -26px;
-        left: 14px;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        span {
-          color: #fff;
-          font-size: 12px;
+      right: 10px;
+      display: flex;
+      flex-direction: row;
+      .out-btn {
+        padding: 0 4px;
+        height: 24px;
+        border: 1px solid #ffffff;
+        border-radius: 4px;
+        color: #fff;
+        font-size: 14px;
+        text-align: center;
+        line-height: 21px;
+        cursor: pointer;
+        margin-left: 10px;
+        &:hover,
+        &:focus {
+          background: #fff;
+          border: 1px solid #fff;
+          color: #000;
         }
       }
-      .blingbling {
+      .max-btn {
+        color: #90bff0;
+        text-align: center;
+        line-height: 21px;
+        cursor: pointer;
+        margin-left: 5px;
+        .iconfont {
+          font-size: 18px;
+        }
+      }
+      .iconList {
+        // position: absolute;
+        // top: -2px;
+        // right: 130px;
+        color: #90bff0;
+        text-align: center;
+        line-height: 21px;
+        cursor: pointer;
+        .iconfont {
+          font-size: 23px;
+        }
+        .alarm-number {
+          width: 15px;
+          height: 15px;
+          background: #f80000;
+          border-radius: 50%;
+          position: relative;
+          top: -26px;
+          left: 14px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          span {
+            color: #fff;
+            font-size: 12px;
+          }
+        }
+        .blingbling {
+          animation: scaleout 1s infinite ease-in-out;
+          @-webkit-keyframes scaleout {
+            30% {
+              -webkit-transform: scale(0);
+            }
+            100% {
+              -webkit-transform: scale(0);
+              opacity: 0;
+            }
+          }
+          @keyframes scaleout {
+            30% {
+              transform: scale(0);
+              -webkit-transform: scale(0);
+            }
+            100% {
+              transform: scale(0);
+              -webkit-transform: scale(0);
+              opacity: 0;
+            }
+          }
+        }
+      }
+      .iconList-a {
+        color: #f80000;
+      }
+      .iconList-bling {
         animation: scaleout 1s infinite ease-in-out;
         @-webkit-keyframes scaleout {
           30% {
@@ -2118,32 +2167,6 @@ export default {
         }
       }
     }
-    .iconList-a {
-      color: #f80000;
-    }
-    .iconList-bling {
-      animation: scaleout 1s infinite ease-in-out;
-      @-webkit-keyframes scaleout {
-        30% {
-          -webkit-transform: scale(0);
-        }
-        100% {
-          -webkit-transform: scale(0);
-          opacity: 0;
-        }
-      }
-      @keyframes scaleout {
-        30% {
-          transform: scale(0);
-          -webkit-transform: scale(0);
-        }
-        100% {
-          transform: scale(0);
-          -webkit-transform: scale(0);
-          opacity: 0;
-        }
-      }
-    }
   }
   .title {
     // padding-left: 20px;
@@ -2163,9 +2186,9 @@ export default {
     }
     .head-List {
       overflow-y: auto;
-      width: calc(100vw - 250px);
+      width: calc(100vw - 230px);
       @media screen and (max-width: 1366px) {
-        width: calc(100vw - 200px);
+        width: calc(100vw - 170px);
       }
       height: 30px;
       ::-webkit-scrollbar {

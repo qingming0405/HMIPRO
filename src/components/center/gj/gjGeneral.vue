@@ -247,7 +247,7 @@ export default {
       const param = this.general[this.currentKey]
       if (!param.isShowTree) {
         param.macList = res.machines
-        param.itemize[0].number = this.macList.length //全部
+        param.itemize[0].number = param.macList.length //全部
         param.itemize[1].number = res.normal //正常
         let stutas = config.generalStutas
         if (stutas) {
@@ -469,7 +469,6 @@ export default {
     },
     // 航海时选择车辆
     changeTree(item) {
-      console.log(item)
       // 使用线程防止组织测点为重选就进行了跳转
       new Promise((resolve, reject) => {
         this.$store.commit('getCheckMsg', {

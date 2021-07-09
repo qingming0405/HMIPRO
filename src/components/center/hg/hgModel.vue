@@ -62,7 +62,7 @@ export default {
   margin-top: 50px;
   .wpower-modelitems-title {
     position: absolute;
-    top: 70px;
+    top: 85px;
     right: 20px;
     display: flex;
     justify-content: flex-end;

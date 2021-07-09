@@ -415,4 +415,4 @@ export default {
     }
   }
 }
-</style>>>>>>>> .r1033
+</style>

@@ -5,7 +5,7 @@
       class="login-img"
       :src="bgURL"
     />
-    <select
+    <!-- <select
       v-model="language"
       @change="changeLang()"
       class="select-language"
@@ -15,7 +15,7 @@
         :title="item.text"
         :value="item.key"
       >{{item.text}}</option>
-    </select>
+    </select> -->
     <div
       class="login-box"
       @keydown.13="login"
@@ -221,12 +221,12 @@ export default {
     },
     //切换语言
     changeLang() {
-      if(this.$i18n.locale != this.language){
+      if (this.$i18n.locale != this.language) {
         localStorage.setItem('language', this.language)
         localStorage.setItem('isChangelanguage', 'true')
       }
       this.$i18n.locale = this.language
-      window.location.reload();//刷新当前页面
+      window.location.reload() //刷新当前页面
       // this.$router.go(0)
       this.getVertionFun()
     },
@@ -239,7 +239,6 @@ export default {
         if (res.audio_alarm) {
           audioAlarm = res.audio_alarm
         }
-        console.log(audioAlarm)
         sessionStorage.setItem('audioAlarm', audioAlarm)
         if (config.loginPhoneNum == 1) {
           this.loginPhoneNum = getLoginNum(Number(res.type))
@@ -282,7 +281,7 @@ export default {
   },
   //生命周期 - 创建完成（可以访问当前this实例）
   created() {
-    if(localStorage.getItem('language')){
+    if (localStorage.getItem('language')) {
       this.language = localStorage.getItem('language')
     }
     const logoFlag = config.loginlogo
@@ -320,6 +319,7 @@ export default {
 <style scoped lang="scss">
 .login-img {
   height: 100%;
+  width: 100%;
 }
 .login_content {
   $titleColor: #444; // 登录框标题颜色

@@ -1029,52 +1029,52 @@ export default {
     //跳转modelitem（传动链、塔筒等）
     toModelIitem(model) {
       const param = this.windModel[this.currentKey]
-      let data;
-      let name = model.name;
+      let data
+      let name = model.name
       switch (name) {
-        case this.$t('FdModel.locName1')://'传动链'
+        case this.$t('FdModel.locName1'): //'传动链'
           data = {
             name: this.$t('FdModel.locName1'), //'传动链',
             router: 'fddrivechain',
             index: 0,
           }
           break
-        case this.$t('FdModel.locName2')://塔筒
+        case this.$t('FdModel.locName2'): //塔筒
           data = {
             name: this.$t('FdModel.locName2'), //'塔筒',
             router: 'fdtowerdrum',
             index: 1,
           }
           break
-        case this.$t('FdModel.locName3')://螺栓
+        case this.$t('FdModel.locName3'): //螺栓
           data = {
             name: this.$t('FdModel.locName3'), //'螺栓',
             router: 'fdbolt',
             index: 2,
           }
           break
-        case this.$t('FdModel.locName4')://叶轮
+        case this.$t('FdModel.locName4'): //叶轮
           data = {
             name: this.$t('FdModel.locName4'), //'叶轮',
             router: 'fdimpeller',
             index: 3,
           }
           break
-        case this.$t('FdModel.locName5')://油液
+        case this.$t('FdModel.locName5'): //油液
           data = {
             name: this.$t('FdModel.locName5'), //'油液',
             router: 'fdoil',
             index: 4,
           }
           break
-        case this.$t('FdModel.locName6')://锚栓
+        case this.$t('FdModel.locName6'): //锚栓
           data = {
             name: this.$t('FdModel.locName6'), //'锚栓',
             router: 'fdanchorbolt',
             index: 5,
           }
           break
-        case this.$t('FdModel.locName7')://基础
+        case this.$t('FdModel.locName7'): //基础
           data = {
             name: this.$t('FdModel.locName7'), //'基础',
             router: 'fdbasics',

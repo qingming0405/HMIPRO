@@ -126,7 +126,6 @@ export default {
           this.getModelInfo(mac)
           return fn
         }
-        console.log('创建定时器')
         this.fdModelInfo[key].timer = setInterval(fn(), 5000)
       }
     },

@@ -85,7 +85,6 @@ export default {
       for (let i in this.tyVib) {
         this.tyVib[i].isShow = false
         clearInterval(this.tyVib[i].timer)
-        console.log('清空111' + this.currentKey)
       }
       /*  总貌图设备模型多开增加了一个type强行变为0的设计，在这边重新判断type */
       const keyArr = Object.keys(this.tyVib)
@@ -146,7 +145,6 @@ export default {
           this.getModelInfo(mac)
           return fn
         }
-        console.log('创建定时器')
         clearInterval(this.tyVib[key].timer)
         this.tyVib[key].timer = setInterval(fn(), 10000)
         this.getChainInfo(mac)
@@ -438,7 +436,6 @@ export default {
     },
   },
   deactivated() {
-    console.log('清空' + this.currentKey)
     clearInterval(this.tyVib[this.currentKey].timer)
   },
   created() {

@@ -236,15 +236,7 @@ export default {
         this.alp = params.alp
       }
       this.predTime = params.predTime || new Date().valueOf()
-      // this.predTime = flatpickr('.retrieval-pred-time', {
-      //   locale: Mandarin, //汉化
-      //   clickOpens: true,
-      //   enableTime: true,
-      //   enableSeconds: true,
-      //   time_24hr: true,
-      //   dateFormat: 'Y-m-d H:i:S',
-      //   defaultDate: params.predTime || new Date().valueOf(),
-      // })
+      
     },
     trendPrediction() {
       this.result.trendPrediction = true
