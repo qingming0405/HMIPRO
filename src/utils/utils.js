@@ -1678,6 +1678,10 @@ export function realCode (position_type, pos_loc) {
       return 'derail'
     case 19:
       return 'keyphase'
+    case 200: // 长采样
+      return 'capture'
+    case 201: // 智子
+      return 'sophon'
   }
   return ''
 }
@@ -1720,6 +1724,10 @@ export function realCodeName (code) {
       return trans('eigenvalue.DerailmentMonitor')//脱轨监测
     case 'keyphase':
       return trans('eigenvalue.BondPhase')//键相
+    case 'capture':
+      return trans('eigenvalue.Capture') // 长采样
+    case 'sophon':
+      return trans('eigenvalue.Sophon') // 智子
   }
   return ''
 }

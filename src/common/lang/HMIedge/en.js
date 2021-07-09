@@ -258,6 +258,8 @@ export const en = {
     Shake: 'Shake',//晃度
     SyntheticInclination: 'Synthetic inclination',//合成倾角
     ProcessVolume: 'Process volume',//过程量
+    Capture: 'Capture', // 长采样
+    Sophon: 'Sophon', // 智子
   },
   // 测点类型
   posTypeName: {
