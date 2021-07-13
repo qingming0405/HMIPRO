@@ -2362,11 +2362,12 @@ export default {
                   }
                 }
               }
-              let unit0 = pos.units.unitName[0]
+              let unit0 = pos.units && pos.units.unitName[0]
               let unit1 = unit0 //积分后单位
               // 计算积分单位
               if ((pos.dgm_type == 3 || pos.dgm_type == 4 || pos.dgm_type == 9) && pType == 3) {
-                unit1 = getUnit1(pos.units.byIntegral, pos.units.unitName[0]);
+                if (pos.units)
+                  unit1 = getUnit1(pos.units.byIntegral, pos.units.unitName[0]);
               }
               if (unit1 != unit0) {
                 msg.spectrum.curUnitY = unit1
@@ -3037,7 +3038,7 @@ export default {
             name: `2倍滚动体通过${pd.failure.name}`,
             speedRate: 2 * Number(parts.speedRate),
             id: 3,
-            type: "BSF",
+            type: "2xBSF",
             status: false,
             count: 0,
             val: ""
@@ -3089,7 +3090,7 @@ export default {
             name: `2倍滚动体通过${pd.failure.name}`,
             speedRate: 2 * Number(parts.speedRate),
             id: 3,
-            type: "BSF",
+            type: "2xBSF",
             status: false,
             count: 0,
             val: ""
@@ -3141,7 +3142,7 @@ export default {
             name: `2倍滚动体通过${pd.failure.name}`,
             speedRate: 2 * Number(parts.speedRate),
             id: 3,
-            type: "BSF",
+            type: "2xBSF",
             status: false,
             count: 0,
             val: ""
@@ -3549,7 +3550,14 @@ export default {
       if (isNx || chartType === 2) {
         unit = "NX";
       }
-      let freq = (item.value * item.speedRate * params.failure.analogSpeed) / 60;
+      let freq
+      // 2倍滚动体通过判断
+      if (item.type.indexOf('2x') !== 1) {
+        freq = (item.value * (item.parent && item.parent.speedRate ? 2 * item.parent.speedRate : item.speedRate) * params.failure.analogSpeed) / 60;
+      } else {
+        freq = (item.value * (item.parent && item.parent.speedRate ? item.parent.speedRate : item.speedRate) * params.failure.analogSpeed) / 60;
+      }
+
       isNx && (freq = (freq * 60) / params.chartData.speed);
       if (chartType === 2) {
         let speedRate = 1;
